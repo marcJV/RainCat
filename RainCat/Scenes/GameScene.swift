@@ -19,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   private let umbrella = UmbrellaSprite.newInstance()
   private var cat : CatSprite!
+  private var food : FoodSprite!
   private let rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
   override func sceneDidLoad() {
@@ -94,6 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     umbrella.update(deltaTime: dt)
+    cat.update(deltaTime: dt, foodLocation: food.position)
 
     self.lastUpdateTime = currentTime
   }
@@ -107,6 +109,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 20))
     rainDrop.physicsBody?.categoryBitMask = RainDropCategory
     rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
+    rainDrop.physicsBody?.density = 0.5
 
     let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
     rainDrop.position = CGPoint(x: randomPosition, y: size.height)
@@ -128,7 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func spawnFood() {
-    let food = FoodSprite.newInstance()
+    food = FoodSprite.newInstance()
     var randomPosition : CGFloat = CGFloat(random.nextInt())
     randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
     randomPosition = CGFloat(abs(randomPosition))
@@ -182,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     switch otherBody.categoryBitMask {
     case RainDropCategory:
-      print("rain hit the cat")
+      cat.hitByRain()
     case WorldFrameCategory:
       spawnCat()
     default:
