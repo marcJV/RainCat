@@ -20,10 +20,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private let umbrella = UmbrellaSprite.newInstance()
   private var cat : CatSprite!
   private var food : FoodSprite!
+  private let hud = HudNode()
   private let rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
   override func sceneDidLoad() {
     self.lastUpdateTime = 0
+
+    hud.setup(size: size)
+
+    hud.quitButtonAction = {
+      let transition = SKTransition.reveal(with: .up, duration: 0.75)
+
+      let gameScene = MenuScene(size: self.size)
+      gameScene.scaleMode = self.scaleMode
+
+      self.view?.presentScene(gameScene, transition: transition)
+
+      self.hud.quitButtonAction = nil
+    }
+
+    addChild(hud)
 
     let background = SKSpriteNode(imageNamed: "background")
     background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -62,7 +78,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let touchPoint = touches.first?.location(in: self)
 
     if let point = touchPoint {
-      umbrella.setDestination(destination: point)
+      hud.touchBeganAtPoint(point: point)
+
+      if !hud.quitButtonPressed {
+        umbrella.setDestination(destination: point)
+      }
     }
   }
 
@@ -70,7 +90,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let touchPoint = touches.first?.location(in: self)
 
     if let point = touchPoint {
-      umbrella.setDestination(destination: point)
+      hud.touchMovedToPoint(point: point)
+
+      if !hud.quitButtonPressed {
+        umbrella.setDestination(destination: point)
+      }
+    }
+  }
+
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    let touchPoint = touches.first?.location(in: self)
+
+    if let point = touchPoint {
+      hud.touchEndedAtPoint(point: point)
     }
   }
 
@@ -127,6 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     cat = CatSprite.newInstance()
     cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 30)
 
+    hud.resetPoints()
     addChild(cat)
   }
 
@@ -186,6 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     switch otherBody.categoryBitMask {
     case RainDropCategory:
       cat.hitByRain()
+      hud.resetPoints()
     case WorldFrameCategory:
       spawnCat()
     default:
@@ -207,13 +241,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     switch otherBody.categoryBitMask {
     case CatCategory:
-      //TODO increment points
-      print("fed cat")
+      hud.addPoint()
       fallthrough
     case WorldFrameCategory:
       foodBody.node?.removeFromParent()
       foodBody.node?.physicsBody = nil
-
+      
       spawnFood()
     default:
       print("something else touched the food")

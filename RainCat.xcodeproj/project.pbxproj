@@ -15,6 +15,7 @@
 		BB281B861D789D0600229A97 /* cat_meow_6.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB281B841D789D0600229A97 /* cat_meow_6.wav */; };
 		BB281B891D78ABAC00229A97 /* cat_meow_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B871D78ABAC00229A97 /* cat_meow_7.mp3 */; };
 		BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */; };
+		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
 		BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */; };
@@ -29,6 +30,8 @@
 		BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */; };
 		BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */; };
 		BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */; };
+		BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */; };
+		BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8E71D79D6B400002F71 /* HudNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,7 @@
 		BB281B841D789D0600229A97 /* cat_meow_6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_6.wav; path = SFX/cat_meow_6.wav; sourceTree = "<group>"; };
 		BB281B871D78ABAC00229A97 /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_7.mp3; path = SFX/cat_meow_7.mp3; sourceTree = "<group>"; };
 		BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UmbrellaSprite.swift; path = Sprites/UmbrellaSprite.swift; sourceTree = "<group>"; };
+		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBA2E4AB1D74A62C00853E63 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = Scenes/GameScene.swift; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 		BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzcomedy.mp3"; path = "Music/bensound-jazzcomedy.mp3"; sourceTree = "<group>"; };
 		BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzyfrenchy.mp3"; path = "Music/bensound-jazzyfrenchy.mp3"; sourceTree = "<group>"; };
 		BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-littleidea.mp3"; path = "Music/bensound-littleidea.mp3"; sourceTree = "<group>"; };
+		BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "Fonts/Pixel Digivolve.otf"; sourceTree = "<group>"; };
+		BBD0A8E71D79D6B400002F71 /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HudNode.swift; path = Sprites/HudNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
+				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -102,6 +109,7 @@
 		BB36AD261D75D70000FB54D0 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				BBD0A8E41D79D4EB00002F71 /* Fonts */,
 				BBD0A8DB1D78F0F100002F71 /* Music */,
 				BB281B7A1D7899AB00229A97 /* SFX */,
 				BBA2E4AF1D74A62C00853E63 /* Main.storyboard */,
@@ -119,6 +127,7 @@
 				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
 				BBB0457E1D77254000DF378C /* CatSprite.swift */,
 				BBB045801D773DE600DF378C /* FoodSprite.swift */,
+				BBD0A8E71D79D6B400002F71 /* HudNode.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -161,6 +170,14 @@
 				BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */,
 			);
 			name = Music;
+			sourceTree = "<group>";
+		};
+		BBD0A8E41D79D4EB00002F71 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +250,7 @@
 				BB281B811D789A3F00229A97 /* cat_meow_3.mp3 in Resources */,
 				BB281B851D789D0600229A97 /* cat_meow_5.wav in Resources */,
 				BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */,
+				BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */,
 				BB281B891D78ABAC00229A97 /* cat_meow_7.mp3 in Resources */,
 				BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */,
 				BB281B861D789D0600229A97 /* cat_meow_6.wav in Resources */,
@@ -251,8 +269,10 @@
 				BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
+				BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */,
 				BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */,
 				BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */,
+				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,
 				BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */,
 				BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */,
 			);

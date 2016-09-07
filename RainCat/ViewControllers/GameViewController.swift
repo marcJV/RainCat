@@ -15,14 +15,14 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let sceneNode = GameScene(size: view.frame.size)
+    let sceneNode = MenuScene(size: view.frame.size)
 
     if let view = self.view as! SKView? {
       view.presentScene(sceneNode)
       view.ignoresSiblingOrder = true
-      view.showsPhysics = true
-      view.showsFPS = true
-      view.showsNodeCount = true
+      //view.showsPhysics = true
+      //view.showsFPS = true
+      //view.showsNodeCount = true
     }
 
     SoundManager.sharedInstance.startPlaying()
