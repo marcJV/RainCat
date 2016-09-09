@@ -193,22 +193,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   //Contact Functions
 
   func didBegin(_ contact: SKPhysicsContact) {
-    if (contact.bodyA.categoryBitMask == RainDropCategory) {
-      contact.bodyA.node?.physicsBody?.collisionBitMask = 0
-    } else if (contact.bodyB.categoryBitMask == RainDropCategory) {
-      contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-    }
-
     if contact.bodyA.categoryBitMask == FoodCategory || contact.bodyB.categoryBitMask == FoodCategory {
       handleFoodHit(contact: contact)
-
-      return
     }
 
     if contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory {
       handleCatCollision(contact: contact)
 
       return
+    }
+
+    if (contact.bodyA.categoryBitMask == RainDropCategory) {
+      contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+      contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+    } else if (contact.bodyB.categoryBitMask == RainDropCategory) {
+      contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+      contact.bodyB.node?.physicsBody?.categoryBitMask = 0
     }
 
     if contact.bodyA.categoryBitMask == WorldFrameCategory {
