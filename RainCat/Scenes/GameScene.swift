@@ -19,13 +19,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   private let umbrella = UmbrellaSprite.newInstance()
   private var cat : CatSprite!
-  private var food : FoodSprite!
+  private var food : FoodSprite?
   private let hud = HudNode()
   private let rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
   override func sceneDidLoad() {
     self.lastUpdateTime = 0
 
+    //Hud Setup
     hud.setup(size: size)
 
     hud.quitButtonAction = {
@@ -41,11 +42,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     addChild(hud)
 
+    //Background Setup
+
     let background = SKSpriteNode(imageNamed: "background")
     background.position = CGPoint(x: frame.midX, y: frame.midY)
     background.zPosition = 0
 
     addChild(background)
+
+    //World Frame Setup
 
     var worldFrame = frame
     worldFrame.origin.x -= 100
@@ -57,6 +62,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     self.physicsWorld.contactDelegate = self
     self.physicsBody?.categoryBitMask = WorldFrameCategory
 
+    //Floor boundary setup
+
     let floorNode = SKShapeNode(rectOf: CGSize(width: size.width, height: 5))
     floorNode.position = CGPoint(x: size.width / 2, y: 50)
     floorNode.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 0), to: CGPoint(x: size.width, y: 0))
@@ -66,13 +73,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     addChild(floorNode)
 
+    //Add Umbrella
+
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
     addChild(umbrella)
+
+    //Spawn initial cat and food
 
     spawnCat()
     spawnFood()
   }
-
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     let touchPoint = touches.first?.location(in: self)
@@ -127,7 +137,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     umbrella.update(deltaTime: dt)
-    cat.update(deltaTime: dt, foodLocation: food.position)
+
+    if let food = food {
+      cat.update(deltaTime: dt, foodLocation: (food.position))
+    }
 
     self.lastUpdateTime = currentTime
   }
@@ -164,15 +177,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func spawnFood() {
-    food = FoodSprite.newInstance()
-    var randomPosition : CGFloat = CGFloat(random.nextInt())
-    randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
-    randomPosition = CGFloat(abs(randomPosition))
-    randomPosition += foodEdgeMargin
+    if food == nil {
+      food = FoodSprite.newInstance()
+      var randomPosition : CGFloat = CGFloat(random.nextInt())
+      randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
+      randomPosition = CGFloat(abs(randomPosition))
+      randomPosition += foodEdgeMargin
 
-    food.position = CGPoint(x: randomPosition, y: size.height)
+      food?.position = CGPoint(x: randomPosition, y: size.height)
 
-    addChild(food)
+      addChild(food!)
+    }
   }
 
   //Contact Functions
@@ -246,6 +261,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     case WorldFrameCategory:
       foodBody.node?.removeFromParent()
       foodBody.node?.physicsBody = nil
+      
+      food = nil
       
       spawnFood()
     default:

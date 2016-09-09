@@ -9,8 +9,11 @@
 import SpriteKit
 
 public class FoodSprite : SKSpriteNode {
+  static let nameLabel = "FoodDish"
+
   public static func newInstance() -> FoodSprite {
     let foodDish = FoodSprite(imageNamed: "food_dish")
+    foodDish.name = nameLabel
 
     foodDish.physicsBody = SKPhysicsBody(rectangleOf: foodDish.size)
     foodDish.physicsBody?.categoryBitMask = FoodCategory
