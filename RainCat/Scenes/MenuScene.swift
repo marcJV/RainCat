@@ -8,19 +8,24 @@
 
 import SpriteKit
 
-class MenuScene : SKScene {
+class MenuScene : SKScene, SKPhysicsContactDelegate {
   let startButtonTexture = SKTexture(imageNamed: "button_start")
   let startButtonPressedTexture = SKTexture(imageNamed: "button_start_pressed")
   let soundButtonTexture = SKTexture(imageNamed: "speaker_on")
   let soundButtonTextureOff = SKTexture(imageNamed: "speaker_off")
 
   let logoSprite = SKSpriteNode(imageNamed: "logo")
+  let catSprite = CatSprite.newInstance()
   var startButton : SKSpriteNode! = nil
   var soundButton : SKSpriteNode! = nil
 
   let highScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
 
   var selectedButton : SKSpriteNode?
+
+  var rainDrops = [SKSpriteNode]()
+
+  var gameScene : GameScene?
 
   override func sceneDidLoad() {
     backgroundColor = SKColor(red:0.30, green:0.81, blue:0.89, alpha:1.0)
@@ -50,7 +55,97 @@ class MenuScene : SKScene {
     highScoreNode.verticalAlignmentMode = .top
     highScoreNode.position = CGPoint(x: size.width / 2, y: startButton.position.y - startButton.size.height / 2 - 50)
     highScoreNode.zPosition = 1
+
     addChild(highScoreNode)
+
+    setupRaindrops(size.height - (logoSprite.position.y + logoSprite.size.height / 2))
+
+
+    //Add in floor physics body
+    physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 20), to: CGPoint(x: size.width, y: 20))
+    physicsBody?.categoryBitMask = FloorCategory
+    physicsBody?.contactTestBitMask = RainDropCategory
+    physicsBody?.restitution = 0.3
+
+
+    catSprite.position = highScoreNode.position
+    addChild(catSprite)
+
+    physicsWorld.contactDelegate = self
+  }
+
+  //This is an ugly method that would benefit greatly from loading it from a .sks file
+  private func setupRaindrops(_ height : CGFloat) {
+    let margin : CGFloat = 60
+    let lowerLimit = size.height - height + margin
+    let upperLimit = size.height - margin
+    let centerLine : CGFloat = (upperLimit + lowerLimit) / 2.0
+
+    let rainTexture = SKTexture(imageNamed: "rain_drop")
+
+    let rainDrop = SKSpriteNode(texture: rainTexture)
+    rainDrop.position = CGPoint(x: size.width / 2, y: centerLine)
+
+    rainDrop.zPosition = 10
+
+    addChild(rainDrop)
+    rainDrops.append(rainDrop)
+
+    //Generate left side
+    var xPosition = rainDrop.position.x
+    var index = 0
+    let innerMargin = 10 * UIScreen.main.nativeScale
+    let offsetAmount = rainDrop.size.width / 2 + innerMargin
+
+    xPosition -= offsetAmount
+
+    while xPosition > margin {
+      let rainDrop = SKSpriteNode(texture: rainTexture)
+      var yPosition = centerLine
+
+      if index % 6 == 0 {
+        yPosition = centerLine - rainDrop.size.height
+      } else if index % 3 == 0 {
+        yPosition = centerLine - innerMargin
+      } else if index % 2 == 0 {
+        yPosition = centerLine + rainDrop.size.height
+      }
+
+      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
+      rainDrop.zPosition = 10
+
+      addChild(rainDrop)
+      rainDrops.append(rainDrop)
+
+      xPosition -= offsetAmount
+      index += 1
+    }
+
+    //Generate right side
+    index = 8 //Hack to have the pattern line up correctly
+    xPosition = rainDrop.position.x + offsetAmount
+    while xPosition < size.width - margin {
+      var yPosition = centerLine
+
+      if index % 6 == 0 {
+        yPosition = centerLine - rainDrop.size.height
+      } else if index % 3 == 0 {
+        yPosition = centerLine - innerMargin
+      } else if index % 2 == 0 {
+        yPosition = centerLine + rainDrop.size.height
+      }
+
+      let rainDrop = SKSpriteNode(texture: rainTexture)
+      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
+
+      rainDrop.zPosition = 10
+
+      addChild(rainDrop)
+      rainDrops.append(rainDrop)
+
+      xPosition += offsetAmount
+      index += 1
+    }
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,6 +161,8 @@ class MenuScene : SKScene {
       } else if soundButton.contains(touch.location(in: self)) {
         selectedButton = soundButton
         handleSoundButtonHover(isHovering: true)
+      } else if catSprite.contains(touch.location(in: self)) {
+        catSprite.meow()
       }
     }
   }
@@ -119,12 +216,15 @@ class MenuScene : SKScene {
   }
 
   func handleStartButtonClick() {
-    let transition = SKTransition.reveal(with: .down, duration: 0.75)
+    for rainDrop in rainDrops {
+      rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: 10)
 
-    let gameScene = GameScene(size: size)
-    gameScene.scaleMode = scaleMode
+      //Makes all of the raindrops fall at different rates
+      rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+      rainDrop.physicsBody?.mass = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+    }
 
-    view?.presentScene(gameScene, transition: transition)
+    gameScene = GameScene(size: size)
   }
 
   func handleSoundButtonClick() {
@@ -134,6 +234,21 @@ class MenuScene : SKScene {
     } else {
       //Is not muted
       soundButton.texture = soundButtonTexture
+    }
+  }
+
+  var didContact = false
+  func didBegin(_ contact: SKPhysicsContact) {
+    if !didContact {
+      didContact = true
+
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        let transition = SKTransition.reveal(with: .down, duration: 0.75)
+
+        self.gameScene?.scaleMode = self.scaleMode
+
+        self.view?.presentScene(self.gameScene!, transition: transition)
+      }
     }
   }
 }

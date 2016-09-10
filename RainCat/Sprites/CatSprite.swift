@@ -95,6 +95,10 @@ public class CatSprite : SKSpriteNode {
       return
     }
 
+    meow()
+  }
+
+  public func meow() {
     if action(forKey: "action_sound_effect") == nil {
       currentRainHits = 0
 
