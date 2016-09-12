@@ -163,9 +163,14 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
       } else if catSprite.contains(touch.location(in: self)) {
         catSprite.meow()
 
-        if catSprite.xScale < 2 {
-          catSprite.setScale(catSprite.xScale + 0.25)
-        } else {
+        switch catSprite.xScale {
+        case 1:
+          catSprite.setScale(2)
+        case 2:
+          catSprite.setScale(3)
+        case 0...1:
+          catSprite.setScale(1)
+        default:
           catSprite.setScale(0.5)
         }
       } else {

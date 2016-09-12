@@ -194,7 +194,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func spawnFood() {
-
     var containsFood = false
 
     for child in children {
