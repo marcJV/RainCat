@@ -69,11 +69,11 @@ public class CatSprite : SKSpriteNode {
       } else if foodLocation.x < position.x {
         //Food is left
         physicsBody?.velocity.dx = -movementSpeed
-        xScale = -1
+        xScale = -1 * abs(xScale)
       } else {
         //Food is right
         physicsBody?.velocity.dx = movementSpeed
-        xScale = 1
+        xScale = abs(xScale)
       }
 
       physicsBody?.angularVelocity = 0

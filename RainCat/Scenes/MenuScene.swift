@@ -25,8 +25,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   var rainDrops = [SKSpriteNode]()
 
-  var gameScene : GameScene?
-
   override func sceneDidLoad() {
 
     backgroundColor = SKColor(red:0.30, green:0.81, blue:0.89, alpha:1.0)
@@ -139,7 +137,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
       let rainDrop = SKSpriteNode(texture: rainTexture)
       rainDrop.position = CGPoint(x: xPosition, y: yPosition)
-
       rainDrop.zPosition = 10
 
       addChild(rainDrop)
@@ -165,6 +162,21 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         handleSoundButtonHover(isHovering: true)
       } else if catSprite.contains(touch.location(in: self)) {
         catSprite.meow()
+
+        if catSprite.xScale < 2 {
+          catSprite.setScale(catSprite.xScale + 0.25)
+        } else {
+          catSprite.setScale(0.5)
+        }
+      } else {
+        for rainDrop in rainDrops {
+          if rainDrop.contains(touch.location(in: self)) {
+
+            if rainDrop.xScale < 3 {
+              rainDrop.setScale(rainDrop.xScale + 1)
+            }
+          }
+        }
       }
     }
   }
@@ -219,14 +231,13 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   func handleStartButtonClick() {
     for rainDrop in rainDrops {
-      rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: 10)
+      rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: 10 * rainDrop.xScale)
+      rainDrop.physicsBody?.categoryBitMask = RainDropCategory
 
       //Makes all of the raindrops fall at different rates
       rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
       rainDrop.physicsBody?.mass = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
     }
-
-    gameScene = GameScene(size: size)
   }
 
   func handleSoundButtonClick() {
@@ -244,12 +255,20 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     if !didContact {
       didContact = true
 
+      var rainScale : CGFloat = 1
+      if contact.bodyA.categoryBitMask == RainDropCategory {
+        rainScale = (contact.bodyA.node?.xScale)!
+      } else if contact.bodyB.categoryBitMask == RainDropCategory {
+        rainScale = (contact.bodyB.node?.xScale)!
+      }
+
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         let transition = SKTransition.reveal(with: .down, duration: 0.75)
+        let gameScene = GameScene(size: self.size, catScale: self.catSprite.xScale, rainScale: rainScale)
 
-        self.gameScene?.scaleMode = self.scaleMode
+        gameScene.scaleMode = self.scaleMode
 
-        self.view?.presentScene(self.gameScene!, transition: transition)
+        self.view?.presentScene(gameScene, transition: transition)
       }
     }
   }

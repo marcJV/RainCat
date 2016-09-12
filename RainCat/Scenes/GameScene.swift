@@ -28,6 +28,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   private var currentPalette = ColorManager.sharedInstance.resetPaletteIndex()
 
+  private var catScale : CGFloat = 1
+  private var rainScale : CGFloat = 1
+
+  public init(size : CGSize, catScale : CGFloat, rainScale : CGFloat) {
+    super.init(size: size)
+
+    self.catScale = catScale
+    self.rainScale = rainScale
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func sceneDidLoad() {
     self.lastUpdateTime = 0
 
@@ -49,7 +63,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     //Background Setup
     backgroundNode = BackgroundNode.newInstance(size: size, palette: currentPalette)
-//    backgroundNode.position = CGPoint(x: frame.midX, y: frame.midY)
 
     addChild(backgroundNode)
 
@@ -73,8 +86,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Add Umbrella
     umbrella = UmbrellaSprite.newInstance(palette: currentPalette)
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
-    addChild(umbrella)
 
+    addChild(umbrella)
+  }
+
+  override func didMove(to view: SKView) {
     //Spawn initial cat and food
 
     spawnCat()
@@ -148,7 +164,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let rainDrop = SKSpriteNode(texture: rainDropTexture)
     rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
     rainDrop.zPosition = 2
-    rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 20))
+    rainDrop.setScale(rainScale)
+
+    let bodyEdge = 20 * rainScale
+    rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: bodyEdge, height: bodyEdge))
     rainDrop.physicsBody?.categoryBitMask = RainDropCategory
     rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
     rainDrop.physicsBody?.density = 0.5
@@ -167,6 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     cat = CatSprite.newInstance()
+    cat.setScale(catScale)
     cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 30)
 
     hud.resetPoints()
