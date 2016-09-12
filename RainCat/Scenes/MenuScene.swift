@@ -18,12 +18,18 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   let catSprite = CatSprite.newInstance()
   var startButton : SKSpriteNode! = nil
   var soundButton : SKSpriteNode! = nil
+  var creditsButton = SKLabelNode(fontNamed: "PixelDigivolve")
 
   let highScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
+  var soundCreditNode = SKLabelNode(fontNamed: "PixelDigivolve")
 
-  var selectedButton : SKSpriteNode?
+  var selectedButton : SKNode?
 
   var rainDrops = [SKSpriteNode]()
+
+  var showingCredits = false
+
+  let creditsNode = SKNode()
 
   override func sceneDidLoad() {
 
@@ -36,13 +42,15 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
     //Setup start button
     startButton = SKSpriteNode(texture: startButtonTexture)
-    startButton.position = CGPoint(x: size.width / 2, y: size.height / 2 - startButton.size.height / 2)
+    startButton.position = CGPoint(x: size.width / 2,
+                                   y: size.height / 2 - startButton.size.height / 2)
     addChild(startButton)
 
     let edgeMargin : CGFloat = 25
     //Setup sound button
     soundButton = SKSpriteNode(texture: (SoundManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
-    soundButton.position = CGPoint(x: size.width - soundButton.size.width / 2 - edgeMargin, y: soundButton.size.height / 2 + edgeMargin)
+    soundButton.position = CGPoint(x: size.width - edgeMargin,
+                                   y: edgeMargin)
     addChild(soundButton)
 
     //Setup high score node
@@ -53,7 +61,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     highScoreNode.text = "\(highScore)"
     highScoreNode.fontSize = 90
     highScoreNode.verticalAlignmentMode = .top
-    highScoreNode.position = CGPoint(x: size.width / 2, y: startButton.position.y - startButton.size.height / 2 - 50)
+    highScoreNode.position = CGPoint(x: size.width / 2,
+                                     y: startButton.position.y - startButton.size.height / 2 - 50)
     highScoreNode.zPosition = 1
 
     addChild(highScoreNode)
@@ -72,6 +81,73 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     addChild(catSprite)
 
     physicsWorld.contactDelegate = self
+
+    creditsButton = SKLabelNode(fontNamed: "PixelDigivolve")
+    creditsButton.text = "?"
+    creditsButton.verticalAlignmentMode = .center
+    creditsButton.horizontalAlignmentMode = .center
+
+    creditsButton.position = CGPoint(x: edgeMargin, y: edgeMargin)
+    addChild(creditsButton)
+
+    setupCredits()
+  }
+
+  //Quick attempt to make credits
+  private func setupCredits() {
+    let developerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    developerTitle.text = "development:"
+    developerTitle.horizontalAlignmentMode = .center
+
+    let developer = SKLabelNode(fontNamed: "PixelDigivolve")
+    developer.text = "Marc Vandehey"
+    developer.horizontalAlignmentMode = .center
+
+    let designerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    designerTitle.text = "design:"
+    designerTitle.horizontalAlignmentMode = .center
+
+    let designCathryn = SKLabelNode(fontNamed: "PixelDigivolve")
+    designCathryn.text = "Cathryn Rowe"
+    designCathryn.horizontalAlignmentMode = .center
+
+    let designMorgan = SKLabelNode(fontNamed: "PixelDigivolve")
+    designMorgan.text = "Morgan Wheaton"
+    designMorgan.horizontalAlignmentMode = .center
+
+    let soundTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    soundTitle.text = "MUSIC:"
+    soundTitle.horizontalAlignmentMode = .center
+
+    soundCreditNode.text = "Bensound.com"
+    soundCreditNode.horizontalAlignmentMode = .center
+
+    let sectionMargin : CGFloat = 40
+
+    let xPos = size.width / 2
+    developerTitle.position = CGPoint(x: xPos, y: logoSprite.position.y - logoSprite.size.height / 2 - sectionMargin - 10)
+    developer.position = CGPoint(x: xPos, y: developerTitle.position.y - developerTitle.fontSize)
+
+    designerTitle.position = CGPoint(x: xPos, y: developer.position.y - developer.fontSize - sectionMargin)
+    designCathryn.position = CGPoint(x: xPos, y: designerTitle.position.y - designerTitle.fontSize)
+    designMorgan.position = CGPoint(x: xPos, y: designCathryn.position.y - designCathryn.fontSize)
+
+    soundTitle.position = CGPoint(x: xPos, y: designMorgan.position.y - designMorgan.fontSize - sectionMargin)
+    soundCreditNode.position = CGPoint(x: xPos, y: soundTitle.position.y - soundTitle.fontSize)
+    soundCreditNode.fontColor = SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
+
+    creditsNode.addChild(developerTitle)
+    creditsNode.addChild(developer)
+    creditsNode.addChild(designerTitle)
+    creditsNode.addChild(designCathryn)
+    creditsNode.addChild(designMorgan)
+    creditsNode.addChild(soundTitle)
+    creditsNode.addChild(soundCreditNode)
+
+    creditsNode.zPosition = 1000
+    addChild(creditsNode)
+
+    creditsNode.alpha = 0
   }
 
   //This is an ugly method that would benefit greatly from loading it from a .sks file
@@ -154,7 +230,18 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         handleSoundButtonHover(isHovering: false)
       }
 
-      if startButton.contains(touch.location(in: self)) {
+      if showingCredits {
+        if soundCreditNode.contains(touch.location(in: self)) {
+          selectedButton = soundCreditNode
+
+          soundCreditNode.alpha = 0.75
+        }
+      }
+
+      if creditsButton.contains(touch.location(in: self)) {
+        selectedButton = creditsButton
+        creditsButton.alpha = 0.75
+      } else if !showingCredits && startButton.contains(touch.location(in: self)) {
         selectedButton = startButton
         handleStartButtonHover(isHovering: true)
       } else if soundButton.contains(touch.location(in: self)) {
@@ -192,6 +279,10 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         handleStartButtonHover(isHovering: (startButton.contains(touch.location(in: self))))
       } else if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
+      } else if selectedButton == soundCreditNode {
+        soundCreditNode.alpha = (soundCreditNode.contains(touch.location(in: self))) ? 0.75 : 1.0
+      } else if selectedButton == creditsButton {
+        creditsButton.alpha = (creditsButton.contains(touch.location(in: self))) ? 0.75 : 1.0
       }
     }
   }
@@ -211,6 +302,34 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
         if (soundButton.contains(touch.location(in: self))) {
           handleSoundButtonClick()
+        }
+      } else if selectedButton == soundCreditNode {
+        soundCreditNode.alpha = 1
+
+        if (soundCreditNode.contains(touch.location(in: self))) {
+          // link to music credits
+          if let url = URL(string: "http://www.bensound.com/") {
+            UIApplication.shared.open(url, options: [:], completionHandler: { (completion) in
+              // dont do anything with this currently
+            })
+          }
+        }
+      } else if selectedButton == creditsButton {
+        creditsButton.alpha = 1
+
+        showingCredits = !showingCredits
+        let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
+        let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
+        if showingCredits {
+          creditsNode.run(fadeIn)
+
+          startButton.run(fadeOut)
+          highScoreNode.run(fadeOut)
+        } else {
+          creditsNode.run(fadeOut)
+
+          startButton.run(fadeIn)
+          highScoreNode.run(fadeIn)
         }
       }
     }
