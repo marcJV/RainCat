@@ -42,7 +42,7 @@ class ColorManager {
   }
 }
 
-struct ColorPalette {
+public struct ColorPalette {
   let umbrellaTopColor : SKColor
   let umbrellaBottomColor : SKColor
   let groundColor : SKColor

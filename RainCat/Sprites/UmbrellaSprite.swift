@@ -9,25 +9,51 @@
 import Foundation
 import SpriteKit
 
-public class UmbrellaSprite : SKSpriteNode {
+public class UmbrellaSprite : SKSpriteNode, Palettable {
+  private var umbrellaTop : SKSpriteNode!
+  private var umbrellaBottom : SKSpriteNode!
+
   private var destination : CGPoint!
   private let easing : CGFloat = 0.1
 
-  public static func newInstance() -> UmbrellaSprite {
-    let umbrella = UmbrellaSprite(imageNamed: "umbrella")
-    umbrella.zPosition = 1
 
-    let path = UIBezierPath()
-    path.move(to: CGPoint())
-    path.addLine(to: CGPoint(x: -umbrella.size.width / 2 - 30, y: 0))
-    path.addLine(to: CGPoint(x: 0, y: umbrella.size.height / 2))
-    path.addLine(to: CGPoint(x: umbrella.size.width / 2 + 30, y: 0))
+  public static func newInstance(palette : ColorPalette) -> UmbrellaSprite {
+    let umbrella = UmbrellaSprite()
 
-    umbrella.physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
-    umbrella.physicsBody?.isDynamic = false
-    umbrella.physicsBody?.categoryBitMask = UmbrellaCategory
-    umbrella.physicsBody?.contactTestBitMask = RainDropCategory
-    umbrella.physicsBody?.restitution = 0.9
+    let top = SKSpriteNode(imageNamed: "umbrellaTop")
+    let bottom = SKSpriteNode(imageNamed: "umbrellaBottom")
+
+    top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
+    top.physicsBody?.isDynamic = false
+    top.physicsBody?.categoryBitMask = UmbrellaCategory
+    top.physicsBody?.contactTestBitMask = RainDropCategory
+    top.physicsBody?.restitution = 0.9
+
+    //TODO determine if we want the physics body to extend a bit or not
+//    let path = UIBezierPath()
+//    path.move(to: CGPoint())
+//    path.addLine(to: CGPoint(x: -umbrella.size.width / 2 - 30, y: 0))
+//    path.addLine(to: CGPoint(x: 0, y: umbrella.size.height / 2))
+//    path.addLine(to: CGPoint(x: umbrella.size.width / 2 + 30, y: 0))
+
+    top.zPosition = 3
+    bottom.zPosition = 2
+
+    top.colorBlendFactor = 1
+    bottom.colorBlendFactor = 1
+
+    top.color = palette.umbrellaTopColor
+    bottom.color = palette.umbrellaBottomColor
+
+    top.position.y = (top.size.height + bottom.size.height) / 2
+
+    bottom.position.x -= bottom.size.width / 4
+
+    umbrella.addChild(top)
+    umbrella.addChild(bottom)
+
+    umbrella.umbrellaTop = top
+    umbrella.umbrellaBottom = bottom
 
     return umbrella
   }
@@ -53,5 +79,11 @@ public class UmbrellaSprite : SKSpriteNode {
     } else {
       position = destination;
     }
+  }
+
+  public func updatePalette(palette: ColorPalette) {
+    umbrellaTop.run(ColorAction().colorTransitionAction(fromColor: umbrellaTop.color, toColor: palette.umbrellaTopColor, duration: colorChangeDuration))
+    umbrellaBottom.run(ColorAction().colorTransitionAction(fromColor: umbrellaBottom.color, toColor: palette.umbrellaBottomColor, duration: colorChangeDuration))
+
   }
 }

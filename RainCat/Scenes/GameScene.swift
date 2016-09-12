@@ -17,17 +17,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private let random = GKARC4RandomSource()
   private let foodEdgeMargin : CGFloat = 75.0
 
-  private let umbrella = UmbrellaSprite.newInstance()
+  private var umbrella : UmbrellaSprite!
   private var cat : CatSprite!
   private var food : FoodSprite?
   private let hud = HudNode()
   private let rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
+  private var backgroundNode : BackgroundNode!
+  private var groundNode : GroundNode!
+
+  private var currentPalette = ColorManager.sharedInstance.resetPaletteIndex()
+
   override func sceneDidLoad() {
     self.lastUpdateTime = 0
 
     //Hud Setup
-    hud.setup(size: size)
+    hud.setup(size: size, palette:  currentPalette)
 
     hud.quitButtonAction = {
       let transition = SKTransition.reveal(with: .up, duration: 0.75)
@@ -43,13 +48,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     addChild(hud)
 
     //Background Setup
+    backgroundNode = BackgroundNode.newInstance(size: size, palette: currentPalette)
+//    backgroundNode.position = CGPoint(x: frame.midX, y: frame.midY)
 
-    let background = SKSpriteNode(imageNamed: "background")
-    background.position = CGPoint(x: frame.midX, y: frame.midY)
-    background.zPosition = 0
+    addChild(backgroundNode)
 
-    addChild(background)
+    //Ground Setup
+    groundNode = GroundNode.newInstance(size: size, palette: currentPalette)
 
+    addChild(groundNode)
     //World Frame Setup
 
     var worldFrame = frame
@@ -62,19 +69,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     self.physicsWorld.contactDelegate = self
     self.physicsBody?.categoryBitMask = WorldFrameCategory
 
-    //Floor boundary setup
-
-    let floorNode = SKShapeNode(rectOf: CGSize(width: size.width, height: 5))
-    floorNode.position = CGPoint(x: size.width / 2, y: 50)
-    floorNode.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 0), to: CGPoint(x: size.width, y: 0))
-    floorNode.physicsBody?.categoryBitMask = FloorCategory
-    floorNode.physicsBody?.contactTestBitMask = RainDropCategory
-    floorNode.physicsBody?.restitution = 0.3
-
-    addChild(floorNode)
 
     //Add Umbrella
-
+    umbrella = UmbrellaSprite.newInstance(palette: currentPalette)
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
     addChild(umbrella)
 
@@ -178,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   func spawnFood() {
     if food == nil {
-      food = FoodSprite.newInstance()
+      food = FoodSprite.newInstance(palette: currentPalette)
       var randomPosition : CGFloat = CGFloat(random.nextInt())
       randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
       randomPosition = CGFloat(abs(randomPosition))
@@ -257,6 +254,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     switch otherBody.categoryBitMask {
     case CatCategory:
       hud.addPoint()
+
+      if hud.score % 5 == 0 {
+        currentPalette = ColorManager.sharedInstance.getNextColorPalette()
+
+        for node in children {
+          if let node = node as? Palettable {
+            node.updatePalette(palette: currentPalette)
+          }
+        }
+      }
       fallthrough
     case WorldFrameCategory:
       foodBody.node?.removeFromParent()

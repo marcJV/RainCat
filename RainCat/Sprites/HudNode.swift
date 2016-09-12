@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class HudNode : SKNode {
+class HudNode : SKNode, Palettable {
   private let scoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
   private(set) var score : Int = 0
   private var highScore : Int = 0
@@ -20,10 +20,12 @@ class HudNode : SKNode {
   private let quitButtonTexture = SKTexture(imageNamed: "quit_button")
   private let quitButtonPressedTexture = SKTexture(imageNamed: "quit_button_pressed")
 
+  private var highScoreColor = SKColor.white
+
   var quitButtonAction : (() -> ())?
 
   //Setup hud here
-  public func setup(size: CGSize) {
+  public func setup(size: CGSize, palette : ColorPalette) {
     let defaults = UserDefaults.standard
 
     highScore = defaults.integer(forKey: ScoreKey)
@@ -39,6 +41,8 @@ class HudNode : SKNode {
     let margin : CGFloat = 15
     quitButton.position = CGPoint(x: size.width - quitButton.size.width - margin, y: size.height - quitButton.size.height - margin)
     quitButton.zPosition = 1000
+
+    highScoreColor = palette.groundColor
     
     addChild(quitButton)
   }
@@ -59,7 +63,8 @@ class HudNode : SKNode {
         showingHighScore = true
 
         scoreNode.run(SKAction.scale(to: 1.5, duration: 0.25))
-        scoreNode.fontColor = UIColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
+        scoreNode.run(ColorAction().colorTransitionAction(fromColor: SKColor.white, toColor: highScoreColor, duration: colorChangeDuration))
+
       }
     }
   }
@@ -73,7 +78,7 @@ class HudNode : SKNode {
       showingHighScore = false
 
       scoreNode.run(SKAction.scale(to: 1.0, duration: 0.25))
-      scoreNode.fontColor = SKColor.white
+      scoreNode.run(ColorAction().colorTransitionAction(fromColor: scoreNode.fontColor!, toColor: SKColor.white, duration: colorChangeDuration))
     }
   }
 
@@ -110,5 +115,13 @@ class HudNode : SKNode {
     }
 
     quitButton.texture = quitButtonTexture
+  }
+
+  public func updatePalette(palette: ColorPalette) {
+    highScoreColor = palette.groundColor
+
+    if showingHighScore {
+      scoreNode.run(ColorAction().colorTransitionAction(fromColor: scoreNode.fontColor!, toColor: palette.groundColor, duration: colorChangeDuration))
+    }
   }
 }
