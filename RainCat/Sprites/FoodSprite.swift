@@ -12,11 +12,13 @@ public class FoodSprite : SKSpriteNode, Palettable {
 
   public static func newInstance(palette : ColorPalette) -> FoodSprite {
     let foodDish = FoodSprite(imageNamed: "food_dish")
-    foodDish.anchorPoint = CGPoint(x: 0, y: 1)
     foodDish.color = palette.foodBowlColor
     foodDish.colorBlendFactor = 1
 
-    foodDish.physicsBody = SKPhysicsBody(rectangleOf: foodDish.size)
+    foodDish.anchorPoint = CGPoint(x: 0, y: 1)
+
+    foodDish.physicsBody = SKPhysicsBody(rectangleOf: foodDish.size,
+                                         center: CGPoint(x: foodDish.size.width / 2, y: -foodDish.size.height / 2))
     foodDish.physicsBody?.categoryBitMask = FoodCategory
     foodDish.physicsBody?.contactTestBitMask = WorldFrameCategory | RainDropCategory | CatCategory
     foodDish.zPosition = 3
