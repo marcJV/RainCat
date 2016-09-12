@@ -194,7 +194,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   func spawnFood() {
-    if food == nil {
+
+    var containsFood = false
+
+    for child in children {
+      if child.name == FoodSprite.foodDishName {
+        containsFood = true
+        break
+      }
+    }
+
+    if !containsFood {
       food = FoodSprite.newInstance(palette: currentPalette)
       var randomPosition : CGFloat = CGFloat(random.nextInt())
       randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)

@@ -9,9 +9,11 @@
 import SpriteKit
 
 public class FoodSprite : SKSpriteNode, Palettable {
+  public static let foodDishName = "FoodDish"
 
   public static func newInstance(palette : ColorPalette) -> FoodSprite {
     let foodDish = FoodSprite(imageNamed: "food_dish")
+    foodDish.name = foodDishName
     foodDish.color = palette.foodBowlColor
     foodDish.colorBlendFactor = 1
 
