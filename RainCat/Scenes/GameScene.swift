@@ -253,7 +253,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     if contact.bodyA.categoryBitMask == RainDropCategory {
       contact.bodyA.node?.physicsBody?.collisionBitMask = 0
       contact.bodyA.node?.physicsBody?.categoryBitMask = 0
-    } else if (contact.bodyB.categoryBitMask == RainDropCategory) {
+    } else if contact.bodyB.categoryBitMask == RainDropCategory {
       contact.bodyB.node?.physicsBody?.collisionBitMask = 0
       contact.bodyB.node?.physicsBody?.categoryBitMask = 0
     }
