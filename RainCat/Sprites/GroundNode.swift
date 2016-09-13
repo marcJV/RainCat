@@ -22,7 +22,7 @@ public class GroundNode : SKShapeNode, Palettable {
     let groundLocation = updatedSize.height * 0.35
     groundNode.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: groundLocation), to: CGPoint(x: size.width, y: groundLocation))
     groundNode.physicsBody?.categoryBitMask = FloorCategory
-    groundNode.physicsBody?.contactTestBitMask = RainDropCategory
+    groundNode.physicsBody?.contactTestBitMask = RainDropCategory | CatCategory
     groundNode.physicsBody?.restitution = 0.3
 
     return groundNode

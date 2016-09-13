@@ -82,12 +82,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     self.physicsWorld.contactDelegate = self
     self.physicsBody?.categoryBitMask = WorldFrameCategory
 
-
     //Add Umbrella
     umbrella = UmbrellaSprite.newInstance(palette: currentPalette)
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
-
-
 
     addChild(umbrella)
   }
@@ -172,21 +169,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   //Spawning Functions
 
   func spawnRaindrop() {
-    let rainDrop = SKSpriteNode(texture: rainDropTexture)
-    rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
-    rainDrop.zPosition = 2
-    rainDrop.setScale(rainScale)
+    for _ in 0...Int(hud.score / 5) {
+      let rainDrop = SKSpriteNode(texture: rainDropTexture)
+      rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
+      rainDrop.zPosition = 2
+      rainDrop.setScale(rainScale)
 
-    let bodyEdge = 20 * rainScale
-    rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: bodyEdge, height: bodyEdge))
-    rainDrop.physicsBody?.categoryBitMask = RainDropCategory
-    rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
-    rainDrop.physicsBody?.density = 0.5
+      let bodyEdge = 20 * rainScale
+      rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: bodyEdge, height: bodyEdge))
+      rainDrop.physicsBody?.categoryBitMask = RainDropCategory
+      rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
+      rainDrop.physicsBody?.density = 0.5
 
-    let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
-    rainDrop.position = CGPoint(x: randomPosition, y: size.height)
+      let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
+      rainDrop.position = CGPoint(x: randomPosition, y: size.height)
 
-    addChild(rainDrop)
+      if hud.score > 20 && arc4random() % 3 == 0 {
+        rainDrop.physicsBody?.velocity.dx = (CGFloat(arc4random()).truncatingRemainder(dividingBy: 4) + 1.0) * 100
+        rainDrop.physicsBody?.velocity.dx *= arc4random() % 2 == 0 ? -1 : 1
+      } else if hud.score > 30 && arc4random() % 3 == 0 {
+        rainDrop.setScale(rainScale * 2)
+      }
+
+      rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+
+      addChild(rainDrop)
+    }
   }
 
   func spawnCat() {
@@ -197,8 +205,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     cat = CatSprite.newInstance()
-    cat.setScale(catScale)
-    cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 30)
+    cat.setScale(0.5)
+    cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y + umbrella.getHeight() / 2)
+
+    cat.run(SKAction.scale(to: catScale, duration: 0.3))
 
     hud.resetPoints()
     addChild(cat)
@@ -270,10 +280,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     switch otherBody.categoryBitMask {
     case RainDropCategory:
+      print("todo fix this")
       cat.hitByRain()
       hud.resetPoints()
+      resetColorPalette()
+
+      rainDropSpawnRate = 0.5
     case WorldFrameCategory:
       spawnCat()
+    case FloorCategory:
+      cat.isGrounded = true
     default:
       print("Something hit the cat")
     }
@@ -296,13 +312,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       hud.addPoint()
 
       if hud.score % 5 == 0 {
-        currentPalette = ColorManager.sharedInstance.getNextColorPalette()
-
-        for node in children {
-          if let node = node as? Palettable {
-            node.updatePalette(palette: currentPalette)
-          }
-        }
+        updateColorPalette()
+        rainDropSpawnRate *= 0.9
       }
 
       fallthrough
@@ -318,4 +329,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       print("something else touched the food")
     }
   }
+
+  func updateColorPalette() {
+    currentPalette = ColorManager.sharedInstance.getNextColorPalette()
+
+    for node in children {
+      if let node = node as? Palettable {
+        node.updatePalette(palette: currentPalette)
+      }
+    }
+  }
+
+  func resetColorPalette() {
+    currentPalette = ColorManager.sharedInstance.resetPaletteIndex()
+
+    for node in children {
+      if let node = node as? Palettable {
+        node.updatePalette(palette: currentPalette)
+      }
+    }
+  }
+
 }

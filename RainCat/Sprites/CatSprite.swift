@@ -17,6 +17,8 @@ public class CatSprite : SKSpriteNode {
   private var currentRainHits = 4
   private let maxRainHits = 4
 
+  var isGrounded = false
+
   private let walkFrames = [
     SKTexture(imageNamed: "cat_one"),
     SKTexture(imageNamed: "cat_two")
@@ -38,7 +40,7 @@ public class CatSprite : SKSpriteNode {
     catSprite.zPosition = 3
     catSprite.physicsBody = SKPhysicsBody(circleOfRadius: catSprite.size.width / 2)
     catSprite.physicsBody?.categoryBitMask = CatCategory
-    catSprite.physicsBody?.contactTestBitMask = RainDropCategory | WorldFrameCategory
+    catSprite.physicsBody?.contactTestBitMask = RainDropCategory | WorldFrameCategory | FloorCategory
 
     return catSprite
   }
@@ -46,7 +48,7 @@ public class CatSprite : SKSpriteNode {
   public func update(deltaTime : TimeInterval, foodLocation: CGPoint) {
     timeSinceLastHit += deltaTime
 
-    if timeSinceLastHit >= maxFlailTime {
+    if timeSinceLastHit >= maxFlailTime && isGrounded {
       if zRotation != 0 && action(forKey: "action_rotate") == nil {
         run(SKAction.rotate(toAngle: 0, duration: 0.25), withKey: "action_rotate")
       }

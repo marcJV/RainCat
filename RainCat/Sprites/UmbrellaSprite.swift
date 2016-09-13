@@ -38,7 +38,7 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     top.physicsBody?.contactTestBitMask = RainDropCategory
     top.physicsBody?.restitution = 0.9
 
-    top.zPosition = 3
+    top.zPosition = 4
     bottom.zPosition = 2
 
     top.colorBlendFactor = 1
@@ -85,6 +85,10 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     } else {
       position = destination;
     }
+  }
+
+  public func getHeight() -> CGFloat {
+    return umbrellaTop.size.height + umbrellaBottom.size.height
   }
 
   public func updatePalette(palette: ColorPalette) {

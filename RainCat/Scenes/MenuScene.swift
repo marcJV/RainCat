@@ -152,7 +152,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   //This is an ugly method that would benefit greatly from loading it from a .sks file
   private func setupRaindrops(_ height : CGFloat) {
-    let margin : CGFloat = 60
+    let margin : CGFloat = 40
     let lowerLimit = size.height - height + margin
     let upperLimit = size.height - margin
     let centerLine : CGFloat = (upperLimit + lowerLimit) / 2.0
@@ -376,15 +376,19 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   var didContact = false
   func didBegin(_ contact: SKPhysicsContact) {
-    if !didContact {
-      didContact = true
 
-      var rainScale : CGFloat = 1
-      if contact.bodyA.categoryBitMask == RainDropCategory {
-        rainScale = (contact.bodyA.node?.xScale)!
-      } else if contact.bodyB.categoryBitMask == RainDropCategory {
-        rainScale = (contact.bodyB.node?.xScale)!
-      }
+    var rainContact = false
+    var rainScale : CGFloat = 1
+    if contact.bodyA.categoryBitMask == RainDropCategory {
+      rainScale = (contact.bodyA.node?.xScale)!
+      rainContact = true
+    } else if contact.bodyB.categoryBitMask == RainDropCategory {
+      rainScale = (contact.bodyB.node?.xScale)!
+      rainContact = true
+    }
+
+    if !didContact && rainContact {
+      didContact = true
 
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         let transition = SKTransition.reveal(with: .down, duration: 0.75)
