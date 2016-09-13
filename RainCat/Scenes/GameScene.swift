@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     self.catScale = catScale
     self.rainScale = rainScale
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -87,11 +87,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     umbrella = UmbrellaSprite.newInstance(palette: currentPalette)
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
 
+
+
     addChild(umbrella)
   }
 
   override func didMove(to view: SKView) {
     //Spawn initial cat and food
+
+    switch catScale {
+    case 2:
+      umbrella.minimumHeight = size.height * 0.4
+    case 3:
+      umbrella.minimumHeight = size.height * 0.5
+    default:
+      umbrella.minimumHeight = size.height * 0.3
+    }
 
     spawnCat()
     spawnFood()
@@ -229,7 +240,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       return
     }
 
-    if (contact.bodyA.categoryBitMask == RainDropCategory) {
+    if contact.bodyA.categoryBitMask == RainDropCategory {
       contact.bodyA.node?.physicsBody?.collisionBitMask = 0
       contact.bodyA.node?.physicsBody?.categoryBitMask = 0
     } else if (contact.bodyB.categoryBitMask == RainDropCategory) {
@@ -293,6 +304,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
           }
         }
       }
+
       fallthrough
     case WorldFrameCategory:
       foodBody.node?.removeFromParent()
@@ -301,6 +313,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       food = nil
       
       spawnFood()
+      
     default:
       print("something else touched the food")
     }

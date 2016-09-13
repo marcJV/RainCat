@@ -15,7 +15,7 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
 
   private var destination : CGPoint!
   private let easing : CGFloat = 0.1
-
+  public var minimumHeight : CGFloat = 0
 
   public static func newInstance(palette : ColorPalette) -> UmbrellaSprite {
     let umbrella = UmbrellaSprite()
@@ -23,18 +23,20 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     let top = SKSpriteNode(imageNamed: "umbrellaTop")
     let bottom = SKSpriteNode(imageNamed: "umbrellaBottom")
 
-    top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
+    let path = UIBezierPath()
+    path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
+    path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
+    path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
+    path.addLine(to: CGPoint(x: top.size.width / 2 - 10, y: -top.size.height / 2))
+    path.addLine(to: CGPoint(x: 0, y: top.size.height / 2 - 10))
+    path.addLine(to: CGPoint(x: -top.size.width / 2 + 10, y: -top.size.height / 2))
+    path.close()
+
+    top.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
     top.physicsBody?.isDynamic = false
     top.physicsBody?.categoryBitMask = UmbrellaCategory
     top.physicsBody?.contactTestBitMask = RainDropCategory
     top.physicsBody?.restitution = 0.9
-
-    //TODO determine if we want the physics body to extend a bit or not
-//    let path = UIBezierPath()
-//    path.move(to: CGPoint())
-//    path.addLine(to: CGPoint(x: -umbrella.size.width / 2 - 30, y: 0))
-//    path.addLine(to: CGPoint(x: 0, y: umbrella.size.height / 2))
-//    path.addLine(to: CGPoint(x: umbrella.size.width / 2 + 30, y: 0))
 
     top.zPosition = 3
     bottom.zPosition = 2
@@ -65,6 +67,10 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
 
   public func setDestination(destination : CGPoint) {
     self.destination = destination
+
+    if destination.y < minimumHeight {
+      self.destination.y = minimumHeight
+    }
   }
 
   public func update(deltaTime : TimeInterval) {
@@ -84,6 +90,6 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   public func updatePalette(palette: ColorPalette) {
     umbrellaTop.run(ColorAction().colorTransitionAction(fromColor: umbrellaTop.color, toColor: palette.umbrellaTopColor, duration: colorChangeDuration))
     umbrellaBottom.run(ColorAction().colorTransitionAction(fromColor: umbrellaBottom.color, toColor: palette.umbrellaBottomColor, duration: colorChangeDuration))
-
+    
   }
 }
