@@ -14,7 +14,7 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   private var umbrellaBottom : SKSpriteNode!
 
   private var destination : CGPoint!
-  private let easing : CGFloat = 0.1
+  private var easing : CGFloat = 0.1
   public var minimumHeight : CGFloat = 0
 
   public static func newInstance(palette : ColorPalette) -> UmbrellaSprite {
@@ -71,6 +71,20 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     if destination.y < minimumHeight {
       self.destination.y = minimumHeight
     }
+
+    let distance = abs(sqrt(pow(self.destination.x - position.x, 2) + pow(self.destination.y - position.y, 2)))
+    if distance > UIScreen.main.bounds.width / 2 {
+      easing = 0.04
+    } else if distance > UIScreen.main.bounds.width / 4 {
+      easing = 0.1
+    } else {
+      easing = 0.15
+    }
+
+    if self.destination.y == minimumHeight && position.y <= (minimumHeight + 5) {
+      easing = max(easing / 2, 0.04)
+    }
+
   }
 
   public func update(deltaTime : TimeInterval) {

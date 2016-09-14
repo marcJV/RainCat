@@ -10,12 +10,14 @@ import SpriteKit
 
 public class CatSprite : SKSpriteNode {
   private let walkingActionKey = "action_walking"
-  private let movementSpeed : CGFloat = 100
   private var timeSinceLastHit : TimeInterval = 2
   private let maxFlailTime : TimeInterval = 2
 
   private var currentRainHits = 4
   private let maxRainHits = 4
+
+  let baseMovementSpeed : CGFloat = 100
+  var movementSpeed : CGFloat = 100
 
   var isGrounded = false
 

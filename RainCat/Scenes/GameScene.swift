@@ -98,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     case 3:
       umbrella.minimumHeight = size.height * 0.5
     default:
-      umbrella.minimumHeight = size.height * 0.3
+      umbrella.minimumHeight = size.height * 0.27
     }
 
     spawnCat()
@@ -163,13 +163,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       cat.update(deltaTime: dt, foodLocation: (food.position))
     }
 
+    cat.movementSpeed = cat.baseMovementSpeed + (cat.baseMovementSpeed * 0.1) * CGFloat(hud.score) / 10.0
+
     self.lastUpdateTime = currentTime
   }
 
   //Spawning Functions
 
   func spawnRaindrop() {
-    for _ in 0...Int(hud.score / 5) {
+    for _ in 0...Int(hud.score / 10) {
       let rainDrop = SKSpriteNode(texture: rainDropTexture)
       rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
       rainDrop.zPosition = 2
@@ -184,11 +186,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
       rainDrop.position = CGPoint(x: randomPosition, y: size.height)
 
-      if hud.score > 20 && arc4random() % 3 == 0 {
+      //Raindrop fun
+
+      if hud.score > 10 && arc4random() % 10 == 0 {
+        rainDrop.yScale = -1
+      }
+
+      if hud.score > 20 && arc4random() % 10 == 0 {
         rainDrop.physicsBody?.velocity.dx = (CGFloat(arc4random()).truncatingRemainder(dividingBy: 4) + 1.0) * 100
         rainDrop.physicsBody?.velocity.dx *= arc4random() % 2 == 0 ? -1 : 1
-      } else if hud.score > 30 && arc4random() % 3 == 0 {
+        rainDrop.zPosition = 4
+        rainDrop.color = currentPalette.umbrellaBottomColor
+        rainDrop.colorBlendFactor = 0.5
+      }
+
+      if hud.score > 30 && arc4random() % 10 == 0 {
         rainDrop.setScale(rainScale * 2)
+        rainDrop.physicsBody?.density = 1000
       }
 
       rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
@@ -207,7 +221,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     cat = CatSprite.newInstance()
     cat.setScale(0.5)
     cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y + umbrella.getHeight() / 2)
-
     cat.run(SKAction.scale(to: catScale, duration: 0.3))
 
     hud.resetPoints()
@@ -232,7 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       randomPosition += foodEdgeMargin
 
       food?.position = CGPoint(x: randomPosition, y: size.height)
-
+      food?.physicsBody?.friction = 100
       addChild(food!)
     }
   }
@@ -280,12 +293,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     switch otherBody.categoryBitMask {
     case RainDropCategory:
-      print("todo fix this")
       cat.hitByRain()
       hud.resetPoints()
       resetColorPalette()
 
       rainDropSpawnRate = 0.5
+      physicsWorld.gravity = CGVector(dx: 0, dy: -7.8)
     case WorldFrameCategory:
       spawnCat()
     case FloorCategory:
@@ -313,8 +326,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
       if hud.score % 5 == 0 {
         updateColorPalette()
-        rainDropSpawnRate *= 0.9
+        rainDropSpawnRate *= 0.95
       }
+
+      let dy : CGFloat = -7.8 - CGFloat(hud.score % 10)
+      var dx : CGFloat = 0.0
+
+      //Update Gravity here
+      if hud.score > 50  {
+        dx = 2.0
+      }
+
+      physicsWorld.gravity = CGVector(dx: dx, dy: dy)
+
 
       fallthrough
     case WorldFrameCategory:
@@ -349,5 +373,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       }
     }
   }
-
 }
