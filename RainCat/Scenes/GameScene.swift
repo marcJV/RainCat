@@ -50,7 +50,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     hud.quitButtonAction = {
       let transition = SKTransition.reveal(with: .up, duration: 0.75)
-
+      transition.pausesOutgoingScene = false
+      transition.pausesIncomingScene = false
+      
       let gameScene = MenuScene(size: self.size)
       gameScene.scaleMode = self.scaleMode
 
@@ -372,5 +374,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         node.updatePalette(palette: currentPalette)
       }
     }
+  }
+
+  deinit {
+    print("game scene destroyed")
   }
 }

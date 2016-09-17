@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B1C871D8C9BA900C09901 /* LogoScene.swift */; };
 		BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D51D84F615001E540D /* BackgroundNode.swift */; };
 		BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D71D84FAEA001E540D /* ColorAction.swift */; };
 		BB1C70DA1D86EC9F001E540D /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D91D86EC9F001E540D /* GroundNode.swift */; };
@@ -26,11 +27,11 @@
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
 		BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */; };
 		BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4AF1D74A62C00853E63 /* Main.storyboard */; };
-		BBA2E4B31D74A62C00853E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B21D74A62C00853E63 /* Assets.xcassets */; };
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
 		BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB0457E1D77254000DF378C /* CatSprite.swift */; };
 		BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB045801D773DE600DF378C /* FoodSprite.swift */; };
 		BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5E64C1D760905005DE3EC /* Constants.swift */; };
+		BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */; };
 		BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8D91D78D97E00002F71 /* SoundManager.swift */; };
 		BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */; };
 		BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB0B1C871D8C9BA900C09901 /* LogoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogoScene.swift; path = Scenes/LogoScene.swift; sourceTree = "<group>"; };
 		BB1C70D51D84F615001E540D /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundNode.swift; path = Sprites/BackgroundNode.swift; sourceTree = "<group>"; };
 		BB1C70D71D84FAEA001E540D /* ColorAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAction.swift; sourceTree = "<group>"; };
 		BB1C70D91D86EC9F001E540D /* GroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroundNode.swift; path = Sprites/GroundNode.swift; sourceTree = "<group>"; };
@@ -61,12 +63,12 @@
 		BBA2E4AB1D74A62C00853E63 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = Scenes/GameScene.swift; sourceTree = "<group>"; };
 		BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ViewControllers/GameViewController.swift; sourceTree = "<group>"; };
 		BBA2E4B01D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BBA2E4B21D74A62C00853E63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBA2E4B51D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBA2E4B71D74A62C00853E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBB0457E1D77254000DF378C /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatSprite.swift; path = Sprites/CatSprite.swift; sourceTree = "<group>"; };
 		BBB045801D773DE600DF378C /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodSprite.swift; path = Sprites/FoodSprite.swift; sourceTree = "<group>"; };
 		BBB5E64C1D760905005DE3EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBD0A8D91D78D97E00002F71 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-clearday.mp3"; path = "Music/bensound-clearday.mp3"; sourceTree = "<group>"; };
 		BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzcomedy.mp3"; path = "Music/bensound-jazzcomedy.mp3"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
 				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
+				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -121,11 +124,11 @@
 		BB36AD261D75D70000FB54D0 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */,
 				BBD0A8E41D79D4EB00002F71 /* Fonts */,
 				BBD0A8DB1D78F0F100002F71 /* Music */,
 				BB281B7A1D7899AB00229A97 /* SFX */,
 				BBA2E4AF1D74A62C00853E63 /* Main.storyboard */,
-				BBA2E4B21D74A62C00853E63 /* Assets.xcassets */,
 				BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */,
 				BBA2E4B71D74A62C00853E63 /* Info.plist */,
 				BBB5E64C1D760905005DE3EC /* Constants.swift */,
@@ -262,7 +265,6 @@
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
 				BB281B821D789A3F00229A97 /* cat_meow_4.mp3 in Resources */,
 				BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */,
-				BBA2E4B31D74A62C00853E63 /* Assets.xcassets in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
 				BB281B801D789A3F00229A97 /* cat_meow_2.mp3 in Resources */,
 				BB281B811D789A3F00229A97 /* cat_meow_3.mp3 in Resources */,
@@ -273,6 +275,7 @@
 				BB3B1D691D847E4E00B643DD /* ColorPalette.plist in Resources */,
 				BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */,
 				BB281B861D789D0600229A97 /* cat_meow_6.wav in Resources */,
+				BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */,
 				BB281B7F1D789A3F00229A97 /* cat_meow_1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +296,7 @@
 				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,
 				BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */,
 				BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */,
+				BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */,
 				BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */,
 				BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */,
 				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,

@@ -32,7 +32,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   let creditsNode = SKNode()
 
   override func sceneDidLoad() {
-
     backgroundColor = SKColor(red:0.30, green:0.81, blue:0.89, alpha:1.0)
 
     //Setup logo - sprite initialized earlier
@@ -42,7 +41,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
     //Setup start button
     startButton = SKSpriteNode(texture: startButtonTexture)
-    startButton.position = CGPoint(x: size.width / 2,
+    startButton.position = CGPoint(x: size.width  / 2,
                                    y: size.height / 2 - startButton.size.height / 2)
     addChild(startButton)
 
@@ -68,7 +67,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     addChild(highScoreNode)
 
     setupRaindrops(size.height - (logoSprite.position.y + logoSprite.size.height / 2))
-
 
     //Add in floor physics body
     physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 20), to: CGPoint(x: size.width, y: 20))
@@ -115,6 +113,10 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     designMorgan.text = "Morgan Wheaton"
     designMorgan.horizontalAlignmentMode = .center
 
+    let designLaura = SKLabelNode(fontNamed: "PixelDigivolve")
+    designLaura.text = "Laura Levisay"
+    designLaura.horizontalAlignmentMode = .center
+
     let soundTitle = SKLabelNode(fontNamed: "PixelDigivolve")
     soundTitle.text = "MUSIC:"
     soundTitle.horizontalAlignmentMode = .center
@@ -122,7 +124,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     soundCreditNode.text = "Bensound.com"
     soundCreditNode.horizontalAlignmentMode = .center
 
-    let sectionMargin : CGFloat = 40
+    let sectionMargin : CGFloat = 30
 
     let xPos = size.width / 2
     developerTitle.position = CGPoint(x: xPos, y: logoSprite.position.y - logoSprite.size.height / 2 - sectionMargin - 10)
@@ -131,8 +133,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     designerTitle.position = CGPoint(x: xPos, y: developer.position.y - developer.fontSize - sectionMargin)
     designCathryn.position = CGPoint(x: xPos, y: designerTitle.position.y - designerTitle.fontSize)
     designMorgan.position = CGPoint(x: xPos, y: designCathryn.position.y - designCathryn.fontSize)
+    designLaura.position = CGPoint(x: xPos, y: designMorgan.position.y - designMorgan.fontSize)
 
-    soundTitle.position = CGPoint(x: xPos, y: designMorgan.position.y - designMorgan.fontSize - sectionMargin)
+    soundTitle.position = CGPoint(x: xPos, y: designLaura.position.y - designLaura.fontSize - sectionMargin)
     soundCreditNode.position = CGPoint(x: xPos, y: soundTitle.position.y - soundTitle.fontSize)
     soundCreditNode.fontColor = SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
 
@@ -141,6 +144,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     creditsNode.addChild(designerTitle)
     creditsNode.addChild(designCathryn)
     creditsNode.addChild(designMorgan)
+    creditsNode.addChild(designLaura)
     creditsNode.addChild(soundTitle)
     creditsNode.addChild(soundCreditNode)
 
@@ -392,6 +396,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         let transition = SKTransition.reveal(with: .down, duration: 0.75)
+        transition.pausesOutgoingScene = false
+        transition.pausesIncomingScene = false
+        
         let gameScene = GameScene(size: self.size, catScale: self.catSprite.xScale, rainScale: rainScale)
 
         gameScene.scaleMode = self.scaleMode
@@ -399,5 +406,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         self.view?.presentScene(gameScene, transition: transition)
       }
     }
+  }
+
+  deinit {
+    print("menu scene destroyed")
   }
 }

@@ -88,10 +88,6 @@ public class CatSprite : SKSpriteNode {
     timeSinceLastHit = 0
     removeAction(forKey: walkingActionKey)
 
-    if SoundManager.sharedInstance.isMuted {
-      return
-    }
-
     //Determine if we should meow or not
     if(currentRainHits < maxRainHits) {
       currentRainHits += 1
@@ -103,7 +99,7 @@ public class CatSprite : SKSpriteNode {
   }
 
   public func meow() {
-    if action(forKey: "action_sound_effect") == nil {
+    if !SoundManager.sharedInstance.isMuted &&  action(forKey: "action_sound_effect") == nil {
       currentRainHits = 0
 
       let selectedSFX = Int(arc4random_uniform(UInt32(meowSFX.count)))

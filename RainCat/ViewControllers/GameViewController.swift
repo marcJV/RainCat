@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let sceneNode = MenuScene(size: view.frame.size)
+    let sceneNode = LogoScene(size: view.frame.size)
 
     if let view = self.view as! SKView? {
       view.presentScene(sceneNode)
@@ -34,11 +34,6 @@ class GameViewController: UIViewController {
 
   override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
     return .landscape
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Release any cached data, images, etc that aren't in use.
   }
 
   override var prefersStatusBarHidden: Bool {
