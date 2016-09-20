@@ -20,14 +20,14 @@ public class CreditsNode : SKNode, Touchable {
   public func setup() {
     let creditsColor = SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
 
-    let developerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
+    let developerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
     developerTitle.text = "development:"
     developerTitle.horizontalAlignmentMode = .center
 
     developer.text = "Marc Vandehey"
     developer.horizontalAlignmentMode = .center
 
-    let designerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
+    let designerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
     designerTitle.text = "design:"
     designerTitle.horizontalAlignmentMode = .center
 
@@ -40,7 +40,7 @@ public class CreditsNode : SKNode, Touchable {
     designLaura.text = "Laura Levisay"
     designLaura.horizontalAlignmentMode = .center
 
-    let soundTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
+    let soundTitle = SKLabelNode(fontNamed: "PixelDigivolve")
     soundTitle.text = "MUSIC:"
     soundTitle.horizontalAlignmentMode = .center
 
