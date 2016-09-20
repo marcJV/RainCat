@@ -32,7 +32,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   let creditsNode = SKNode()
 
   override func sceneDidLoad() {
-    backgroundColor = SKColor(red:0.30, green:0.81, blue:0.89, alpha:1.0)
+    backgroundColor = BACKGROUND_COLOR
 
     //Setup logo - sprite initialized earlier
     logoSprite.position = CGPoint(x: size.width / 2, y: size.height / 2 + 100)
@@ -93,7 +93,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   //Quick attempt to make credits
   private func setupCredits() {
-    let developerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    let developerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
     developerTitle.text = "development:"
     developerTitle.horizontalAlignmentMode = .center
 
@@ -101,7 +101,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     developer.text = "Marc Vandehey"
     developer.horizontalAlignmentMode = .center
 
-    let designerTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    let designerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
     designerTitle.text = "design:"
     designerTitle.horizontalAlignmentMode = .center
 
@@ -117,7 +117,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     designLaura.text = "Laura Levisay"
     designLaura.horizontalAlignmentMode = .center
 
-    let soundTitle = SKLabelNode(fontNamed: "PixelDigivolve")
+    let soundTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
     soundTitle.text = "MUSIC:"
     soundTitle.horizontalAlignmentMode = .center
 

@@ -17,22 +17,30 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   private var easing : CGFloat = 0.1
   public var minimumHeight : CGFloat = 0
 
-  public static func newInstance(palette : ColorPalette) -> UmbrellaSprite {
+  private var isPingPong = false
+
+  public static func newInstance(palette : ColorPalette, pingPong : Bool = false) -> UmbrellaSprite {
     let umbrella = UmbrellaSprite()
+
+    umbrella.isPingPong = pingPong
 
     let top = SKSpriteNode(imageNamed: "umbrellaTop")
     let bottom = SKSpriteNode(imageNamed: "umbrellaBottom")
 
-    let path = UIBezierPath()
-    path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
-    path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
-    path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
-    path.addLine(to: CGPoint(x: top.size.width / 2 - 10, y: -top.size.height / 2))
-    path.addLine(to: CGPoint(x: 0, y: top.size.height / 2 - 10))
-    path.addLine(to: CGPoint(x: -top.size.width / 2 + 10, y: -top.size.height / 2))
-    path.close()
+    if pingPong {
+      top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
+    } else {
+      let path = UIBezierPath()
+      path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
+      path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
+      path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
+      path.addLine(to: CGPoint(x: top.size.width / 2 - 10, y: -top.size.height / 2))
+      path.addLine(to: CGPoint(x: 0, y: top.size.height / 2 - 10))
+      path.addLine(to: CGPoint(x: -top.size.width / 2 + 10, y: -top.size.height / 2))
+      path.close()
 
-    top.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
+      top.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
+    }
     top.physicsBody?.isDynamic = false
     top.physicsBody?.categoryBitMask = UmbrellaCategory
     top.physicsBody?.contactTestBitMask = RainDropCategory
@@ -72,19 +80,23 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
       self.destination.y = minimumHeight
     }
 
-    let distance = abs(sqrt(pow(self.destination.x - position.x, 2) + pow(self.destination.y - position.y, 2)))
-    if distance > UIScreen.main.bounds.width / 2 {
-      easing = 0.04
-    } else if distance > UIScreen.main.bounds.width / 4 {
-      easing = 0.1
+    let distance = Distance(p1: self.destination, p2: self.position)
+
+    if isPingPong {
+      easing = 0.3
     } else {
-      easing = 0.15
-    }
+      if distance > UIScreen.main.bounds.width / 2 {
+        easing = 0.04
+      } else if distance > UIScreen.main.bounds.width / 4 {
+        easing = 0.1
+      } else {
+        easing = 0.15
+      }
 
-    if self.destination.y == minimumHeight && position.y <= (minimumHeight + 5) {
-      easing = max(easing / 2, 0.04)
+      if self.destination.y == minimumHeight && position.y <= (minimumHeight + 5) {
+        easing = max(easing / 2, 0.04)
+      }
     }
-
   }
 
   public func update(deltaTime : TimeInterval) {
@@ -101,6 +113,10 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     }
   }
 
+  public func getVelocity() -> CGVector {
+    return CGVector(dx: destination.x - position.x, dy: destination.y - position.y)
+  }
+
   public func getHeight() -> CGFloat {
     return umbrellaTop.size.height + umbrellaBottom.size.height
   }
@@ -108,6 +124,5 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   public func updatePalette(palette: ColorPalette) {
     umbrellaTop.run(ColorAction().colorTransitionAction(fromColor: umbrellaTop.color, toColor: palette.umbrellaTopColor, duration: colorChangeDuration))
     umbrellaBottom.run(ColorAction().colorTransitionAction(fromColor: umbrellaBottom.color, toColor: palette.umbrellaBottomColor, duration: colorChangeDuration))
-    
   }
 }

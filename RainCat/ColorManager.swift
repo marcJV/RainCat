@@ -9,6 +9,8 @@
 
 import SpriteKit
 
+let BACKGROUND_COLOR = SKColor(red:0.30, green:0.81, blue:0.89, alpha:1.0)
+
 class ColorManager {
   static let sharedInstance = ColorManager()
 

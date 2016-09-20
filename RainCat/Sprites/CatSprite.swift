@@ -9,6 +9,8 @@
 import SpriteKit
 
 public class CatSprite : SKSpriteNode {
+  public var walkHorizontally = true
+
   private let walkingActionKey = "action_walking"
   private var timeSinceLastHit : TimeInterval = 2
   private let maxFlailTime : TimeInterval = 2
@@ -18,6 +20,8 @@ public class CatSprite : SKSpriteNode {
 
   let baseMovementSpeed : CGFloat = 100
   var movementSpeed : CGFloat = 100
+  var flipScale = false //used only for ping pong for player 1
+
 
   var isGrounded = false
 
@@ -51,10 +55,6 @@ public class CatSprite : SKSpriteNode {
     timeSinceLastHit += deltaTime
 
     if timeSinceLastHit >= maxFlailTime && isGrounded {
-      if zRotation != 0 && action(forKey: "action_rotate") == nil {
-        run(SKAction.rotate(toAngle: 0, duration: 0.25), withKey: "action_rotate")
-      }
-
       if action(forKey: walkingActionKey) == nil {
         let walkingAction = SKAction.repeatForever(
           SKAction.animate(with: walkFrames,
@@ -65,19 +65,36 @@ public class CatSprite : SKSpriteNode {
         run(walkingAction, withKey:walkingActionKey)
       }
 
-      //Stand still if the food is above us
-      if foodLocation.y > position.y && abs(foodLocation.x - position.x) < 2 {
-        physicsBody?.velocity.dx = 0
-        removeAction(forKey: walkingActionKey)
-        texture = walkFrames[1]
-      } else if foodLocation.x < position.x {
-        //Food is left
-        physicsBody?.velocity.dx = -movementSpeed
-        xScale = -1 * abs(xScale)
+      if walkHorizontally {
+        if zRotation != 0 && action(forKey: "action_rotate") == nil {
+          run(SKAction.rotate(toAngle: 0, duration: 0.25), withKey: "action_rotate")
+        }
+
+        //Stand still if the food is above us
+        if foodLocation.y > position.y && abs(foodLocation.x - position.x) < 2 {
+          physicsBody?.velocity.dx = 0
+          removeAction(forKey: walkingActionKey)
+          texture = walkFrames[1]
+        } else if foodLocation.x < position.x {
+          //Food is left
+          physicsBody?.velocity.dx = -movementSpeed
+          xScale = -1 * abs(xScale)
+        } else {
+          //Food is right
+          physicsBody?.velocity.dx = movementSpeed
+          xScale = abs(xScale)
+        }
       } else {
-        //Food is right
-        physicsBody?.velocity.dx = movementSpeed
-        xScale = abs(xScale)
+        if foodLocation.y < position.y {
+          //Food is down
+          physicsBody?.velocity.dy = -movementSpeed
+          xScale = abs(yScale) * (flipScale ? 1 : -1)
+
+        } else {
+          //Food is up
+          physicsBody?.velocity.dy = movementSpeed
+          xScale = abs(yScale) * (flipScale ? -1 : 1)
+        }
       }
 
       physicsBody?.angularVelocity = 0

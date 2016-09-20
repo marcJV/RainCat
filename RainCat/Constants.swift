@@ -19,3 +19,7 @@ let colorChangeDuration : TimeInterval = 0.25
 
 let ScoreKey = "RAINCAT_HIGHSCORE"
 let MuteKey = "RAINCAT_MUTED"
+
+public func Distance(p1: CGPoint, p2: CGPoint) -> CGFloat {
+  return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
+}
