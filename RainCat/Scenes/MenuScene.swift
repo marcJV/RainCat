@@ -9,74 +9,57 @@
 import SpriteKit
 
 class MenuScene : SKScene, SKPhysicsContactDelegate {
-  let startButtonTexture = SKTexture(imageNamed: "button_start")
-  let startButtonPressedTexture = SKTexture(imageNamed: "button_start_pressed")
   let soundButtonTexture = SKTexture(imageNamed: "speaker_on")
   let soundButtonTextureOff = SKTexture(imageNamed: "speaker_off")
 
-  let logoSprite = SKSpriteNode(imageNamed: "logo")
   let catSprite = CatSprite.newInstance()
-  var startButton : SKSpriteNode! = nil
   var soundButton : SKSpriteNode! = nil
   var creditsButton = SKLabelNode(fontNamed: "PixelDigivolve")
 
-  let highScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
-  var soundCreditNode = SKLabelNode(fontNamed: "PixelDigivolve")
-
   var selectedButton : SKNode?
 
-  var rainDrops = [SKSpriteNode]()
+  let creditsNode = CreditsNode()
+  let menuNode = MenuNode()
+  let playerSelectNode = PlayerSelectNode()
 
-  var showingCredits = false
+  let rainDropBanner = RainDropBanner()
 
-  let creditsNode = SKNode()
+  var currentNode : Touchable?
+
+  private var showingPlayerSelectScreen = false
 
   override func sceneDidLoad() {
     backgroundColor = BACKGROUND_COLOR
-
-    //Setup logo - sprite initialized earlier
-    logoSprite.position = CGPoint(x: size.width / 2, y: size.height / 2 + 100)
-    
-    addChild(logoSprite)
-
-    //Setup start button
-    startButton = SKSpriteNode(texture: startButtonTexture)
-    startButton.position = CGPoint(x: size.width  / 2,
-                                   y: size.height / 2 - startButton.size.height / 2)
-    addChild(startButton)
-
     let edgeMargin : CGFloat = 25
+    let bannerHeight : CGFloat = 100
+
+    rainDropBanner.setup(size: CGSize(width: frame.width, height: bannerHeight))
+    rainDropBanner.position = CGPoint(x: 0, y: size.height - bannerHeight - edgeMargin * 2)
+    addChild(rainDropBanner)
+
+    currentNode = menuNode
+
+    //Menu Setup
+    menuNode.position = CGPoint(x: frame.midX, y: rainDropBanner.position.y - bannerHeight - edgeMargin * 2)
+    menuNode.setup()
+    addChild(menuNode)
+
+    playerSelectNode.setup(width: frame.width)
+    playerSelectNode.alpha = 0
+    playerSelectNode.position = CGPoint(x: frame.maxX, y: rainDropBanner.position.y - bannerHeight - edgeMargin * 2)
+    addChild(playerSelectNode)
+
     //Setup sound button
     soundButton = SKSpriteNode(texture: (SoundManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
     soundButton.position = CGPoint(x: size.width - edgeMargin,
                                    y: edgeMargin)
     addChild(soundButton)
 
-    //Setup high score node
-    let defaults = UserDefaults.standard
-
-    let highScore = defaults.integer(forKey: ScoreKey)
-
-    highScoreNode.text = "\(highScore)"
-    highScoreNode.fontSize = 90
-    highScoreNode.verticalAlignmentMode = .top
-    highScoreNode.position = CGPoint(x: size.width / 2,
-                                     y: startButton.position.y - startButton.size.height / 2 - 50)
-    highScoreNode.zPosition = 1
-
-    addChild(highScoreNode)
-
-    setupRaindrops(size.height - (logoSprite.position.y + logoSprite.size.height / 2))
-
     //Add in floor physics body
     physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 20), to: CGPoint(x: size.width, y: 20))
     physicsBody?.categoryBitMask = FloorCategory
     physicsBody?.contactTestBitMask = RainDropCategory
     physicsBody?.restitution = 0.3
-
-
-    catSprite.position = highScoreNode.position
-    addChild(catSprite)
 
     physicsWorld.contactDelegate = self
 
@@ -88,166 +71,38 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     creditsButton.position = CGPoint(x: edgeMargin, y: edgeMargin)
     addChild(creditsButton)
 
-    setupCredits()
-  }
+    creditsNode.position = CGPoint(x: frame.midX, y: size.height / 2 + 100)
+    creditsNode.setup()
 
-  //Quick attempt to make credits
-  private func setupCredits() {
-    let developerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
-    developerTitle.text = "development:"
-    developerTitle.horizontalAlignmentMode = .center
-
-    let developer = SKLabelNode(fontNamed: "PixelDigivolve")
-    developer.text = "Marc Vandehey"
-    developer.horizontalAlignmentMode = .center
-
-    let designerTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
-    designerTitle.text = "design:"
-    designerTitle.horizontalAlignmentMode = .center
-
-    let designCathryn = SKLabelNode(fontNamed: "PixelDigivolve")
-    designCathryn.text = "Cathryn Rowe"
-    designCathryn.horizontalAlignmentMode = .center
-
-    let designMorgan = SKLabelNode(fontNamed: "PixelDigivolve")
-    designMorgan.text = "Morgan Wheaton"
-    designMorgan.horizontalAlignmentMode = .center
-
-    let designLaura = SKLabelNode(fontNamed: "PixelDigivolve")
-    designLaura.text = "Laura Levisay"
-    designLaura.horizontalAlignmentMode = .center
-
-    let soundTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
-    soundTitle.text = "MUSIC:"
-    soundTitle.horizontalAlignmentMode = .center
-
-    soundCreditNode.text = "Bensound.com"
-    soundCreditNode.horizontalAlignmentMode = .center
-
-    let sectionMargin : CGFloat = 30
-
-    let xPos = size.width / 2
-    developerTitle.position = CGPoint(x: xPos, y: logoSprite.position.y - logoSprite.size.height / 2 - sectionMargin - 10)
-    developer.position = CGPoint(x: xPos, y: developerTitle.position.y - developerTitle.fontSize)
-
-    designerTitle.position = CGPoint(x: xPos, y: developer.position.y - developer.fontSize - sectionMargin)
-    designCathryn.position = CGPoint(x: xPos, y: designerTitle.position.y - designerTitle.fontSize)
-    designMorgan.position = CGPoint(x: xPos, y: designCathryn.position.y - designCathryn.fontSize)
-    designLaura.position = CGPoint(x: xPos, y: designMorgan.position.y - designMorgan.fontSize)
-
-    soundTitle.position = CGPoint(x: xPos, y: designLaura.position.y - designLaura.fontSize - sectionMargin)
-    soundCreditNode.position = CGPoint(x: xPos, y: soundTitle.position.y - soundTitle.fontSize)
-    soundCreditNode.fontColor = SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
-
-    creditsNode.addChild(developerTitle)
-    creditsNode.addChild(developer)
-    creditsNode.addChild(designerTitle)
-    creditsNode.addChild(designCathryn)
-    creditsNode.addChild(designMorgan)
-    creditsNode.addChild(designLaura)
-    creditsNode.addChild(soundTitle)
-    creditsNode.addChild(soundCreditNode)
-
-    creditsNode.zPosition = 1000
     addChild(creditsNode)
 
-    creditsNode.alpha = 0
-  }
+    catSprite.position = menuNode.position
+    addChild(catSprite)
 
-  //This is an ugly method that would benefit greatly from loading it from a .sks file
-  private func setupRaindrops(_ height : CGFloat) {
-    let margin : CGFloat = 40
-    let lowerLimit = size.height - height + margin
-    let upperLimit = size.height - margin
-    let centerLine : CGFloat = (upperLimit + lowerLimit) / 2.0
-
-    let rainTexture = SKTexture(imageNamed: "rain_drop")
-
-    let rainDrop = SKSpriteNode(texture: rainTexture)
-    rainDrop.position = CGPoint(x: size.width / 2, y: centerLine)
-
-    rainDrop.zPosition = 10
-
-    addChild(rainDrop)
-    rainDrops.append(rainDrop)
-
-    //Generate left side
-    var xPosition = rainDrop.position.x
-    var index = 0
-    let innerMargin = 10 * UIScreen.main.nativeScale
-    let offsetAmount = rainDrop.size.width / 2 + innerMargin
-
-    xPosition -= offsetAmount
-
-    while xPosition > margin {
-      let rainDrop = SKSpriteNode(texture: rainTexture)
-      var yPosition = centerLine
-
-      if index % 6 == 0 {
-        yPosition = centerLine - rainDrop.size.height
-      } else if index % 3 == 0 {
-        yPosition = centerLine - innerMargin
-      } else if index % 2 == 0 {
-        yPosition = centerLine + rainDrop.size.height
-      }
-
-      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
-      rainDrop.zPosition = 10
-
-      addChild(rainDrop)
-      rainDrops.append(rainDrop)
-
-      xPosition -= offsetAmount
-      index += 1
+    menuNode.startGameAction = {
+      self.handleStartButtonClick()
     }
 
-    //Generate right side
-    index = 8 //Hack to have the pattern line up correctly
-    xPosition = rainDrop.position.x + offsetAmount
-    while xPosition < size.width - margin {
-      var yPosition = centerLine
+    menuNode.versesAction = {
+      self.handleVersesButtonClick()
+    }
 
-      if index % 6 == 0 {
-        yPosition = centerLine - rainDrop.size.height
-      } else if index % 3 == 0 {
-        yPosition = centerLine - innerMargin
-      } else if index % 2 == 0 {
-        yPosition = centerLine + rainDrop.size.height
-      }
+    playerSelectNode.backAction = {
+      self.handleBackButtonClick()
+    }
 
-      let rainDrop = SKSpriteNode(texture: rainTexture)
-      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
-      rainDrop.zPosition = 10
-
-      addChild(rainDrop)
-      rainDrops.append(rainDrop)
-
-      xPosition += offsetAmount
-      index += 1
+    playerSelectNode.startAction = {
+      self.handleStartVerses()
     }
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-      if selectedButton != nil {
-        handleStartButtonHover(isHovering: false)
-        handleSoundButtonHover(isHovering: false)
-      }
-
-      if showingCredits {
-        if soundCreditNode.contains(touch.location(in: self)) {
-          selectedButton = soundCreditNode
-
-          soundCreditNode.alpha = 0.75
-        }
-      }
+      currentNode?.touchBeganAtPoint(touch: touch)
 
       if creditsButton.contains(touch.location(in: self)) {
         selectedButton = creditsButton
         creditsButton.alpha = 0.75
-      } else if !showingCredits && startButton.contains(touch.location(in: self)) {
-        selectedButton = startButton
-        handleStartButtonHover(isHovering: true)
       } else if soundButton.contains(touch.location(in: self)) {
         selectedButton = soundButton
         handleSoundButtonHover(isHovering: true)
@@ -265,27 +120,21 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
           catSprite.setScale(0.5)
         }
       } else {
-        for rainDrop in rainDrops {
-          if rainDrop.contains(touch.location(in: self)) {
-
-            if rainDrop.xScale < 3 {
-              rainDrop.setScale(rainDrop.xScale + 1)
-            }
-          }
-        }
+        rainDropBanner.touchBeganAtPoint(touch: touch)
       }
     }
   }
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-      if selectedButton == startButton {
-        handleStartButtonHover(isHovering: (startButton.contains(touch.location(in: self))))
-      } else if selectedButton == soundButton {
+
+      currentNode?.touchMovedToPoint(touch: touch)
+
+      if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
-      } else if selectedButton == soundCreditNode {
-        soundCreditNode.alpha = (soundCreditNode.contains(touch.location(in: self))) ? 0.75 : 1.0
-      } else if selectedButton == creditsButton {
+        //      } else if selectedButton == soundCreditNode {
+        //        soundCreditNode.alpha = (soundCreditNode.contains(touch.location(in: self))) ? 0.75 : 1.0
+      }else if selectedButton == creditsButton {
         creditsButton.alpha = (creditsButton.contains(touch.location(in: self))) ? 0.75 : 1.0
       }
     }
@@ -294,59 +143,22 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
 
-      if selectedButton == startButton {
-        handleStartButtonHover(isHovering: false)
+      currentNode?.touchEndedAtPoint(touch: touch)
 
-        if (startButton.contains(touch.location(in: self))) {
-          handleStartButtonClick()
-        }
-
-      } else if selectedButton == soundButton {
+      if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: false)
 
         if (soundButton.contains(touch.location(in: self))) {
           handleSoundButtonClick()
         }
-      } else if selectedButton == soundCreditNode {
-        soundCreditNode.alpha = 1
-
-        if (soundCreditNode.contains(touch.location(in: self))) {
-          // link to music credits
-          if let url = URL(string: "http://www.bensound.com/") {
-            UIApplication.shared.open(url, options: [:], completionHandler: { (completion) in
-              // dont do anything with this currently
-            })
-          }
-        }
       } else if selectedButton == creditsButton {
         creditsButton.alpha = 1
 
-        showingCredits = !showingCredits
-        let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
-        let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
-        if showingCredits {
-          creditsNode.run(fadeIn)
-
-          startButton.run(fadeOut)
-          highScoreNode.run(fadeOut)
-        } else {
-          creditsNode.run(fadeOut)
-
-          startButton.run(fadeIn)
-          highScoreNode.run(fadeIn)
-        }
+        handleCreditsButtonClick()
       }
     }
 
     selectedButton = nil
-  }
-
-  func handleStartButtonHover(isHovering : Bool) {
-    if isHovering {
-      startButton.texture = startButtonPressedTexture
-    } else {
-      startButton.texture = startButtonTexture
-    }
   }
 
   func handleSoundButtonHover(isHovering : Bool) {
@@ -358,14 +170,37 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   }
 
   func handleStartButtonClick() {
-    for rainDrop in rainDrops {
-      rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: 10 * rainDrop.xScale)
-      rainDrop.physicsBody?.categoryBitMask = RainDropCategory
+   rainDropBanner.makeItRain()
+  }
 
-      //Makes all of the raindrops fall at different rates
-      rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
-      rainDrop.physicsBody?.mass = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
-    }
+  func handleVersesButtonClick() {
+    showingPlayerSelectScreen = true
+    currentNode = playerSelectNode
+
+    playerSelectNode.position.x = frame.maxX
+
+    let translateAction = SKAction.moveBy(x: -frame.width, y: 0, duration: 0.25)
+    menuNode.run(translateAction)
+    playerSelectNode.run(translateAction)
+
+    menuNode.run(SKAction.fadeOut(withDuration: 0.25))
+    playerSelectNode.run(SKAction.fadeIn(withDuration: 0.25))
+  }
+
+  func handleBackButtonClick() {
+    showingPlayerSelectScreen = false
+    currentNode = menuNode
+
+    let translateAction = SKAction.moveBy(x: frame.width, y: 0, duration: 0.25)
+    menuNode.run(translateAction)
+    playerSelectNode.run(translateAction)
+
+    menuNode.run(SKAction.fadeIn(withDuration: 0.25))
+    playerSelectNode.run(SKAction.fadeOut(withDuration: 0.25))
+  }
+
+  func handleStartVerses() {
+    rainDropBanner.makeItRain()
   }
 
   func handleSoundButtonClick() {
@@ -375,6 +210,26 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     } else {
       //Is not muted
       soundButton.texture = soundButtonTexture
+    }
+  }
+
+  func handleCreditsButtonClick() {
+    let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
+    let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
+
+    if (currentNode as! SKNode) != creditsNode {
+      menuNode.run(fadeOut)
+      playerSelectNode.run(fadeOut)
+
+      creditsNode.run(fadeIn)
+
+      currentNode = creditsNode
+    } else {
+      creditsNode.run(fadeOut)
+      menuNode.run(fadeIn)
+      playerSelectNode.run(fadeIn)
+
+      currentNode = showingPlayerSelectScreen ? playerSelectNode : menuNode
     }
   }
 
@@ -398,16 +253,26 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         let transition = SKTransition.reveal(with: .down, duration: 0.75)
         transition.pausesOutgoingScene = false
         transition.pausesIncomingScene = false
+
+        var scene : SKScene
+
+        if (self.currentNode as! SKNode) == self.menuNode {
+          scene = GameScene(size: self.size, catScale: self.catSprite.xScale, rainScale: rainScale)
+        } else {
+          scene = PingPongScene(size: self.size,
+                                player1ColorPalette: self.playerSelectNode.playerOnePalette(),
+                                player2ColorPalette: self.playerSelectNode.playerTwoPalette(),
+                                catScale: self.catSprite.xScale,
+                                rainScale: rainScale)
+        }
         
-        let gameScene = GameScene(size: self.size, catScale: self.catSprite.xScale, rainScale: rainScale)
-
-        gameScene.scaleMode = self.scaleMode
-
-        self.view?.presentScene(gameScene, transition: transition)
+        scene.scaleMode = self.scaleMode
+        
+        self.view?.presentScene(scene, transition: transition)
       }
     }
   }
-
+  
   deinit {
     print("menu scene destroyed")
   }

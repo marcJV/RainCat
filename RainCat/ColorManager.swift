@@ -30,6 +30,7 @@ class ColorManager {
       }
     }
   }
+
   public func resetPaletteIndex() -> ColorPalette {
     colorIndex = 0
 
@@ -39,6 +40,14 @@ class ColorManager {
   public func getNextColorPalette() -> ColorPalette {
     let palette = colorList[colorIndex]
     colorIndex = (colorIndex + 1) % colorList.count
+
+    return palette
+  }
+
+public func getColorPalette(_ index : Int) -> ColorPalette {
+    let fixedIndex = index % colorList.count
+
+    let palette = colorList[fixedIndex]
 
     return palette
   }

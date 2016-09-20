@@ -20,7 +20,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   private let cat1Key = "PLAYER_ONE_CAT"
   private let cat2Key = "PLAYER_TWO_CAT"
 
-  private var puck : SKSpriteNode!
+  private var puck : SKSpriteNode?
 
   private var lastUpdateTime : TimeInterval = 0
   private let maxNoHitTime : TimeInterval = 5
@@ -37,7 +37,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
   private let backgroundNode = PingPongBackgroundNode()
 
-  private let deadZone :CGFloat = 150
+  private var deadZone :CGFloat = 150
 
   private var cat1X : CGFloat = 0
   private var cat2X : CGFloat = 0
@@ -59,14 +59,48 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   private var p1Touch : UITouch?
   private var p2Touch : UITouch?
 
+  private var player1Palette : ColorPalette!
+  private var player2Palette : ColorPalette!
+
+  private var rainScale : CGFloat!
+  private var catScale : CGFloat!
+
+  private var destinationOffset : CGFloat
+
+  private var giantMode = false
+
+  public init(size: CGSize, player1ColorPalette : ColorPalette, player2ColorPalette : ColorPalette, catScale : CGFloat, rainScale : CGFloat) {
+    player1Palette = player1ColorPalette
+    player2Palette = player2ColorPalette
+
+    self.catScale = catScale
+    self.rainScale = rainScale
+
+    destinationOffset = 50 * ((catScale > 1) ? catScale : 1)
+
+    if catScale > 2 {
+      giantMode = true
+    }
+
+    super.init(size: size)
+  }
+
+  public required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   public override func sceneDidLoad() {
+    if giantMode {
+      deadZone = 75
+    }
+
     hud.setup(size: size)
 
     addChild(hud)
 
     backgroundColor = SKColor(red:0.38, green:0.60, blue:0.65, alpha:1.0)
 
-    backgroundNode.setup(frame: frame, deadZone: deadZone)
+    backgroundNode.setup(frame: frame, deadZone: deadZone, playerOnePalette: player1Palette, playerTwoPalette: player2Palette)
     addChild(backgroundNode)
 
     //Override graviy for the cats
@@ -79,7 +113,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     setupUmbrellas()
     setupCats()
-    setupPuck()
 
     resetLocations(arc4random() % 2 == 0) //random start location
 
@@ -102,17 +135,19 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   }
 
   private func setupPuck() {
-    puck = SKSpriteNode(imageNamed: "rain_drop")
+    if puck == nil {
+      puck = SKSpriteNode(imageNamed: "medium_rain_drop")
+    }
 
-    puck.setScale(2.0)
-    puck.zPosition = 4
-    puck.physicsBody = SKPhysicsBody(circleOfRadius: puck.size.height / 3)
-    puck.physicsBody?.categoryBitMask = RainDropCategory
-    puck.physicsBody?.contactTestBitMask = UmbrellaCategory | WorldFrameCategory | CatCategory
-    puck.physicsBody?.restitution = 1
-    puck.physicsBody?.linearDamping = 0.5
+    puck!.setScale(rainScale)
+    puck!.zPosition = 4
+    puck!.physicsBody = SKPhysicsBody(circleOfRadius: puck!.size.height / 3)
+    puck!.physicsBody?.categoryBitMask = RainDropCategory
+    puck!.physicsBody?.contactTestBitMask = UmbrellaCategory | WorldFrameCategory | CatCategory
+    puck!.physicsBody?.restitution = 1
+    puck!.physicsBody?.linearDamping = 0.5
 
-    addChild(puck)
+    addChild(puck!)
   }
 
   private func setupCats() {
@@ -131,8 +166,8 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     cat1.isGrounded = true
     cat2.isGrounded = true
 
-    cat1.setScale(0.75)
-    cat2.setScale(0.75)
+    cat1.setScale(catScale)
+    cat2.setScale(catScale)
 
     cat1.zRotation = p1Rotation
     cat1.flipScale = true
@@ -145,19 +180,19 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     cat1.position = cat1ZeroPosition
     cat1Destination = cat1.position
-    cat1Destination.y = 50
+    cat1Destination.y = destinationOffset
 
     cat2ZeroPosition = CGPoint(x: cat2X, y: frame.midY)
     cat2.position = cat2ZeroPosition
-    cat2Destination.y = frame.height - 50
+    cat2Destination.y = frame.height - destinationOffset
 
     addChild(cat1)
     addChild(cat2)
   }
 
   private func setupUmbrellas() {
-    umbrella1 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getNextColorPalette(), pingPong: true)
-    umbrella2 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getNextColorPalette(), pingPong: true)
+    umbrella1 = UmbrellaSprite.newInstance(palette: player1Palette, pingPong: true)
+    umbrella2 = UmbrellaSprite.newInstance(palette: player2Palette, pingPong: true)
 
     umbrella1.physicsBody?.restitution = 0.1
     umbrella2.physicsBody?.restitution = 0.1
@@ -180,19 +215,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   }
 
   private func resetLocations(_ playerOnePuck : Bool) {
-    puck.physicsBody?.isDynamic = true
-
-    if playerOnePuck {
-      puck.position = CGPoint(x: frame.midX - deadZone - 65,
-                              y: frame.height * (umbrella1.position.y > frame.height / 2 ? 0.25 : 0.75))
-    } else {
-      puck.position = CGPoint(x: frame.midX + deadZone + 65 ,
-                              y: frame.height * (umbrella2.position.y > frame.height / 2 ? 0.25 : 0.75))
-    }
-
-    puck.physicsBody?.velocity = CGVector()
-    puck.physicsBody?.angularVelocity = 0
-
     cat1.physicsBody?.velocity = CGVector()
     cat1.physicsBody?.angularVelocity = 0
 
@@ -206,10 +228,10 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     umbrella2.setDestination(destination: umbrella2ZeroPosition)
 
     cat1Destination = cat1ZeroPosition
-    cat1Destination.y = 50
+    cat1Destination.y = destinationOffset
 
     cat2Destination = cat2ZeroPosition
-    cat2Destination.y = frame.height - 50
+    cat2Destination.y = frame.height - destinationOffset
 
     cat1.run(SKAction.move(to: cat1ZeroPosition, duration: 0.25))
     cat2.run(SKAction.move(to: cat2ZeroPosition, duration: 0.25))
@@ -221,6 +243,18 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     catHit = false
     roundStarted = false
+
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(200)) {
+      self.setupPuck()
+
+      if playerOnePuck {
+        self.puck?.position = CGPoint(x: self.frame.midX - self.deadZone - 65,
+                                      y: self.frame.height * (self.umbrella1.position.y > self.frame.height / 2 ? 0.25 : 0.75))
+      } else {
+        self.puck?.position = CGPoint(x: self.frame.midX + self.deadZone + 65,
+                                      y: self.frame.height * (self.umbrella2.position.y > self.frame.height / 2 ? 0.25 : 0.75))
+      }
+    }
   }
 
   private func rematchPressed() {
@@ -252,7 +286,8 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     catHit = false
     roundStarted = false
 
-    puck.removeFromParent()
+    puck?.removeFromParent()
+    puck = nil
 
     setupPuck()
     resetLocations(player1Lost)
@@ -372,9 +407,9 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     if abs(cat1.position.y - cat1Destination.y) < 30 {
       if cat1.position.y < frame.midY {
-        cat1Destination.y = frame.height - 50
+        cat1Destination.y = frame.height - destinationOffset
       } else {
-        cat1Destination.y = 50
+        cat1Destination.y = destinationOffset
       }
     }
 
@@ -383,9 +418,9 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     if abs(cat2.position.y - cat2Destination.y) < 30 {
       if cat2.position.y < frame.midY {
-        cat2Destination.y = frame.height - 50
+        cat2Destination.y = frame.height - destinationOffset
       } else {
-        cat2Destination.y = 50
+        cat2Destination.y = destinationOffset
       }
     }
 
@@ -404,18 +439,16 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     } else if contact.bodyB.categoryBitMask == RainDropCategory {
       otherBody = contact.bodyA
     } else {
-      print("bad touch")
-
       return
     }
 
     currentNoHitTime = 0
-    roundStarted = true
 
     switch otherBody.categoryBitMask {
     case UmbrellaCategory:
+      roundStarted = true
 
-      puck.physicsBody?.angularVelocity = 0.0
+      puck?.physicsBody?.angularVelocity = 0.0
 
       var impulse = (otherBody.node?.parent as? UmbrellaSprite)!.getVelocity()
 
@@ -435,10 +468,18 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
         impulse.dy = max * ((impulse.dy > 1) ? 1 : -1)
       }
 
-      puck.physicsBody?.applyImpulse(impulse)
+      puck?.physicsBody?.applyImpulse(impulse)
     case CatCategory:
+      if !roundStarted {
+        return
+      }
+      
       if !catHit {
         catHit = true
+
+        puck?.physicsBody = nil
+        puck?.removeFromParent()
+        puck = nil
 
         if otherBody.node?.name == cat1Key {
           hud.incrementPlayerTwo()
@@ -484,7 +525,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
         }
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-          self.puck.physicsBody?.isDynamic = false
           self.resetLocations(self.p1LastHit)
         }
       }
@@ -507,25 +547,29 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     let fadeOutAction = SKAction.fadeOut(withDuration: 0.25)
     
     backgroundNode.run(fadeOutAction)
-    puck.run(fadeOutAction)
+    puck?.run(fadeOutAction)
     
     if hud.playerTwoScore >= maxPoints {
       //P2 wins
       umbrella2.run(winAnimation)
       umbrella1.run(fadeOutAction)
-
+      
       cat2.run(fadeOutAction)
-
+      
     } else if hud.playerOneScore >= maxPoints {
       //P1 wins
       umbrella1.run(winAnimation)
       umbrella2.run(fadeOutAction)
-
+      
       cat1.run(fadeOutAction)
     }
-
+    
     umbrella1.physicsBody = nil
     umbrella2.physicsBody = nil
-    puck.physicsBody = nil
+    puck?.physicsBody = nil
+  }
+  
+  deinit {
+    print("pingpong scene destroyed")
   }
 }

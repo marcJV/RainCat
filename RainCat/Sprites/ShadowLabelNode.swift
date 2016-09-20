@@ -23,7 +23,7 @@ public class ShadowLabelNode : SKNode {
     shadowTextNode.zPosition = 0
 
     textNode.position = CGPoint()
-    shadowTextNode.position = CGPoint(x: -1, y: -4)
+    shadowTextNode.position = CGPoint(x: -1, y: -6)
 
     textNode.fontColor = SKColor.white
     shadowTextNode.fontColor = SKColor(red:0.23, green:0.64, blue:0.71, alpha:1.0)
@@ -47,6 +47,12 @@ public class ShadowLabelNode : SKNode {
     didSet {
       textNode.fontSize = fontSize
       shadowTextNode.fontSize = fontSize
+
+      if fontSize < 80 {
+        shadowTextNode.position = CGPoint(x: -1, y: -3)
+      } else {
+        shadowTextNode.position = CGPoint(x: -1, y: -6)
+      }
     }
   }
 

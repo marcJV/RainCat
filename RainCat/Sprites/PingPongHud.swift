@@ -68,13 +68,6 @@ public class PingPongHud : SKNode {
     messageNode.zPosition = 1000
     addChild(messageNode)
 
-//    messageNodeShadow.fontColor = SKColor(red:0.23, green:0.64, blue:0.71, alpha:1.0)
-//    messageNodeShadow.alpha = 0
-//    messageNodeShadow.fontSize = 65
-//    messageNodeShadow.position = CGPoint(x: (size.width / 2) - 2, y: (size.height / 2) - 3)
-//    messageNodeShadow.zPosition = 999
-//    addChild(messageNodeShadow)
-
     rematchButton = SKSpriteNode(texture: rematchTexture)
     rematchButton.alpha = 0
     rematchButton.position = CGPoint(x: size.width / 2,
@@ -111,7 +104,7 @@ public class PingPongHud : SKNode {
     }
   }
 
-  func touchBeganAtPoint(point: CGPoint) {
+  public func touchBeganAtPoint(point: CGPoint) {
     let quitContainsPoint = quitButton.contains(point)
 
     if quitButtonPressed && !quitContainsPoint {
@@ -133,7 +126,7 @@ public class PingPongHud : SKNode {
     }
   }
 
-  func touchMovedToPoint(point: CGPoint) {
+  public func touchMovedToPoint(point: CGPoint) {
     if quitButtonPressed {
       if quitButton.contains(point) {
         quitButton.texture = quitButtonPressedTexture
@@ -149,7 +142,7 @@ public class PingPongHud : SKNode {
     }
   }
 
-  func touchEndedAtPoint(point: CGPoint) {
+  public func touchEndedAtPoint(point: CGPoint) {
     if quitButtonPressed && quitButton.contains(point) && quitButtonAction != nil {
       quitButtonAction!()
     } else if showingRematchButton && rematchButtonPressed && rematchButton.contains(point) && rematchButtonAction != nil {
@@ -167,20 +160,16 @@ public class PingPongHud : SKNode {
     showMessageIndefinitely(message: message)
 
     messageNode.run(SKAction.fadeOut(withDuration: 2))
-//    messageNodeShadow.run(SKAction.fadeOut(withDuration: 2))
   }
 
   func showMessageIndefinitely(message : String) {
     messageNode.text = message
-//    messageNodeShadow.text = message
 
     messageNode.alpha = 1
-//    messageNodeShadow.alpha = 1
   }
 
   func hideMessage() {
     messageNode.run(SKAction.fadeOut(withDuration: 0.25))
-//    messageNodeShadow.run(SKAction.fadeOut(withDuration: 0.25))
   }
 
   func showRematchButton() {

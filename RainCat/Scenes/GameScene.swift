@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private var cat : CatSprite!
   private var food : FoodSprite?
   private let hud = HudNode()
-  private let rainDropTexture = SKTexture(imageNamed: "rain_drop")
+  private var rainDropTexture : SKTexture
 
   private var backgroundNode : BackgroundNode!
   private var groundNode : GroundNode!
@@ -32,6 +32,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private var rainScale : CGFloat = 1
 
   public init(size : CGSize, catScale : CGFloat, rainScale : CGFloat) {
+    switch rainScale {
+    case 2:
+      rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
+    case 3:
+      rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
+    default:
+      rainDropTexture = SKTexture(imageNamed: "rain_drop")
+    }
+
     super.init(size: size)
 
     self.catScale = catScale

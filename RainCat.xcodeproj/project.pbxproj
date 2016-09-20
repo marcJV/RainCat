@@ -23,6 +23,11 @@
 		BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */; };
 		BB3B1D691D847E4E00B643DD /* ColorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3B1D681D847E4E00B643DD /* ColorPalette.plist */; };
 		BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */; };
+		BB4E53F91D9172520031DAB9 /* CreditsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53F81D9172520031DAB9 /* CreditsNode.swift */; };
+		BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */; };
+		BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FC1D9176B50031DAB9 /* Touchable.swift */; };
+		BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */; };
+		BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
 		BB81CBA41D90F105009EAA22 /* PingPongPlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */; };
 		BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */; };
@@ -63,6 +68,11 @@
 		BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UmbrellaSprite.swift; path = Sprites/UmbrellaSprite.swift; sourceTree = "<group>"; };
 		BB3B1D681D847E4E00B643DD /* ColorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ColorPalette.plist; sourceTree = "<group>"; };
 		BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		BB4E53F81D9172520031DAB9 /* CreditsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsNode.swift; path = Sprites/CreditsNode.swift; sourceTree = "<group>"; };
+		BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuNode.swift; path = Sprites/MenuNode.swift; sourceTree = "<group>"; };
+		BB4E53FC1D9176B50031DAB9 /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Sprites/Touchable.swift; sourceTree = "<group>"; };
+		BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainDropBanner.swift; path = Sprites/RainDropBanner.swift; sourceTree = "<group>"; };
+		BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerSelectNode.swift; path = Scenes/PlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongPlayerSelectNode.swift; path = Sprites/PingPongPlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShadowLabelNode.swift; path = Sprites/ShadowLabelNode.swift; sourceTree = "<group>"; };
@@ -151,20 +161,40 @@
 		BB36AD271D75D86B00FB54D0 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
-				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
-				BBB0457E1D77254000DF378C /* CatSprite.swift */,
-				BBB045801D773DE600DF378C /* FoodSprite.swift */,
-				BBD0A8E71D79D6B400002F71 /* HudNode.swift */,
+				BB4E54011D918EF50031DAB9 /* MenuNodeGroups */,
 				BB1C70D51D84F615001E540D /* BackgroundNode.swift */,
-				BB1C70D91D86EC9F001E540D /* GroundNode.swift */,
+				BBB0457E1D77254000DF378C /* CatSprite.swift */,
 				BB1C70D71D84FAEA001E540D /* ColorAction.swift */,
-				BB1C70DB1D870508001E540D /* Paletteable.swift */,
-				BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */,
+				BBB045801D773DE600DF378C /* FoodSprite.swift */,
+				BB1C70D91D86EC9F001E540D /* GroundNode.swift */,
+				BBD0A8E71D79D6B400002F71 /* HudNode.swift */,
 				BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */,
+				BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */,
 				BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */,
+				BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */,
 				BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */,
+				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
 			);
 			name = Sprites;
+			sourceTree = "<group>";
+		};
+		BB4E54001D918EDD0031DAB9 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BB1C70DB1D870508001E540D /* Paletteable.swift */,
+				BB4E53FC1D9176B50031DAB9 /* Touchable.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		BB4E54011D918EF50031DAB9 /* MenuNodeGroups */ = {
+			isa = PBXGroup;
+			children = (
+				BB4E53F81D9172520031DAB9 /* CreditsNode.swift */,
+				BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */,
+				BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */,
+			);
+			name = MenuNodeGroups;
 			sourceTree = "<group>";
 		};
 		BBA2E4991D74A62C00853E63 = {
@@ -186,6 +216,7 @@
 		BBA2E4A41D74A62C00853E63 /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
+				BB4E54001D918EDD0031DAB9 /* Protocols */,
 				BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */,
 				BB36AD271D75D86B00FB54D0 /* Sprites */,
 				BB36AD241D75D6DE00FB54D0 /* Scenes */,
@@ -304,20 +335,25 @@
 			files = (
 				BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */,
 				BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */,
+				BB4E53F91D9172520031DAB9 /* CreditsNode.swift in Sources */,
 				BB1C70DA1D86EC9F001E540D /* GroundNode.swift in Sources */,
 				BB0CE14D1D9088B200D4E664 /* PingPongBackgroundNode.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
+				BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */,
 				BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */,
 				BB81CBA41D90F105009EAA22 /* PingPongPlayerSelectNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */,
+				BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */,
 				BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */,
 				BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */,
 				BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */,
 				BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */,
 				BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */,
+				BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */,
 				BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */,
+				BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */,
 				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,
 				BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */,
 				BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */,

@@ -40,8 +40,8 @@ public class CatSprite : SKSpriteNode {
     "cat_meow_7.mp3"
   ]
 
-  public static func newInstance() -> CatSprite {
-    let catSprite = CatSprite(imageNamed: "cat_one")
+public static func newInstance() -> CatSprite {
+    let catSprite = CatSprite(imageNamed: "cat_two")
 
     catSprite.zPosition = 3
     catSprite.physicsBody = SKPhysicsBody(circleOfRadius: catSprite.size.width / 2)

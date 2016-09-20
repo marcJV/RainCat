@@ -54,7 +54,7 @@ public class LogoScene : SKScene {
       ]))
 
     //Preload the menu
-    let menuScene = PingPongScene(size: self.size)
+    let menuScene = MenuScene(size: self.size)
 
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),
