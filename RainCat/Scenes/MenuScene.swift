@@ -83,7 +83,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
       self.handleStartButtonClick()
     }
 
-    menuNode.versesAction = {
+    menuNode.versusAction = {
       self.handleVersesButtonClick()
     }
 

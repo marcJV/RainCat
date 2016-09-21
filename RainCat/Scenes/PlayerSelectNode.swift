@@ -46,10 +46,10 @@ public class PlayerSelectNode : SKNode, Touchable {
     backButton.position = CGPoint(x: width / 2, y: startButton.position.y - startButton.size.height - margin)
     addChild(backButton)
 
-    umbrella1.position = CGPoint(x: width * 0.15, y: startButton.position.y)
+    umbrella1.position = CGPoint(x: width * 0.15, y: startButton.position.y - 40)
     addChild(umbrella1)
 
-    umbrella2.position = CGPoint(x: width * 0.85, y: startButton.position.y)
+    umbrella2.position = CGPoint(x: width * 0.85, y: startButton.position.y - 40)
     addChild(umbrella2)
   }
 

@@ -15,12 +15,12 @@ public class MenuNode : SKNode, Touchable {
   private let startButtonTexture = SKTexture(imageNamed: "survival_button")
   private let startButtonPressedTexture = SKTexture(imageNamed: "survival_button_pressed")
 
-  private var versesButton : SKSpriteNode!
-  private let versesButtonTexture = SKTexture(imageNamed: "verses_button")
-  private let versesButtonPressedTexture = SKTexture(imageNamed: "verses_button_pressed")
+  private var versusButton : SKSpriteNode!
+  private let versusButtonTexture = SKTexture(imageNamed: "versus_button")
+  private let versusButtonPressedTexture = SKTexture(imageNamed: "versus_button_pressed")
 
   public var startGameAction : (() -> ())?
-  public var versesAction : (() -> ())?
+  public var versusAction : (() -> ())?
 
   private var selectedButton : SKNode?
 
@@ -36,9 +36,9 @@ public class MenuNode : SKNode, Touchable {
     startButton.position = CGPoint(x: 0, y: appTitleNode.position.y - appTitleNode.fontSize - startButton.size.height / 2)
     addChild(startButton)
 
-    versesButton = SKSpriteNode(texture: versesButtonTexture)
-    versesButton.position = CGPoint(x: 0, y: startButton.position.y - startButton.size.height / 2 - versesButton.size.height / 2 - 20)
-    addChild(versesButton)
+    versusButton = SKSpriteNode(texture: versusButtonTexture)
+    versusButton.position = CGPoint(x: 0, y: startButton.position.y - startButton.size.height / 2 - versusButton.size.height / 2 - 20)
+    addChild(versusButton)
 
     //Setup high score node
     let defaults = UserDefaults.standard
@@ -66,8 +66,8 @@ public class MenuNode : SKNode, Touchable {
       selectedButton = startButton
       
       handleStartButtonHover(isHovering: true)
-    } else if versesButton.contains(point) {
-      selectedButton = versesButton
+    } else if versusButton.contains(point) {
+      selectedButton = versusButton
 
       handleVersesButtonHover(isHovering: true)
     }
@@ -78,8 +78,8 @@ public class MenuNode : SKNode, Touchable {
 
     if selectedButton == startButton {
       handleStartButtonHover(isHovering: startButton.contains(point))
-    } else if selectedButton == versesButton {
-      handleVersesButtonHover(isHovering: versesButton.contains(point))
+    } else if selectedButton == versusButton {
+      handleVersesButtonHover(isHovering: versusButton.contains(point))
     }
   }
 
@@ -90,10 +90,10 @@ public class MenuNode : SKNode, Touchable {
       handleStartButtonHover(isHovering: false)
 
       startGameAction!()
-    } else if selectedButton == versesButton && versesButton.contains(point) && versesAction != nil {
+    } else if selectedButton == versusButton && versusButton.contains(point) && versusAction != nil {
       handleVersesButtonHover(isHovering: false)
 
-      versesAction!()
+      versusAction!()
     }
 
     selectedButton = nil
@@ -115,9 +115,9 @@ public class MenuNode : SKNode, Touchable {
 
   func handleVersesButtonHover(isHovering : Bool) {
     if isHovering {
-      versesButton.texture = versesButtonPressedTexture
+      versusButton.texture = versusButtonPressedTexture
     } else {
-      versesButton.texture = versesButtonTexture
+      versusButton.texture = versusButtonTexture
     }
   }
 }
