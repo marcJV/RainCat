@@ -22,7 +22,6 @@ public class CatSprite : SKSpriteNode {
   var movementSpeed : CGFloat = 100
   var flipScale = false //used only for ping pong for player 1
 
-
   var isGrounded = false
 
   private let walkFrames = [
@@ -116,7 +115,7 @@ public static func newInstance() -> CatSprite {
   }
 
   public func meow() {
-    if !SoundManager.sharedInstance.isMuted &&  action(forKey: "action_sound_effect") == nil {
+    if !SoundManager.sharedInstance.isMuted && action(forKey: "action_sound_effect") == nil {
       currentRainHits = 0
 
       let selectedSFX = Int(arc4random_uniform(UInt32(meowSFX.count)))

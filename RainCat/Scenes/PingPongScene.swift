@@ -245,6 +245,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     roundStarted = false
 
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(200)) {
+      self.puck?.removeFromParent()
       self.setupPuck()
 
       if playerOnePuck {
@@ -481,7 +482,9 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
         puck?.removeFromParent()
         puck = nil
 
+
         if otherBody.node?.name == cat1Key {
+
           hud.incrementPlayerTwo()
 
           if hud.playerTwoScore >= maxPoints {
@@ -497,10 +500,12 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
           cat1.hitByRain()
           cat1.removeAllActions()
+          cat1.meow()
           cat1.physicsBody?.angularVelocity = 0.75
 
           p1LastHit = true
         } else if otherBody.node?.name == cat2Key {
+
           hud.incrementPlayerOne()
 
           if hud.playerOneScore >= maxPoints {
@@ -517,6 +522,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
           cat2.hitByRain()
           cat2.removeAllActions()
+          cat2.meow()
           cat2.physicsBody?.angularVelocity = 0.75
 
           p1LastHit = false

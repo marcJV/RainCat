@@ -34,7 +34,7 @@ public class PlayerSelectNode : SKNode, Touchable {
   public func setup(width : CGFloat) {
     let margin : CGFloat = 15
     versesTitle.fontSize = 100
-    versesTitle.text = "Verses"
+    versesTitle.text = "Cat-Pong"
     versesTitle.position = CGPoint(x: width / 2, y: 0)
     addChild(versesTitle)
 
