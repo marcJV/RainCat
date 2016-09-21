@@ -186,7 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       let rainDrop = SKSpriteNode(texture: rainDropTexture)
       rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
       rainDrop.zPosition = 2
-      rainDrop.setScale(rainScale)
 
       let bodyEdge = 20 * rainScale
       rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: bodyEdge, height: bodyEdge))
