@@ -84,11 +84,19 @@
 			isa = PBXGroup;
 			children = (
 				BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */,
+				BBE2D58D1D9AB93B0046B493 /* Sprites */,
 				BB36AD241D75D6DE00FB54D0 /* Scenes */,
 				BB36AD251D75D6E200FB54D0 /* ViewControllers */,
 				BB36AD261D75D70000FB54D0 /* Support */,
 			);
 			path = RainCat;
+			sourceTree = "<group>";
+		};
+		BBE2D58D1D9AB93B0046B493 /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

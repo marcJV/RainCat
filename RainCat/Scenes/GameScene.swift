@@ -7,14 +7,12 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 class GameScene: SKScene {
 
   private var lastUpdateTime : TimeInterval = 0
   private var currentRainDropSpawnTime : TimeInterval = 0
   private var rainDropSpawnRate : TimeInterval = 0.5
-  private let random = GKARC4RandomSource()
 
   override func sceneDidLoad() {
     self.lastUpdateTime = 0
@@ -49,26 +47,7 @@ class GameScene: SKScene {
     // Update the Spawn Timer
     currentRainDropSpawnTime += dt
 
-    if currentRainDropSpawnTime > rainDropSpawnRate {
-      currentRainDropSpawnTime = 0
-
-      spawnRaindrop()
-    }
 
     self.lastUpdateTime = currentTime
-  }
-
-  func spawnRaindrop() {
-    let rainDrop = SKShapeNode(rectOf: CGSize(width: 20, height: 20))
-    rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
-    rainDrop.fillColor = SKColor.blue
-    rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 20, height: 20))
-
-    let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
-    rainDrop.position = CGPoint(x: randomPosition, y: size.height)
-
-    print("position: \(randomPosition)")
-
-    addChild(rainDrop)
   }
 }
