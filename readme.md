@@ -1,15 +1,8 @@
-![RainCat Lesson One Header](documentation/header.png)
-#RainCat - Lesson 1
-This is the end of day code for RainCat lesson 1. 
+![RainCat Initial Code](documentation/header.png)
+#RainCat - Starting Point
+This is the initial code for RainCat, feel free to check it over, then head over to the lesson to get started.
 
-In this lesson we covered: 
 
-- Initial project setup
-- Add a floor
-- Alpha version of the rain drops
-- Initial physics
-- Rain drop spawning function
-
-To follow along with the tutorial, check out the article [on Medium](https://medium.com/hello-thirteen23/raincat-lesson-1-79a750ef319f#.iqgubl1xk).
+To follow along with the tutorial, check out the article on [Smashing Magazine](NEED-LINK).
 
 ![divider](documentation/divider.png)
