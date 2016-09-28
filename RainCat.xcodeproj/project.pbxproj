@@ -29,6 +29,8 @@
 		BBB66BC21D9C3A670048A87B /* bensound-jazzyfrenchy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBB66BBE1D9C3A670048A87B /* bensound-jazzyfrenchy.mp3 */; };
 		BBB66BC31D9C3A670048A87B /* bensound-littleidea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBB66BBF1D9C3A670048A87B /* bensound-littleidea.mp3 */; };
 		BBB66BC51D9C3D8A0048A87B /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB66BC41D9C3D8A0048A87B /* SoundManager.swift */; };
+		BBB66BC71D9C4B480048A87B /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB66BC61D9C4B480048A87B /* HudNode.swift */; };
+		BBB66BC91D9C4D9D0048A87B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB66BC81D9C4D9D0048A87B /* MenuScene.swift */; };
 		BBE2D58F1D9AC5840046B493 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2D58E1D9AC5840046B493 /* BackgroundNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		BBB66BBE1D9C3A670048A87B /* bensound-jazzyfrenchy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzyfrenchy.mp3"; path = "Music/bensound-jazzyfrenchy.mp3"; sourceTree = "<group>"; };
 		BBB66BBF1D9C3A670048A87B /* bensound-littleidea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-littleidea.mp3"; path = "Music/bensound-littleidea.mp3"; sourceTree = "<group>"; };
 		BBB66BC41D9C3D8A0048A87B /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		BBB66BC61D9C4B480048A87B /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HudNode.swift; path = Sprites/HudNode.swift; sourceTree = "<group>"; };
+		BBB66BC81D9C4D9D0048A87B /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		BBE2D58E1D9AC5840046B493 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundNode.swift; path = Sprites/BackgroundNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
+				BBB66BC81D9C4D9D0048A87B /* MenuScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				BB8385701D9B1D23001E19AB /* UmbrellaSprite.swift */,
 				BB4E82371D9C0BA5000D7181 /* CatSprite.swift */,
 				BB4E82391D9C1358000D7181 /* FoodSprite.swift */,
+				BBB66BC61D9C4B480048A87B /* HudNode.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -252,7 +258,9 @@
 			files = (
 				BB8385711D9B1D23001E19AB /* UmbrellaSprite.swift in Sources */,
 				BB4E82381D9C0BA5000D7181 /* CatSprite.swift in Sources */,
+				BBB66BC91D9C4D9D0048A87B /* MenuScene.swift in Sources */,
 				BB4E823A1D9C1358000D7181 /* FoodSprite.swift in Sources */,
+				BBB66BC71D9C4B480048A87B /* HudNode.swift in Sources */,
 				BB83856F1D9AFFD0001E19AB /* Constants.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
 				BBE2D58F1D9AC5840046B493 /* BackgroundNode.swift in Sources */,
@@ -388,7 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirteen23.RainCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -403,7 +411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thirteen23.RainCat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

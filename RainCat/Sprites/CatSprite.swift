@@ -84,6 +84,10 @@ public class CatSprite : SKSpriteNode {
     timeSinceLastHit = 0
     removeAction(forKey: walkingActionKey)
 
+    if SoundManager.sharedInstance.isMuted {
+      return
+    }
+
     //Determine if we should meow or not
     if(currentRainHits < maxRainHits) {
       currentRainHits += 1
