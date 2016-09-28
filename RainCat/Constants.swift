@@ -9,3 +9,5 @@
 let WorldCategory    : UInt32 = 0x1 << 1
 let RainDropCategory : UInt32 = 0x1 << 2
 let FloorCategory    : UInt32 = 0x1 << 3
+let CatCategory      : UInt32 = 0x1 << 4
+let FoodCategory     : UInt32 = 0x1 << 5
