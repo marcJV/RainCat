@@ -4,12 +4,14 @@ This is the end of day code for RainCat lesson 1.
 
 In this lesson we covered: 
 
-- Initial project setup
+- Check out the base code
 - Add a floor
-- Alpha version of the rain drops
+- Add raindrops
 - Initial physics
-- Rain drop spawning function
+- Adding in the umbrella object to keep our cat dry from the rain
+- Beginning collision detection with categoryBitMask and contactTestBitMask
+- Creating a world boundary to remove nodes that fall off screen
 
-To follow along with the tutorial, check out the article [on Medium](https://medium.com/hello-thirteen23/raincat-lesson-1-79a750ef319f#.iqgubl1xk).
+To follow along with the tutorial, check out the article on [Smashing Magazine](NEED-LINK).
 
 ![divider](documentation/divider.png)
