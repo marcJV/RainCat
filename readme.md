@@ -1,15 +1,10 @@
-![RainCat Lesson Two Header](documentation/header.png)
-#RainCat - Lesson 3
-This is the end of day code for RainCat lesson 3. 
+![RainCat Header](documentation/header.png)
+#RainCat
 
-In this lesson we covered: 
+A simple exploration of SpriteKit in Swift 3.
 
-- Add in textures to make it look closer to the final game
-- Spawn the cat
-- Implement cat collision
-- Spawn food
-- Implement food collision
+Check out the game in the [AppStore](https://itunes.apple.com/us/app/raincat/id1152624676?ls=1&mt=8)!
 
-To follow along with the tutorial, check out the article [on Medium](https://medium.com/hello-thirteen23/raincat-lesson-3-e9bac0ec0c13#.9n694p49t).
+Learn to make this game on [Medium](https://medium.com/hello-thirteen23/raincat-lesson-1-79a750ef319f#.2p76gl7ne)!
 
 ![divider](documentation/divider.png)
