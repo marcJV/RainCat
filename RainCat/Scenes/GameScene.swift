@@ -339,6 +339,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rainDropSpawnRate *= 0.95
       }
 
+      //Stronger gravity the higher the score
       let dy : CGFloat = -7.8 - CGFloat(hud.score % 10)
       var dx : CGFloat = 0.0
 
@@ -348,7 +349,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       }
 
       physicsWorld.gravity = CGVector(dx: dx, dy: dy)
-
 
       fallthrough
     case WorldFrameCategory:

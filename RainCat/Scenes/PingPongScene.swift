@@ -17,10 +17,16 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
   private let hud = PingPongHud()
 
-  private let cat1Key = "PLAYER_ONE_CAT"
-  private let cat2Key = "PLAYER_TWO_CAT"
-
   private var puck : SKSpriteNode?
+
+  private let backgroundNode = PingPongBackgroundNode()
+
+  private var player1Palette : ColorPalette!
+  private var player2Palette : ColorPalette!
+
+  //Track finger movement based on touches
+  private var p1Touch : UITouch?
+  private var p2Touch : UITouch?
 
   private var lastUpdateTime : TimeInterval = 0
   private let maxNoHitTime : TimeInterval = 5
@@ -35,38 +41,31 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   private var umbrella1ZeroPosition = CGPoint()
   private var umbrella2ZeroPosition = CGPoint()
 
-  private let backgroundNode = PingPongBackgroundNode()
-
-  private var deadZone :CGFloat = 150
-
-  private var cat1X : CGFloat = 0
-  private var cat2X : CGFloat = 0
-
   private let umbrellaScale : CGFloat = 0.85
 
   private let p1Rotation = CGFloat(M_PI / -2.0)
   private let p2Rotation = CGFloat(M_PI / 2.0)
 
-  private var catHit = false
-  private var p1LastHit = false
-
-  private var roundStarted = false
-  private var showingWinCondition = false
+  private let cat1Key = "PLAYER_ONE_CAT"
+  private let cat2Key = "PLAYER_TWO_CAT"
 
   private let maxPoints = 7
-
-  //Track finger movement based on touches
-  private var p1Touch : UITouch?
-  private var p2Touch : UITouch?
-
-  private var player1Palette : ColorPalette!
-  private var player2Palette : ColorPalette!
 
   private var rainScale : CGFloat!
   private var catScale : CGFloat!
 
   private var destinationOffset : CGFloat
 
+  private var deadZone :CGFloat = 150
+
+  private var cat1X : CGFloat = 0
+  private var cat2X : CGFloat = 0
+
+  private var catHit = false
+  private var p1LastHit = false
+
+  private var roundStarted = false
+  private var showingWinCondition = false
   private var giantMode = false
 
   public init(size: CGSize, player1ColorPalette : ColorPalette, player2ColorPalette : ColorPalette, catScale : CGFloat, rainScale : CGFloat) {

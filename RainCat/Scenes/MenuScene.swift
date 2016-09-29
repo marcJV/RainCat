@@ -132,8 +132,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
       if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
-        //      } else if selectedButton == soundCreditNode {
-        //        soundCreditNode.alpha = (soundCreditNode.contains(touch.location(in: self))) ? 0.75 : 1.0
       }else if selectedButton == creditsButton {
         creditsButton.alpha = (creditsButton.contains(touch.location(in: self))) ? 0.75 : 1.0
       }
