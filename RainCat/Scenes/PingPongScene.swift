@@ -126,6 +126,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
       self.view?.presentScene(gameScene, transition: transition)
 
       self.hud.quitButtonAction = nil
+      self.hud.rematchButtonAction = nil
     }
 
     hud.rematchButtonAction = {

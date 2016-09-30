@@ -54,7 +54,7 @@ public class MenuNode : SKNode, Touchable {
     addChild(highScoreNode)
   }
 
-  public func touchBeganAtPoint(touch: UITouch) {
+  public func touchBegan(touch: UITouch) {
     let point = touch.location(in: self)
 
     if selectedButton != nil {
@@ -73,7 +73,7 @@ public class MenuNode : SKNode, Touchable {
     }
   }
 
-  public func touchMovedToPoint(touch: UITouch) {
+  public func touchMoved(touch: UITouch) {
     let point = touch.location(in: self)
 
     if selectedButton == startButton {
@@ -83,7 +83,7 @@ public class MenuNode : SKNode, Touchable {
     }
   }
 
-  public func touchEndedAtPoint(touch: UITouch) {
+  public func touchEnded(touch: UITouch) {
     let point = touch.location(in: self)
 
     if selectedButton == startButton && startButton.contains(point) && startGameAction != nil {
@@ -99,7 +99,7 @@ public class MenuNode : SKNode, Touchable {
     selectedButton = nil
   }
 
-  public func touchCancelledAtPoint(touch: UITouch) {
+  public func touchCancelled(touch: UITouch) {
     selectedButton = nil
     
     handleStartButtonHover(isHovering: false)
@@ -119,5 +119,10 @@ public class MenuNode : SKNode, Touchable {
     } else {
       versusButton.texture = versusButtonTexture
     }
+  }
+
+  func clearActions() {
+    startGameAction = nil
+    versusAction = nil
   }
 }

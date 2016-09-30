@@ -13,8 +13,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   let soundButtonTextureOff = SKTexture(imageNamed: "speaker_off")
 
   let catSprite = CatSprite.newInstance()
-  var soundButton : SKSpriteNode! = nil
-  var creditsButton = SKLabelNode(fontNamed: "PixelDigivolve")
+  var soundButton : AlphaButton! = nil
+  var creditsButton : AlphaButton! = nil
 
   var selectedButton : SKNode?
 
@@ -50,9 +50,22 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     addChild(playerSelectNode)
 
     //Setup sound button
-    soundButton = SKSpriteNode(texture: (SoundManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
-    soundButton.position = CGPoint(x: size.width - edgeMargin,
+    let baseSoundButton = SKSpriteNode(texture: (SoundManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
+
+    soundButton = AlphaButton(baseNode: baseSoundButton, size: soundButtonTexture.size(), margin: edgeMargin)
+    soundButton.position = CGPoint(x: size.width - soundButton.size.width / 2 - edgeMargin,
                                    y: edgeMargin)
+
+    soundButton.buttonClickAction = {
+      if SoundManager.sharedInstance.toggleMute() {
+        //Is muted
+        (self.soundButton.baseNode as! SKSpriteNode).texture = self.soundButtonTextureOff
+      } else {
+        //Is not muted
+        (self.soundButton.baseNode as! SKSpriteNode).texture = self.soundButtonTexture
+      }
+    }
+
     addChild(soundButton)
 
     //Add in floor physics body
@@ -63,12 +76,33 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
     physicsWorld.contactDelegate = self
 
-    creditsButton = SKLabelNode(fontNamed: "PixelDigivolve")
-    creditsButton.text = "?"
-    creditsButton.verticalAlignmentMode = .center
-    creditsButton.horizontalAlignmentMode = .center
+    let questionMarkLabel = SKLabelNode(fontNamed: "PixelDigivolve")
+    questionMarkLabel.text = "?"
+    questionMarkLabel.verticalAlignmentMode = .center
+    questionMarkLabel.horizontalAlignmentMode = .center
 
+    creditsButton = AlphaButton(baseNode: questionMarkLabel, size: CGSize(width: 22, height: 22), margin: 22)
     creditsButton.position = CGPoint(x: edgeMargin, y: edgeMargin)
+    creditsButton.buttonClickAction = {
+      let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
+      let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
+
+      if (self.currentNode as! SKNode) != self.creditsNode {
+        self.menuNode.run(fadeOut)
+        self.playerSelectNode.run(fadeOut)
+
+        self.creditsNode.run(fadeIn)
+
+        self.currentNode = self.creditsNode
+      } else {
+        self.creditsNode.run(fadeOut)
+        self.menuNode.run(fadeIn)
+        self.playerSelectNode.run(fadeIn)
+
+        self.currentNode = self.showingPlayerSelectScreen ? self.playerSelectNode : self.menuNode
+      }
+    }
+
     addChild(creditsButton)
 
     creditsNode.position = CGPoint(x: frame.midX, y: size.height / 2 + 100)
@@ -98,15 +132,12 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-      currentNode?.touchBeganAtPoint(touch: touch)
+      currentNode?.touchBegan(touch: touch)
 
-      if creditsButton.contains(touch.location(in: self)) {
-        selectedButton = creditsButton
-        creditsButton.alpha = 0.75
-      } else if soundButton.contains(touch.location(in: self)) {
-        selectedButton = soundButton
-        handleSoundButtonHover(isHovering: true)
-      } else if catSprite.contains(touch.location(in: self)) {
+      soundButton.touchBegan(touch: touch)
+      creditsButton.touchBegan(touch: touch)
+
+      if catSprite.contains(touch.location(in: self)) {
         catSprite.meow()
 
         switch catSprite.xScale {
@@ -120,7 +151,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
           catSprite.setScale(0.5)
         }
       } else {
-        rainDropBanner.touchBeganAtPoint(touch: touch)
+        rainDropBanner.touchBegan(touch: touch)
       }
     }
   }
@@ -128,7 +159,11 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
 
-      currentNode?.touchMovedToPoint(touch: touch)
+      currentNode?.touchMoved(touch: touch)
+
+      soundButton.touchMoved(touch: touch)
+      creditsButton.touchMoved(touch: touch)
+
 
       if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
@@ -141,22 +176,20 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
 
-      currentNode?.touchEndedAtPoint(touch: touch)
+      currentNode?.touchEnded(touch: touch)
 
-      if selectedButton == soundButton {
-        handleSoundButtonHover(isHovering: false)
-
-        if (soundButton.contains(touch.location(in: self))) {
-          handleSoundButtonClick()
-        }
-      } else if selectedButton == creditsButton {
-        creditsButton.alpha = 1
-
-        handleCreditsButtonClick()
-      }
+      soundButton.touchEnded(touch: touch)
+      creditsButton.touchEnded(touch: touch)
     }
 
     selectedButton = nil
+  }
+
+  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if let touch = touches.first {
+      soundButton.touchCancelled(touch: touch)
+      creditsButton.touchCancelled(touch: touch)
+    }
   }
 
   func handleSoundButtonHover(isHovering : Bool) {
@@ -168,7 +201,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
   }
 
   func handleStartButtonClick() {
-   rainDropBanner.makeItRain()
+    rainDropBanner.makeItRain()
   }
 
   func handleVersesButtonClick() {
@@ -199,36 +232,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   func handleStartVerses() {
     rainDropBanner.makeItRain()
-  }
-
-  func handleSoundButtonClick() {
-    if SoundManager.sharedInstance.toggleMute() {
-      //Is muted
-      soundButton.texture = soundButtonTextureOff
-    } else {
-      //Is not muted
-      soundButton.texture = soundButtonTexture
-    }
-  }
-
-  func handleCreditsButtonClick() {
-    let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
-    let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
-
-    if (currentNode as! SKNode) != creditsNode {
-      menuNode.run(fadeOut)
-      playerSelectNode.run(fadeOut)
-
-      creditsNode.run(fadeIn)
-
-      currentNode = creditsNode
-    } else {
-      creditsNode.run(fadeOut)
-      menuNode.run(fadeIn)
-      playerSelectNode.run(fadeIn)
-
-      currentNode = showingPlayerSelectScreen ? playerSelectNode : menuNode
-    }
   }
 
   var didContact = false
@@ -267,8 +270,19 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         scene.scaleMode = self.scaleMode
         
         self.view?.presentScene(scene, transition: transition)
+
+        self.clearButtonActions()
       }
     }
+  }
+
+  // Clean up all closures to remove circular references
+  private func clearButtonActions() {
+    soundButton.buttonClickAction = nil
+    creditsButton.buttonClickAction = nil
+
+    menuNode.clearActions()
+    playerSelectNode.clearActions()
   }
   
   deinit {

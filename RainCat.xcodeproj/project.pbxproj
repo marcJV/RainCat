@@ -39,6 +39,7 @@
 		BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB0457E1D77254000DF378C /* CatSprite.swift */; };
 		BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB045801D773DE600DF378C /* FoodSprite.swift */; };
 		BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5E64C1D760905005DE3EC /* Constants.swift */; };
+		BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */; };
 		BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9F6E71D8D941A00385223 /* PingPongScene.swift */; };
 		BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */; };
 		BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8D91D78D97E00002F71 /* SoundManager.swift */; };
@@ -86,6 +87,7 @@
 		BBB0457E1D77254000DF378C /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatSprite.swift; path = Sprites/CatSprite.swift; sourceTree = "<group>"; };
 		BBB045801D773DE600DF378C /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodSprite.swift; path = Sprites/FoodSprite.swift; sourceTree = "<group>"; };
 		BBB5E64C1D760905005DE3EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaButton.swift; path = Sprites/Buttons/AlphaButton.swift; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongScene.swift; path = Scenes/PingPongScene.swift; sourceTree = "<group>"; };
 		BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBD0A8D91D78D97E00002F71 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		BB36AD271D75D86B00FB54D0 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				BBB8459C1D9DBA1D00D269C0 /* Buttons */,
 				BB4E54011D918EF50031DAB9 /* MenuNodeGroups */,
 				BB1C70D51D84F615001E540D /* BackgroundNode.swift */,
 				BBB0457E1D77254000DF378C /* CatSprite.swift */,
@@ -226,6 +229,14 @@
 				BBD0A8D91D78D97E00002F71 /* SoundManager.swift */,
 			);
 			path = RainCat;
+			sourceTree = "<group>";
+		};
+		BBB8459C1D9DBA1D00D269C0 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		BBD0A8DB1D78F0F100002F71 /* Music */ = {
@@ -341,6 +352,7 @@
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
 				BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */,
 				BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */,
+				BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */,
 				BB81CBA41D90F105009EAA22 /* PingPongPlayerSelectNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,

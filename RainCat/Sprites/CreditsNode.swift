@@ -82,7 +82,7 @@ public class CreditsNode : SKNode, Touchable {
     alpha = 0
   }
 
-  public func touchBeganAtPoint(touch: UITouch) {
+  public func touchBegan(touch: UITouch) {
     if selectedNode == nil {
       let location = touch.location(in: self)
 
@@ -113,13 +113,13 @@ public class CreditsNode : SKNode, Touchable {
     }
   }
 
-  public func touchMovedToPoint(touch: UITouch) {
+  public func touchMoved(touch: UITouch) {
     if let node = selectedNode {
       handleAlpha(node: node, highlighted: node.contains(touch.location(in: self)))
     }
   }
 
-  public func touchEndedAtPoint(touch: UITouch) {
+  public func touchEnded(touch: UITouch) {
     if let node = selectedNode {
       handleAlpha(node: node, highlighted: false)
 
@@ -151,7 +151,7 @@ public class CreditsNode : SKNode, Touchable {
     selectedNode = nil
   }
 
-  public func touchCancelledAtPoint(touch: UITouch) {
+  public func touchCancelled(touch: UITouch) {
     handleAlpha(node: t23Logo, highlighted: false)
     handleAlpha(node: developer, highlighted: false)
     handleAlpha(node: designCathryn, highlighted: false)

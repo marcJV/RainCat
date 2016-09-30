@@ -53,7 +53,7 @@ public class PlayerSelectNode : SKNode, Touchable {
     addChild(umbrella2)
   }
 
-  public func touchBeganAtPoint(touch: UITouch) {
+  public func touchBegan(touch: UITouch) {
     let point = touch.location(in: self)
 
     if selectedNode == nil {
@@ -77,7 +77,7 @@ public class PlayerSelectNode : SKNode, Touchable {
     }
   }
 
-  public func touchMovedToPoint(touch: UITouch) {
+  public func touchMoved(touch: UITouch) {
     let point = touch.location(in: self)
 
     if let selectedNode = selectedNode {
@@ -92,7 +92,7 @@ public class PlayerSelectNode : SKNode, Touchable {
     }
   }
 
-  public func touchEndedAtPoint(touch: UITouch) {
+  public func touchEnded(touch: UITouch) {
     let point = touch.location(in: self)
 
     if selectedNode == startButton && startButton.contains(point) && startAction != nil {
@@ -120,7 +120,7 @@ public class PlayerSelectNode : SKNode, Touchable {
     selectedNode = nil
   }
 
-  public func touchCancelledAtPoint(touch: UITouch) {
+  public func touchCancelled(touch: UITouch) {
     selectedNode = nil
 
     handleStartButtonHover(isHovering: false)
@@ -160,5 +160,10 @@ public class PlayerSelectNode : SKNode, Touchable {
 
   public func playerTwoPalette() -> ColorPalette {
     return ColorManager.sharedInstance.getColorPalette(player2ColorIndex)
+  }
+
+  func clearActions() {
+    startAction = nil
+    backAction = nil
   }
 }

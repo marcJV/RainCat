@@ -9,8 +9,8 @@
 import SpriteKit
 
 public protocol Touchable {
-  func touchBeganAtPoint(touch: UITouch)
-  func touchMovedToPoint(touch: UITouch)
-  func touchEndedAtPoint(touch: UITouch)
-  func touchCancelledAtPoint(touch: UITouch)
+  func touchBegan(touch: UITouch)
+  func touchMoved(touch: UITouch)
+  func touchEnded(touch: UITouch)
+  func touchCancelled(touch: UITouch)
 }

@@ -97,7 +97,7 @@ public class RainDropBanner : SKNode, Touchable {
     }
   }
 
-  public func touchBeganAtPoint(touch: UITouch) {
+  public func touchBegan(touch: UITouch) {
     for rainDrop in rainDrops {
       if rainDrop.contains(touch.location(in: self)) {
 
@@ -112,15 +112,15 @@ public class RainDropBanner : SKNode, Touchable {
     }
   }
 
-  public func touchMovedToPoint(touch: UITouch) {
+  public func touchMoved(touch: UITouch) {
     //Not implemented
   }
 
-  public func touchEndedAtPoint(touch: UITouch) {
+  public func touchEnded(touch: UITouch) {
     //Not implemented
   }
 
-  public func touchCancelledAtPoint(touch: UITouch) {
+  public func touchCancelled(touch: UITouch) {
     //Not implemented
   }
 }
