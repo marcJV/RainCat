@@ -7,14 +7,12 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
   private var lastUpdateTime : TimeInterval = 0
   private var currentRainDropSpawnTime : TimeInterval = 0
   private var rainDropSpawnRate : TimeInterval = 0.5
-  private let random = GKARC4RandomSource()
   private let foodEdgeMargin : CGFloat = 75.0
 
   private var umbrella : UmbrellaSprite!
@@ -193,7 +191,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
       rainDrop.physicsBody?.density = 0.5
 
-      let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
+      var randomPosition = CGFloat(arc4random())
+      randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width)
       rainDrop.position = CGPoint(x: randomPosition, y: size.height)
 
       //Raindrop fun
@@ -249,9 +248,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     if !containsFood {
       food = FoodSprite.newInstance(palette: currentPalette)
-      var randomPosition : CGFloat = CGFloat(random.nextInt())
+      var randomPosition : CGFloat = CGFloat(arc4random())
       randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
-      randomPosition = CGFloat(abs(randomPosition))
       randomPosition += foodEdgeMargin
 
       food?.position = CGPoint(x: randomPosition, y: size.height)
