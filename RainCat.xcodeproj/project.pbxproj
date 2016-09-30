@@ -29,7 +29,6 @@
 		BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */; };
 		BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
-		BB81CBA41D90F105009EAA22 /* PingPongPlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */; };
 		BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
@@ -75,7 +74,6 @@
 		BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainDropBanner.swift; path = Sprites/RainDropBanner.swift; sourceTree = "<group>"; };
 		BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerSelectNode.swift; path = Scenes/PlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
-		BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongPlayerSelectNode.swift; path = Sprites/PingPongPlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShadowLabelNode.swift; path = Sprites/ShadowLabelNode.swift; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				BBD0A8E71D79D6B400002F71 /* HudNode.swift */,
 				BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */,
 				BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */,
-				BB81CBA31D90F105009EAA22 /* PingPongPlayerSelectNode.swift */,
 				BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */,
 				BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */,
 				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
@@ -353,7 +350,6 @@
 				BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */,
 				BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */,
 				BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */,
-				BB81CBA41D90F105009EAA22 /* PingPongPlayerSelectNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */,
