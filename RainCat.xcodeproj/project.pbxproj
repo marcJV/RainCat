@@ -30,6 +30,7 @@
 		BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
 		BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */; };
+		BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB98D4801DC3A49C00D17C8D /* LCDScene.sks */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
 		BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */; };
@@ -37,6 +38,7 @@
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
 		BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB0457E1D77254000DF378C /* CatSprite.swift */; };
 		BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB045801D773DE600DF378C /* FoodSprite.swift */; };
+		BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB318381DC78F6700644DB6 /* LCDScene.swift */; };
 		BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5E64C1D760905005DE3EC /* Constants.swift */; };
 		BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */; };
 		BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9F6E71D8D941A00385223 /* PingPongScene.swift */; };
@@ -75,6 +77,7 @@
 		BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerSelectNode.swift; path = Scenes/PlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
 		BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShadowLabelNode.swift; path = Sprites/ShadowLabelNode.swift; sourceTree = "<group>"; };
+		BB98D4801DC3A49C00D17C8D /* LCDScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScene.sks; path = Scenes/LCDScene.sks; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBA2E4AB1D74A62C00853E63 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = Scenes/GameScene.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		BBA2E4B71D74A62C00853E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBB0457E1D77254000DF378C /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatSprite.swift; path = Sprites/CatSprite.swift; sourceTree = "<group>"; };
 		BBB045801D773DE600DF378C /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodSprite.swift; path = Sprites/FoodSprite.swift; sourceTree = "<group>"; };
+		BBB318381DC78F6700644DB6 /* LCDScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScene.swift; path = Scenes/LCDScene.swift; sourceTree = "<group>"; };
 		BBB5E64C1D760905005DE3EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaButton.swift; path = Sprites/Buttons/AlphaButton.swift; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongScene.swift; path = Scenes/PingPongScene.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
 				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
 				BBC9F6E71D8D941A00385223 /* PingPongScene.swift */,
+				BBB318381DC78F6700644DB6 /* LCDScene.swift */,
+				BB98D4801DC3A49C00D17C8D /* LCDScene.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 				BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */,
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
 				BB281B821D789A3F00229A97 /* cat_meow_4.mp3 in Resources */,
+				BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */,
 				BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
 				BB281B801D789A3F00229A97 /* cat_meow_2.mp3 in Resources */,
@@ -366,6 +373,7 @@
 				BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */,
 				BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */,
 				BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */,
+				BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */,
 				BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

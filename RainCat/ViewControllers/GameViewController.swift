@@ -15,6 +15,31 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    if let scene = GKScene(fileNamed: "LCDScene") {
+
+      // Get the SKScene from the loaded GKScene
+      if let sceneNode = scene.rootNode as! LCDScene? {
+
+        // Copy gameplay related content over to the scene
+//        sceneNode.entities = scene.entities
+//        sceneNode.graphs = scene.graphs
+
+        // Set the scale mode to scale to fit the window
+        sceneNode.scaleMode = .aspectFill
+
+        // Present the scene
+        if let view = self.view as! SKView? {
+          view.presentScene(sceneNode)
+
+          view.ignoresSiblingOrder = true
+
+          view.showsFPS = true
+          view.showsNodeCount = true
+        }
+      }
+    }
+
+/*
     let sceneNode = LogoScene(size: view.frame.size)
 
     if let view = self.view as! SKView? {
@@ -24,6 +49,7 @@ class GameViewController: UIViewController {
       //view.showsFPS = true
       //view.showsNodeCount = true
     }
+*/
 
     SoundManager.sharedInstance.startPlaying()
   }
