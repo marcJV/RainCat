@@ -76,7 +76,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
     physicsWorld.contactDelegate = self
 
-    let questionMarkLabel = SKLabelNode(fontNamed: "PixelDigivolve")
+    let questionMarkLabel = SKLabelNode(fontNamed: BASE_FONT_NAME)
     questionMarkLabel.text = "?"
     questionMarkLabel.verticalAlignmentMode = .center
     questionMarkLabel.horizontalAlignmentMode = .center

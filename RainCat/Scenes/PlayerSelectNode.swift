@@ -21,7 +21,7 @@ public class PlayerSelectNode : SKNode, Touchable {
   private let umbrella1 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getColorPalette(0))
   private let umbrella2 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getColorPalette(1))
 
-  private let versesTitle = ShadowLabelNode(fontNamed: "PixelDigivolve")
+  private let versesTitle = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
 
   private var selectedNode : SKNode?
 

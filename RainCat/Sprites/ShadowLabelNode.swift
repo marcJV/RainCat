@@ -16,6 +16,10 @@ public class ShadowLabelNode : SKNode {
   init(fontNamed: String) {
     super.init()
 
+    setup(fontNamed: fontNamed)
+  }
+
+  func setup(fontNamed: String) {
     textNode = SKLabelNode(fontNamed: fontNamed)
     shadowTextNode = SKLabelNode(fontNamed: fontNamed)
 
@@ -31,15 +35,17 @@ public class ShadowLabelNode : SKNode {
     addChild(textNode)
     addChild(shadowTextNode)
   }
-  
+
   required public init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+    super.init(coder: aDecoder)
   }
 
   public override var zPosition: CGFloat {
     didSet {
-      textNode.zPosition = zPosition
-      shadowTextNode.zPosition = zPosition - 1
+      if textNode != nil {
+        textNode.zPosition = zPosition
+        shadowTextNode.zPosition = zPosition - 1
+      }
     }
   }
 

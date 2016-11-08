@@ -9,7 +9,7 @@
 import SpriteKit
 
 class HudNode : SKNode, Palettable {
-  private let scoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
+  private let scoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private(set) var score : Int = 0
   private var highScore : Int = 0
   private var showingHighScore = false

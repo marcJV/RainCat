@@ -41,6 +41,7 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
 
       top.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
     }
+    
     top.physicsBody?.isDynamic = false
     top.physicsBody?.categoryBitMask = UmbrellaCategory
     top.physicsBody?.contactTestBitMask = RainDropCategory

@@ -10,7 +10,7 @@ import SpriteKit
 
 public class MenuNode : SKNode, Touchable {
   private var startButton : SKSpriteNode! = nil
-  private let highScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
+  private let highScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
 
   private let startButtonTexture = SKTexture(imageNamed: "survival_button")
   private let startButtonPressedTexture = SKTexture(imageNamed: "survival_button_pressed")
@@ -26,7 +26,7 @@ public class MenuNode : SKNode, Touchable {
 
   public func setup() {
     //Setup start button
-    let appTitleNode = ShadowLabelNode(fontNamed: "PixelDigivolve")
+    let appTitleNode = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
     appTitleNode.text = "RainCat"
     appTitleNode.fontSize = 110
 

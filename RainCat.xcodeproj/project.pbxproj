@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B1C871D8C9BA900C09901 /* LogoScene.swift */; };
 		BB0CE14D1D9088B200D4E664 /* PingPongBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */; };
+		BB0D073B1DD1800B0025428D /* LCDHudLives.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073A1DD1800B0025428D /* LCDHudLives.swift */; };
+		BB0D073D1DD181540025428D /* LCDFoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073C1DD181540025428D /* LCDFoodRow.swift */; };
+		BB0D073F1DD183430025428D /* LCDCatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073E1DD183430025428D /* LCDCatRow.swift */; };
 		BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D51D84F615001E540D /* BackgroundNode.swift */; };
 		BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D71D84FAEA001E540D /* ColorAction.swift */; };
 		BB1C70DA1D86EC9F001E540D /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D91D86EC9F001E540D /* GroundNode.swift */; };
 		BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70DB1D870508001E540D /* Paletteable.swift */; };
+		BB2422D41DCA33FD0039D692 /* TwoPaneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */; };
 		BB281B7F1D789A3F00229A97 /* cat_meow_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7B1D789A3F00229A97 /* cat_meow_1.mp3 */; };
 		BB281B801D789A3F00229A97 /* cat_meow_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7C1D789A3F00229A97 /* cat_meow_2.mp3 */; };
 		BB281B811D789A3F00229A97 /* cat_meow_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7D1D789A3F00229A97 /* cat_meow_3.mp3 */; };
@@ -29,6 +33,8 @@
 		BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */; };
 		BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
+		BB7AC0741DC979CB00998737 /* LCDScreenNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */; };
+		BB7AC0761DC97A1200998737 /* LCDRainLane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AC0751DC97A1200998737 /* LCDRainLane.swift */; };
 		BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */; };
 		BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB98D4801DC3A49C00D17C8D /* LCDScene.sks */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
@@ -51,15 +57,21 @@
 		BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */; };
 		BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8E71D79D6B400002F71 /* HudNode.swift */; };
 		BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */; };
+		BBFE08621DC98ED300063F83 /* LCDHudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFE08611DC98ED300063F83 /* LCDHudNode.swift */; };
+		BBFE08641DC990D900063F83 /* LCDUmbrellaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB0B1C871D8C9BA900C09901 /* LogoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogoScene.swift; path = Scenes/LogoScene.swift; sourceTree = "<group>"; };
 		BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongBackgroundNode.swift; path = Sprites/PingPongBackgroundNode.swift; sourceTree = "<group>"; };
+		BB0D073A1DD1800B0025428D /* LCDHudLives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDHudLives.swift; path = Sprites/LCDGame/LCDHudLives.swift; sourceTree = "<group>"; };
+		BB0D073C1DD181540025428D /* LCDFoodRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDFoodRow.swift; path = Sprites/LCDGame/LCDFoodRow.swift; sourceTree = "<group>"; };
+		BB0D073E1DD183430025428D /* LCDCatRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDCatRow.swift; path = Sprites/LCDGame/LCDCatRow.swift; sourceTree = "<group>"; };
 		BB1C70D51D84F615001E540D /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundNode.swift; path = Sprites/BackgroundNode.swift; sourceTree = "<group>"; };
 		BB1C70D71D84FAEA001E540D /* ColorAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAction.swift; sourceTree = "<group>"; };
 		BB1C70D91D86EC9F001E540D /* GroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroundNode.swift; path = Sprites/GroundNode.swift; sourceTree = "<group>"; };
 		BB1C70DB1D870508001E540D /* Paletteable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paletteable.swift; path = Sprites/Paletteable.swift; sourceTree = "<group>"; };
+		BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwoPaneButton.swift; path = Sprites/Buttons/TwoPaneButton.swift; sourceTree = "<group>"; };
 		BB281B7B1D789A3F00229A97 /* cat_meow_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_1.mp3; path = SFX/cat_meow_1.mp3; sourceTree = "<group>"; };
 		BB281B7C1D789A3F00229A97 /* cat_meow_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_2.mp3; path = SFX/cat_meow_2.mp3; sourceTree = "<group>"; };
 		BB281B7D1D789A3F00229A97 /* cat_meow_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_3.mp3; path = SFX/cat_meow_3.mp3; sourceTree = "<group>"; };
@@ -76,6 +88,8 @@
 		BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainDropBanner.swift; path = Sprites/RainDropBanner.swift; sourceTree = "<group>"; };
 		BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerSelectNode.swift; path = Scenes/PlayerSelectNode.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
+		BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScreenNode.swift; path = Sprites/LCDGame/LCDScreenNode.swift; sourceTree = "<group>"; };
+		BB7AC0751DC97A1200998737 /* LCDRainLane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDRainLane.swift; path = Sprites/LCDGame/LCDRainLane.swift; sourceTree = "<group>"; };
 		BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShadowLabelNode.swift; path = Sprites/ShadowLabelNode.swift; sourceTree = "<group>"; };
 		BB98D4801DC3A49C00D17C8D /* LCDScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScene.sks; path = Scenes/LCDScene.sks; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +114,8 @@
 		BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "Fonts/Pixel Digivolve.otf"; sourceTree = "<group>"; };
 		BBD0A8E71D79D6B400002F71 /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HudNode.swift; path = Sprites/HudNode.swift; sourceTree = "<group>"; };
 		BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongHud.swift; path = Sprites/PingPongHud.swift; sourceTree = "<group>"; };
+		BBFE08611DC98ED300063F83 /* LCDHudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDHudNode.swift; path = Sprites/LCDGame/LCDHudNode.swift; sourceTree = "<group>"; };
+		BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDUmbrellaRow.swift; path = Sprites/LCDGame/LCDUmbrellaRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +196,7 @@
 				BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */,
 				BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */,
 				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
+				BBFE08601DC98EB400063F83 /* LCDGame */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -238,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */,
+				BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -259,6 +277,20 @@
 				BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		BBFE08601DC98EB400063F83 /* LCDGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB7AC0751DC97A1200998737 /* LCDRainLane.swift */,
+				BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */,
+				BBFE08611DC98ED300063F83 /* LCDHudNode.swift */,
+				BB0D073A1DD1800B0025428D /* LCDHudLives.swift */,
+				BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */,
+				BB0D073C1DD181540025428D /* LCDFoodRow.swift */,
+				BB0D073E1DD183430025428D /* LCDCatRow.swift */,
+			);
+			name = LCDGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,14 +388,22 @@
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
 				BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */,
 				BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */,
+				BB2422D41DCA33FD0039D692 /* TwoPaneButton.swift in Sources */,
+				BBFE08641DC990D900063F83 /* LCDUmbrellaRow.swift in Sources */,
+				BB0D073B1DD1800B0025428D /* LCDHudLives.swift in Sources */,
 				BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */,
+				BB0D073D1DD181540025428D /* LCDFoodRow.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */,
 				BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */,
+				BBFE08621DC98ED300063F83 /* LCDHudNode.swift in Sources */,
+				BB0D073F1DD183430025428D /* LCDCatRow.swift in Sources */,
 				BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */,
 				BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */,
 				BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */,
+				BB7AC0761DC97A1200998737 /* LCDRainLane.swift in Sources */,
+				BB7AC0741DC979CB00998737 /* LCDScreenNode.swift in Sources */,
 				BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */,
 				BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */,
 				BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */,

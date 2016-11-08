@@ -9,10 +9,9 @@
 import SpriteKit
 
 public class PingPongHud : SKNode {
-  private var playerOneScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
-  private var playerTwoScoreNode = SKLabelNode(fontNamed: "PixelDigivolve")
-  private var messageNode = ShadowLabelNode(fontNamed: "PixelDigivolve")
-//  private var messageNodeShadow = SKLabelNode(fontNamed: "PixelDigivolve")
+  private var playerOneScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
+  private var playerTwoScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
+  private var messageNode = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
 
   private(set) var quitButtonPressed = false
 

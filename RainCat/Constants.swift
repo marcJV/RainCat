@@ -17,8 +17,12 @@ let FoodCategory       : UInt32 = 0x1 << 6
 
 let colorChangeDuration : TimeInterval = 0.25
 
+let lcdOffAlpha : CGFloat = 0.05
+let lcdOnAlpha  : CGFloat = 1
+
 let ScoreKey = "RAINCAT_HIGHSCORE"
 let MuteKey = "RAINCAT_MUTED"
+let BASE_FONT_NAME = "PixelDigivolve"
 
 public func Distance(p1: CGPoint, p2: CGPoint) -> CGFloat {
   return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
