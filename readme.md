@@ -12,6 +12,6 @@ In this lesson we covered:
 - Beginning collision detection with categoryBitMask and contactTestBitMask
 - Creating a world boundary to remove nodes that fall off screen
 
-To follow along with the tutorial, check out the article on [Smashing Magazine](NEED-LINK).
+To follow along with the tutorial, check out the article on [Smashing Magazine](https://www.smashingmagazine.com/2016/11/how-to-build-a-spritekit-game-in-swift-3-part-1/).
 
 ![divider](documentation/divider.png)
