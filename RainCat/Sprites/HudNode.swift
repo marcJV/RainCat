@@ -43,7 +43,9 @@ class HudNode : SKNode, Palettable {
     quitButton.zPosition = 1000
 
     highScoreColor = palette.groundColor
+
     
+
     addChild(quitButton)
   }
 

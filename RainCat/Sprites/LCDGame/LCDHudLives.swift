@@ -8,18 +8,69 @@
 
 import SpriteKit
 
-class LCDHudLives : SKNode {
+class LCDHudLives : SKNode, Resetable, LCDSetupable {
   private var lifeOne   : SKSpriteNode!
   private var lifeTwo   : SKSpriteNode!
   private var lifeThree : SKSpriteNode!
+
+  private let maxLives = 3
+  private var lives = 3
 
   func setup() {
     lifeOne = childNode(withName: "cat-life-one") as! SKSpriteNode!
     lifeTwo = childNode(withName: "cat-life-two") as! SKSpriteNode!
     lifeThree = childNode(withName: "cat-life-three") as! SKSpriteNode!
 
-    lifeOne.alpha = lcdOffAlpha
-    lifeTwo.alpha = lcdOffAlpha
-    lifeThree.alpha = lcdOffAlpha
+    updateDisplay(lives: lives)
+  }
+
+  public func decrementLives() {
+    lives -= 1
+
+    updateDisplay(lives: lives)
+  }
+
+  public func hasLivesRemaining() -> Bool {
+    return lives > 0
+  }
+
+  public func resetPressed() {
+    updateDisplay(lives: maxLives)
+  }
+
+  public func resetReleased() {
+    lives = maxLives
+
+    updateDisplay(lives: maxLives)
+  }
+
+  private func updateDisplay(lives : Int) {
+    print("lives updating to \(lives)")
+
+    switch lives {
+    case 0:
+      flutterFadeOut(node: lifeOne)
+      lifeTwo.alpha = lcdOffAlpha
+      lifeThree.alpha = lcdOffAlpha
+    case 1:
+      lifeOne.alpha = lcdOnAlpha
+      flutterFadeOut(node: lifeTwo)
+      lifeThree.alpha = lcdOffAlpha
+    case 2:
+      lifeOne.alpha = lcdOnAlpha
+      lifeTwo.alpha = lcdOnAlpha
+      flutterFadeOut(node: lifeThree)
+    default:
+      lifeOne.alpha = lcdOnAlpha
+      lifeTwo.alpha = lcdOnAlpha
+      lifeThree.alpha = lcdOnAlpha
+    }
+  }
+
+  private func flutterFadeOut(node : SKSpriteNode) {
+    let actionFadeToOff = SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.15)
+    let actionFadeToOn = SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.15)
+
+    node.run(SKAction.sequence([actionFadeToOff, actionFadeToOn, actionFadeToOff]))
   }
 }

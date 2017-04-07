@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class LCDRainLane : SKNode {
+class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   private var raindropNodeOne   : SKSpriteNode!
   private var raindropNodeTwo   : SKSpriteNode!
   private var raindropNodeThree : SKSpriteNode!
@@ -21,6 +21,7 @@ class LCDRainLane : SKNode {
   private var raindropNodeTen   : SKSpriteNode!
 
   private(set) var needsRaindrop = false
+  private var shouldUpdate = true
 
   func setup() {
     raindropNodeOne = childNode(withName: "rain-pos-one") as! SKSpriteNode!
@@ -46,103 +47,71 @@ class LCDRainLane : SKNode {
     raindropNodeTen.alpha = lcdOffAlpha
   }
 
+  func resetPressed() {
+    shouldUpdate = false
+
+    raindropNodeTen.removeAllActions()
+
+    for child in children {
+      if let resetable = child as? SKSpriteNode {
+        resetable.alpha = lcdOnAlpha
+      }
+    }
+  }
+
+  func resetReleased() {
+    needsRaindrop = false
+
+    for child in children {
+      if let resetable = child as? SKSpriteNode {
+        resetable.alpha = lcdOffAlpha
+      }
+    }
+
+    shouldUpdate = true
+  }
+
   //Move the raindrop down one raindrop level
   func update() {
-    raindropNodeTen.alpha = raindropNodeNine.alpha
-    raindropNodeNine.alpha = raindropNodeEight.alpha
-    raindropNodeEight.alpha = raindropNodeSeven.alpha
-    raindropNodeSeven.alpha = raindropNodeSix.alpha
-    raindropNodeSix.alpha = raindropNodeFive.alpha
-    raindropNodeFive.alpha = raindropNodeFour.alpha
-    raindropNodeFour.alpha = raindropNodeThree.alpha
-    raindropNodeThree.alpha = raindropNodeTwo.alpha
-    raindropNodeTwo.alpha = raindropNodeOne.alpha
-    raindropNodeOne.alpha = needsRaindrop ? lcdOnAlpha : lcdOffAlpha
+    if(shouldUpdate) {
+      raindropNodeTen.alpha = raindropNodeNine.alpha
+      raindropNodeNine.alpha = raindropNodeEight.alpha
+      raindropNodeEight.alpha = raindropNodeSeven.alpha
+      raindropNodeSeven.alpha = raindropNodeSix.alpha
+      raindropNodeSix.alpha = raindropNodeFive.alpha
+      raindropNodeFive.alpha = raindropNodeFour.alpha
+      raindropNodeFour.alpha = raindropNodeThree.alpha
+      raindropNodeThree.alpha = raindropNodeTwo.alpha
+      raindropNodeTwo.alpha = raindropNodeOne.alpha
+      raindropNodeOne.alpha = needsRaindrop ? lcdOnAlpha : lcdOffAlpha
 
-    needsRaindrop = false
+      needsRaindrop = false
+    }
   }
 
   func addRaindrop() {
-    needsRaindrop = true
+    needsRaindrop = true && shouldUpdate
   }
 
-  func removeUmbrellaLevelRaindrop() {
-    raindropNodeNine.alpha = lcdOffAlpha
+  func checkUmbrellaHit() -> Bool {
+    if(shouldUpdate) {
+      let hadRaindrop = raindropNodeNine.alpha == lcdOnAlpha
+      raindropNodeNine.alpha = lcdOffAlpha
 
-    //TODO play sound?
+      //TODO play sound?
+
+      return hadRaindrop
+    }
+
+    return false
+  }
+
+  func blinkRaindrop() {
+    raindropNodeTen.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.30),
+                                                                  SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.30)])))
   }
 
   func hasCatLevel() -> Bool {
-    return raindropNodeTen.alpha == lcdOnAlpha
-  }
-
-  func testLights() {
-   raindropNodeOne.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 4.5)
-      ])))
-
-    raindropNodeTwo.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 0.5),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 4)
-      ])))
-
-    raindropNodeThree.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 1),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 3.5)
-      ])))
-
-    raindropNodeFour.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 1.5),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 3)
-      ])))
-
-    raindropNodeFive.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 2.0),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 2.5)
-      ])))
-
-    raindropNodeSix.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 2.5),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 2.0)
-      ])))
-
-    raindropNodeSeven.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 3.0),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 1.5)
-      ])))
-
-    raindropNodeEight.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 3.5),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 1.0)
-      ])))
-
-    raindropNodeNine.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 4.0),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25),
-      SKAction.wait(forDuration: 0.5)
-      ])))
-
-    raindropNodeTen.run(SKAction.repeatForever(SKAction.sequence([
-      SKAction.wait(forDuration: 4.5),
-      SKAction.fadeAlpha(to: 0.05, duration: 0.25),
-      SKAction.fadeAlpha(to: 1, duration: 0.25)
-      ])))
+    return shouldUpdate && raindropNodeTen.alpha == lcdOnAlpha
   }
 }

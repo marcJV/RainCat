@@ -8,16 +8,16 @@
 
 import SpriteKit
 
-class LCDFoodRow : SKNode {
+class LCDFoodRow : SKNode, Resetable, LCDSetupable {
 
-  var foodPosition1 : SKSpriteNode!
-  var foodPosition2 : SKSpriteNode!
-  var foodPosition3 : SKSpriteNode!
-  var foodPosition4 : SKSpriteNode!
-  var foodPosition5 : SKSpriteNode!
-  var foodPosition6 : SKSpriteNode!
+  private var foodPosition1 : SKSpriteNode!
+  private var foodPosition2 : SKSpriteNode!
+  private var foodPosition3 : SKSpriteNode!
+  private var foodPosition4 : SKSpriteNode!
+  private var foodPosition5 : SKSpriteNode!
+  private var foodPosition6 : SKSpriteNode!
 
-  var currentPosition = -1
+  private(set) var foodLocation = -1
 
   func setup() {
     foodPosition1 = childNode(withName: "food-pos-one") as! SKSpriteNode!
@@ -38,19 +38,43 @@ class LCDFoodRow : SKNode {
   }
 
   func showNextPosition() {
-    turnOffLocationAtIndex(index: currentPosition)
-    var location = Int(arc4random() % 6)
+    turnOffLocationAtIndex(index: foodLocation)
+    var location = Int(arc4random() % LCD_MAX_LOCATION)
 
     //If location clashes with last location move the food to an adjacent location
-    if currentPosition == location {
+    if foodLocation == location {
       location += (arc4random() % 2 == 0) ? 1 : -1
 
-      location %= 6
-
-      print(location)
+      if location < 0 {
+        location = Int(LCD_MAX_LOCATION) - 1
+      } else if location > Int(LCD_MAX_LOCATION) - 1 {
+        location = 0
+      }
     }
 
+    print("next food location \(location)")
+
     turnOnLocationAtIndex(index: location)
+  }
+
+  func resetPressed() {
+    turnOnLocationAtIndex(index: 0)
+    turnOnLocationAtIndex(index: 1)
+    turnOnLocationAtIndex(index: 2)
+    turnOnLocationAtIndex(index: 3)
+    turnOnLocationAtIndex(index: 4)
+    turnOnLocationAtIndex(index: 5)
+  }
+
+  func resetReleased() {
+    turnOffLocationAtIndex(index: 0)
+    turnOffLocationAtIndex(index: 1)
+    turnOffLocationAtIndex(index: 2)
+    turnOffLocationAtIndex(index: 3)
+    turnOffLocationAtIndex(index: 4)
+    turnOffLocationAtIndex(index: 5)
+
+    showNextPosition()
   }
 
   func turnOffLocationAtIndex(index : Int) {
@@ -85,10 +109,10 @@ class LCDFoodRow : SKNode {
       foodPosition5.alpha = lcdOnAlpha
     default:
       foodPosition6.alpha = lcdOnAlpha
-      currentPosition = 5 // In case we are at a negative location
+      foodLocation = 5 // In case we are at a negative location
     }
 
-    currentPosition = index
+    foodLocation = index
 
   }
 }

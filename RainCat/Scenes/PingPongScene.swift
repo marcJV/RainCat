@@ -43,8 +43,8 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
   private let umbrellaScale : CGFloat = 0.85
 
-  private let p1Rotation = CGFloat(M_PI / -2.0)
-  private let p2Rotation = CGFloat(M_PI / 2.0)
+  private let p1Rotation = CGFloat.pi / -2.0
+  private let p2Rotation = CGFloat.pi / 2.0
 
   private let cat1Key = "PLAYER_ONE_CAT"
   private let cat2Key = "PLAYER_TWO_CAT"
@@ -474,7 +474,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
       if !roundStarted {
         return
       }
-      
+
       if !catHit {
         catHit = true
 

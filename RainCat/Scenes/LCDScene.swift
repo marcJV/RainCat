@@ -52,6 +52,8 @@ class LCDScene : SKScene {
         currentButton = rightButton
       } else if resetButton.contains(location) {
         currentButton = resetButton
+
+        lcdScreen.resetPressed()
       } else if quitButton.contains(location) {
         currentButton = quitButton
       }
@@ -83,7 +85,7 @@ class LCDScene : SKScene {
       } else if button == rightButton {
         lcdScreen.moveUmbrellaRight()
       } else if button == resetButton {
-        //reset game scene
+        lcdScreen.resetReleased()
       } else if button == quitButton {
         //quit button action
       }

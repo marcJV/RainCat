@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class LCDUmbrellaRow : SKNode {
+class LCDUmbrellaRow : SKNode, Resetable, LCDSetupable {
   private var umbrella1 : SKSpriteNode!
   private var umbrella2 : SKSpriteNode!
   private var umbrella3 : SKSpriteNode!
@@ -16,7 +16,10 @@ class LCDUmbrellaRow : SKNode {
   private var umbrella5 : SKSpriteNode!
   private var umbrella6 : SKSpriteNode!
 
-  private(set) var umbrellaLocation = 2
+  private var shouldUpdate = true
+
+  private let defaultUmbrellaLocation = 2
+  private(set) var umbrellaLocation = 0
 
   func setup() {
     umbrella1 = childNode(withName: "umbrella-pos-one") as! SKSpriteNode!
@@ -31,6 +34,8 @@ class LCDUmbrellaRow : SKNode {
     umbrella4.alpha = lcdOffAlpha
     umbrella5.alpha = lcdOffAlpha
     umbrella6.alpha = lcdOffAlpha
+
+    umbrellaLocation = defaultUmbrellaLocation
   }
 
   func moveLeft() {
@@ -42,7 +47,7 @@ class LCDUmbrellaRow : SKNode {
   }
 
   func moveRight() {
-    if umbrellaLocation < 5 {
+    if umbrellaLocation < Int(LCD_MAX_LOCATION) - 1 {
       umbrellaLocation += 1
     }
 
@@ -50,11 +55,36 @@ class LCDUmbrellaRow : SKNode {
   }
 
   func updateLeds() {
-    umbrella1.alpha = umbrellaLocation == 0 ? lcdOnAlpha : lcdOffAlpha
-    umbrella2.alpha = umbrellaLocation == 1 ? lcdOnAlpha : lcdOffAlpha
-    umbrella3.alpha = umbrellaLocation == 2 ? lcdOnAlpha : lcdOffAlpha
-    umbrella4.alpha = umbrellaLocation == 3 ? lcdOnAlpha : lcdOffAlpha
-    umbrella5.alpha = umbrellaLocation == 4 ? lcdOnAlpha : lcdOffAlpha
-    umbrella6.alpha = umbrellaLocation == 5 ? lcdOnAlpha : lcdOffAlpha
+    if(shouldUpdate) {
+      umbrella1.alpha = umbrellaLocation == 0 ? lcdOnAlpha : lcdOffAlpha
+      umbrella2.alpha = umbrellaLocation == 1 ? lcdOnAlpha : lcdOffAlpha
+      umbrella3.alpha = umbrellaLocation == 2 ? lcdOnAlpha : lcdOffAlpha
+      umbrella4.alpha = umbrellaLocation == 3 ? lcdOnAlpha : lcdOffAlpha
+      umbrella5.alpha = umbrellaLocation == 4 ? lcdOnAlpha : lcdOffAlpha
+      umbrella6.alpha = umbrellaLocation == 5 ? lcdOnAlpha : lcdOffAlpha
+    }
+  }
+
+  func resetPressed() {
+    shouldUpdate = false
+
+    for child in children {
+      if let resetable = child as? SKSpriteNode {
+        resetable.alpha = lcdOnAlpha
+      }
+    }
+  }
+
+  func resetReleased() {
+    shouldUpdate = true
+
+    for child in children {
+      if let resetable = child as? SKSpriteNode {
+        resetable.alpha = lcdOffAlpha
+      }
+    }
+
+    umbrellaLocation = defaultUmbrellaLocation
+    updateLeds()
   }
 }

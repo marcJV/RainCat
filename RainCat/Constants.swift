@@ -17,6 +17,8 @@ let FoodCategory       : UInt32 = 0x1 << 6
 
 let colorChangeDuration : TimeInterval = 0.25
 
+let LCD_MAX_LOCATION : UInt32 = 6
+
 let lcdOffAlpha : CGFloat = 0.05
 let lcdOnAlpha  : CGFloat = 1
 

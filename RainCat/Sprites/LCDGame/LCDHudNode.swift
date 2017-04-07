@@ -8,25 +8,57 @@
 
 import SpriteKit
 
-class LCDHudNode : SKNode {
-  var lifeHudNode : LCDHudLives!
+class LCDHudNode : SKNode, Resetable, LCDSetupable {
+  private var lifeHudNode : LCDHudLives!
+  private var lcdTimeNode : LCDTimeNode!
+  private var lcdScoreNode : LCDScoreNode!
 
   func setup() {
     lifeHudNode = childNode(withName: "display-lives") as! LCDHudLives!
-    lifeHudNode.setup()
+    lcdTimeNode = childNode(withName: "display-time") as! LCDTimeNode!
+    lcdScoreNode = childNode(withName: "display-score") as! LCDScoreNode!
 
-    //Setup time and score
+    for child in children {
+      if let setupable = child as? LCDSetupable {
+        setupable.setup()
+      }
+    }
+  }
+
+  func catHit() {
+    lifeHudNode.decrementLives()
+  }
+
+  func hasLivesRemaining() -> Bool {
+    return lifeHudNode.hasLivesRemaining()
   }
 
   func addScore() {
-
+    lcdScoreNode.incrementScore()
   }
 
   func resetScore() {
+    lcdScoreNode.resetPressed()
+  }
 
+  func resetPressed() {
+    for child in children {
+      if let resetable = child as? Resetable {
+        resetable.resetPressed()
+      }
+    }
+  }
+
+  func resetReleased() {
+    for child in children {
+      if let resetable = child as? Resetable {
+        resetable.resetReleased()
+      }
+    }
   }
 
   func update() {
     //Use this to update time
+    lcdTimeNode.update()
   }
 }

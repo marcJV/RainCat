@@ -40,7 +40,7 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
         audioPlayer = try AVAudioPlayer(contentsOf: soundURL!)
         audioPlayer?.delegate = self
       } catch {
-        print("audio player failed to load: \(soundURL) \(trackPosition)")
+        print("audio player failed to load: \(String(describing: soundURL)) \(trackPosition)")
 
         return
       }
