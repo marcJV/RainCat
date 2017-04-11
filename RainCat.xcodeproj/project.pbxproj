@@ -27,6 +27,7 @@
 		BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */; };
 		BB3B1D691D847E4E00B643DD /* ColorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3B1D681D847E4E00B643DD /* ColorPalette.plist */; };
 		BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */; };
+		BB430ABC1E98654200281D04 /* SKControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB430ABB1E98654200281D04 /* SKControl.swift */; };
 		BB4E53F91D9172520031DAB9 /* CreditsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53F81D9172520031DAB9 /* CreditsNode.swift */; };
 		BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */; };
 		BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FC1D9176B50031DAB9 /* Touchable.swift */; };
@@ -87,6 +88,7 @@
 		BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UmbrellaSprite.swift; path = Sprites/UmbrellaSprite.swift; sourceTree = "<group>"; };
 		BB3B1D681D847E4E00B643DD /* ColorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ColorPalette.plist; sourceTree = "<group>"; };
 		BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		BB430ABB1E98654200281D04 /* SKControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKControl.swift; path = Sprites/Buttons/SKControl.swift; sourceTree = "<group>"; };
 		BB4E53F81D9172520031DAB9 /* CreditsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsNode.swift; path = Sprites/CreditsNode.swift; sourceTree = "<group>"; };
 		BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuNode.swift; path = Sprites/MenuNode.swift; sourceTree = "<group>"; };
 		BB4E53FC1D9176B50031DAB9 /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Sprites/Touchable.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			children = (
 				BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */,
 				BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */,
+				BB430ABB1E98654200281D04 /* SKControl.swift */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */,
 				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,
 				BBE8FF531E8C60DA00904331 /* LCDTimeNode.swift in Sources */,
+				BB430ABC1E98654200281D04 /* SKControl.swift in Sources */,
 				BBE8FF551E8C826600904331 /* LCDScoreNode.swift in Sources */,
 				BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */,
 				BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */,

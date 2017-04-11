@@ -107,8 +107,10 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   }
 
   func blinkRaindrop() {
-    raindropNodeTen.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.30),
-                                                                  SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.30)])))
+    raindropNodeTen.run(SKAction.repeatForever(SKAction.sequence([SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.0),
+                                                                  SKAction.wait(forDuration: 0.25),
+                                                                  SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.0),
+                                                                  SKAction.wait(forDuration: 0.25)])))
   }
 
   func hasCatLevel() -> Bool {

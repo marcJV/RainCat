@@ -8,13 +8,22 @@
 
 import SpriteKit
 
-class TwoPaneButton : SKSpriteNode {
+class TwoPaneButton : SKAControlSprite {
   private var foregroundPane : SKSpriteNode!
   private var label : SKLabelNode!
   private var zeroPosition = CGPoint()
 
+  var elevation = 10 {
+    didSet {
+      zeroPosition = CGPoint(x: elevation, y: elevation)
+      foregroundPane.position = zeroPosition
+    }
+  }
+
   func setup(text: String, fontSize: CGFloat) {
     zeroPosition = CGPoint(x: 10, y: 10)
+
+    anchorPoint = CGPoint(x: 0, y: 1)
 
     self.color = SKColor(red:0.79, green:0.76, blue:0.37, alpha:1.0)
 
@@ -35,14 +44,26 @@ class TwoPaneButton : SKSpriteNode {
 
     addChild(foregroundPane)
     foregroundPane.addChild(label)
+
+    addTarget(self, selector: #selector(touched(_:)), forControlEvents: [.TouchDown, .DragEnter])
+    addTarget(self, selector: #selector(untouched(_:)), forControlEvents: [.TouchUpOutside, .TouchUpInside, .DragExit])
   }
 
-  func setTouched() {
+  func touched(_ sender : TwoPaneButton){
     foregroundPane.run(SKAction.move(to: CGPoint(), duration: 0.05))
   }
 
-  func setUntouched() {
+  func untouched(_ sender : TwoPaneButton) {
     foregroundPane.run(SKAction.move(to: zeroPosition, duration: 0.05))
+  }
+
+  override var zPosition: CGFloat {
+    didSet {
+      if foregroundPane != nil {
+        foregroundPane.zPosition = zPosition + 1
+        label.zPosition = zPosition + 2
+      }
+    }
   }
 }
 

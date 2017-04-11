@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-public class ColorAction : SKAction {
+public class ColorAction {
   // In the class that calls colorTransitionAction
   // Include these variables
   // In my code its the class that aggregates the sprite

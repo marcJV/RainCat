@@ -19,6 +19,8 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
 
   private(set) var foodLocation = -1
 
+  private var shouldUpdate = true
+
   func setup() {
     foodPosition1 = childNode(withName: "food-pos-one") as! SKSpriteNode!
     foodPosition2 = childNode(withName: "food-pos-two") as! SKSpriteNode!
@@ -38,26 +40,30 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
   }
 
   func showNextPosition() {
-    turnOffLocationAtIndex(index: foodLocation)
-    var location = Int(arc4random() % LCD_MAX_LOCATION)
+    if shouldUpdate {
+      turnOffLocationAtIndex(index: foodLocation)
+      var location = Int(arc4random() % LCD_MAX_LOCATION)
 
-    //If location clashes with last location move the food to an adjacent location
-    if foodLocation == location {
-      location += (arc4random() % 2 == 0) ? 1 : -1
+      //If location clashes with last location move the food to an adjacent location
+      if foodLocation == location {
+        location += (arc4random() % 2 == 0) ? 1 : -1
 
-      if location < 0 {
-        location = Int(LCD_MAX_LOCATION) - 1
-      } else if location > Int(LCD_MAX_LOCATION) - 1 {
-        location = 0
+        if location < 0 {
+          location = Int(LCD_MAX_LOCATION) - 1
+        } else if location > Int(LCD_MAX_LOCATION) - 1 {
+          location = 0
+        }
       }
+
+      print("next food location \(location)")
+
+      turnOnLocationAtIndex(index: location)
     }
-
-    print("next food location \(location)")
-
-    turnOnLocationAtIndex(index: location)
   }
 
   func resetPressed() {
+    shouldUpdate = false
+
     turnOnLocationAtIndex(index: 0)
     turnOnLocationAtIndex(index: 1)
     turnOnLocationAtIndex(index: 2)
@@ -74,6 +80,7 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
     turnOffLocationAtIndex(index: 4)
     turnOffLocationAtIndex(index: 5)
 
+    shouldUpdate = true
     showNextPosition()
   }
 
@@ -95,7 +102,6 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
   }
 
   func turnOnLocationAtIndex(index : Int) {
-
     switch index {
     case 0:
       foodPosition1.alpha = lcdOnAlpha
@@ -111,8 +117,7 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
       foodPosition6.alpha = lcdOnAlpha
       foodLocation = 5 // In case we are at a negative location
     }
-
+    
     foodLocation = index
-
   }
 }

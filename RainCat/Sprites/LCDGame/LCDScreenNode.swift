@@ -16,13 +16,41 @@ class LCDScreenNode : SKSpriteNode, Resetable {
   private var catRow : LCDCatRow!
   private var hudNode : LCDHudNode!
 
-  private var tick : TimeInterval = 1.25 //How fast the game updates
+  private var tick : TimeInterval = 0.75 //How fast the game updates
   private var tickNumber = 7 //Current Tick
-  private var spawnsPerDrop = 0 //Number of raindrops per spawn
-  private let ticksPerDrop = 6 //Number of ticks it takes to spawn raindrops
+  private var spawnsPerDrop = 3 //Number of raindrops per spawn
+  private var ticksPerDrop = 5 //Number of ticks it takes to spawn raindrops
   private var lastUpdateTime : TimeInterval = 0.0
 
+  private let defaultTickInterval : Int = 125
+  private let defaultSpawnsPerDrop = 0
+  private let defaultTicksPerDrop = 6
+
+  private let tickDecrementAmount : TimeInterval = 0.07
+  private let spawnsIncrementAmount = 1
+  private let ticksPerDropDecrementAmount = 1
+
+  //Every x Points update our variables
+  private let tickUpdateInterval = 15
+  private let spawnsUpdateInterval = 40
+  private let ticksPerDropUpdateInterval = 20
+
+  //Constructing a logarithmic equation for tick speed from startspeed to end speed
+  let startSpeed = 190.0
+  let endSpeed = 40.0
+
+  let endLinear = 20.0
+  let startScore = 1.0
+  let endScore = 200.0
+
+  var a = 0.0
+  var b = 0.0
+
   func setup() {
+    //Setup difficulty scale
+    a = (startSpeed - endSpeed) / (log(startScore / endScore))
+    b = exp((endSpeed * log(startScore)) - (startSpeed * log(endScore)) / (startSpeed - endSpeed))
+
     lanes.append(childNode(withName: "raindrop-lane-one") as! LCDRainLane!)
     lanes.append(childNode(withName: "raindrop-lane-two") as! LCDRainLane!)
     lanes.append(childNode(withName: "raindrop-lane-three") as! LCDRainLane!)
@@ -40,6 +68,8 @@ class LCDScreenNode : SKSpriteNode, Resetable {
         setupable.setup()
       }
     }
+
+    reset()
   }
 
   func update(deltaTime : TimeInterval) {
@@ -61,10 +91,10 @@ class LCDScreenNode : SKSpriteNode, Resetable {
 
       if hudNode.hasLivesRemaining() {
         if checkUmbrellaLevelRaindrop(atIndex: umbrellaRow.umbrellaLocation) {
-          hudNode.addScore()
+          updateScore()
 
           //Extra raindrop at umbrella location!
-          addRaindrop(atIndex: umbrellaRow.umbrellaLocation)
+          addRaindrop(atIndex: foodRow.foodLocation)
         }
 
         //Tell cat row where the food is
@@ -77,7 +107,9 @@ class LCDScreenNode : SKSpriteNode, Resetable {
         }
 
         if catRow.didEatFood {
-          hudNode.addScore()
+          updateScore()
+          updateScore()
+
           foodRow.showNextPosition()
 
           //Extra raindrop!
@@ -155,5 +187,42 @@ class LCDScreenNode : SKSpriteNode, Resetable {
         resetable.resetReleased()
       }
     }
+
+    reset()
+  }
+
+  private func updateScore() {
+    let currentScore = hudNode.addScore()
+
+    updateTicks(score: Double(currentScore))
+
+    if currentScore % spawnsUpdateInterval == 0 {
+      spawnsPerDrop += spawnsIncrementAmount
+    }
+
+    if currentScore % ticksPerDropUpdateInterval == 0 {
+      ticksPerDrop -= ticksPerDropDecrementAmount
+    }
+
+    print("Current Score: \(currentScore)  Tick Interval: \(tick) Spawns Per Drop: \(spawnsPerDrop) Ticks Per Drop: \(ticksPerDrop)")
+  }
+
+  private func updateTicks(score : Double) {
+    if score < endLinear {
+      tick = (Double(defaultTickInterval) - (score / endLinear * score)) / 100
+    } else {
+      tick = (a * log( b * Double.maximum(score, 1.0))) / 100
+    }
+
+    print("tick set to: \(tick)")
+  }
+
+  private func reset() {
+    updateTicks(score: 0)
+    spawnsPerDrop = defaultSpawnsPerDrop
+    ticksPerDrop = defaultTicksPerDrop
+
+    tickNumber = 100
+    lastUpdateTime = 100
   }
 }

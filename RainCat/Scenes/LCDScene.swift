@@ -19,6 +19,7 @@ class LCDScene : SKScene {
   private var lastUpdateTime : TimeInterval = 0.0
 
   private var currentButton : TwoPaneButton?
+  private var isQuitting = false
 
   override func didMove(to view: SKView) {
     lcdScreen = childNode(withName: "lcd-screen") as! LCDScreenNode!
@@ -31,80 +32,20 @@ class LCDScene : SKScene {
 
     leftButton = childNode(withName: "left-button") as! TwoPaneButton!
     leftButton.setup(text: "left", fontSize: 25)
+    leftButton.addTarget(self, selector: #selector(moveLeft(_:)), forControlEvents: .TouchUpInside)
 
     rightButton = childNode(withName: "right-button") as! TwoPaneButton!
     rightButton.setup(text: "right", fontSize: 25)
+    rightButton.addTarget(self, selector: #selector(moveRight(_:)), forControlEvents: .TouchUpInside)
 
     resetButton = childNode(withName: "reset-button") as! TwoPaneButton!
     resetButton.setup(text: "reset", fontSize: 19)
+    resetButton.addTarget(self, selector: #selector(resetPressed(_:)), forControlEvents: [.TouchDown, .DragEnter])
+    resetButton.addTarget(self, selector: #selector(resetReleased(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside])
 
     quitButton = childNode(withName: "quit-button") as! TwoPaneButton!
     quitButton.setup(text: "quit", fontSize: 19)
-  }
-
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if currentButton == nil && touches.first != nil {
-      let location = touches.first!.location(in: self)
-
-      if leftButton.contains(location) {
-        currentButton = leftButton
-      } else if rightButton.contains(location) {
-        currentButton = rightButton
-      } else if resetButton.contains(location) {
-        currentButton = resetButton
-
-        lcdScreen.resetPressed()
-      } else if quitButton.contains(location) {
-        currentButton = quitButton
-      }
-
-      currentButton?.setTouched()
-    }
-  }
-
-  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if currentButton != nil && touches.first != nil {
-      let location = touches.first!.location(in: self)
-
-      if currentButton!.contains(location) {
-        currentButton?.setTouched()
-      } else {
-        currentButton?.setUntouched()
-      }
-
-      if currentButton! == resetButton {
-        //TODO Reset the game anyways
-      }
-    }
-  }
-
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let button = currentButton {
-      if button == leftButton {
-        lcdScreen.moveUmbrellaLeft()
-      } else if button == rightButton {
-        lcdScreen.moveUmbrellaRight()
-      } else if button == resetButton {
-        lcdScreen.resetReleased()
-      } else if button == quitButton {
-        //quit button action
-      }
-    }
-
-    leftButton.setUntouched()
-    rightButton.setUntouched()
-    resetButton.setUntouched()
-    quitButton.setUntouched()
-
-    currentButton = nil
-  }
-
-  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    leftButton.setUntouched()
-    rightButton.setUntouched()
-    resetButton.setUntouched()
-    quitButton.setUntouched()
-    currentButton = nil
+    quitButton.addTarget(self, selector: #selector(quitPressed(_:)), forControlEvents: .TouchUpInside)
   }
 
   override func update(_ currentTime: TimeInterval) {
@@ -114,7 +55,31 @@ class LCDScene : SKScene {
     if deltaTime > 1 {
       deltaTime = 0
     }
-
+    
     lcdScreen.update(deltaTime: deltaTime)
+  }
+
+  func moveLeft(_ sender:Any) {
+    lcdScreen.moveUmbrellaLeft()
+  }
+
+  func moveRight(_ sender:Any) {
+    lcdScreen.moveUmbrellaRight()
+  }
+
+  func quitPressed(_ sender:Any) {
+    MenuScene.presentMenuScene(currentScene: self)
+  }
+
+  func resetPressed(_ sender:Any) {
+    lcdScreen.resetPressed()
+  }
+
+  func resetReleased(_ sender:Any) {
+    lcdScreen.resetReleased()
+  }
+
+  deinit {
+    print("destroyed LCD Game Scene")
   }
 }

@@ -33,8 +33,14 @@ class LCDHudNode : SKNode, Resetable, LCDSetupable {
     return lifeHudNode.hasLivesRemaining()
   }
 
-  func addScore() {
+  func getScore() -> Int {
+    return lcdScoreNode.score
+  }
+
+  func addScore() -> Int {
     lcdScoreNode.incrementScore()
+
+    return lcdScoreNode.score
   }
 
   func resetScore() {

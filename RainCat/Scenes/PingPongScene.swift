@@ -116,14 +116,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     resetLocations(arc4random() % 2 == 0) //random start location
 
     hud.quitButtonAction = {
-      let transition = SKTransition.reveal(with: .up, duration: 0.75)
-      transition.pausesOutgoingScene = false
-      transition.pausesIncomingScene = false
-
-      let gameScene = MenuScene(size: self.size)
-      gameScene.scaleMode = self.scaleMode
-
-      self.view?.presentScene(gameScene, transition: transition)
+      MenuScene.presentMenuScene(currentScene: self)
 
       self.hud.quitButtonAction = nil
       self.hud.rematchButtonAction = nil
@@ -298,63 +291,27 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     let touchPoint = touches.first?.location(in: self)
 
     if let point = touchPoint {
-      hud.touchBeganAtPoint(point: point)
-
       if catHit {
         return
       }
 
-      if !hud.quitButtonPressed {
-        for touch in touches {
-          var location = touch.location(in: self)
+      for touch in touches {
+        var location = touch.location(in: self)
 
-          if location.x < frame.midX {
-            if p1Touch == nil {
-              p1Touch = touch
+        if location.x < frame.midX {
+          if p1Touch == nil {
+            p1Touch = touch
 
-              if location.x > frame.midX - deadZone {
-                location.x = frame.midX - deadZone
-              }
-
-              umbrella1.setDestination(destination: location)
-            }
-          } else {
-            if p2Touch == nil {
-              p2Touch = touch
-
-              if location.x < frame.midX + deadZone {
-                location.x = frame.midX + deadZone
-              }
-
-              umbrella2.setDestination(destination: location)
-            }
-          }
-        }
-      }
-    }
-  }
-
-  override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
-
-    if let point = touchPoint {
-      hud.touchMovedToPoint(point: point)
-
-      if catHit {
-        return
-      }
-
-      if !hud.quitButtonPressed {
-        for touch in touches {
-          var location = touch.location(in: self)
-
-          if p1Touch == touch {
             if location.x > frame.midX - deadZone {
               location.x = frame.midX - deadZone
             }
 
             umbrella1.setDestination(destination: location)
-          } else if p2Touch == touch {
+          }
+        } else {
+          if p2Touch == nil {
+            p2Touch = touch
+
             if location.x < frame.midX + deadZone {
               location.x = frame.midX + deadZone
             }
@@ -366,13 +323,32 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     }
   }
 
-  override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+  override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     let touchPoint = touches.first?.location(in: self)
+      if catHit {
+        return
+      }
 
-    if let point = touchPoint {
-      hud.touchEndedAtPoint(point: point)
-    }
+      for touch in touches {
+        var location = touch.location(in: self)
 
+        if p1Touch == touch {
+          if location.x > frame.midX - deadZone {
+            location.x = frame.midX - deadZone
+          }
+
+          umbrella1.setDestination(destination: location)
+        } else if p2Touch == touch {
+          if location.x < frame.midX + deadZone {
+            location.x = frame.midX + deadZone
+          }
+
+          umbrella2.setDestination(destination: location)
+        }
+      }
+  }
+
+  override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     for touch in touches {
       if p1Touch == touch {
         p1Touch = nil
@@ -549,7 +525,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
       SKAction.scale(to: 2, duration: 0.25),
       SKAction.move(to: CGPoint(x: frame.midX, y: frame.midY), duration: 0.25)
       ])
-    
+
     let fadeOutAction = SKAction.fadeOut(withDuration: 0.25)
     
     backgroundNode.run(fadeOutAction)

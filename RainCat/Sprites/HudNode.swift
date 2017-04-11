@@ -16,9 +16,7 @@ class HudNode : SKNode, Palettable {
 
   private(set) var quitButtonPressed = false
 
-  private var quitButton : SKSpriteNode!
-  private let quitButtonTexture = SKTexture(imageNamed: "quit_button")
-  private let quitButtonPressedTexture = SKTexture(imageNamed: "quit_button_pressed")
+  private var quitButton : TwoPaneButton!
 
   private var highScoreColor = SKColor.white
 
@@ -37,16 +35,20 @@ class HudNode : SKNode, Palettable {
 
     addChild(scoreNode)
 
-    quitButton = SKSpriteNode(texture: quitButtonTexture)
-    let margin : CGFloat = 15
-    quitButton.position = CGPoint(x: size.width - quitButton.size.width - margin, y: size.height - quitButton.size.height - margin)
+    quitButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 80, height: 35))
+    quitButton.setup(text: "Quit", fontSize: 20)
+    quitButton.elevation = 5
+    quitButton.position = CGPoint(x: size.width - quitButton.size.width - 25, y: size.height - quitButton.size.height - 5)
     quitButton.zPosition = 1000
+    quitButton.addTarget(self, selector: #selector(quit(_:)), forControlEvents: .TouchUpInside)
 
     highScoreColor = palette.groundColor
 
-    
-
     addChild(quitButton)
+  }
+
+  public func quit(_ sender:AnyObject) {
+    quitButtonAction!()
   }
 
   public func addPoint() {
@@ -94,9 +96,9 @@ class HudNode : SKNode, Palettable {
     if quitButtonPressed && !containsPoint {
       //Cancel the last click
       quitButtonPressed = false
-      quitButton.texture = quitButtonTexture
+//      quitButton.setUntouched()
     } else if containsPoint {
-      quitButton.texture = quitButtonPressedTexture
+//      quitButton.setTouched()
       quitButtonPressed = true
     }
   }
@@ -104,9 +106,9 @@ class HudNode : SKNode, Palettable {
   func touchMovedToPoint(point: CGPoint) {
     if quitButtonPressed {
       if quitButton.contains(point) {
-        quitButton.texture = quitButtonPressedTexture
+//        quitButton.setUntouched()
       } else {
-        quitButton.texture = quitButtonTexture
+//        quitButton.setTouched()
       }
     }
   }
@@ -116,7 +118,7 @@ class HudNode : SKNode, Palettable {
       quitButtonAction!()
     }
 
-    quitButton.texture = quitButtonTexture
+//    quitButton.setUntouched()
   }
 
   public func updatePalette(palette: ColorPalette) {

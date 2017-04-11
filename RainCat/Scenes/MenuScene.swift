@@ -24,7 +24,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   let rainDropBanner = RainDropBanner()
 
-  var currentNode : Touchable?
+  var currentNode : SKNode!
 
   private var showingPlayerSelectScreen = false
 
@@ -87,7 +87,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
       let fadeOut = SKAction.fadeAlpha(to: 0, duration: 0.25)
       let fadeIn = SKAction.fadeAlpha(to: 1, duration: 0.25)
 
-      if (self.currentNode as! SKNode) != self.creditsNode {
+      if self.currentNode != self.creditsNode {
         self.menuNode.run(fadeOut)
         self.playerSelectNode.run(fadeOut)
 
@@ -132,7 +132,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-      currentNode?.touchBegan(touch: touch)
+      if let touchableNode = currentNode as? Touchable {
+        touchableNode.touchBegan(touch: touch)
+      }
 
       soundButton.touchBegan(touch: touch)
       creditsButton.touchBegan(touch: touch)
@@ -158,8 +160,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-
-      currentNode?.touchMoved(touch: touch)
+      if let touchableNode = currentNode as? Touchable {
+        touchableNode.touchMoved(touch: touch)
+      }
 
       soundButton.touchMoved(touch: touch)
       creditsButton.touchMoved(touch: touch)
@@ -175,8 +178,9 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     if let touch = touches.first {
-
-      currentNode?.touchEnded(touch: touch)
+      if let touchableNode = currentNode as? Touchable {
+        touchableNode.touchEnded(touch: touch)
+      }
 
       soundButton.touchEnded(touch: touch)
       creditsButton.touchEnded(touch: touch)
@@ -255,36 +259,53 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         transition.pausesOutgoingScene = false
         transition.pausesIncomingScene = false
 
-        var scene : SKScene
+        var scene : SKScene?
 
-        if (self.currentNode as! SKNode) == self.menuNode {
+        if self.currentNode == self.menuNode {
           scene = GameScene(size: self.size, catScale: self.catSprite.xScale, rainScale: rainScale)
         } else {
-          scene = PingPongScene(size: self.size,
-                                player1ColorPalette: self.playerSelectNode.playerOnePalette(),
-                                player2ColorPalette: self.playerSelectNode.playerTwoPalette(),
-                                catScale: self.catSprite.xScale,
-                                rainScale: rainScale)
+
+//          scene = SKScene(fileNamed: "LCDScene")
+
+                    scene = PingPongScene(size: self.size,
+                                          player1ColorPalette: self.playerSelectNode.playerOnePalette(),
+                                          player2ColorPalette: self.playerSelectNode.playerTwoPalette(),
+                                          catScale: self.catSprite.xScale,
+                                          rainScale: rainScale)
+        }
+
+        if let scene = scene {
+          scene.scaleMode = self.scaleMode
+
+          self.view?.presentScene(scene, transition: transition)
+
         }
         
-        scene.scaleMode = self.scaleMode
-        
-        self.view?.presentScene(scene, transition: transition)
-
         self.clearButtonActions()
       }
     }
   }
-
+  
   // Clean up all closures to remove circular references
   private func clearButtonActions() {
     soundButton.buttonClickAction = nil
     creditsButton.buttonClickAction = nil
-
+    
     menuNode.clearActions()
     playerSelectNode.clearActions()
   }
-  
+
+  public static func presentMenuScene(currentScene : SKScene) {
+    let transition = SKTransition.reveal(with: .up, duration: 0.75)
+    transition.pausesOutgoingScene = false
+    transition.pausesIncomingScene = false
+
+    let gameScene = MenuScene(size: currentScene.size)
+    gameScene.scaleMode = currentScene.scaleMode
+
+    currentScene.view?.presentScene(gameScene, transition: transition)
+  }
+
   deinit {
     print("menu scene destroyed")
   }

@@ -13,21 +13,12 @@ public class PingPongHud : SKNode {
   private var playerTwoScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private var messageNode = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
 
-  private(set) var quitButtonPressed = false
-
-  private var quitButton : SKSpriteNode!
-  private let quitButtonTexture = SKTexture(imageNamed: "quit_button")
-  private let quitButtonPressedTexture = SKTexture(imageNamed: "quit_button_pressed")
-
-  var quitButtonAction : (() -> ())?
-
-  private var rematchButton : SKSpriteNode!
-  private let rematchTexture = SKTexture(imageNamed: "rematch_button")
-  private let rematchPressedTexture = SKTexture(imageNamed: "rematch_button_pressed")
+  private var quitButton : TwoPaneButton!
+  private var rematchButton : TwoPaneButton!
 
   private var showingRematchButton = false
-  private var rematchButtonPressed = false
 
+  var quitButtonAction : (() -> ())?
   var rematchButtonAction : (() ->())?
 
   private(set) var playerOneScore = 0
@@ -54,9 +45,13 @@ public class PingPongHud : SKNode {
     playerOneScoreNode.text = "\(playerOneScore)"
     playerTwoScoreNode.text = "\(playerTwoScore)"
 
-    quitButton = SKSpriteNode(texture: quitButtonTexture)
+    quitButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 75, height: 35))
+    quitButton.setup(text: "Quit", fontSize: 20)
+    quitButton.elevation = 5
+
     let margin : CGFloat = 15
-    quitButton.position = CGPoint(x: size.width / 2, y: quitButton.size.height / 2 + margin)
+    quitButton.position = CGPoint(x: size.width / 2 - quitButton.size.width / 2, y: quitButton.size.height + margin)
+    quitButton.addTarget(self, selector: #selector(quitSelected(_:)), forControlEvents: .TouchUpInside)
     quitButton.zPosition = 1000
 
     addChild(quitButton)
@@ -67,10 +62,12 @@ public class PingPongHud : SKNode {
     messageNode.zPosition = 1000
     addChild(messageNode)
 
-    rematchButton = SKSpriteNode(texture: rematchTexture)
+    rematchButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
+    rematchButton.setup(text: "Rematch?", fontSize: 40)
     rematchButton.alpha = 0
-    rematchButton.position = CGPoint(x: size.width / 2,
-                                     y: quitButton.position.y + (quitButton.size.height / 2) + (rematchButton.size.height / 2) + margin * 2)
+    rematchButton.addTarget(self, selector: #selector(rematchSelected(_:)), forControlEvents: .TouchUpInside)
+    rematchButton.position = CGPoint(x: size.width / 2 - rematchButton.size.width / 2,
+                                     y: messageNode.position.y - rematchButton.size.height / 2 - margin * 2)
     rematchButton.zPosition = 1000
     addChild(rematchButton)
   }
@@ -103,56 +100,12 @@ public class PingPongHud : SKNode {
     }
   }
 
-  public func touchBeganAtPoint(point: CGPoint) {
-    let quitContainsPoint = quitButton.contains(point)
-
-    if quitButtonPressed && !quitContainsPoint {
-      //Cancel the last click
-      quitButtonPressed = false
-      quitButton.texture = quitButtonTexture
-    } else if quitContainsPoint {
-      quitButton.texture = quitButtonPressedTexture
-      quitButtonPressed = true
-    }
-
-    let rematchContainsPoint = rematchButton.contains(point)
-    if showingRematchButton && rematchButtonPressed && !rematchContainsPoint {
-      rematchButtonPressed = false
-      rematchButton.texture = rematchTexture
-    } else if rematchContainsPoint {
-      rematchButtonPressed = true
-      rematchButton.texture = rematchPressedTexture
-    }
+  func quitSelected(_ sender:AnyObject?) {
+    quitButtonAction!()
   }
 
-  public func touchMovedToPoint(point: CGPoint) {
-    if quitButtonPressed {
-      if quitButton.contains(point) {
-        quitButton.texture = quitButtonPressedTexture
-      } else {
-        quitButton.texture = quitButtonTexture
-      }
-    } else if rematchButtonPressed {
-      if rematchButton.contains(point) {
-        rematchButton.texture = rematchPressedTexture
-      } else {
-        rematchButton.texture = rematchTexture
-      }
-    }
-  }
-
-  public func touchEndedAtPoint(point: CGPoint) {
-    if quitButtonPressed && quitButton.contains(point) && quitButtonAction != nil {
-      quitButtonAction!()
-    } else if showingRematchButton && rematchButtonPressed && rematchButton.contains(point) && rematchButtonAction != nil {
-      rematchButtonAction!()
-    }
-
-    rematchButtonPressed = false
-    quitButtonPressed = false
-
-    quitButton.texture = quitButtonTexture
-    rematchButton.texture = rematchTexture
+  func rematchSelected(_ sender:AnyObject?) {
+    rematchButtonAction!()
   }
 
   func showMessage(message : String) {

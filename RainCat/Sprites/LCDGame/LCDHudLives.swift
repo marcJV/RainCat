@@ -50,12 +50,9 @@ class LCDHudLives : SKNode, Resetable, LCDSetupable {
     switch lives {
     case 0:
       flutterFadeOut(node: lifeOne)
-      lifeTwo.alpha = lcdOffAlpha
-      lifeThree.alpha = lcdOffAlpha
     case 1:
       lifeOne.alpha = lcdOnAlpha
       flutterFadeOut(node: lifeTwo)
-      lifeThree.alpha = lcdOffAlpha
     case 2:
       lifeOne.alpha = lcdOnAlpha
       lifeTwo.alpha = lcdOnAlpha
@@ -68,9 +65,10 @@ class LCDHudLives : SKNode, Resetable, LCDSetupable {
   }
 
   private func flutterFadeOut(node : SKSpriteNode) {
-    let actionFadeToOff = SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.15)
-    let actionFadeToOn = SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.15)
-
-    node.run(SKAction.sequence([actionFadeToOff, actionFadeToOn, actionFadeToOff]))
+    node.run(SKAction.repeat(SKAction.sequence([SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.0),
+                                       SKAction.wait(forDuration: 0.15),
+                                       SKAction.fadeAlpha(to: lcdOnAlpha, duration: 0.0),
+                                       SKAction.wait(forDuration: 0.15),
+                                       SKAction.fadeAlpha(to: lcdOffAlpha, duration: 0.0)]), count: 2))
   }
 }

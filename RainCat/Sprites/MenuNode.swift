@@ -8,16 +8,11 @@
 
 import SpriteKit
 
-public class MenuNode : SKNode, Touchable {
-  private var startButton : SKSpriteNode! = nil
+public class MenuNode : SKNode {
+  private var startButton : TwoPaneButton!
+  private var versusButton : TwoPaneButton!
+
   private let highScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
-
-  private let startButtonTexture = SKTexture(imageNamed: "survival_button")
-  private let startButtonPressedTexture = SKTexture(imageNamed: "survival_button_pressed")
-
-  private var versusButton : SKSpriteNode!
-  private let versusButtonTexture = SKTexture(imageNamed: "versus_button")
-  private let versusButtonPressedTexture = SKTexture(imageNamed: "versus_button_pressed")
 
   public var startGameAction : (() -> ())?
   public var versusAction : (() -> ())?
@@ -32,12 +27,21 @@ public class MenuNode : SKNode, Touchable {
 
     addChild(appTitleNode)
 
-    startButton = SKSpriteNode(texture: startButtonTexture)
-    startButton.position = CGPoint(x: 0, y: appTitleNode.position.y - appTitleNode.fontSize - startButton.size.height / 2)
+    startButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
+    startButton.setup(text: "Classic Mode", fontSize: 30)
+    startButton.position = CGPoint(x: -startButton.size.width / 2.0, y: appTitleNode.position.y + 15 - appTitleNode.fontSize - startButton.size.height / 2)
+
+
+    startButton.addTarget(self, selector: #selector(MenuNode.runStartGameAction(_:)), forControlEvents: .TouchUpInside)
+
     addChild(startButton)
 
-    versusButton = SKSpriteNode(texture: versusButtonTexture)
-    versusButton.position = CGPoint(x: 0, y: startButton.position.y - startButton.size.height / 2 - versusButton.size.height / 2 - 20)
+    versusButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
+    versusButton.setup(text: "Verses Mode", fontSize: 30)
+    versusButton.position = CGPoint(x: -startButton.size.width / 2.0, y: startButton.position.y - startButton.size.height / 2 - versusButton.size.height / 2 - 20)
+    versusButton.addTarget(self, selector: #selector(MenuNode.runVersesGameAction(_:)), forControlEvents: .TouchUpInside)
+
+
     addChild(versusButton)
 
     //Setup high score node
@@ -54,71 +58,12 @@ public class MenuNode : SKNode, Touchable {
     addChild(highScoreNode)
   }
 
-  public func touchBegan(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if selectedButton != nil {
-      handleStartButtonHover(isHovering: false)
-      handleVersesButtonHover(isHovering: false)
-    }
-
-    if startButton.contains(point) {
-      selectedButton = startButton
-      
-      handleStartButtonHover(isHovering: true)
-    } else if versusButton.contains(point) {
-      selectedButton = versusButton
-
-      handleVersesButtonHover(isHovering: true)
-    }
+  func runStartGameAction(_ sender:Any) {
+    startGameAction!()
   }
 
-  public func touchMoved(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if selectedButton == startButton {
-      handleStartButtonHover(isHovering: startButton.contains(point))
-    } else if selectedButton == versusButton {
-      handleVersesButtonHover(isHovering: versusButton.contains(point))
-    }
-  }
-
-  public func touchEnded(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if selectedButton == startButton && startButton.contains(point) && startGameAction != nil {
-      handleStartButtonHover(isHovering: false)
-
-      startGameAction!()
-    } else if selectedButton == versusButton && versusButton.contains(point) && versusAction != nil {
-      handleVersesButtonHover(isHovering: false)
-
-      versusAction!()
-    }
-
-    selectedButton = nil
-  }
-
-  public func touchCancelled(touch: UITouch) {
-    selectedButton = nil
-    
-    handleStartButtonHover(isHovering: false)
-  }
-
-  func handleStartButtonHover(isHovering : Bool) {
-    if isHovering {
-      startButton.texture = startButtonPressedTexture
-    } else {
-      startButton.texture = startButtonTexture
-    }
-  }
-
-  func handleVersesButtonHover(isHovering : Bool) {
-    if isHovering {
-      versusButton.texture = versusButtonPressedTexture
-    } else {
-      versusButton.texture = versusButtonTexture
-    }
+  func runVersesGameAction(_ sender:Any) {
+    versusAction!()
   }
 
   func clearActions() {
