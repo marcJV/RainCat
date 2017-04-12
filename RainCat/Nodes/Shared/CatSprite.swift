@@ -74,6 +74,7 @@ public static func newInstance() -> CatSprite {
           xScale = abs(xScale)
         }
       } else {
+        //Used for Cat Pong
         if foodLocation.y < position.y {
           //Food is down
           physicsBody?.velocity.dy = -movementSpeed

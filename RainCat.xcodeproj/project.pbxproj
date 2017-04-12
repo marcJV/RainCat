@@ -8,96 +8,112 @@
 
 /* Begin PBXBuildFile section */
 		BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B1C871D8C9BA900C09901 /* LogoScene.swift */; };
-		BB0CE14D1D9088B200D4E664 /* PingPongBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */; };
-		BB0D073B1DD1800B0025428D /* LCDHudLives.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073A1DD1800B0025428D /* LCDHudLives.swift */; };
-		BB0D073D1DD181540025428D /* LCDFoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073C1DD181540025428D /* LCDFoodRow.swift */; };
-		BB0D073F1DD183430025428D /* LCDCatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D073E1DD183430025428D /* LCDCatRow.swift */; };
-		BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D51D84F615001E540D /* BackgroundNode.swift */; };
-		BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D71D84FAEA001E540D /* ColorAction.swift */; };
-		BB1C70DA1D86EC9F001E540D /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70D91D86EC9F001E540D /* GroundNode.swift */; };
-		BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C70DB1D870508001E540D /* Paletteable.swift */; };
-		BB2422D41DCA33FD0039D692 /* TwoPaneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */; };
-		BB281B7F1D789A3F00229A97 /* cat_meow_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7B1D789A3F00229A97 /* cat_meow_1.mp3 */; };
-		BB281B801D789A3F00229A97 /* cat_meow_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7C1D789A3F00229A97 /* cat_meow_2.mp3 */; };
-		BB281B811D789A3F00229A97 /* cat_meow_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7D1D789A3F00229A97 /* cat_meow_3.mp3 */; };
-		BB281B821D789A3F00229A97 /* cat_meow_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B7E1D789A3F00229A97 /* cat_meow_4.mp3 */; };
-		BB281B851D789D0600229A97 /* cat_meow_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB281B831D789D0600229A97 /* cat_meow_5.wav */; };
-		BB281B861D789D0600229A97 /* cat_meow_6.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB281B841D789D0600229A97 /* cat_meow_6.wav */; };
-		BB281B891D78ABAC00229A97 /* cat_meow_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB281B871D78ABAC00229A97 /* cat_meow_7.mp3 */; };
-		BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */; };
-		BB3B1D691D847E4E00B643DD /* ColorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB3B1D681D847E4E00B643DD /* ColorPalette.plist */; };
-		BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */; };
-		BB430ABC1E98654200281D04 /* SKControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB430ABB1E98654200281D04 /* SKControl.swift */; };
-		BB4E53F91D9172520031DAB9 /* CreditsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53F81D9172520031DAB9 /* CreditsNode.swift */; };
-		BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */; };
-		BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FC1D9176B50031DAB9 /* Touchable.swift */; };
-		BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */; };
-		BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */; };
+		BB459C3C1E9EB1460027CA9B /* ColorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C391E9EB1460027CA9B /* ColorAction.swift */; };
+		BB459C3D1E9EB1460027CA9B /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C3A1E9EB1460027CA9B /* ColorManager.swift */; };
+		BB459C3E1E9EB1460027CA9B /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C3B1E9EB1460027CA9B /* SoundManager.swift */; };
+		BB459C461E9EB16B0027CA9B /* cat_meow_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C3F1E9EB16B0027CA9B /* cat_meow_1.mp3 */; };
+		BB459C471E9EB16B0027CA9B /* cat_meow_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C401E9EB16B0027CA9B /* cat_meow_2.mp3 */; };
+		BB459C481E9EB16B0027CA9B /* cat_meow_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C411E9EB16B0027CA9B /* cat_meow_3.mp3 */; };
+		BB459C491E9EB16B0027CA9B /* cat_meow_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C421E9EB16B0027CA9B /* cat_meow_4.mp3 */; };
+		BB459C4A1E9EB16B0027CA9B /* cat_meow_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB459C431E9EB16B0027CA9B /* cat_meow_5.wav */; };
+		BB459C4B1E9EB16B0027CA9B /* cat_meow_6.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB459C441E9EB16B0027CA9B /* cat_meow_6.wav */; };
+		BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C451E9EB16B0027CA9B /* cat_meow_7.mp3 */; };
+		BB459C501E9EB17F0027CA9B /* ColorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB459C4D1E9EB17F0027CA9B /* ColorPalette.plist */; };
+		BB459C511E9EB17F0027CA9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C4E1E9EB17F0027CA9B /* Constants.swift */; };
+		BB459C541E9EB1E20027CA9B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB459C531E9EB1E20027CA9B /* Info.plist */; };
+		BB459C851E9EB3F20027CA9B /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C641E9EB3F20027CA9B /* BackgroundNode.swift */; };
+		BB459C861E9EB3F20027CA9B /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C651E9EB3F20027CA9B /* GroundNode.swift */; };
+		BB459C871E9EB3F20027CA9B /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C661E9EB3F20027CA9B /* HudNode.swift */; };
+		BB459C881E9EB3F20027CA9B /* LCDCatNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C681E9EB3F20027CA9B /* LCDCatNode.swift */; };
+		BB459C891E9EB3F20027CA9B /* LCDCatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C691E9EB3F20027CA9B /* LCDCatRow.swift */; };
+		BB459C8A1E9EB3F20027CA9B /* LCDFoodRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6A1E9EB3F20027CA9B /* LCDFoodRow.swift */; };
+		BB459C8B1E9EB3F20027CA9B /* LCDHudLives.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6B1E9EB3F20027CA9B /* LCDHudLives.swift */; };
+		BB459C8C1E9EB3F20027CA9B /* LCDHudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6C1E9EB3F20027CA9B /* LCDHudNode.swift */; };
+		BB459C8D1E9EB3F20027CA9B /* LCDNumberNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6D1E9EB3F20027CA9B /* LCDNumberNode.swift */; };
+		BB459C8E1E9EB3F20027CA9B /* LCDProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6E1E9EB3F20027CA9B /* LCDProtocols.swift */; };
+		BB459C8F1E9EB3F20027CA9B /* LCDRainLane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C6F1E9EB3F20027CA9B /* LCDRainLane.swift */; };
+		BB459C901E9EB3F20027CA9B /* LCDScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C701E9EB3F20027CA9B /* LCDScoreNode.swift */; };
+		BB459C911E9EB3F20027CA9B /* LCDScreenNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C711E9EB3F20027CA9B /* LCDScreenNode.swift */; };
+		BB459C921E9EB3F20027CA9B /* LCDTimeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C721E9EB3F20027CA9B /* LCDTimeNode.swift */; };
+		BB459C931E9EB3F20027CA9B /* LCDUmbrellaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C731E9EB3F20027CA9B /* LCDUmbrellaRow.swift */; };
+		BB459C941E9EB3F20027CA9B /* CreditsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C751E9EB3F20027CA9B /* CreditsNode.swift */; };
+		BB459C951E9EB3F20027CA9B /* MenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C761E9EB3F20027CA9B /* MenuNode.swift */; };
+		BB459C961E9EB3F20027CA9B /* PlayerSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C771E9EB3F20027CA9B /* PlayerSelectNode.swift */; };
+		BB459C971E9EB3F20027CA9B /* RainDropBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C781E9EB3F20027CA9B /* RainDropBanner.swift */; };
+		BB459C981E9EB3F20027CA9B /* PingPongBackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C7A1E9EB3F20027CA9B /* PingPongBackgroundNode.swift */; };
+		BB459C991E9EB3F20027CA9B /* PingPongHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C7B1E9EB3F20027CA9B /* PingPongHud.swift */; };
+		BB459C9A1E9EB3F20027CA9B /* AlphaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C7E1E9EB3F20027CA9B /* AlphaButton.swift */; };
+		BB459C9B1E9EB3F20027CA9B /* SKControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C7F1E9EB3F20027CA9B /* SKControl.swift */; };
+		BB459C9C1E9EB3F20027CA9B /* TwoPaneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C801E9EB3F20027CA9B /* TwoPaneButton.swift */; };
+		BB459C9D1E9EB3F20027CA9B /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C811E9EB3F20027CA9B /* CatSprite.swift */; };
+		BB459C9E1E9EB3F20027CA9B /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C821E9EB3F20027CA9B /* FoodSprite.swift */; };
+		BB459C9F1E9EB3F20027CA9B /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C831E9EB3F20027CA9B /* ShadowLabelNode.swift */; };
+		BB459CA01E9EB3F20027CA9B /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */; };
+		BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA11E9EB4070027CA9B /* Paletteable.swift */; };
+		BB459CA41E9EB4070027CA9B /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA21E9EB4070027CA9B /* Touchable.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
-		BB7AC0741DC979CB00998737 /* LCDScreenNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */; };
-		BB7AC0761DC97A1200998737 /* LCDRainLane.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7AC0751DC97A1200998737 /* LCDRainLane.swift */; };
-		BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */; };
 		BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB98D4801DC3A49C00D17C8D /* LCDScene.sks */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
 		BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */; };
 		BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4AF1D74A62C00853E63 /* Main.storyboard */; };
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
-		BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB0457E1D77254000DF378C /* CatSprite.swift */; };
-		BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB045801D773DE600DF378C /* FoodSprite.swift */; };
 		BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB318381DC78F6700644DB6 /* LCDScene.swift */; };
-		BBB3F9E01E8C986A00A0F4FB /* LCDProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB3F9DF1E8C986A00A0F4FB /* LCDProtocols.swift */; };
-		BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB5E64C1D760905005DE3EC /* Constants.swift */; };
-		BBB6AE471E8CB32400C0CDD9 /* LCDCatNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB6AE461E8CB32400C0CDD9 /* LCDCatNode.swift */; };
-		BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */; };
 		BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9F6E71D8D941A00385223 /* PingPongScene.swift */; };
 		BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */; };
-		BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8D91D78D97E00002F71 /* SoundManager.swift */; };
 		BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */; };
 		BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */; };
 		BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */; };
 		BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */; };
 		BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */; };
-		BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0A8E71D79D6B400002F71 /* HudNode.swift */; };
-		BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */; };
-		BBE8FF511E8C592000904331 /* LCDNumberNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE8FF501E8C592000904331 /* LCDNumberNode.swift */; };
-		BBE8FF531E8C60DA00904331 /* LCDTimeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE8FF521E8C60DA00904331 /* LCDTimeNode.swift */; };
-		BBE8FF551E8C826600904331 /* LCDScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE8FF541E8C826600904331 /* LCDScoreNode.swift */; };
-		BBFE08621DC98ED300063F83 /* LCDHudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFE08611DC98ED300063F83 /* LCDHudNode.swift */; };
-		BBFE08641DC990D900063F83 /* LCDUmbrellaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BB0B1C871D8C9BA900C09901 /* LogoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogoScene.swift; path = Scenes/LogoScene.swift; sourceTree = "<group>"; };
-		BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongBackgroundNode.swift; path = Sprites/PingPongBackgroundNode.swift; sourceTree = "<group>"; };
-		BB0D073A1DD1800B0025428D /* LCDHudLives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDHudLives.swift; path = Sprites/LCDGame/LCDHudLives.swift; sourceTree = "<group>"; };
-		BB0D073C1DD181540025428D /* LCDFoodRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDFoodRow.swift; path = Sprites/LCDGame/LCDFoodRow.swift; sourceTree = "<group>"; };
-		BB0D073E1DD183430025428D /* LCDCatRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDCatRow.swift; path = Sprites/LCDGame/LCDCatRow.swift; sourceTree = "<group>"; };
-		BB1C70D51D84F615001E540D /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundNode.swift; path = Sprites/BackgroundNode.swift; sourceTree = "<group>"; };
-		BB1C70D71D84FAEA001E540D /* ColorAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAction.swift; sourceTree = "<group>"; };
-		BB1C70D91D86EC9F001E540D /* GroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroundNode.swift; path = Sprites/GroundNode.swift; sourceTree = "<group>"; };
-		BB1C70DB1D870508001E540D /* Paletteable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paletteable.swift; path = Sprites/Paletteable.swift; sourceTree = "<group>"; };
-		BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwoPaneButton.swift; path = Sprites/Buttons/TwoPaneButton.swift; sourceTree = "<group>"; };
-		BB281B7B1D789A3F00229A97 /* cat_meow_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_1.mp3; path = SFX/cat_meow_1.mp3; sourceTree = "<group>"; };
-		BB281B7C1D789A3F00229A97 /* cat_meow_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_2.mp3; path = SFX/cat_meow_2.mp3; sourceTree = "<group>"; };
-		BB281B7D1D789A3F00229A97 /* cat_meow_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_3.mp3; path = SFX/cat_meow_3.mp3; sourceTree = "<group>"; };
-		BB281B7E1D789A3F00229A97 /* cat_meow_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_4.mp3; path = SFX/cat_meow_4.mp3; sourceTree = "<group>"; };
-		BB281B831D789D0600229A97 /* cat_meow_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_5.wav; path = SFX/cat_meow_5.wav; sourceTree = "<group>"; };
-		BB281B841D789D0600229A97 /* cat_meow_6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_6.wav; path = SFX/cat_meow_6.wav; sourceTree = "<group>"; };
-		BB281B871D78ABAC00229A97 /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_7.mp3; path = SFX/cat_meow_7.mp3; sourceTree = "<group>"; };
-		BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UmbrellaSprite.swift; path = Sprites/UmbrellaSprite.swift; sourceTree = "<group>"; };
-		BB3B1D681D847E4E00B643DD /* ColorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ColorPalette.plist; sourceTree = "<group>"; };
-		BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		BB430ABB1E98654200281D04 /* SKControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKControl.swift; path = Sprites/Buttons/SKControl.swift; sourceTree = "<group>"; };
-		BB4E53F81D9172520031DAB9 /* CreditsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsNode.swift; path = Sprites/CreditsNode.swift; sourceTree = "<group>"; };
-		BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuNode.swift; path = Sprites/MenuNode.swift; sourceTree = "<group>"; };
-		BB4E53FC1D9176B50031DAB9 /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Sprites/Touchable.swift; sourceTree = "<group>"; };
-		BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainDropBanner.swift; path = Sprites/RainDropBanner.swift; sourceTree = "<group>"; };
-		BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerSelectNode.swift; path = Scenes/PlayerSelectNode.swift; sourceTree = "<group>"; };
+		BB459C391E9EB1460027CA9B /* ColorAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorAction.swift; path = Utility/ColorAction.swift; sourceTree = "<group>"; };
+		BB459C3A1E9EB1460027CA9B /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorManager.swift; path = Utility/ColorManager.swift; sourceTree = "<group>"; };
+		BB459C3B1E9EB1460027CA9B /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundManager.swift; path = Utility/SoundManager.swift; sourceTree = "<group>"; };
+		BB459C3F1E9EB16B0027CA9B /* cat_meow_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_1.mp3; path = Support/SFX/cat_meow_1.mp3; sourceTree = "<group>"; };
+		BB459C401E9EB16B0027CA9B /* cat_meow_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_2.mp3; path = Support/SFX/cat_meow_2.mp3; sourceTree = "<group>"; };
+		BB459C411E9EB16B0027CA9B /* cat_meow_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_3.mp3; path = Support/SFX/cat_meow_3.mp3; sourceTree = "<group>"; };
+		BB459C421E9EB16B0027CA9B /* cat_meow_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_4.mp3; path = Support/SFX/cat_meow_4.mp3; sourceTree = "<group>"; };
+		BB459C431E9EB16B0027CA9B /* cat_meow_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_5.wav; path = Support/SFX/cat_meow_5.wav; sourceTree = "<group>"; };
+		BB459C441E9EB16B0027CA9B /* cat_meow_6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_6.wav; path = Support/SFX/cat_meow_6.wav; sourceTree = "<group>"; };
+		BB459C451E9EB16B0027CA9B /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_7.mp3; path = Support/SFX/cat_meow_7.mp3; sourceTree = "<group>"; };
+		BB459C4D1E9EB17F0027CA9B /* ColorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ColorPalette.plist; path = Support/ColorPalette.plist; sourceTree = "<group>"; };
+		BB459C4E1E9EB17F0027CA9B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Support/Constants.swift; sourceTree = "<group>"; };
+		BB459C531E9EB1E20027CA9B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB459C641E9EB3F20027CA9B /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
+		BB459C651E9EB3F20027CA9B /* GroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroundNode.swift; sourceTree = "<group>"; };
+		BB459C661E9EB3F20027CA9B /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudNode.swift; sourceTree = "<group>"; };
+		BB459C681E9EB3F20027CA9B /* LCDCatNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDCatNode.swift; sourceTree = "<group>"; };
+		BB459C691E9EB3F20027CA9B /* LCDCatRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDCatRow.swift; sourceTree = "<group>"; };
+		BB459C6A1E9EB3F20027CA9B /* LCDFoodRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDFoodRow.swift; sourceTree = "<group>"; };
+		BB459C6B1E9EB3F20027CA9B /* LCDHudLives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDHudLives.swift; sourceTree = "<group>"; };
+		BB459C6C1E9EB3F20027CA9B /* LCDHudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDHudNode.swift; sourceTree = "<group>"; };
+		BB459C6D1E9EB3F20027CA9B /* LCDNumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDNumberNode.swift; sourceTree = "<group>"; };
+		BB459C6E1E9EB3F20027CA9B /* LCDProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDProtocols.swift; sourceTree = "<group>"; };
+		BB459C6F1E9EB3F20027CA9B /* LCDRainLane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDRainLane.swift; sourceTree = "<group>"; };
+		BB459C701E9EB3F20027CA9B /* LCDScoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDScoreNode.swift; sourceTree = "<group>"; };
+		BB459C711E9EB3F20027CA9B /* LCDScreenNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDScreenNode.swift; sourceTree = "<group>"; };
+		BB459C721E9EB3F20027CA9B /* LCDTimeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDTimeNode.swift; sourceTree = "<group>"; };
+		BB459C731E9EB3F20027CA9B /* LCDUmbrellaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LCDUmbrellaRow.swift; sourceTree = "<group>"; };
+		BB459C751E9EB3F20027CA9B /* CreditsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsNode.swift; sourceTree = "<group>"; };
+		BB459C761E9EB3F20027CA9B /* MenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuNode.swift; sourceTree = "<group>"; };
+		BB459C771E9EB3F20027CA9B /* PlayerSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSelectNode.swift; sourceTree = "<group>"; };
+		BB459C781E9EB3F20027CA9B /* RainDropBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainDropBanner.swift; sourceTree = "<group>"; };
+		BB459C7A1E9EB3F20027CA9B /* PingPongBackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingPongBackgroundNode.swift; sourceTree = "<group>"; };
+		BB459C7B1E9EB3F20027CA9B /* PingPongHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingPongHud.swift; sourceTree = "<group>"; };
+		BB459C7E1E9EB3F20027CA9B /* AlphaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaButton.swift; sourceTree = "<group>"; };
+		BB459C7F1E9EB3F20027CA9B /* SKControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKControl.swift; sourceTree = "<group>"; };
+		BB459C801E9EB3F20027CA9B /* TwoPaneButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPaneButton.swift; sourceTree = "<group>"; };
+		BB459C811E9EB3F20027CA9B /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatSprite.swift; sourceTree = "<group>"; };
+		BB459C821E9EB3F20027CA9B /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSprite.swift; sourceTree = "<group>"; };
+		BB459C831E9EB3F20027CA9B /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowLabelNode.swift; sourceTree = "<group>"; };
+		BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellaSprite.swift; sourceTree = "<group>"; };
+		BB459CA11E9EB4070027CA9B /* Paletteable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paletteable.swift; path = Protocols/Paletteable.swift; sourceTree = "<group>"; };
+		BB459CA21E9EB4070027CA9B /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Protocols/Touchable.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
-		BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScreenNode.swift; path = Sprites/LCDGame/LCDScreenNode.swift; sourceTree = "<group>"; };
-		BB7AC0751DC97A1200998737 /* LCDRainLane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDRainLane.swift; path = Sprites/LCDGame/LCDRainLane.swift; sourceTree = "<group>"; };
-		BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShadowLabelNode.swift; path = Sprites/ShadowLabelNode.swift; sourceTree = "<group>"; };
 		BB98D4801DC3A49C00D17C8D /* LCDScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScene.sks; path = Scenes/LCDScene.sks; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,29 +121,14 @@
 		BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ViewControllers/GameViewController.swift; sourceTree = "<group>"; };
 		BBA2E4B01D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBA2E4B51D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BBA2E4B71D74A62C00853E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBB0457E1D77254000DF378C /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatSprite.swift; path = Sprites/CatSprite.swift; sourceTree = "<group>"; };
-		BBB045801D773DE600DF378C /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoodSprite.swift; path = Sprites/FoodSprite.swift; sourceTree = "<group>"; };
 		BBB318381DC78F6700644DB6 /* LCDScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScene.swift; path = Scenes/LCDScene.swift; sourceTree = "<group>"; };
-		BBB3F9DF1E8C986A00A0F4FB /* LCDProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDProtocols.swift; path = Sprites/LCDGame/LCDProtocols.swift; sourceTree = "<group>"; };
-		BBB5E64C1D760905005DE3EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BBB6AE461E8CB32400C0CDD9 /* LCDCatNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDCatNode.swift; path = Sprites/LCDGame/LCDCatNode.swift; sourceTree = "<group>"; };
-		BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlphaButton.swift; path = Sprites/Buttons/AlphaButton.swift; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongScene.swift; path = Scenes/PingPongScene.swift; sourceTree = "<group>"; };
 		BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BBD0A8D91D78D97E00002F71 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-clearday.mp3"; path = "Music/bensound-clearday.mp3"; sourceTree = "<group>"; };
 		BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzcomedy.mp3"; path = "Music/bensound-jazzcomedy.mp3"; sourceTree = "<group>"; };
 		BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzyfrenchy.mp3"; path = "Music/bensound-jazzyfrenchy.mp3"; sourceTree = "<group>"; };
 		BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-littleidea.mp3"; path = "Music/bensound-littleidea.mp3"; sourceTree = "<group>"; };
 		BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "Fonts/Pixel Digivolve.otf"; sourceTree = "<group>"; };
-		BBD0A8E71D79D6B400002F71 /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HudNode.swift; path = Sprites/HudNode.swift; sourceTree = "<group>"; };
-		BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongHud.swift; path = Sprites/PingPongHud.swift; sourceTree = "<group>"; };
-		BBE8FF501E8C592000904331 /* LCDNumberNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDNumberNode.swift; path = Sprites/LCDGame/LCDNumberNode.swift; sourceTree = "<group>"; };
-		BBE8FF521E8C60DA00904331 /* LCDTimeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDTimeNode.swift; path = Sprites/LCDGame/LCDTimeNode.swift; sourceTree = "<group>"; };
-		BBE8FF541E8C826600904331 /* LCDScoreNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScoreNode.swift; path = Sprites/LCDGame/LCDScoreNode.swift; sourceTree = "<group>"; };
-		BBFE08611DC98ED300063F83 /* LCDHudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDHudNode.swift; path = Sprites/LCDGame/LCDHudNode.swift; sourceTree = "<group>"; };
-		BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDUmbrellaRow.swift; path = Sprites/LCDGame/LCDUmbrellaRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,13 +145,13 @@
 		BB281B7A1D7899AB00229A97 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
-				BB281B7B1D789A3F00229A97 /* cat_meow_1.mp3 */,
-				BB281B7C1D789A3F00229A97 /* cat_meow_2.mp3 */,
-				BB281B7D1D789A3F00229A97 /* cat_meow_3.mp3 */,
-				BB281B7E1D789A3F00229A97 /* cat_meow_4.mp3 */,
-				BB281B831D789D0600229A97 /* cat_meow_5.wav */,
-				BB281B841D789D0600229A97 /* cat_meow_6.wav */,
-				BB281B871D78ABAC00229A97 /* cat_meow_7.mp3 */,
+				BB459C3F1E9EB16B0027CA9B /* cat_meow_1.mp3 */,
+				BB459C401E9EB16B0027CA9B /* cat_meow_2.mp3 */,
+				BB459C411E9EB16B0027CA9B /* cat_meow_3.mp3 */,
+				BB459C421E9EB16B0027CA9B /* cat_meow_4.mp3 */,
+				BB459C431E9EB16B0027CA9B /* cat_meow_5.wav */,
+				BB459C441E9EB16B0027CA9B /* cat_meow_6.wav */,
+				BB459C451E9EB16B0027CA9B /* cat_meow_7.mp3 */,
 			);
 			name = SFX;
 			sourceTree = "<group>";
@@ -159,11 +160,11 @@
 			isa = PBXGroup;
 			children = (
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
-				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
-				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
-				BBC9F6E71D8D941A00385223 /* PingPongScene.swift */,
-				BBB318381DC78F6700644DB6 /* LCDScene.swift */,
 				BB98D4801DC3A49C00D17C8D /* LCDScene.sks */,
+				BBB318381DC78F6700644DB6 /* LCDScene.swift */,
+				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
+				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
+				BBC9F6E71D8D941A00385223 /* PingPongScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -179,15 +180,16 @@
 		BB36AD261D75D70000FB54D0 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */,
+				BB459C531E9EB1E20027CA9B /* Info.plist */,
+				BB459C4D1E9EB17F0027CA9B /* ColorPalette.plist */,
+				BB459C4E1E9EB17F0027CA9B /* Constants.swift */,
 				BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */,
 				BBD0A8E41D79D4EB00002F71 /* Fonts */,
+				BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */,
+				BBA2E4AF1D74A62C00853E63 /* Main.storyboard */,
 				BBD0A8DB1D78F0F100002F71 /* Music */,
 				BB281B7A1D7899AB00229A97 /* SFX */,
-				BBA2E4AF1D74A62C00853E63 /* Main.storyboard */,
-				BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */,
-				BBA2E4B71D74A62C00853E63 /* Info.plist */,
-				BBB5E64C1D760905005DE3EC /* Constants.swift */,
-				BB3B1D681D847E4E00B643DD /* ColorPalette.plist */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -195,41 +197,108 @@
 		BB36AD271D75D86B00FB54D0 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
-				BBB8459C1D9DBA1D00D269C0 /* Buttons */,
-				BB4E54011D918EF50031DAB9 /* MenuNodeGroups */,
-				BB1C70D51D84F615001E540D /* BackgroundNode.swift */,
-				BBB0457E1D77254000DF378C /* CatSprite.swift */,
-				BB1C70D71D84FAEA001E540D /* ColorAction.swift */,
-				BBB045801D773DE600DF378C /* FoodSprite.swift */,
-				BB1C70D91D86EC9F001E540D /* GroundNode.swift */,
-				BBD0A8E71D79D6B400002F71 /* HudNode.swift */,
-				BB0CE14C1D9088B200D4E664 /* PingPongBackgroundNode.swift */,
-				BBDB03D31D90602000D3F8D0 /* PingPongHud.swift */,
-				BB4E53FE1D91839F0031DAB9 /* RainDropBanner.swift */,
-				BB81CBA51D90F15B009EAA22 /* ShadowLabelNode.swift */,
-				BB36AD281D75D92400FB54D0 /* UmbrellaSprite.swift */,
-				BBFE08601DC98EB400063F83 /* LCDGame */,
+				BB459C631E9EB3F20027CA9B /* ClassicGame */,
+				BB459C671E9EB3F20027CA9B /* LCDGame */,
+				BB459C741E9EB3F20027CA9B /* Menu */,
+				BB459C791E9EB3F20027CA9B /* PingPongGame */,
+				BB459C7C1E9EB3F20027CA9B /* Shared */,
 			);
 			name = Sprites;
+			sourceTree = "<group>";
+		};
+		BB459C361E9EAFBE0027CA9B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C391E9EB1460027CA9B /* ColorAction.swift */,
+				BB459C3A1E9EB1460027CA9B /* ColorManager.swift */,
+				BB459C3B1E9EB1460027CA9B /* SoundManager.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		BB459C631E9EB3F20027CA9B /* ClassicGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C641E9EB3F20027CA9B /* BackgroundNode.swift */,
+				BB459C651E9EB3F20027CA9B /* GroundNode.swift */,
+				BB459C661E9EB3F20027CA9B /* HudNode.swift */,
+			);
+			name = ClassicGame;
+			path = Nodes/ClassicGame;
+			sourceTree = "<group>";
+		};
+		BB459C671E9EB3F20027CA9B /* LCDGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C681E9EB3F20027CA9B /* LCDCatNode.swift */,
+				BB459C691E9EB3F20027CA9B /* LCDCatRow.swift */,
+				BB459C6A1E9EB3F20027CA9B /* LCDFoodRow.swift */,
+				BB459C6B1E9EB3F20027CA9B /* LCDHudLives.swift */,
+				BB459C6C1E9EB3F20027CA9B /* LCDHudNode.swift */,
+				BB459C6D1E9EB3F20027CA9B /* LCDNumberNode.swift */,
+				BB459C6E1E9EB3F20027CA9B /* LCDProtocols.swift */,
+				BB459C6F1E9EB3F20027CA9B /* LCDRainLane.swift */,
+				BB459C701E9EB3F20027CA9B /* LCDScoreNode.swift */,
+				BB459C711E9EB3F20027CA9B /* LCDScreenNode.swift */,
+				BB459C721E9EB3F20027CA9B /* LCDTimeNode.swift */,
+				BB459C731E9EB3F20027CA9B /* LCDUmbrellaRow.swift */,
+			);
+			name = LCDGame;
+			path = Nodes/LCDGame;
+			sourceTree = "<group>";
+		};
+		BB459C741E9EB3F20027CA9B /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C751E9EB3F20027CA9B /* CreditsNode.swift */,
+				BB459C761E9EB3F20027CA9B /* MenuNode.swift */,
+				BB459C771E9EB3F20027CA9B /* PlayerSelectNode.swift */,
+				BB459C781E9EB3F20027CA9B /* RainDropBanner.swift */,
+			);
+			name = Menu;
+			path = Nodes/Menu;
+			sourceTree = "<group>";
+		};
+		BB459C791E9EB3F20027CA9B /* PingPongGame */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C7A1E9EB3F20027CA9B /* PingPongBackgroundNode.swift */,
+				BB459C7B1E9EB3F20027CA9B /* PingPongHud.swift */,
+			);
+			name = PingPongGame;
+			path = Nodes/PingPongGame;
+			sourceTree = "<group>";
+		};
+		BB459C7C1E9EB3F20027CA9B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C7D1E9EB3F20027CA9B /* Buttons */,
+				BB459C811E9EB3F20027CA9B /* CatSprite.swift */,
+				BB459C821E9EB3F20027CA9B /* FoodSprite.swift */,
+				BB459C831E9EB3F20027CA9B /* ShadowLabelNode.swift */,
+				BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */,
+			);
+			name = Shared;
+			path = Nodes/Shared;
+			sourceTree = "<group>";
+		};
+		BB459C7D1E9EB3F20027CA9B /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				BB459C7E1E9EB3F20027CA9B /* AlphaButton.swift */,
+				BB459C7F1E9EB3F20027CA9B /* SKControl.swift */,
+				BB459C801E9EB3F20027CA9B /* TwoPaneButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		BB4E54001D918EDD0031DAB9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				BB1C70DB1D870508001E540D /* Paletteable.swift */,
-				BB4E53FC1D9176B50031DAB9 /* Touchable.swift */,
+				BB459CA11E9EB4070027CA9B /* Paletteable.swift */,
+				BB459CA21E9EB4070027CA9B /* Touchable.swift */,
 			);
 			name = Protocols;
-			sourceTree = "<group>";
-		};
-		BB4E54011D918EF50031DAB9 /* MenuNodeGroups */ = {
-			isa = PBXGroup;
-			children = (
-				BB4E53F81D9172520031DAB9 /* CreditsNode.swift */,
-				BB4E53FA1D91752B0031DAB9 /* MenuNode.swift */,
-				BB4E54021D919D110031DAB9 /* PlayerSelectNode.swift */,
-			);
-			name = MenuNodeGroups;
 			sourceTree = "<group>";
 		};
 		BBA2E4991D74A62C00853E63 = {
@@ -251,26 +320,14 @@
 		BBA2E4A41D74A62C00853E63 /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
+				BB459C361E9EAFBE0027CA9B /* Utility */,
 				BB4E54001D918EDD0031DAB9 /* Protocols */,
-				BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */,
 				BB36AD271D75D86B00FB54D0 /* Sprites */,
 				BB36AD241D75D6DE00FB54D0 /* Scenes */,
 				BB36AD251D75D6E200FB54D0 /* ViewControllers */,
 				BB36AD261D75D70000FB54D0 /* Support */,
-				BB3B1D6A1D84BF2300B643DD /* ColorManager.swift */,
-				BBD0A8D91D78D97E00002F71 /* SoundManager.swift */,
 			);
 			path = RainCat;
-			sourceTree = "<group>";
-		};
-		BBB8459C1D9DBA1D00D269C0 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				BBB8459D1D9DBA3800D269C0 /* AlphaButton.swift */,
-				BB2422D31DCA33FD0039D692 /* TwoPaneButton.swift */,
-				BB430ABB1E98654200281D04 /* SKControl.swift */,
-			);
-			name = Buttons;
 			sourceTree = "<group>";
 		};
 		BBD0A8DB1D78F0F100002F71 /* Music */ = {
@@ -290,25 +347,6 @@
 				BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */,
 			);
 			name = Fonts;
-			sourceTree = "<group>";
-		};
-		BBFE08601DC98EB400063F83 /* LCDGame */ = {
-			isa = PBXGroup;
-			children = (
-				BB7AC0751DC97A1200998737 /* LCDRainLane.swift */,
-				BB7AC0731DC979CB00998737 /* LCDScreenNode.swift */,
-				BBFE08611DC98ED300063F83 /* LCDHudNode.swift */,
-				BBE8FF521E8C60DA00904331 /* LCDTimeNode.swift */,
-				BBE8FF541E8C826600904331 /* LCDScoreNode.swift */,
-				BB0D073A1DD1800B0025428D /* LCDHudLives.swift */,
-				BBFE08631DC990D900063F83 /* LCDUmbrellaRow.swift */,
-				BB0D073C1DD181540025428D /* LCDFoodRow.swift */,
-				BB0D073E1DD183430025428D /* LCDCatRow.swift */,
-				BBE8FF501E8C592000904331 /* LCDNumberNode.swift */,
-				BBB3F9DF1E8C986A00A0F4FB /* LCDProtocols.swift */,
-				BBB6AE461E8CB32400C0CDD9 /* LCDCatNode.swift */,
-			);
-			name = LCDGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,22 +410,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */,
+				BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */,
+				BB459C541E9EB1E20027CA9B /* Info.plist in Resources */,
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
-				BB281B821D789A3F00229A97 /* cat_meow_4.mp3 in Resources */,
 				BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */,
 				BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
-				BB281B801D789A3F00229A97 /* cat_meow_2.mp3 in Resources */,
-				BB281B811D789A3F00229A97 /* cat_meow_3.mp3 in Resources */,
-				BB281B851D789D0600229A97 /* cat_meow_5.wav in Resources */,
 				BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */,
+				BB459C491E9EB16B0027CA9B /* cat_meow_4.mp3 in Resources */,
+				BB459C4B1E9EB16B0027CA9B /* cat_meow_6.wav in Resources */,
 				BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */,
-				BB281B891D78ABAC00229A97 /* cat_meow_7.mp3 in Resources */,
-				BB3B1D691D847E4E00B643DD /* ColorPalette.plist in Resources */,
+				BB459C461E9EB16B0027CA9B /* cat_meow_1.mp3 in Resources */,
+				BB459C501E9EB17F0027CA9B /* ColorPalette.plist in Resources */,
+				BB459C4A1E9EB16B0027CA9B /* cat_meow_5.wav in Resources */,
+				BB459C471E9EB16B0027CA9B /* cat_meow_2.mp3 in Resources */,
+				BB459C481E9EB16B0027CA9B /* cat_meow_3.mp3 in Resources */,
 				BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */,
-				BB281B861D789D0600229A97 /* cat_meow_6.wav in Resources */,
 				BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */,
-				BB281B7F1D789A3F00229A97 /* cat_meow_1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,47 +437,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBB5E64D1D760905005DE3EC /* Constants.swift in Sources */,
-				BBD0A8DA1D78D97E00002F71 /* SoundManager.swift in Sources */,
-				BB4E53F91D9172520031DAB9 /* CreditsNode.swift in Sources */,
-				BB1C70DA1D86EC9F001E540D /* GroundNode.swift in Sources */,
-				BBB6AE471E8CB32400C0CDD9 /* LCDCatNode.swift in Sources */,
-				BB0CE14D1D9088B200D4E664 /* PingPongBackgroundNode.swift in Sources */,
+				BB459C8E1E9EB3F20027CA9B /* LCDProtocols.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
-				BB4E53FB1D91752B0031DAB9 /* MenuNode.swift in Sources */,
-				BB1C70D81D84FAEA001E540D /* ColorAction.swift in Sources */,
-				BB2422D41DCA33FD0039D692 /* TwoPaneButton.swift in Sources */,
-				BBFE08641DC990D900063F83 /* LCDUmbrellaRow.swift in Sources */,
-				BB0D073B1DD1800B0025428D /* LCDHudLives.swift in Sources */,
-				BBB3F9E01E8C986A00A0F4FB /* LCDProtocols.swift in Sources */,
-				BBB8459E1D9DBA3800D269C0 /* AlphaButton.swift in Sources */,
-				BB0D073D1DD181540025428D /* LCDFoodRow.swift in Sources */,
+				BB459C3C1E9EB1460027CA9B /* ColorAction.swift in Sources */,
+				BB459C981E9EB3F20027CA9B /* PingPongBackgroundNode.swift in Sources */,
+				BB459C9F1E9EB3F20027CA9B /* ShadowLabelNode.swift in Sources */,
+				BB459C8A1E9EB3F20027CA9B /* LCDFoodRow.swift in Sources */,
+				BB459CA01E9EB3F20027CA9B /* UmbrellaSprite.swift in Sources */,
+				BB459C971E9EB3F20027CA9B /* RainDropBanner.swift in Sources */,
+				BB459C951E9EB3F20027CA9B /* MenuNode.swift in Sources */,
+				BB459C941E9EB3F20027CA9B /* CreditsNode.swift in Sources */,
+				BB459C921E9EB3F20027CA9B /* LCDTimeNode.swift in Sources */,
+				BB459C881E9EB3F20027CA9B /* LCDCatNode.swift in Sources */,
+				BB459C901E9EB3F20027CA9B /* LCDScoreNode.swift in Sources */,
+				BB459C9A1E9EB3F20027CA9B /* AlphaButton.swift in Sources */,
+				BB459C8C1E9EB3F20027CA9B /* LCDHudNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
-				BB3B1D6B1D84BF2300B643DD /* ColorManager.swift in Sources */,
+				BB459C851E9EB3F20027CA9B /* BackgroundNode.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */,
-				BB4E54031D919D110031DAB9 /* PlayerSelectNode.swift in Sources */,
-				BBFE08621DC98ED300063F83 /* LCDHudNode.swift in Sources */,
-				BB0D073F1DD183430025428D /* LCDCatRow.swift in Sources */,
-				BB81CBA61D90F15B009EAA22 /* ShadowLabelNode.swift in Sources */,
-				BBD0A8E81D79D6B400002F71 /* HudNode.swift in Sources */,
-				BB1C70DC1D870508001E540D /* Paletteable.swift in Sources */,
-				BB7AC0761DC97A1200998737 /* LCDRainLane.swift in Sources */,
-				BB7AC0741DC979CB00998737 /* LCDScreenNode.swift in Sources */,
-				BBE8FF511E8C592000904331 /* LCDNumberNode.swift in Sources */,
+				BB459C8B1E9EB3F20027CA9B /* LCDHudLives.swift in Sources */,
+				BB459C961E9EB3F20027CA9B /* PlayerSelectNode.swift in Sources */,
+				BB459C991E9EB3F20027CA9B /* PingPongHud.swift in Sources */,
+				BB459C3E1E9EB1460027CA9B /* SoundManager.swift in Sources */,
+				BB459C511E9EB17F0027CA9B /* Constants.swift in Sources */,
+				BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */,
+				BB459C9C1E9EB3F20027CA9B /* TwoPaneButton.swift in Sources */,
+				BB459C8D1E9EB3F20027CA9B /* LCDNumberNode.swift in Sources */,
+				BB459C911E9EB3F20027CA9B /* LCDScreenNode.swift in Sources */,
+				BB459C9E1E9EB3F20027CA9B /* FoodSprite.swift in Sources */,
+				BB459C861E9EB3F20027CA9B /* GroundNode.swift in Sources */,
 				BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */,
-				BBB045811D773DE600DF378C /* FoodSprite.swift in Sources */,
-				BB4E53FD1D9176B50031DAB9 /* Touchable.swift in Sources */,
-				BBB0457F1D77254000DF378C /* CatSprite.swift in Sources */,
-				BB4E53FF1D91839F0031DAB9 /* RainDropBanner.swift in Sources */,
+				BB459CA41E9EB4070027CA9B /* Touchable.swift in Sources */,
+				BB459C891E9EB3F20027CA9B /* LCDCatRow.swift in Sources */,
+				BB459C8F1E9EB3F20027CA9B /* LCDRainLane.swift in Sources */,
+				BB459C9B1E9EB3F20027CA9B /* SKControl.swift in Sources */,
+				BB459C931E9EB3F20027CA9B /* LCDUmbrellaRow.swift in Sources */,
 				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,
-				BBE8FF531E8C60DA00904331 /* LCDTimeNode.swift in Sources */,
-				BB430ABC1E98654200281D04 /* SKControl.swift in Sources */,
-				BBE8FF551E8C826600904331 /* LCDScoreNode.swift in Sources */,
-				BB1C70D61D84F615001E540D /* BackgroundNode.swift in Sources */,
-				BBDB03D41D90602000D3F8D0 /* PingPongHud.swift in Sources */,
-				BB36AD291D75D92400FB54D0 /* UmbrellaSprite.swift in Sources */,
+				BB459C9D1E9EB3F20027CA9B /* CatSprite.swift in Sources */,
+				BB459C3D1E9EB1460027CA9B /* ColorManager.swift in Sources */,
 				BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */,
 				BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */,
+				BB459C871E9EB3F20027CA9B /* HudNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
