@@ -66,7 +66,7 @@ class SKAControlSprite : SKSpriteNode {
    Current State of the button
    - Note: ReadOnly
    */
-  fileprivate(set) var controlState:SKAControlState = .Normal {
+  private(set) var controlState:SKAControlState = .Normal {
     didSet {
       if oldValue != controlState {
         updateControl()

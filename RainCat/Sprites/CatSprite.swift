@@ -29,16 +29,6 @@ public class CatSprite : SKSpriteNode {
     SKTexture(imageNamed: "cat_two")
   ]
 
-  private let meowSFX = [
-    "cat_meow_1.mp3",
-    "cat_meow_2.mp3",
-    "cat_meow_3.mp3",
-    "cat_meow_4.mp3",
-    "cat_meow_5.wav",
-    "cat_meow_6.wav",
-    "cat_meow_7.mp3"
-  ]
-
 public static func newInstance() -> CatSprite {
     let catSprite = CatSprite(imageNamed: "cat_two")
 
@@ -111,17 +101,8 @@ public static func newInstance() -> CatSprite {
       return
     }
 
-    meow()
-  }
+    currentRainHits = 0
 
-  public func meow() {
-    if !SoundManager.sharedInstance.isMuted && action(forKey: "action_sound_effect") == nil {
-      currentRainHits = 0
-
-      let selectedSFX = Int(arc4random_uniform(UInt32(meowSFX.count)))
-
-      run(SKAction.playSoundFileNamed(meowSFX[selectedSFX], waitForCompletion: true),
-          withKey: "action_sound_effect")
-    }
+    SoundManager.sharedInstance.meow(node: self)
   }
 }

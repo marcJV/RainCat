@@ -136,11 +136,8 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         touchableNode.touchBegan(touch: touch)
       }
 
-      soundButton.touchBegan(touch: touch)
-      creditsButton.touchBegan(touch: touch)
-
       if catSprite.contains(touch.location(in: self)) {
-        catSprite.meow()
+        SoundManager.sharedInstance.meow(node: catSprite)
 
         switch catSprite.xScale {
         case 1:
@@ -164,10 +161,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
         touchableNode.touchMoved(touch: touch)
       }
 
-      soundButton.touchMoved(touch: touch)
-      creditsButton.touchMoved(touch: touch)
-
-
       if selectedButton == soundButton {
         handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
       }else if selectedButton == creditsButton {
@@ -181,18 +174,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
       if let touchableNode = currentNode as? Touchable {
         touchableNode.touchEnded(touch: touch)
       }
-
-      soundButton.touchEnded(touch: touch)
-      creditsButton.touchEnded(touch: touch)
-    }
-
-    selectedButton = nil
-  }
-
-  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let touch = touches.first {
-      soundButton.touchCancelled(touch: touch)
-      creditsButton.touchCancelled(touch: touch)
     }
   }
 
@@ -278,7 +259,6 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
           scene.scaleMode = self.scaleMode
 
           self.view?.presentScene(scene, transition: transition)
-
         }
         
         self.clearButtonActions()

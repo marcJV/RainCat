@@ -8,14 +8,12 @@
 
 import SpriteKit
 
-public class AlphaButton : SKNode, Touchable {
+class AlphaButton : SKAControlSprite {
 
   public var baseNode : SKNode
   private var margin : CGFloat
   private var baseNodeSize : CGSize
   private var modifiedFrame : CGRect
-
-  private(set) var size : CGSize
 
   private(set) var isHovering = false
 
@@ -28,53 +26,32 @@ public class AlphaButton : SKNode, Touchable {
     self.modifiedFrame = CGRect(origin: CGPoint(x: -margin, y: -margin),
                                 size: CGSize(width: size.width + margin * 2, height: size.height + margin * 2))
 
-    self.size = CGSize(width: baseNodeSize.width + margin, height: baseNodeSize.height + margin)
-
-    super.init()
+    super.init(texture: nil, color: SKColor.clear,
+               size: CGSize(width: baseNodeSize.width + margin, height: baseNodeSize.height + margin))
 
     baseNode.position = CGPoint(x: modifiedFrame.midX, y: modifiedFrame.midY)
+
+
+    addTarget(self, selector: #selector(runClickAction(_:)), forControlEvents: .TouchUpInside)
+
     addChild(baseNode)
+  }
+
+  override func updateControl() {
+    if controlState.contains(.Highlighted) {
+      baseNode.run(SKAction.fadeAlpha(to: 0.5, duration: 0.15))
+    } else if controlState.contains(.Normal) {
+      baseNode.run(SKAction.fadeAlpha(to: 1.0, duration: 0.15))
+    }
   }
 
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  // Touchable protocol
-
-  public func touchBegan(touch: UITouch) {
-    let nodeLocation = touch.location(in: self)
-
-    if modifiedFrame.contains(nodeLocation) {
-      setHovering(isHovering: true)
-    }
-  }
-
-  public func touchMoved(touch: UITouch) {
-    let nodeLocation = touch.location(in: self)
-
-    setHovering(isHovering: modifiedFrame.contains(nodeLocation))
-  }
-
-  public func touchEnded(touch: UITouch) {
-    setHovering(isHovering: false)
-
-    if modifiedFrame.contains(touch.location(in: self)) && buttonClickAction != nil {
-      buttonClickAction!()
-    }
-  }
-
-  public func touchCancelled(touch: UITouch) {
-    setHovering(isHovering: false)
-  }
-
-  private func setHovering(isHovering : Bool) {
-    self.isHovering = isHovering
-
-    if isHovering {
-      baseNode.alpha = 0.5
-    } else {
-      baseNode.alpha = 1.0
+  func runClickAction(_ sender: AnyObject) {
+    if let clickAction = buttonClickAction {
+      clickAction()
     }
   }
 }

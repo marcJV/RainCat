@@ -288,9 +288,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   }
 
   override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
-
-    if let point = touchPoint {
       if catHit {
         return
       }
@@ -319,12 +316,10 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
             umbrella2.setDestination(destination: location)
           }
         }
-      }
     }
   }
 
   override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
       if catHit {
         return
       }
@@ -476,7 +471,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
           cat1.hitByRain()
           cat1.removeAllActions()
-          cat1.meow()
+          SoundManager.sharedInstance.meow(node: cat1)
           cat1.physicsBody?.angularVelocity = 0.75
 
           p1LastHit = true
@@ -498,7 +493,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
           cat2.hitByRain()
           cat2.removeAllActions()
-          cat2.meow()
+          SoundManager.sharedInstance.meow(node: cat2)
           cat2.physicsBody?.angularVelocity = 0.75
 
           p1LastHit = false

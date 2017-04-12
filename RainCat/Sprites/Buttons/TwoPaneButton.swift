@@ -44,17 +44,14 @@ class TwoPaneButton : SKAControlSprite {
 
     addChild(foregroundPane)
     foregroundPane.addChild(label)
-
-    addTarget(self, selector: #selector(touched(_:)), forControlEvents: [.TouchDown, .DragEnter])
-    addTarget(self, selector: #selector(untouched(_:)), forControlEvents: [.TouchUpOutside, .TouchUpInside, .DragExit])
   }
 
-  func touched(_ sender : TwoPaneButton){
-    foregroundPane.run(SKAction.move(to: CGPoint(), duration: 0.05))
-  }
-
-  func untouched(_ sender : TwoPaneButton) {
-    foregroundPane.run(SKAction.move(to: zeroPosition, duration: 0.05))
+  override func updateControl() {
+    if controlState.contains(.Highlighted) {
+      foregroundPane.run(SKAction.move(to: CGPoint(), duration: 0.05))
+    } else if controlState.contains(.Normal) {
+      foregroundPane.run(SKAction.move(to: zeroPosition, duration: 0.05))
+    }
   }
 
   override var zPosition: CGFloat {
