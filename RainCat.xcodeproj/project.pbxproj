@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB0B1C881D8C9BA900C09901 /* LogoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0B1C871D8C9BA900C09901 /* LogoScene.swift */; };
+		BB0C20551E9EDAE8004C8E84 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C20541E9EDAE8004C8E84 /* UserDefaultsManager.swift */; };
 		BB459C3C1E9EB1460027CA9B /* ColorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C391E9EB1460027CA9B /* ColorAction.swift */; };
 		BB459C3D1E9EB1460027CA9B /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C3A1E9EB1460027CA9B /* ColorManager.swift */; };
 		BB459C3E1E9EB1460027CA9B /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C3B1E9EB1460027CA9B /* SoundManager.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		BB0B1C871D8C9BA900C09901 /* LogoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogoScene.swift; path = Scenes/LogoScene.swift; sourceTree = "<group>"; };
+		BB0C20541E9EDAE8004C8E84 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsManager.swift; path = Utility/UserDefaultsManager.swift; sourceTree = "<group>"; };
 		BB459C391E9EB1460027CA9B /* ColorAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorAction.swift; path = Utility/ColorAction.swift; sourceTree = "<group>"; };
 		BB459C3A1E9EB1460027CA9B /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorManager.swift; path = Utility/ColorManager.swift; sourceTree = "<group>"; };
 		BB459C3B1E9EB1460027CA9B /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundManager.swift; path = Utility/SoundManager.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				BB459C391E9EB1460027CA9B /* ColorAction.swift */,
 				BB459C3A1E9EB1460027CA9B /* ColorManager.swift */,
 				BB459C3B1E9EB1460027CA9B /* SoundManager.swift */,
+				BB0C20541E9EDAE8004C8E84 /* UserDefaultsManager.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */,
 				BB459C9D1E9EB3F20027CA9B /* CatSprite.swift in Sources */,
 				BB459C3D1E9EB1460027CA9B /* ColorManager.swift in Sources */,
+				BB0C20551E9EDAE8004C8E84 /* UserDefaultsManager.swift in Sources */,
 				BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */,
 				BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */,
 				BB459C871E9EB3F20027CA9B /* HudNode.swift in Sources */,

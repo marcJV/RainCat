@@ -29,6 +29,7 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
 
     if pingPong {
       top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
+      umbrella.anchorPoint = CGPoint(x: 1, y: 0.5)
     } else {
       let path = UIBezierPath()
       path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
@@ -125,5 +126,9 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   public func updatePalette(palette: ColorPalette) {
     umbrellaTop.run(ColorAction().colorTransitionAction(fromColor: umbrellaTop.color, toColor: palette.umbrellaTopColor, duration: colorChangeDuration))
     umbrellaBottom.run(ColorAction().colorTransitionAction(fromColor: umbrellaBottom.color, toColor: palette.umbrellaBottomColor, duration: colorChangeDuration))
+  }
+
+  public func updatePalette(palette : Int) {
+    updatePalette(palette: ColorManager.sharedInstance.getColorPalette(palette))
   }
 }

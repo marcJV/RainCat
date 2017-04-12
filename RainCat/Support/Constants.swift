@@ -24,6 +24,9 @@ let lcdOnAlpha  : CGFloat = 1
 
 let ScoreKey = "RAINCAT_HIGHSCORE"
 let MuteKey = "RAINCAT_MUTED"
+let PlayerOnePaletteKey = "PLAYER_ONE_PALETTE"
+let PlayerTwoPaletteKey = "PLAYER_TWO_PALETTE"
+
 let BASE_FONT_NAME = "PixelDigivolve"
 
 public func Distance(p1: CGPoint, p2: CGPoint) -> CGFloat {

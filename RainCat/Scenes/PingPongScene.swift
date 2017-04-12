@@ -353,6 +353,16 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     }
   }
 
+  public override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    for touch in touches {
+      if p1Touch == touch {
+        p1Touch = nil
+      } else if p2Touch == touch {
+        p2Touch = nil
+      }
+    }
+  }
+
   public override func update(_ currentTime: TimeInterval) {
     //check if raindrop is outside bounds, then reset
 
@@ -424,9 +434,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
       var impulse = (otherBody.node?.parent as? UmbrellaSprite)!.getVelocity()
 
-      impulse.dx /= 2
-      impulse.dy /= 2
-
       let max : CGFloat = 25
 
       //Check who hit the puck last
@@ -453,9 +460,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
         puck?.removeFromParent()
         puck = nil
 
-
         if otherBody.node?.name == cat1Key {
-
           hud.incrementPlayerTwo()
 
           if hud.playerTwoScore >= maxPoints {
@@ -476,7 +481,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
           p1LastHit = true
         } else if otherBody.node?.name == cat2Key {
-
           hud.incrementPlayerOne()
 
           if hud.playerOneScore >= maxPoints {

@@ -51,6 +51,10 @@ public func getColorPalette(_ index : Int) -> ColorPalette {
 
     return palette
   }
+
+  public func getNextColorPaletteIndex(_ index : Int) -> Int {
+    return (index + 1) % colorList.count
+  }
 }
 
 public struct ColorPalette {

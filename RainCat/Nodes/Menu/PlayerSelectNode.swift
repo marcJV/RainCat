@@ -27,6 +27,12 @@ public class PlayerSelectNode : SKNode, Touchable {
   public var backAction : (() -> ())?
 
   public func setup(width : CGFloat) {
+    player1ColorIndex = UserDefaultsManager.sharedInstance.playerOnePalette
+    player2ColorIndex = UserDefaultsManager.sharedInstance.playerTwoPalette
+
+    umbrella1.updatePalette(palette: player1ColorIndex)
+    umbrella2.updatePalette(palette: player2ColorIndex)
+
     let margin : CGFloat = 15
     versesTitle.fontSize = 100
     versesTitle.text = "Cat-Pong"
@@ -84,15 +90,17 @@ public class PlayerSelectNode : SKNode, Touchable {
     if selectedNode == umbrella1 && umbrella1.contains(point) {
       handleAlpha(node: umbrella1, highlighted: false)
 
-      player1ColorIndex += 1
-
+      player1ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player1ColorIndex)
       umbrella1.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player1ColorIndex))
+
+      UserDefaultsManager.sharedInstance.updatePlayerOnePalette(palette: player1ColorIndex)
     } else if selectedNode == umbrella2 && umbrella2.contains(point) {
       handleAlpha(node: umbrella2, highlighted: false)
 
-      player2ColorIndex += 1
-
+      player2ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player2ColorIndex)
       umbrella2.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player2ColorIndex))
+
+      UserDefaultsManager.sharedInstance.updatePlayerOnePalette(palette: player2ColorIndex)
     }
 
     selectedNode = nil

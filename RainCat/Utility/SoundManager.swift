@@ -14,7 +14,6 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
 
   var audioPlayer : AVAudioPlayer?
   var trackPosition = 0
-  private(set) var isMuted = false
 
   //Music: http://www.bensound.com/royalty-free-music
   static private let tracks = [
@@ -37,14 +36,10 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   private override init() {
     //This is private so you can only have one Sound Manager ever.
     trackPosition = Int(arc4random_uniform(UInt32(SoundManager.tracks.count)))
-
-    let defaults = UserDefaults.standard
-
-    isMuted = defaults.bool(forKey: MuteKey)
   }
 
   public func startPlaying() {
-    if !isMuted && (audioPlayer == nil || audioPlayer?.isPlaying == false) {
+    if !UserDefaultsManager.sharedInstance.isMuted && (audioPlayer == nil || audioPlayer?.isPlaying == false) {
       let soundURL = Bundle.main.url(forResource: SoundManager.tracks[trackPosition], withExtension: "mp3")
 
       do {
@@ -70,11 +65,8 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   }
 
   func toggleMute() -> Bool {
-    isMuted = !isMuted
-
-    let defaults = UserDefaults.standard
-    defaults.set(isMuted, forKey: MuteKey)
-    defaults.synchronize()
+    UserDefaultsManager.sharedInstance.toggleMute()
+    let isMuted = UserDefaultsManager.sharedInstance.isMuted
 
     if isMuted {
       audioPlayer?.stop()
@@ -86,7 +78,7 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   }
 
   public func meow(node : SKNode) {
-    if !isMuted && node.action(forKey: "action_sound_effect") == nil {
+    if !UserDefaultsManager.sharedInstance.isMuted && node.action(forKey: "action_sound_effect") == nil {
 
       let selectedSFX = Int(arc4random_uniform(UInt32(meowSFX.count)))
 

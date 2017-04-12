@@ -50,7 +50,7 @@ class MenuScene : SKScene, SKPhysicsContactDelegate {
     addChild(playerSelectNode)
 
     //Setup sound button
-    let baseSoundButton = SKSpriteNode(texture: (SoundManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
+    let baseSoundButton = SKSpriteNode(texture: (UserDefaultsManager.sharedInstance.isMuted ? soundButtonTextureOff : soundButtonTexture))
 
     soundButton = AlphaButton(baseNode: baseSoundButton, size: soundButtonTexture.size(), margin: edgeMargin)
     soundButton.position = CGPoint(x: size.width - soundButton.size.width / 2 - edgeMargin,

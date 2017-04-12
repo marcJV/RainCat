@@ -71,7 +71,7 @@ public class LogoScene : SKScene {
       })
       ]))
 
-    if !SoundManager.sharedInstance.isMuted {
+    if !UserDefaultsManager.sharedInstance.isMuted {
       run(SKAction.sequence([
         SKAction.wait(forDuration: 2.6),
         SKAction.playSoundFileNamed("cat_meow_3", waitForCompletion: true)
