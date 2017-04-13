@@ -49,6 +49,8 @@ public func getColorPalette(_ index : Int) -> ColorPalette {
 
     let palette = colorList[fixedIndex]
 
+  print("getting palette number: \(index) \(fixedIndex)")
+
     return palette
   }
 

@@ -53,6 +53,7 @@
 		BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA11E9EB4070027CA9B /* Paletteable.swift */; };
 		BB459CA41E9EB4070027CA9B /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA21E9EB4070027CA9B /* Touchable.swift */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */; };
+		BB73A6681E9FD22200F6AFB2 /* LCDScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */; };
 		BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB98D4801DC3A49C00D17C8D /* LCDScene.sks */; };
 		BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */; };
 		BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AB1D74A62C00853E63 /* GameScene.swift */; };
@@ -116,6 +117,7 @@
 		BB459CA11E9EB4070027CA9B /* Paletteable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paletteable.swift; path = Protocols/Paletteable.swift; sourceTree = "<group>"; };
 		BB459CA21E9EB4070027CA9B /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Protocols/Touchable.swift; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuScene.swift; path = Scenes/MenuScene.swift; sourceTree = "<group>"; };
+		BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScreen.sks; path = Nodes/LCDGame/LCDScreen.sks; sourceTree = "<group>"; };
 		BB98D4801DC3A49C00D17C8D /* LCDScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScene.sks; path = Scenes/LCDScene.sks; sourceTree = "<group>"; };
 		BBA2E4A21D74A62C00853E63 /* RainCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA2E4A51D74A62C00853E63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
+				BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */,
 				BB98D4801DC3A49C00D17C8D /* LCDScene.sks */,
 				BBB318381DC78F6700644DB6 /* LCDScene.swift */,
 				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */,
+				BB73A6681E9FD22200F6AFB2 /* LCDScreen.sks in Resources */,
 				BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */,
 				BB459C541E9EB1E20027CA9B /* Info.plist in Resources */,
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
@@ -613,7 +617,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thirteen23.rain-cat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -628,7 +632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.thirteen23.rain-cat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -54,7 +54,7 @@ public class LogoScene : SKScene {
       ]))
 
     //Preload the menu
-    let menuScene = MenuScene(size: self.size)
+    let menuScene = SKScene(fileNamed: "LCDScene")!//MenuScene(size: self.size)
 
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),

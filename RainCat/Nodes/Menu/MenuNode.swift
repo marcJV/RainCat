@@ -28,7 +28,7 @@ public class MenuNode : SKNode {
     addChild(appTitleNode)
 
     startButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
-    startButton.setup(text: "Classic Mode", fontSize: 30)
+    startButton.setup(text: "Single Player", fontSize: 30)
     startButton.position = CGPoint(x: -startButton.size.width / 2.0, y: appTitleNode.position.y + 15 - appTitleNode.fontSize - startButton.size.height / 2)
 
 
@@ -37,7 +37,7 @@ public class MenuNode : SKNode {
     addChild(startButton)
 
     versusButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
-    versusButton.setup(text: "Verses Mode", fontSize: 30)
+    versusButton.setup(text: "Multiplayer", fontSize: 30)
     versusButton.position = CGPoint(x: -startButton.size.width / 2.0, y: startButton.position.y - startButton.size.height / 2 - versusButton.size.height / 2 - 20)
     versusButton.addTarget(self, selector: #selector(MenuNode.runVersesGameAction(_:)), forControlEvents: .TouchUpInside)
 

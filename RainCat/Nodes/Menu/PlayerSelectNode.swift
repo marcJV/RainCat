@@ -100,7 +100,7 @@ public class PlayerSelectNode : SKNode, Touchable {
       player2ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player2ColorIndex)
       umbrella2.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player2ColorIndex))
 
-      UserDefaultsManager.sharedInstance.updatePlayerOnePalette(palette: player2ColorIndex)
+      UserDefaultsManager.sharedInstance.updatePlayerTwoPalette(palette: player2ColorIndex)
     }
 
     selectedNode = nil

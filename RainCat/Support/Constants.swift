@@ -24,6 +24,7 @@ let lcdOnAlpha  : CGFloat = 1
 
 let ScoreKey = "RAINCAT_HIGHSCORE"
 let MuteKey = "RAINCAT_MUTED"
+let FirstLaunchPaletteChooser = "FIRST_LAUNCH_PALETTE_CHOOSER"
 let PlayerOnePaletteKey = "PLAYER_ONE_PALETTE"
 let PlayerTwoPaletteKey = "PLAYER_TWO_PALETTE"
 

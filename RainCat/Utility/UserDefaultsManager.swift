@@ -14,6 +14,7 @@ class UserDefaultsManager {
   private(set) var isMuted : Bool
   private(set) var playerOnePalette : Int
   private(set) var playerTwoPalette : Int
+  private(set) var initiallySetPalatte : Bool
 
   private init() {
     //This is private so you can only have one Sound Manager ever.
@@ -21,8 +22,20 @@ class UserDefaultsManager {
     let defaults = UserDefaults.standard
 
     isMuted = defaults.bool(forKey: MuteKey)
-    playerOnePalette = defaults.integer(forKey: PlayerOnePaletteKey)
-    playerTwoPalette = defaults.integer(forKey: PlayerTwoPaletteKey)
+    initiallySetPalatte = defaults.bool(forKey: FirstLaunchPaletteChooser)
+
+    if !initiallySetPalatte {
+      playerOnePalette = 0
+      playerTwoPalette = 1
+
+      defaults.set(playerOnePalette, forKey: PlayerOnePaletteKey)
+      defaults.set(playerTwoPalette, forKey: PlayerTwoPaletteKey)
+      defaults.set(true, forKey: FirstLaunchPaletteChooser)
+      defaults.synchronize()
+    } else {
+      playerOnePalette = defaults.integer(forKey: PlayerOnePaletteKey)
+      playerTwoPalette = defaults.integer(forKey: PlayerTwoPaletteKey)
+    }
   }
 
   public func updatePlayerOnePalette(palette : Int) {
