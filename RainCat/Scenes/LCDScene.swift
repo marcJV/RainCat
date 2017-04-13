@@ -22,7 +22,9 @@ class LCDScene : SKScene {
   private var isQuitting = false
 
   override func didMove(to view: SKView) {
-    lcdScreen = childNode(withName: "lcd-screen") as! LCDScreenNode!
+    let lcdReference = childNode(withName: "lcd-reference")
+
+    lcdScreen = lcdReference?.children[0].childNode(withName: "lcd-screen") as! LCDScreenNode
     lcdScreen.setup()
 
     let rainCatLabel = childNode(withName: "rain-cat-logo") as! ShadowLabelNode!

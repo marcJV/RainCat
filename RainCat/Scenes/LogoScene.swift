@@ -54,7 +54,14 @@ public class LogoScene : SKScene {
       ]))
 
     //Preload the menu
-    let menuScene = SKScene(fileNamed: "LCDScene")!//MenuScene(size: self.size)
+    var menuScene : SKScene
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      menuScene = SKScene(fileNamed: "LCDScene-iPhone")!
+    } else {
+      menuScene = SKScene(fileNamed: "LCDScene")!
+    }
+
+     //MenuScene(size: self.size)
 
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),

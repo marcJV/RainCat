@@ -21,14 +21,14 @@ public class CreditsNode : SKNode, Touchable {
     let creditsColor = SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0)
 
     let developerTitle = SKLabelNode(fontNamed: BASE_FONT_NAME)
-    developerTitle.text = "development:"
+    developerTitle.text = "development"
     developerTitle.horizontalAlignmentMode = .center
 
     developer.text = "Marc Vandehey"
     developer.horizontalAlignmentMode = .center
 
     let designerTitle = SKLabelNode(fontNamed: BASE_FONT_NAME)
-    designerTitle.text = "design:"
+    designerTitle.text = "design"
     designerTitle.horizontalAlignmentMode = .center
 
     designCathryn.text = "Cathryn Rowe"
@@ -41,7 +41,7 @@ public class CreditsNode : SKNode, Touchable {
     designLaura.horizontalAlignmentMode = .center
 
     let soundTitle = SKLabelNode(fontNamed: BASE_FONT_NAME)
-    soundTitle.text = "MUSIC:"
+    soundTitle.text = "MUSIC"
     soundTitle.horizontalAlignmentMode = .center
 
     soundCreditNode.text = "Bensound.com"

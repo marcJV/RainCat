@@ -60,6 +60,7 @@
 		BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */; };
 		BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4AF1D74A62C00853E63 /* Main.storyboard */; };
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
+		BBAF08181EA000E500AAF449 /* LCDScene-iPhone.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08171EA000E500AAF449 /* LCDScene-iPhone.sks */; };
 		BBB318391DC78F6700644DB6 /* LCDScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB318381DC78F6700644DB6 /* LCDScene.swift */; };
 		BBC9F6E81D8D941A00385223 /* PingPongScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9F6E71D8D941A00385223 /* PingPongScene.swift */; };
 		BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		BBA2E4AD1D74A62C00853E63 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameViewController.swift; path = ViewControllers/GameViewController.swift; sourceTree = "<group>"; };
 		BBA2E4B01D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBA2E4B51D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BBAF08171EA000E500AAF449 /* LCDScene-iPhone.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "LCDScene-iPhone.sks"; path = "Scenes/LCDScene-iPhone.sks"; sourceTree = "<group>"; };
 		BBB318381DC78F6700644DB6 /* LCDScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDScene.swift; path = Scenes/LCDScene.swift; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongScene.swift; path = Scenes/PingPongScene.swift; sourceTree = "<group>"; };
 		BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
 				BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */,
 				BB98D4801DC3A49C00D17C8D /* LCDScene.sks */,
+				BBAF08171EA000E500AAF449 /* LCDScene-iPhone.sks */,
 				BBB318381DC78F6700644DB6 /* LCDScene.swift */,
 				BB0B1C871D8C9BA900C09901 /* LogoScene.swift */,
 				BB6B0C2C1D7F41FF00BBA0BD /* MenuScene.swift */,
@@ -422,6 +425,7 @@
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
 				BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */,
 				BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */,
+				BBAF08181EA000E500AAF449 /* LCDScene-iPhone.sks in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
 				BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */,
 				BB459C491E9EB16B0027CA9B /* cat_meow_4.mp3 in Resources */,

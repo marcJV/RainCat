@@ -47,11 +47,6 @@ class LCDScreenNode : SKSpriteNode, Resetable {
   var b = 0.0
 
   func setup() {
-//    let screenScene = SKScene(fileNamed: "LCDScreen")!
-
-//    addChild(screenScene)
-//    let child = screenScene!.childNode(withName: "lcd-screen")!
-
     //Setup difficulty scale
     a = (startSpeed - endSpeed) / (log(startScore / endScore))
     b = exp((endSpeed * log(startScore)) - (startSpeed * log(endScore)) / (startSpeed - endSpeed))
