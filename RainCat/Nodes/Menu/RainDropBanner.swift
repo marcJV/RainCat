@@ -9,106 +9,67 @@
 import SpriteKit
 
 public class RainDropBanner : SKNode, Touchable {
-  let rainTexture = SKTexture(imageNamed: "rain_drop")
-  let mediumTexture = SKTexture(imageNamed: "medium_rain_drop")
-  let largeTexture = SKTexture(imageNamed: "large_rain_drop")
+  typealias RainDrops = (raindrop: SKSpriteNode, lcdRaindrop: SKSpriteNode)
 
-  var rainDrops = [SKSpriteNode]()
+  var rainDrops = [RainDrops]()
 
-  public func setup(size : CGSize) {
-    let margin : CGFloat = 40
-    let lowerLimit : CGFloat = 0
-    let upperLimit : CGFloat = size.height
-    let centerLine : CGFloat = (upperLimit + lowerLimit) / 2.0
+  public func setup(maskNode : SKNode) {
+    for i in 0...23 {
+      let index = String(format: "%02d", i)
 
+      let node = childNode(withName: "raindrop\(index)") as! SKSpriteNode
 
-    let rainDrop = SKSpriteNode(texture: rainTexture)
-    rainDrop.position = CGPoint(x: size.width / 2, y: centerLine)
+      let lcdNode = SKSpriteNode(imageNamed: "large_rain_drop")
 
-    rainDrop.zPosition = 10
+      rainDrops.append((raindrop: node, lcdRaindrop: lcdNode))
 
-    addChild(rainDrop)
-    rainDrops.append(rainDrop)
+      lcdNode.anchorPoint = CGPoint(x: 0, y: 1)
+      lcdNode.position = node.position
 
-    //Generate left side
-    var xPosition = rainDrop.position.x
-    var index = 0
-    let innerMargin = 10 * UIScreen.main.nativeScale
-    let offsetAmount = rainDrop.size.width / 2 + innerMargin
+      maskNode.addChild(lcdNode)
 
-    xPosition -= offsetAmount
-
-    while xPosition > margin {
-      let rainDrop = SKSpriteNode(texture: rainTexture)
-      var yPosition = centerLine
-
-      if index % 6 == 0 {
-        yPosition = centerLine - rainDrop.size.height
-      } else if index % 3 == 0 {
-        yPosition = centerLine - innerMargin
-      } else if index % 2 == 0 {
-        yPosition = centerLine + rainDrop.size.height
-      }
-
-      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
-      rainDrop.zPosition = 10
-
-      addChild(rainDrop)
-      rainDrops.append(rainDrop)
-
-      xPosition -= offsetAmount
-      index += 1
-    }
-
-    //Generate right side
-    index = 8 //Hack to have the pattern line up correctly
-    xPosition = rainDrop.position.x + offsetAmount
-    while xPosition < size.width - margin {
-      var yPosition = centerLine
-
-      if index % 6 == 0 {
-        yPosition = centerLine - rainDrop.size.height
-      } else if index % 3 == 0 {
-        yPosition = centerLine - innerMargin
-      } else if index % 2 == 0 {
-        yPosition = centerLine + rainDrop.size.height
-      }
-
-      let rainDrop = SKSpriteNode(texture: rainTexture)
-      rainDrop.position = CGPoint(x: xPosition, y: yPosition)
-      rainDrop.zPosition = 10
-
-      addChild(rainDrop)
-      rainDrops.append(rainDrop)
-      
-      xPosition += offsetAmount
-      index += 1
+      lcdNode.zPosition = 100
     }
   }
 
   public func makeItRain() {
-    for rainDrop in rainDrops {
-      rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: 10 * rainDrop.xScale)
-      rainDrop.physicsBody?.categoryBitMask = RainDropCategory
-
-      //Makes all of the raindrops fall at different rates
-      rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
-      rainDrop.physicsBody?.mass = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+    for node in rainDrops {
+      addPhysicsBody(rainDrop: node.raindrop)
     }
   }
 
-  public func touchBegan(touch: UITouch) {
-    for rainDrop in rainDrops {
-      if rainDrop.contains(touch.location(in: self)) {
+  private func addPhysicsBody(rainDrop : SKSpriteNode) {
+    rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: rainDrop.size.width / 2)
+    rainDrop.physicsBody?.categoryBitMask = RainDropCategory
 
-        if rainDrop.texture == rainTexture {
-          rainDrop.texture = mediumTexture
-          rainDrop.setScale(2)
-        } else if rainDrop.texture == mediumTexture {
-          rainDrop.texture = largeTexture
-          rainDrop.setScale(3)
-        }
+    //Makes all of the raindrops fall at different rates
+    rainDrop.physicsBody?.linearDamping = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+    rainDrop.physicsBody?.mass = CGFloat(arc4random()).truncatingRemainder(dividingBy: 100) / 100
+  }
+
+  public func touchBegan(touch: UITouch) {
+    for node : RainDrops in rainDrops {
+      if node.raindrop.contains(touch.location(in: self)) {
+        enlargeRaindrop(node.raindrop)
+        enlargeRaindrop(node.lcdRaindrop)
       }
+    }
+  }
+
+  func enlargeRaindrop(_ raindrop : SKSpriteNode) {
+    let oldScale = raindrop.xScale
+
+    let newScale = min(raindrop.xScale + 0.35, 1)
+    //Since we use a 0,1 anchor point, we need to update the position to appear centered
+    if oldScale != newScale {
+      raindrop.position.x -= raindrop.size.width / 33
+
+      let scaleRainDropAction = SKAction.group([
+        SKAction.moveTo(x: raindrop.position.x - raindrop.size.width / 4, duration: 0.05),
+        SKAction.scale(to: newScale, duration: 0.05)
+        ])
+
+      raindrop.run(scaleRainDropAction)
     }
   }
 
@@ -122,5 +83,14 @@ public class RainDropBanner : SKNode, Touchable {
 
   public func touchCancelled(touch: UITouch) {
     //Not implemented
+  }
+
+  public func update(size: CGSize) {
+    for node : RainDrops in rainDrops {
+      node.lcdRaindrop.position = node.raindrop.position
+      node.lcdRaindrop.setScale(node.raindrop.xScale)
+      node.lcdRaindrop.position.y += size.height //This fixes anchorpoint madness
+      node.lcdRaindrop.zRotation = node.raindrop.zRotation     
+    }
   }
 }

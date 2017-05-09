@@ -8,9 +8,9 @@
 
 import SpriteKit
 
-public class LogoScene : SKScene {
+public class LogoScene : SceneNode {
 
-  let backgroundSprite = SKSpriteNode(imageNamed: "launch_screen")
+  let backgroundSprite = SKSpriteNode(imageNamed: "loony")
   let maskNode = SKCropNode()
   let circleNode = SKShapeNode(circleOfRadius: 20)
 
@@ -18,7 +18,7 @@ public class LogoScene : SKScene {
 
   var logoFrames = [SKTexture]()
 
-  public override func sceneDidLoad() {
+  override func layoutScene(size: CGSize) {
     //We can fix pulling a large number of assets if we do the mask animation ourselves
     //TODO: Need to figure out correct speed / easing and clean this up
     for index in 0...89 {
@@ -26,42 +26,41 @@ public class LogoScene : SKScene {
       logoFrames.append(SKTexture(imageNamed: textureName))
     }
 
-    backgroundColor = SKColor(red:0.18, green:0.20, blue:0.22, alpha:1.0)
+    let backgroundNode = SKSpriteNode(color: SKColor(red:0.18, green:0.20, blue:0.22, alpha:1.0), size: size)
+    addChild(backgroundNode)
 
     circleNode.setScale(0)
 
     maskNode.maskNode = circleNode
 
-    backgroundSprite.position = CGPoint(x: frame.midX, y: frame.midY)
+    backgroundSprite.position = CGPoint(x: size.width / 2, y: size.height / 2)
     addChild(backgroundSprite)
 
-    circleNode.position = CGPoint(x: frame.midX, y: frame.midY)
+    circleNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
     circleNode.fillColor = SKColor(red:0.18, green:0.20, blue:0.22, alpha:1.0)
     circleNode.lineWidth = 0
 
     circleNode.zPosition = 1
     addChild(circleNode)
 
-    t23Logo.position = CGPoint(x: frame.midX, y: frame.midY)
+    t23Logo.position = CGPoint(x: size.width / 2, y: size.height / 2)
     t23Logo.zPosition = 2
     addChild(t23Logo)
   }
 
-  public override func didMove(to view: SKView) {
+  override func attachedToScene() {
     circleNode.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.1),
       SKAction.scale(to: 100, duration: 0.8)
       ]))
 
     //Preload the menu
-    var menuScene : SKScene
-    if UIDevice.current.userInterfaceIdiom == .phone {
-      menuScene = SKScene(fileNamed: "LCDScene-iPhone")!
-    } else {
-      menuScene = SKScene(fileNamed: "LCDScene")!
-    }
+//    var menuScene : SKScene
+        
 
-     //MenuScene(size: self.size)
+    //     menuScene = MenuScene(size: getDisplaySize())
+
+//    menuScene = SKScene(fileNamed: "MainMenu")!
 
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),
@@ -72,9 +71,13 @@ public class LogoScene : SKScene {
         transition.pausesOutgoingScene = false
         transition.pausesIncomingScene = false
 
-        menuScene.scaleMode = self.scaleMode
+        if let parent = self.parent as? Router {
+          parent.navigate(to: .MainMenu)
+        }
 
-        self.view?.presentScene(menuScene, transition: transition)
+//        menuScene.scaleMode = self.scaleMode
+
+//        self.view?.presentScene(menuScene, transition: transition)
       })
       ]))
 
@@ -84,6 +87,10 @@ public class LogoScene : SKScene {
         SKAction.playSoundFileNamed("cat_meow_3", waitForCompletion: true)
         ]))
     }
+  }
+
+  override func detachedFromScene() {
+
   }
 
   deinit {

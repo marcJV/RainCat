@@ -33,6 +33,12 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     "cat_meow_7.mp3"
   ]
 
+  private let tickSFX = "blip_0012.wav"
+  private let chipSFX = "Chip_Hat_10.wav"
+  private let kick1 = "kick_003.wav"
+  private let kick2 = "kick_004.wav"
+  private var kick = true
+
   private override init() {
     //This is private so you can only have one Sound Manager ever.
     trackPosition = Int(arc4random_uniform(UInt32(SoundManager.tracks.count)))
@@ -85,5 +91,25 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
       node.run(SKAction.playSoundFileNamed(meowSFX[selectedSFX], waitForCompletion: true),
           withKey: "action_sound_effect")
     }
+  }
+
+  public static func playTick(node :SKNode) {
+
+    var sfx : String
+
+    if SoundManager.sharedInstance.kick {
+      sfx = SoundManager.sharedInstance.kick1
+    } else {
+      sfx = SoundManager.sharedInstance.kick2
+    }
+
+    SoundManager.sharedInstance.kick = !SoundManager.sharedInstance.kick
+
+//    SoundManager.sharedInstance.tickSFX
+
+//    if !UserDefaultsManager.sharedInstance.isMuted {
+      node.run(SKAction.playSoundFileNamed(SoundManager.sharedInstance.chipSFX, waitForCompletion: true),
+               withKey: "tick")
+//    }
   }
 }

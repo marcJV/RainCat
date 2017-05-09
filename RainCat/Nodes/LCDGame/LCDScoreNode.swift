@@ -49,7 +49,7 @@ class LCDScoreNode : SKSpriteNode, Resetable, LCDSetupable {
     updateDisplay(score: 0)
   }
 
-  private func updateDisplay(score : Int) {
+  func updateDisplay(score : Int) {
     var tempScore = score
 
     let ones = tempScore % 10

@@ -39,8 +39,9 @@ struct SKAControlEvent: OptionSet, Hashable {
   static var DragEnter:      SKAControlEvent   { return SKAControlEvent(rawValue: 1 << 5) }
   static var DragExit:       SKAControlEvent   { return SKAControlEvent(rawValue: 1 << 6) }
   static var TouchCancelled: SKAControlEvent   { return SKAControlEvent(rawValue: 1 << 7) }
+  static var ValueChanged:   SKAControlEvent   { return SKAControlEvent(rawValue: 1 << 8) }
   static var AllOptions:     [SKAControlEvent] {
-    return [.TouchDown, .TouchUpInside, .TouchUpOutside, .DragOutside, .DragInside, .DragEnter, .DragExit, .TouchCancelled]
+    return [.TouchDown, .TouchUpInside, .TouchUpOutside, .DragOutside, .DragInside, .DragEnter, .DragExit, .TouchCancelled, .ValueChanged]
   }
 
   var hashValue: Int {
@@ -54,7 +55,7 @@ struct SKAControlEvent: OptionSet, Hashable {
  - Parameter selector: Selector to call
  */
 struct SKASelector {
-  let target: AnyObject
+  unowned let target: AnyObject
   let selector: Selector
 }
 
@@ -62,13 +63,25 @@ struct SKASelector {
 class SKAControlSprite : SKSpriteNode {
   fileprivate var selectors = [SKAControlEvent: [SKASelector]]()
 
+  override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    super.init(texture: texture, color: color, size: size)
+
+    isUserInteractionEnabled = true
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+
+    isUserInteractionEnabled = true
+  }
+
   /**
    Current State of the button
    - Note: ReadOnly
    */
   private(set) var controlState:SKAControlState = .Normal {
     didSet {
-      if oldValue != controlState {
+      if oldValue.rawValue != controlState.rawValue {
         updateControl()
       }
     }
@@ -88,6 +101,14 @@ class SKAControlSprite : SKSpriteNode {
       } else {
         controlState.subtract(.Selected)
       }
+
+      performSelectorsForEvent(.ValueChanged)
+    }
+  }
+
+  var value:CGFloat = 0 {
+    didSet {
+      performSelectorsForEvent(.ValueChanged)
     }
   }
 
@@ -119,6 +140,7 @@ class SKAControlSprite : SKSpriteNode {
    */
   func addTarget(_ target: AnyObject, selector: Selector, forControlEvents events: SKAControlEvent) {
     isUserInteractionEnabled = true
+
     let buttonSelector = SKASelector(target: target, selector: selector)
 
     addButtonSelector(buttonSelector, forControlEvents: events)
@@ -158,7 +180,7 @@ class SKAControlSprite : SKSpriteNode {
    */
   fileprivate func performSelectors(_ buttonSelectors: [SKASelector]) {
     for selector in buttonSelectors {
-      let _ = selector.target.perform(selector.selector, with: selector.target);
+      let _ = selector.target.perform(selector.selector, with: self);
     }
   }
 
@@ -173,41 +195,50 @@ class SKAControlSprite : SKSpriteNode {
 
   /// Save a touch to help determine if the touch just entered or exited the node
   fileprivate var lastEvent:SKAControlEvent = .None
+  private(set) var currentTouch : UITouch?
 
   // MARK: - Touch Methods
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let _ = touches.first as UITouch?, enabled {
-      performSelectorsForEvent(.TouchDown)
-      lastEvent = .TouchDown
-      controlState.insert(.Highlighted)
+    if !enabled { return }
+
+    for touch in touches {
+      if beginTracking(touch, with: event) {
+        lastEvent = .TouchDown
+
+        performSelectorsForEvent(.TouchDown)
+        controlState.insert(.Highlighted)
+        controlState.subtract(.Normal)
+      }
     }
 
     super.touchesBegan(touches, with:event)
   }
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    if let touch = touches.first as UITouch?, let parent = parent, enabled {
-      let currentLocation = (touch.location(in: parent))
+    for touch in touches {
+      if continueTracking(touch, with: event), let parent = parent, enabled {
+        let currentLocation = (touch.location(in: parent))
 
-      if lastEvent == .DragInside && !contains(currentLocation) {
-        ///Touch Moved Outside Node
-        controlState.subtract(.Highlighted)
-        performSelectorsForEvent(.DragExit)
-        lastEvent = .DragExit
-      } else if lastEvent == .DragOutside && contains(currentLocation) {
-        ///Touched Moved Inside Node
-        controlState.insert(.Highlighted)
-        performSelectorsForEvent(.DragEnter)
-        lastEvent = .DragEnter
-      } else if !contains(currentLocation) {
-        /// Touch stayed Outside Node
-        performSelectorsForEvent(.DragOutside)
-        lastEvent = .DragOutside
-      } else if contains(currentLocation) {
-        ///Touch Stayed Inside Node
-        performSelectorsForEvent(.DragInside)
-        lastEvent = .DragInside
+        if lastEvent == .DragInside && !contains(currentLocation) {
+          ///Touch Moved Outside Node
+          controlState.subtract(.Highlighted)
+          performSelectorsForEvent(.DragExit)
+          lastEvent = .DragExit
+        } else if lastEvent == .DragOutside && contains(currentLocation) {
+          ///Touched Moved Inside Node
+          controlState.insert(.Highlighted)
+          performSelectorsForEvent(.DragEnter)
+          lastEvent = .DragEnter
+        } else if !contains(currentLocation) {
+          /// Touch stayed Outside Node
+          performSelectorsForEvent(.DragOutside)
+          lastEvent = .DragOutside
+        } else if contains(currentLocation) {
+          ///Touch Stayed Inside Node
+          performSelectorsForEvent(.DragInside)
+          lastEvent = .DragInside
+        }
       }
     }
 
@@ -216,14 +247,18 @@ class SKAControlSprite : SKSpriteNode {
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     lastEvent = .None
-    if let touch = touches.first as UITouch?, let parent = parent, enabled {
-      if contains(touch.location(in: parent)) {
-        performSelectorsForEvent(.TouchUpInside)
-      } else {
-        performSelectorsForEvent(.TouchUpOutside)
-      }
+    for touch in touches {
+      if endTracking(touch, with: event), let parent = parent, enabled {
 
-      controlState.subtract(.Highlighted)
+        if contains(touch.location(in: parent)) {
+          performSelectorsForEvent(.TouchUpInside)
+        } else {
+          performSelectorsForEvent(.TouchUpOutside)
+        }
+
+        controlState.subtract(.Highlighted)
+        controlState.insert(.Normal)
+      }
     }
 
     super.touchesEnded(touches, with: event)
@@ -233,10 +268,48 @@ class SKAControlSprite : SKSpriteNode {
   override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     lastEvent = .None
 
-    performSelectorsForEvent( .TouchCancelled)
+    for touch in touches {
+      if cancelTracking(touch, with: event) {
+        performSelectorsForEvent( .TouchCancelled)
+        controlState.subtract(.Highlighted)
+        controlState.insert(.Normal)
+      }
+    }
 
     super.touchesCancelled(touches, with: event)
   }
+
+  func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    if currentTouch == nil {
+      currentTouch = touch
+      return true
+    }
+
+    return false
+  }
+
+  func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    return currentTouch == touch
+  }
+
+  func endTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    if currentTouch == touch {
+      currentTouch = nil
+      return true
+    }
+
+    return false
+  }
+
+  func cancelTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    if currentTouch == touch {
+      currentTouch = nil
+      return true
+    }
+
+    return false
+  }
+
 
   /**
    SKAControlState Possible states for the SKAButton

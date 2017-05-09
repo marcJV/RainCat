@@ -33,3 +33,12 @@ let BASE_FONT_NAME = "PixelDigivolve"
 public func Distance(p1: CGPoint, p2: CGPoint) -> CGFloat {
   return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
 }
+
+
+public func getDisplaySize() -> CGSize {
+  if UIDevice.current.userInterfaceIdiom == .phone {
+    return CGSize(width: 1334, height: 750)
+  } else {
+    return CGSize(width: 1024, height: 768)
+  }
+}

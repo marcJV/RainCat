@@ -83,6 +83,8 @@ class LCDScreenNode : SKSpriteNode, Resetable {
     lastUpdateTime += deltaTime
 
     if lastUpdateTime >= tick {
+      SoundManager.playTick(node: self)
+
       lastUpdateTime = 0.0
 
       if checkCatHit() {

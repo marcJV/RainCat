@@ -116,7 +116,7 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     resetLocations(arc4random() % 2 == 0) //random start location
 
     hud.quitButtonAction = {
-      MenuScene.presentMenuScene(currentScene: self)
+//      MenuScene.presentMenuScene(currentScene: self)
 
       self.hud.quitButtonAction = nil
       self.hud.rematchButtonAction = nil

@@ -24,6 +24,14 @@ class LCDScene : SKScene {
   override func didMove(to view: SKView) {
     let lcdReference = childNode(withName: "lcd-reference")
 
+    var controlsTextSize : CGFloat = 25
+    var optionsTextSize : CGFloat = 19
+
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      controlsTextSize = 35
+      optionsTextSize = 25
+    }
+
     lcdScreen = lcdReference?.children[0].childNode(withName: "lcd-screen") as! LCDScreenNode
     lcdScreen.setup()
 
@@ -33,20 +41,20 @@ class LCDScene : SKScene {
     rainCatLabel?.fontSize = 80
 
     leftButton = childNode(withName: "left-button") as! TwoPaneButton!
-    leftButton.setup(text: "left", fontSize: 25)
+    leftButton.setup(text: "left", fontSize: controlsTextSize)
     leftButton.addTarget(self, selector: #selector(moveLeft(_:)), forControlEvents: .TouchUpInside)
 
     rightButton = childNode(withName: "right-button") as! TwoPaneButton!
-    rightButton.setup(text: "right", fontSize: 25)
+    rightButton.setup(text: "right", fontSize: controlsTextSize)
     rightButton.addTarget(self, selector: #selector(moveRight(_:)), forControlEvents: .TouchUpInside)
 
     resetButton = childNode(withName: "reset-button") as! TwoPaneButton!
-    resetButton.setup(text: "reset", fontSize: 19)
+    resetButton.setup(text: "reset", fontSize: optionsTextSize)
     resetButton.addTarget(self, selector: #selector(resetPressed(_:)), forControlEvents: [.TouchDown, .DragEnter])
     resetButton.addTarget(self, selector: #selector(resetReleased(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside])
 
     quitButton = childNode(withName: "quit-button") as! TwoPaneButton!
-    quitButton.setup(text: "quit", fontSize: 19)
+    quitButton.setup(text: "quit", fontSize: optionsTextSize)
     quitButton.addTarget(self, selector: #selector(quitPressed(_:)), forControlEvents: .TouchUpInside)
   }
 
@@ -70,7 +78,7 @@ class LCDScene : SKScene {
   }
 
   func quitPressed(_ sender:Any) {
-    MenuScene.presentMenuScene(currentScene: self)
+//    MenuScene.presentMenuScene(currentScene: self)
   }
 
   func resetPressed(_ sender:Any) {

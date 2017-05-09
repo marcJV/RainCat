@@ -60,10 +60,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       transition.pausesOutgoingScene = false
       transition.pausesIncomingScene = false
       
-      let gameScene = MenuScene(size: self.size)
-      gameScene.scaleMode = self.scaleMode
+//      let gameScene = MenuScene()
+//      gameScene.scaleMode = self.scaleMode
 
-      self.view?.presentScene(gameScene, transition: transition)
+//      self.view?.presentScene(gameScene, transition: transition)
 
       self.hud.quitButtonAction = nil
     }

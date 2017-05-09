@@ -38,6 +38,14 @@ public class ShadowLabelNode : SKNode {
 
   required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+
+    setup(fontNamed: BASE_FONT_NAME)
+    let labelText = userData?.value(forKey: "text") as? String
+    textNode.text = labelText
+    shadowTextNode.text = labelText
+
+    textNode.fontSize = 100
+    shadowTextNode.fontSize = 100
   }
 
   public override var zPosition: CGFloat {
@@ -74,5 +82,17 @@ public class ShadowLabelNode : SKNode {
       textNode.horizontalAlignmentMode = horizontalAlignmentMode
       shadowTextNode.horizontalAlignmentMode = horizontalAlignmentMode
     }
+  }
+
+  public func getLCDVersion() -> SKLabelNode {
+    let newNode = SKLabelNode(fontNamed: textNode.fontName)
+    newNode.text = textNode.text
+    newNode.color = .black
+    newNode.fontSize = textNode.fontSize
+    newNode.horizontalAlignmentMode = textNode.horizontalAlignmentMode
+    newNode.verticalAlignmentMode = textNode.verticalAlignmentMode
+    newNode.position = position
+    
+    return newNode
   }
 }

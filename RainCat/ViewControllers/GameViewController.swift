@@ -15,13 +15,19 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let sceneNode = LogoScene(size: view.frame.size)
+    var sceneNode : SKScene //= LogoScene(size: view.frame.size)
+//    if UIDevice.current.userInterfaceIdiom == .phone {
+//      sceneNode = SKScene(fileNamed: "LogoScene-iPhone")!
+//    } else {
+      sceneNode = RainCatScene(size: getDisplaySize())
+//    }
+
 
     if let view = self.view as! SKView? {
       view.presentScene(sceneNode)
       view.ignoresSiblingOrder = true
-      view.scene?.scaleMode = .aspectFill
-      //view.showsPhysics = true
+//      view.scene?.scaleMode = .aspectFill
+      view.showsPhysics = true
       //view.showsFPS = true
       //view.showsNodeCount = true
     }
