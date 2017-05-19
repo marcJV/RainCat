@@ -13,4 +13,10 @@ public class SceneNode : SKSpriteNode {
   func attachedToScene() {}
   func detachedFromScene() {}
   func update(dt : TimeInterval) {}
+
+  func pauseNode() {}
+
+  func getGravity() -> CGVector {
+    return CGVector(dx: 0, dy: -9.8)
+  }
 }

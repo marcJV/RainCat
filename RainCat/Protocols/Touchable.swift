@@ -14,3 +14,7 @@ public protocol Touchable {
   func touchEnded(touch: UITouch)
   func touchCancelled(touch: UITouch)
 }
+
+public protocol Updateable {
+  func update(deltaTime : TimeInterval)
+}

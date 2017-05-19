@@ -16,18 +16,20 @@ class RainCatScene : SKScene, Router {
     navigate(to: .Logo)
   }
 
-
   func navigate(to: Location) {
     baseNode?.zPosition = 1
     var newNode : SceneNode
 
     switch to {
     case .MainMenu:
-      newNode = MenuScene(color: .clear, size: size)
-    case .Classic: fallthrough
-    case .LCD: fallthrough
+      newNode = MenuSceneNode(color: .clear, size: size)
+    case .Classic:
+      newNode = GameScene(color: .clear, size: size)
+    case .LCD:
+      newNode = LCDSceneNode(color: .clear, size: size)
     case .ClassicMulti: fallthrough
-    case .CatPont: fallthrough
+    case .CatPong:
+      newNode = PingPongSceneNode(color: .clear, size: size)
     default:
       newNode = LogoScene(color: .clear, size: size)
     }
@@ -35,16 +37,24 @@ class RainCatScene : SKScene, Router {
     newNode.zPosition = 2
     newNode.layoutScene(size: size)
 
-    addChild(newNode)
-
-    newNode.attachedToScene()
+    physicsWorld.gravity = newNode.getGravity()
 
     if baseNode != nil {
-      (baseNode!).removeFromParent()
-      baseNode!.detachedFromScene()
+      updateBaseNode(newNode: newNode)
+    } else {
+      baseNode = newNode
+      addChild(newNode)
+      newNode.attachedToScene()
     }
+  }
+
+  private func updateBaseNode(newNode : SceneNode) {
+    (baseNode!).removeFromParent()
+    baseNode!.detachedFromScene()
 
     baseNode = newNode
+    addChild(newNode)
+    newNode.attachedToScene()
 
     if let _ = baseNode as? SKPhysicsContactDelegate {
       physicsWorld.contactDelegate = (baseNode as! SKPhysicsContactDelegate)
@@ -57,6 +67,8 @@ class RainCatScene : SKScene, Router {
     if deltaTime > 1 {
       deltaTime = 0
     }
+
+    lastTime = currentTime
 
     if baseNode != nil {
       baseNode!.update(dt: deltaTime)

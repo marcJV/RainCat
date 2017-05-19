@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-public class PingPongScene : SKScene, SKPhysicsContactDelegate {
+class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegate {
   private var umbrella1 : UmbrellaSprite!
   private var umbrella2 : UmbrellaSprite!
 
@@ -51,10 +51,10 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
   private let maxPoints = 7
 
-  private var rainScale : CGFloat!
-  private var catScale : CGFloat!
+  private var rainScale : CGFloat = 1
+  private var catScale : CGFloat = 1
 
-  private var destinationOffset : CGFloat
+  private var destinationOffset : CGFloat = 50
 
   private var deadZone :CGFloat = 150
 
@@ -68,43 +68,45 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   private var showingWinCondition = false
   private var giantMode = false
 
-  public init(size: CGSize, player1ColorPalette : ColorPalette, player2ColorPalette : ColorPalette, catScale : CGFloat, rainScale : CGFloat) {
-    player1Palette = player1ColorPalette
-    player2Palette = player2ColorPalette
+//  public init(size: CGSize, player1ColorPalette : ColorPalette, player2ColorPalette : ColorPalette, catScale : CGFloat, rainScale : CGFloat) {
+//    player1Palette = player1ColorPalette
+//    player2Palette = player2ColorPalette
+//
+//    self.catScale = catScale
+//    self.rainScale = rainScale
+//
+//    destinationOffset = 50 * ((catScale > 1) ? catScale : 1)
+//
+//    if catScale > 2 {
+//      giantMode = true
+//    }
+//
+//    super.init(color: SKColor(red:0.38, green:0.60, blue:0.65, alpha:1.0), size: size)
+//  }
 
-    self.catScale = catScale
-    self.rainScale = rainScale
+  override func attachedToScene() {}
+  override func detachedFromScene() {}
 
-    destinationOffset = 50 * ((catScale > 1) ? catScale : 1)
+  override func layoutScene(size : CGSize) {
+    isUserInteractionEnabled = true
+    anchorPoint = CGPoint()
 
-    if catScale > 2 {
-      giantMode = true
-    }
+    color = SKColor(red:0.38, green:0.60, blue:0.65, alpha:1.0)
 
-    super.init(size: size)
-  }
+    player1Palette = ColorManager.sharedInstance.getColorPalette(UserDefaultsManager.sharedInstance.playerOnePalette)
+    player2Palette = ColorManager.sharedInstance.getColorPalette(UserDefaultsManager.sharedInstance.playerTwoPalette)
 
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  public override func sceneDidLoad() {
     if giantMode {
       deadZone = 75
     }
 
     hud.setup(size: size)
-
+    hud.pingPongNavigation = self
+    
     addChild(hud)
-
-    backgroundColor = SKColor(red:0.38, green:0.60, blue:0.65, alpha:1.0)
 
     backgroundNode.setup(frame: frame, deadZone: deadZone, playerOnePalette: player1Palette, playerTwoPalette: player2Palette)
     addChild(backgroundNode)
-
-    //Override graviy for the cats
-    physicsWorld.gravity = CGVector()
-    physicsWorld.contactDelegate = self
 
     physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
     physicsBody?.restitution = 0.4
@@ -114,17 +116,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     setupCats()
 
     resetLocations(arc4random() % 2 == 0) //random start location
-
-    hud.quitButtonAction = {
-//      MenuScene.presentMenuScene(currentScene: self)
-
-      self.hud.quitButtonAction = nil
-      self.hud.rematchButtonAction = nil
-    }
-
-    hud.rematchButtonAction = {
-      self.rematchPressed()
-    }
   }
 
   private func setupPuck() {
@@ -184,8 +175,8 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
   }
 
   private func setupUmbrellas() {
-    umbrella1 = UmbrellaSprite.newInstance(palette: player1Palette, pingPong: true)
-    umbrella2 = UmbrellaSprite.newInstance(palette: player2Palette, pingPong: true)
+    umbrella1 = UmbrellaSprite(palette: player1Palette, pingPong: true)
+    umbrella2 = UmbrellaSprite(palette: player2Palette, pingPong: true)
 
     umbrella1.physicsBody?.restitution = 0.1
     umbrella2.physicsBody?.restitution = 0.1
@@ -251,7 +242,13 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     }
   }
 
-  private func rematchPressed() {
+  func quitPressed() {
+    if let parent = parent as? Router {
+      parent.navigate(to: .MainMenu)
+    }
+  }
+
+  func restartPressed() {
     let player1Lost = hud.playerTwoScore >= maxPoints
 
     hud.hideRematchButton()
@@ -363,18 +360,14 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
     }
   }
 
-  public override func update(_ currentTime: TimeInterval) {
-    //check if raindrop is outside bounds, then reset
+  override func getGravity() -> CGVector {
+    return CGVector(dx: 0, dy: 0)
+  }
 
+  override func update(dt : TimeInterval) { //check if raindrop is outside bounds, then reset
     if showingWinCondition {
       return
     }
-
-    if (self.lastUpdateTime == 0) {
-      self.lastUpdateTime = currentTime
-    }
-
-    let dt = currentTime - self.lastUpdateTime
 
     if roundStarted {
       currentNoHitTime += dt
@@ -408,8 +401,6 @@ public class PingPongScene : SKScene, SKPhysicsContactDelegate {
 
     cat2Destination.x = cat2X
     cat2.update(deltaTime: dt, foodLocation: cat2Destination)
-
-    lastUpdateTime = currentTime
   }
 
   public func didBegin(_ contact: SKPhysicsContact) {

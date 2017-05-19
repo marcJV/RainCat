@@ -9,6 +9,8 @@
 import SpriteKit
 
 public class PingPongHud : SKNode {
+  weak var pingPongNavigation : PingPongNavigation?
+
   private var playerOneScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private var playerTwoScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private var messageNode = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
@@ -17,9 +19,6 @@ public class PingPongHud : SKNode {
   private var rematchButton : TwoPaneButton!
 
   private var showingRematchButton = false
-
-  var quitButtonAction : (() -> ())?
-  var rematchButtonAction : (() ->())?
 
   private(set) var playerOneScore = 0
   private(set) var playerTwoScore = 0
@@ -51,7 +50,7 @@ public class PingPongHud : SKNode {
 
     let margin : CGFloat = 15
     quitButton.position = CGPoint(x: size.width / 2 - quitButton.size.width / 2, y: quitButton.size.height + margin)
-    quitButton.addTarget(self, selector: #selector(quitSelected(_:)), forControlEvents: .TouchUpInside)
+    quitButton.addTarget(self, selector: #selector(quitSelected), forControlEvents: .TouchUpInside)
     quitButton.zPosition = 1000
 
     addChild(quitButton)
@@ -65,7 +64,7 @@ public class PingPongHud : SKNode {
     rematchButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
     rematchButton.setup(text: "Rematch?", fontSize: 40)
     rematchButton.alpha = 0
-    rematchButton.addTarget(self, selector: #selector(rematchSelected(_:)), forControlEvents: .TouchUpInside)
+    rematchButton.addTarget(self, selector: #selector(rematchSelected), forControlEvents: .TouchUpInside)
     rematchButton.position = CGPoint(x: size.width / 2 - rematchButton.size.width / 2,
                                      y: messageNode.position.y - rematchButton.size.height / 2 - margin * 2)
     rematchButton.zPosition = 1000
@@ -100,12 +99,16 @@ public class PingPongHud : SKNode {
     }
   }
 
-  func quitSelected(_ sender:AnyObject?) {
-    quitButtonAction!()
+  func quitSelected() {
+    if let nav = pingPongNavigation {
+      nav.quitPressed()
+    }
   }
 
-  func rematchSelected(_ sender:AnyObject?) {
-    rematchButtonAction!()
+  func rematchSelected() {
+    if let nav = pingPongNavigation {
+      nav.restartPressed()
+    }
   }
 
   func showMessage(message : String) {

@@ -8,9 +8,8 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
-  private var lastUpdateTime : TimeInterval = 0
   private var currentRainDropSpawnTime : TimeInterval = 0
   private var rainDropSpawnRate : TimeInterval = 0.5
   private let foodEdgeMargin : CGFloat = 75.0
@@ -19,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private var cat : CatSprite!
   private var food : FoodSprite?
   private let hud = HudNode()
-  private var rainDropTexture : SKTexture
+  private var rainDropTexture : SKTexture!
 
   private var backgroundNode : BackgroundNode!
   private var groundNode : GroundNode!
@@ -29,45 +28,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   private var catScale : CGFloat = 1
   private var rainScale : CGFloat = 1
 
-  public init(size : CGSize, catScale : CGFloat, rainScale : CGFloat) {
-    switch rainScale {
-    case 2:
-      rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
-    case 3:
-      rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
-    default:
-      rainDropTexture = SKTexture(imageNamed: "rain_drop")
-    }
+//  public init(size : CGSize, catScale : CGFloat, rainScale : CGFloat) {
+//    switch rainScale {
+//    case 2:
+//      rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
+//    case 3:
+//      rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
+//    default:
+//      rainDropTexture = SKTexture(imageNamed: "rain_drop")
+//    }
+//
+//    super.init(size: size)
+//
+//    self.catScale = catScale
+//    self.rainScale = rainScale
+//  }
+//
+//  required init?(coder aDecoder: NSCoder) {
+//    fatalError("init(coder:) has not been implemented")
+//  }
 
-    super.init(size: size)
+  override func detachedFromScene() {}
 
-    self.catScale = catScale
-    self.rainScale = rainScale
-  }
+  override func layoutScene(size : CGSize) {
+    isUserInteractionEnabled = true
+    rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  override func sceneDidLoad() {
-    self.lastUpdateTime = 0
+    anchorPoint = CGPoint()
 
     //Hud Setup
     hud.setup(size: size, palette:  currentPalette)
-
-    hud.quitButtonAction = {
-      let transition = SKTransition.reveal(with: .up, duration: 0.75)
-      transition.pausesOutgoingScene = false
-      transition.pausesIncomingScene = false
-      
-//      let gameScene = MenuScene()
-//      gameScene.scaleMode = self.scaleMode
-
-//      self.view?.presentScene(gameScene, transition: transition)
-
-      self.hud.quitButtonAction = nil
-    }
-
+    hud.quitNavigation = self
     addChild(hud)
 
     //Background Setup
@@ -88,17 +79,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     worldFrame.size.width += 200
 
     self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
-    self.physicsWorld.contactDelegate = self
     self.physicsBody?.categoryBitMask = WorldFrameCategory
 
     //Add Umbrella
-    umbrella = UmbrellaSprite.newInstance(palette: currentPalette)
+    umbrella = UmbrellaSprite(palette: currentPalette)
     umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
 
     addChild(umbrella)
   }
 
-  override func didMove(to view: SKView) {
+  override func attachedToScene() {
     //Spawn initial cat and food
 
     switch catScale {
@@ -114,15 +104,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     spawnFood()
   }
 
+  func quitPressed() {
+    if let parent = parent as? Router {
+      parent.navigate(to: .MainMenu)
+    }
+  }
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     let touchPoint = touches.first?.location(in: self)
 
     if let point = touchPoint {
-      hud.touchBeganAtPoint(point: point)
 
-      if !hud.quitButtonPressed {
         umbrella.setDestination(destination: point)
-      }
+
     }
   }
 
@@ -130,32 +124,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let touchPoint = touches.first?.location(in: self)
 
     if let point = touchPoint {
-      hud.touchMovedToPoint(point: point)
 
-      if !hud.quitButtonPressed {
         umbrella.setDestination(destination: point)
-      }
+
     }
   }
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     let touchPoint = touches.first?.location(in: self)
 
-    if let point = touchPoint {
-      hud.touchEndedAtPoint(point: point)
-    }
+
   }
 
-  override func update(_ currentTime: TimeInterval) {
+  override func update(dt: TimeInterval) {
     // Called before each frame is rendered
-
-    // Initialize _lastUpdateTime if it has not already been
-    if (self.lastUpdateTime == 0) {
-      self.lastUpdateTime = currentTime
-    }
-
-    // Calculate time since last update
-    let dt = currentTime - self.lastUpdateTime
 
     // Update the Spawn Timer
     currentRainDropSpawnTime += dt
@@ -173,8 +155,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     cat.movementSpeed = cat.baseMovementSpeed + (cat.baseMovementSpeed * 0.1) * CGFloat(hud.score) / 10.0
-
-    self.lastUpdateTime = currentTime
   }
 
   //Spawning Functions
@@ -306,7 +286,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       resetColorPalette()
 
       rainDropSpawnRate = 0.5
-      physicsWorld.gravity = CGVector(dx: 0, dy: -7.8)
     case WorldFrameCategory:
       spawnCat()
     case FloorCategory:
@@ -314,6 +293,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     default:
       print("Something hit the cat")
     }
+  }
+
+  override func getGravity() -> CGVector {
+    return CGVector(dx: 0, dy: -7.8)
   }
 
   func handleFoodHit(contact: SKPhysicsContact) {
@@ -346,7 +329,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dx = 2.0
       }
 
-      physicsWorld.gravity = CGVector(dx: dx, dy: dy)
+      //TODO Fix gravity changer
+     // physicsWorld.gravity = CGVector(dx: dx, dy: dy)
 
       fallthrough
     case WorldFrameCategory:

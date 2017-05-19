@@ -13,6 +13,16 @@ public class RainDropBanner : SKNode, Touchable {
 
   var rainDrops = [RainDrops]()
 
+  func pause () {
+    for rainDrop in rainDrops {
+      rainDrop.raindrop.isPaused = isPaused
+      rainDrop.lcdRaindrop.isPaused = isPaused
+
+      rainDrop.raindrop.physicsBody?.isDynamic = isPaused
+      rainDrop.raindrop.speed = 0
+    }
+  }
+
   public func setup(maskNode : SKNode) {
     for i in 0...23 {
       let index = String(format: "%02d", i)
@@ -90,7 +100,7 @@ public class RainDropBanner : SKNode, Touchable {
       node.lcdRaindrop.position = node.raindrop.position
       node.lcdRaindrop.setScale(node.raindrop.xScale)
       node.lcdRaindrop.position.y += size.height //This fixes anchorpoint madness
-      node.lcdRaindrop.zRotation = node.raindrop.zRotation     
+      node.lcdRaindrop.zRotation = node.raindrop.zRotation
     }
   }
 }

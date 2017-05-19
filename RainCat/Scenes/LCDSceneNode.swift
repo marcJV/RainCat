@@ -9,19 +9,35 @@
 import Foundation
 import SpriteKit
 
-class LCDScene : SKScene {
+class LCDSceneNode : SceneNode {
   private var lcdScreen   : LCDScreenNode!
   private var leftButton  : TwoPaneButton!
   private var rightButton : TwoPaneButton!
   private var resetButton : TwoPaneButton!
   private var quitButton  : TwoPaneButton!
 
-  private var lastUpdateTime : TimeInterval = 0.0
-
   private var currentButton : TwoPaneButton?
   private var isQuitting = false
 
-  override func didMove(to view: SKView) {
+  override func layoutScene(size: CGSize) {
+    var scene : SKScene
+    anchorPoint = CGPoint(x: 0, y: 0)
+    color = BACKGROUND_COLOR
+
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      scene = SKScene(fileNamed: "LCDScene-iPhone")!//Todo make iphone variant
+    } else {
+      scene = SKScene(fileNamed: "LCDScene")!
+    }
+
+    for child in scene.children {
+      child.removeFromParent()
+      addChild(child)
+
+      //Fix position since SKS file's anchorpoint is (0,1)
+      child.position.y += size.height
+    }
+
     let lcdReference = childNode(withName: "lcd-reference")
 
     var controlsTextSize : CGFloat = 25
@@ -42,50 +58,49 @@ class LCDScene : SKScene {
 
     leftButton = childNode(withName: "left-button") as! TwoPaneButton!
     leftButton.setup(text: "left", fontSize: controlsTextSize)
-    leftButton.addTarget(self, selector: #selector(moveLeft(_:)), forControlEvents: .TouchUpInside)
+    leftButton.addTarget(self, selector: #selector(moveLeft), forControlEvents: .TouchUpInside)
 
     rightButton = childNode(withName: "right-button") as! TwoPaneButton!
     rightButton.setup(text: "right", fontSize: controlsTextSize)
-    rightButton.addTarget(self, selector: #selector(moveRight(_:)), forControlEvents: .TouchUpInside)
+    rightButton.addTarget(self, selector: #selector(moveRight), forControlEvents: .TouchUpInside)
 
     resetButton = childNode(withName: "reset-button") as! TwoPaneButton!
     resetButton.setup(text: "reset", fontSize: optionsTextSize)
-    resetButton.addTarget(self, selector: #selector(resetPressed(_:)), forControlEvents: [.TouchDown, .DragEnter])
-    resetButton.addTarget(self, selector: #selector(resetReleased(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside])
+    resetButton.addTarget(self, selector: #selector(resetPressed), forControlEvents: [.TouchDown, .DragEnter])
+    resetButton.addTarget(self, selector: #selector(resetReleased), forControlEvents: [.TouchUpInside, .TouchUpOutside])
 
     quitButton = childNode(withName: "quit-button") as! TwoPaneButton!
     quitButton.setup(text: "quit", fontSize: optionsTextSize)
-    quitButton.addTarget(self, selector: #selector(quitPressed(_:)), forControlEvents: .TouchUpInside)
+    quitButton.addTarget(self, selector: #selector(quitPressed), forControlEvents: .TouchUpInside)
   }
 
-  override func update(_ currentTime: TimeInterval) {
-    var deltaTime = currentTime - lastUpdateTime
-    lastUpdateTime = currentTime
+  override func attachedToScene() {}
 
-    if deltaTime > 1 {
-      deltaTime = 0
-    }
-    
-    lcdScreen.update(deltaTime: deltaTime)
+  override func detachedFromScene() {}
+
+  override func update(dt: TimeInterval) {
+    lcdScreen.update(deltaTime: dt)
   }
 
-  func moveLeft(_ sender:Any) {
+  func moveLeft() {
     lcdScreen.moveUmbrellaLeft()
   }
 
-  func moveRight(_ sender:Any) {
+  func moveRight() {
     lcdScreen.moveUmbrellaRight()
   }
 
-  func quitPressed(_ sender:Any) {
-//    MenuScene.presentMenuScene(currentScene: self)
+  func quitPressed() {
+    if let parent = parent as? Router {
+        parent.navigate(to: .MainMenu)
+    }
   }
 
-  func resetPressed(_ sender:Any) {
+  func resetPressed() {
     lcdScreen.resetPressed()
   }
 
-  func resetReleased(_ sender:Any) {
+  func resetReleased() {
     lcdScreen.resetReleased()
   }
 

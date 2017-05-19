@@ -22,7 +22,10 @@ let LCD_MAX_LOCATION : UInt32 = 6
 let lcdOffAlpha : CGFloat = 0.05
 let lcdOnAlpha  : CGFloat = 1
 
-let ScoreKey = "RAINCAT_HIGHSCORE"
+let ClassicSinglePlayerScoreKey = "RAINCAT_HIGHSCORE"
+let ClassicMultiplayerScoreKey = "RAINCAT_MULTIPLAYER_HIGHSCORE"
+let LCDSinglePlayerScoreKey = "RAINCAT_LCD_HIGHSCORE"
+
 let MuteKey = "RAINCAT_MUTED"
 let FirstLaunchPaletteChooser = "FIRST_LAUNCH_PALETTE_CHOOSER"
 let PlayerOnePaletteKey = "PLAYER_ONE_PALETTE"
@@ -30,8 +33,10 @@ let PlayerTwoPaletteKey = "PLAYER_TWO_PALETTE"
 
 let BASE_FONT_NAME = "PixelDigivolve"
 
-public func Distance(p1: CGPoint, p2: CGPoint) -> CGFloat {
-  return abs(sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2)))
+public func Distance(p1: CGPoint, p2: CGPoint, absoluteValue: Bool = true) -> CGFloat {
+  let distance = sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2))
+
+  return (absoluteValue ? abs(distance) : distance)
 }
 
 

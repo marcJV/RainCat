@@ -92,6 +92,79 @@ class TwoPaneButton : SKAControlSprite {
     }
   }
 
+
+  let moveKey = "moving_the_button_yay!"
+
+  func moveTo(y: CGFloat, duration: TimeInterval = 0.5, delay: TimeInterval = 0.0) {
+    runMoveAction(horizontally: true,
+                  positiveMovement:  y > position.y,
+                  point: CGPoint(x: position.x, y: y),
+                  duration : duration,
+                  delay: delay)
+  }
+
+  func moveTo(x: CGFloat, duration : TimeInterval = 0.5, delay: TimeInterval = 0.0) {
+    runMoveAction(horizontally: false,
+                  positiveMovement: x > position.x,
+                  point: CGPoint(x: x, y: position.y),
+                  duration : duration,
+                  delay: delay)
+  }
+
+  private func runMoveAction(horizontally : Bool, positiveMovement : Bool, point : CGPoint, duration : TimeInterval, delay : TimeInterval) {
+      removeAction(forKey: moveKey)
+    
+      let end = duration * 0.1
+
+      var startAmount : CGFloat = 0
+      var overshootAmount : CGFloat = 0
+      var settleAmount : CGFloat = 0
+
+      if positiveMovement {
+        print("moving up")
+
+        startAmount = -elevation
+        overshootAmount = elevation * 1.5
+        settleAmount = -elevation * 0.5
+      } else {
+        print("moving down")
+
+        startAmount = elevation * 1.5
+        overshootAmount = -elevation * 2
+        settleAmount = elevation * 0.5
+      }
+
+      var startAction : SKAction
+      var waitAction : SKAction
+      var overshootAction : SKAction
+      var settleAction : SKAction
+      let delayAction = SKAction.wait(forDuration: delay)
+      let moveAction = SKAction.move(to: point, duration: duration)
+
+      if horizontally {
+        startAction = SKAction.moveBy(x: 0, y: startAmount, duration: end)
+        overshootAction = SKAction.moveBy(x: 0, y: overshootAmount, duration: end * 2)
+        settleAction = SKAction.moveBy(x: 0, y: settleAmount, duration: end * 2)
+      } else {
+        startAction = SKAction.moveBy(x: startAmount, y: 0, duration: end)
+        overshootAction = SKAction.moveBy(x: overshootAmount, y: 0, duration: end * 2)
+        settleAction = SKAction.moveBy(x: settleAmount, y: 0, duration: end * 2)
+      }
+
+      waitAction = SKAction.wait(forDuration: duration - end * 2)
+
+      startAction.timingMode = .easeIn
+      overshootAction.timingMode = .easeOut
+      settleAction.timingMode = .easeInEaseOut
+      moveAction.timingMode = .easeInEaseOut
+
+      backgroundPane.run(SKAction.sequence([
+        delayAction, startAction, waitAction, overshootAction, settleAction
+        ]))
+
+      run(SKAction.sequence([delayAction, moveAction]), withKey: moveKey)
+  }
+
   override func updateControl() {
     if controlState.contains(.Highlighted) {
       foregroundPane.run(SKAction.move(to: zeroPosition, duration: 0.05))

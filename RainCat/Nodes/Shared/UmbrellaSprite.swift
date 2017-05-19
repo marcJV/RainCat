@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-public class UmbrellaSprite : SKSpriteNode, Palettable {
+class UmbrellaSprite : SKSpriteNode, Palettable {
   private var umbrellaTop : SKSpriteNode!
   private var umbrellaBottom : SKSpriteNode!
 
@@ -18,18 +18,47 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
   public var minimumHeight : CGFloat = 0
 
   private var isPingPong = false
+  var clickArea : SKAControlSprite?
 
-  public static func newInstance(palette : ColorPalette, pingPong : Bool = false) -> UmbrellaSprite {
-    let umbrella = UmbrellaSprite()
+  public init() {
+    super.init(texture: nil, color: .clear, size: .zero)
+  }
 
-    umbrella.isPingPong = pingPong
+  public required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+
+    clickArea = SKAControlSprite(texture: nil, color: .clear, size: .zero)
+    clickArea?.zPosition = 1000
+    
+    addChild(clickArea!)
+    clickArea!.isUserInteractionEnabled = true
+
+    if let playerNumber = userData?.value(forKey: "catpongplayer") as? Int {
+      if playerNumber == 1 {
+        setup(palette: ColorManager.sharedInstance.getColorPalette(UserDefaultsManager.sharedInstance.playerOnePalette))
+      } else {
+        setup(palette: ColorManager.sharedInstance.getColorPalette(UserDefaultsManager.sharedInstance.playerTwoPalette))
+      }
+    } else {
+      setup(palette: ColorManager.sharedInstance.getColorPalette(0))
+    }
+  }
+
+  convenience init(palette: ColorPalette, pingPong : Bool = false) {
+    self.init()
+
+    setup(palette: palette, pingPong: pingPong)
+  }
+
+  private func setup(palette : ColorPalette, pingPong : Bool = false) {
+    isPingPong = pingPong
 
     let top = SKSpriteNode(imageNamed: "umbrellaTop")
     let bottom = SKSpriteNode(imageNamed: "umbrellaBottom")
 
     if pingPong {
       top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
-      umbrella.anchorPoint = CGPoint(x: 1, y: 0.5)
+      anchorPoint = CGPoint(x: 1, y: 0.5)
     } else {
       let path = UIBezierPath()
       path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
@@ -57,17 +86,24 @@ public class UmbrellaSprite : SKSpriteNode, Palettable {
     top.color = palette.umbrellaTopColor
     bottom.color = palette.umbrellaBottomColor
 
-    top.position.y = (top.size.height + bottom.size.height) / 2
+    if xScale > 0 {
+      top.position.y = (top.size.height + bottom.size.height) / 2
+    } else {
+      top.position.y = (top.size.height + bottom.size.height) / 2 - 5
+    }
 
     bottom.position.x -= bottom.size.width / 4
 
-    umbrella.addChild(top)
-    umbrella.addChild(bottom)
+    addChild(top)
+    addChild(bottom)
 
-    umbrella.umbrellaTop = top
-    umbrella.umbrellaBottom = bottom
+    umbrellaTop = top
+    umbrellaBottom = bottom
 
-    return umbrella
+    if clickArea != nil {
+      clickArea?.size = CGSize(width: top.size.width, height: top.size.width)
+      clickArea?.position.y += 50
+    }
   }
 
   public func updatePosition(point : CGPoint) {

@@ -25,3 +25,4 @@ public func SKTTimingFunctionQuarticEaseOut(_ t: CGFloat) -> CGFloat {
   let f = t - 1.0
   return 1.0 - f * f * f * f
 }
+

@@ -36,11 +36,11 @@ class CreditLabelButtonSprite : SKAControlSprite {
   override func updateControl() {
     var action : SKAction
     if controlState.contains(.Disabled) {
-      action = SKAction.scale(to: 0.25, duration: 0.15)
+      action = SKAction.fadeAlpha(to: 0.25, duration: 0.1)
     } else if controlState.contains(.Highlighted) {
-      action = SKAction.scale(to: 1.1, duration: 0.15)
+      action = SKAction.fadeAlpha(to: 0.65, duration: 0.1)
     } else {
-      action = SKAction.scale(to: 1, duration: 0.15)
+      action = SKAction.fadeAlpha(to: 1, duration: 0.1)
     }
 
     label.run(action)

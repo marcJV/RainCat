@@ -61,4 +61,40 @@ class UserDefaultsManager {
     defaults.set(isMuted, forKey: MuteKey)
     defaults.synchronize()
   }
+
+  public func getClassicHighScore() -> Int {
+    let defaults = UserDefaults.standard
+
+    return defaults.integer(forKey: ClassicSinglePlayerScoreKey)
+  }
+
+  public func updateClassicHighScore(highScore : Int) {
+    let defaults = UserDefaults.standard
+    defaults.set(highScore, forKey: ClassicSinglePlayerScoreKey)
+    defaults.synchronize()
+  }
+
+  public func getClassicMultiplayerHighScore() -> Int {
+    let defaults = UserDefaults.standard
+
+    return defaults.integer(forKey: ClassicMultiplayerScoreKey)
+  }
+
+  public func updateClassicMultiplayerHighScore(highScore : Int) {
+    let defaults = UserDefaults.standard
+    defaults.set(highScore, forKey: ClassicMultiplayerScoreKey)
+    defaults.synchronize()
+  }
+
+  public func getLCDHighScore() -> Int {
+    let defaults = UserDefaults.standard
+
+    return defaults.integer(forKey: LCDSinglePlayerScoreKey)
+  }
+
+  public func updateLCDHighScore(highScore : Int) {
+    let defaults = UserDefaults.standard
+    defaults.set(highScore, forKey: LCDSinglePlayerScoreKey)
+    defaults.synchronize()
+  }
 }

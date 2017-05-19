@@ -8,117 +8,80 @@
 
 import SpriteKit
 
-public class PlayerSelectNode : SKNode, Touchable {
+public class PlayerSelectNode : SKNode, MenuNodeAnimation {
+  weak var menuNavigation : MenuNavigation?
 
   private var startButton : TwoPaneButton!
-  private var backButton : TwoPaneButton!
 
-  private let umbrella1 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getColorPalette(0))
-  private let umbrella2 = UmbrellaSprite.newInstance(palette: ColorManager.sharedInstance.getColorPalette(1))
+  private var catPongLabel : ShadowLabelNode!
 
-  private let versesTitle = ShadowLabelNode(fontNamed: BASE_FONT_NAME)
-
-  private var selectedNode : SKNode?
+  private var umbrella1 : UmbrellaSprite!
+  private var umbrella2 : UmbrellaSprite!
 
   private var player1ColorIndex = 0
   private var player2ColorIndex = 1
 
-  public var startAction : (() -> ())?
-  public var backAction : (() -> ())?
+  private var umbrella1Reference : AnimationReference!
+  private var umbrella2Reference : AnimationReference!
+  private var catPongLabelReference : AnimationReference!
+  private var buttonStartReference : AnimationReference!
 
-  public func setup(width : CGFloat) {
+  public func setup(sceneSize: CGSize) {
     player1ColorIndex = UserDefaultsManager.sharedInstance.playerOnePalette
     player2ColorIndex = UserDefaultsManager.sharedInstance.playerTwoPalette
+
+    umbrella1 = childNode(withName: "umbrella1") as! UmbrellaSprite
+    umbrella2 = childNode(withName: "umbrella2") as! UmbrellaSprite
 
     umbrella1.updatePalette(palette: player1ColorIndex)
     umbrella2.updatePalette(palette: player2ColorIndex)
 
-    let margin : CGFloat = 15
-    versesTitle.fontSize = 100
-    versesTitle.text = "Cat-Pong"
-    versesTitle.position = CGPoint(x: width / 2, y: 0)
-    addChild(versesTitle)
+    umbrella1.clickArea!.name = "umbrella1"
+    umbrella2.clickArea!.name = "umbrella2"
 
-    startButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
-    startButton.setup(text: "Start", fontSize: 30)
-    startButton.addTarget(self, selector: #selector(startCatPong(_:)), forControlEvents: .TouchUpInside)
+    umbrella1.clickArea?.addTarget(self, selector: #selector(umbrellaTapped(_:)), forControlEvents: .TouchUpInside)
+    umbrella2.clickArea?.addTarget(self, selector: #selector(umbrellaTapped(_:)), forControlEvents: .TouchUpInside)
 
-    startButton.position = CGPoint(x: width / 2 - startButton.size.width / 2, y: -versesTitle.fontSize)
-    addChild(startButton)
+    startButton = childNode(withName: "button-catpong-start") as! TwoPaneButton
+    startButton.addTarget(self, selector: #selector(startCatPong), forControlEvents: .TouchUpInside)
 
-    backButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 250, height: 50))
-    backButton.setup(text: "Back", fontSize: 25)
-    backButton.addTarget(self, selector: #selector(backToMenu(_:)), forControlEvents: .TouchUpInside)
-    backButton.position = CGPoint(x: width / 2 - backButton.size.width / 2,
-                                  y: startButton.position.y - startButton.size.height - margin * 2)
-    addChild(backButton)
+    catPongLabel = childNode(withName: "label-catpong") as! ShadowLabelNode
 
-    umbrella1.position = CGPoint(x: width * 0.15, y: startButton.position.y - 40)
-    addChild(umbrella1)
+    umbrella1Reference = AnimationReference(zeroPosition: umbrella1.position.x,
+                                          offscreenLeft: umbrella1.position.x - sceneSize.width,
+                                          offscreenRight: sceneSize.width + umbrella1.position.x)
 
-    umbrella2.position = CGPoint(x: width * 0.85, y: startButton.position.y - 40)
-    addChild(umbrella2)
+    umbrella2Reference = AnimationReference(zeroPosition: umbrella2.position.x,
+                                            offscreenLeft: umbrella2.position.x - sceneSize.width,
+                                            offscreenRight: sceneSize.width + umbrella2.position.x)
+
+    catPongLabelReference = AnimationReference(zeroPosition: catPongLabel.position.x,
+                                            offscreenLeft: catPongLabel.position.x - sceneSize.width,
+                                            offscreenRight: sceneSize.width + catPongLabel.position.x)
+
+    buttonStartReference = AnimationReference(zeroPosition: startButton.position.x,
+                                            offscreenLeft: startButton.position.x - sceneSize.width,
+                                            offscreenRight: sceneSize.width + startButton.position.x)
+
+    navigateOutToRight(duration: 0)
   }
 
-  public func touchBegan(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if selectedNode == nil {
-      if umbrella1.contains(point) {
-        selectedNode = umbrella1
-
-        handleAlpha(node: umbrella1, highlighted: true)
-      } else if umbrella2.contains(point) {
-        selectedNode = umbrella2
-
-        handleAlpha(node: umbrella2, highlighted: true)
-      }
-    }
+  func getName() -> String {
+    return "playerSelect"
   }
 
-  public func touchMoved(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if let selectedNode = selectedNode {
-      handleAlpha(node: selectedNode, highlighted: selectedNode.contains(point))
-    }
-  }
-
-  public func touchEnded(touch: UITouch) {
-    let point = touch.location(in: self)
-
-    if selectedNode == umbrella1 && umbrella1.contains(point) {
-      handleAlpha(node: umbrella1, highlighted: false)
-
+  func umbrellaTapped(_ sender : UmbrellaSprite) {
+    if sender.name == umbrella1.clickArea!.name {
       player1ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player1ColorIndex)
       umbrella1.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player1ColorIndex))
 
       UserDefaultsManager.sharedInstance.updatePlayerOnePalette(palette: player1ColorIndex)
-    } else if selectedNode == umbrella2 && umbrella2.contains(point) {
-      handleAlpha(node: umbrella2, highlighted: false)
-
+    } else {
       player2ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player2ColorIndex)
       umbrella2.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player2ColorIndex))
 
       UserDefaultsManager.sharedInstance.updatePlayerTwoPalette(palette: player2ColorIndex)
     }
-
-    selectedNode = nil
-  }
-
-  public func touchCancelled(touch: UITouch) {
-    selectedNode = nil
-
-    handleAlpha(node: umbrella1, highlighted: false)
-    handleAlpha(node: umbrella2, highlighted: false)
-  }
-
-  func startCatPong(_ sender:AnyObject) {
-    startAction!()
-  }
-
-  func backToMenu(_ sender:AnyObject) {
-    backAction!()
   }
 
   private func handleAlpha(node : SKNode, highlighted : Bool) {
@@ -137,8 +100,31 @@ public class PlayerSelectNode : SKNode, Touchable {
     return ColorManager.sharedInstance.getColorPalette(player2ColorIndex)
   }
 
-  func clearActions() {
-    startAction = nil
-    backAction = nil
+  func startCatPong() {
+    if let menu = menuNavigation {
+      menu.navigateToMultiplayerCatPong()
+    }
+  }
+
+  func navigateOutToLeft(duration: TimeInterval) {
+
+  }
+
+  func navigateInFromLeft(duration: TimeInterval) {
+
+  }
+
+  func navigateOutToRight(duration: TimeInterval) {
+    umbrella1.run(SKActionHelper.moveToEaseInOut(x: umbrella1Reference.offscreenRight, duration: duration))
+    umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.offscreenRight, duration: duration))
+    catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.offscreenRight, duration: duration))
+    startButton.moveTo(x: buttonStartReference.offscreenRight, duration: duration)
+  }
+
+  func navigateInFromRight(duration: TimeInterval) {
+    umbrella1.run(SKActionHelper.moveToEaseInOut(x: umbrella1Reference.zeroPosition, duration: duration))
+    umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration))
+    catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.zeroPosition, duration: duration))
+    startButton.moveTo(x: buttonStartReference.zeroPosition, duration: duration)
   }
 }

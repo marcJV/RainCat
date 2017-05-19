@@ -9,24 +9,19 @@
 import SpriteKit
 
 class HudNode : SKNode, Palettable {
+  weak var quitNavigation : QuitNavigation?
   private let scoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private(set) var score : Int = 0
   private var highScore : Int = 0
   private var showingHighScore = false
 
-  private(set) var quitButtonPressed = false
-
   private var quitButton : TwoPaneButton!
 
   private var highScoreColor = SKColor.white
 
-  var quitButtonAction : (() -> ())?
-
   //Setup hud here
   public func setup(size: CGSize, palette : ColorPalette) {
-    let defaults = UserDefaults.standard
-
-    highScore = defaults.integer(forKey: ScoreKey)
+    highScore = UserDefaultsManager.sharedInstance.getClassicHighScore()
 
     scoreNode.text = "\(score)"
     scoreNode.fontSize = 70
@@ -40,15 +35,17 @@ class HudNode : SKNode, Palettable {
     quitButton.elevation = 5
     quitButton.position = CGPoint(x: size.width - quitButton.size.width - 25, y: size.height - quitButton.size.height - 5)
     quitButton.zPosition = 1000
-    quitButton.addTarget(self, selector: #selector(quit(_:)), forControlEvents: .TouchUpInside)
+    quitButton.addTarget(self, selector: #selector(quit), forControlEvents: .TouchUpInside)
 
     highScoreColor = palette.groundColor
 
     addChild(quitButton)
   }
 
-  public func quit(_ sender:AnyObject) {
-    quitButtonAction!()
+  public func quit() {
+    if let quit = quitNavigation {
+      quit.quitPressed()
+    }
   }
 
   public func addPoint() {
@@ -59,9 +56,7 @@ class HudNode : SKNode, Palettable {
     if score > highScore {
       highScore = score
 
-      let defaults = UserDefaults.standard
-      defaults.set(score, forKey: ScoreKey)
-      defaults.synchronize()
+      UserDefaultsManager.sharedInstance.updateClassicHighScore(highScore: highScore)
 
       if !showingHighScore {
         showingHighScore = true
@@ -88,37 +83,6 @@ class HudNode : SKNode, Palettable {
 
   private func updateScoreboard() {
     scoreNode.text = "\(score)"
-  }
-
-  func touchBeganAtPoint(point: CGPoint) {
-    let containsPoint = quitButton.contains(point)
-
-    if quitButtonPressed && !containsPoint {
-      //Cancel the last click
-      quitButtonPressed = false
-//      quitButton.setUntouched()
-    } else if containsPoint {
-//      quitButton.setTouched()
-      quitButtonPressed = true
-    }
-  }
-
-  func touchMovedToPoint(point: CGPoint) {
-    if quitButtonPressed {
-      if quitButton.contains(point) {
-//        quitButton.setUntouched()
-      } else {
-//        quitButton.setTouched()
-      }
-    }
-  }
-
-  func touchEndedAtPoint(point: CGPoint) {
-    if quitButton.contains(point) && quitButtonAction != nil {
-      quitButtonAction!()
-    }
-
-//    quitButton.setUntouched()
   }
 
   public func updatePalette(palette: ColorPalette) {

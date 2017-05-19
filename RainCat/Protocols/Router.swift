@@ -13,5 +13,5 @@ protocol Router {
 }
 
 public enum Location {
-  case Logo, MainMenu, Classic, LCD, ClassicMulti, CatPont
+  case Logo, MainMenu, Classic, LCD, ClassicMulti, CatPong
 }
