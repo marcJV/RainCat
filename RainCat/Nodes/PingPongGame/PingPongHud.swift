@@ -44,7 +44,7 @@ public class PingPongHud : SKNode {
     playerOneScoreNode.text = "\(playerOneScore)"
     playerTwoScoreNode.text = "\(playerTwoScore)"
 
-    quitButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 75, height: 35))
+    quitButton = TwoPaneButton(color: .clear, size: CGSize(width: 75, height: 35))
     quitButton.setup(text: "Quit", fontSize: 20)
     quitButton.elevation = 5
 

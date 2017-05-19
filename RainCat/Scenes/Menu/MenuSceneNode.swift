@@ -137,10 +137,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     titleNode.setup(sceneSize: size)
     titleNode.menuNavigation = self
 
-    let multiplayerReference = childNode(withName: "multiplayer-reference")
-    multiplayerNode = multiplayerReference?.children[0].childNode(withName: "group-multiplayer") as! MultiplayerNode
-    multiplayerNode.setup(sceneSize: size)
-    multiplayerNode.menuNavigation = self
+
 
     let creditsReference = childNode(withName: "menu-reference")
     creditsNode = creditsReference?.children[0].childNode(withName: "group-credits") as! CreditsNode
@@ -151,6 +148,13 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     playerSelectNode = playerSelectReference?.children[0].childNode(withName: "group-playerselect") as! PlayerSelectNode
     playerSelectNode.setup(sceneSize: size)
     playerSelectNode.menuNavigation = self
+
+    let multiplayerReference = childNode(withName: "multiplayer-reference")
+    multiplayerNode = multiplayerReference?.children[0].childNode(withName: "group-multiplayer") as! MultiplayerNode
+    multiplayerNode.setup(sceneSize: size)
+    multiplayerNode.menuNavigation = self
+    multiplayerNode.umbrella1LeftPosition = playerSelectNode.umbrellaLeftPositions.umbrella1Left
+    multiplayerNode.umbrella2LeftPosition = playerSelectNode.umbrellaLeftPositions.umbrella2Left
 
     setupSoundButton(maskNode: maskNode)
 
@@ -233,7 +237,6 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
           catSprite.run(SKAction.scale(to: 3, duration: 0.05))
         case 0...1:
           catSprite.run(SKAction.scale(to: 1, duration: 0.05))
-          rainDropBanner.makeItRain()
         default:
           catSprite.run(SKAction.scale(to: 0.5, duration: 0.05))
         }
@@ -331,7 +334,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       currentNode.navigateOutToRight(duration: 1.0)
 
       if currentNode.getName() == playerSelectNode.getName() {
-        multiplayerNode.navigateInFromRight(duration: 1.0)
+        multiplayerNode.navigateInFromLeft(duration: 1.0)
         currentNode = multiplayerNode
       } else {
         backButton.moveTo(y: backButtonReference.offscreenLeft)

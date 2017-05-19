@@ -25,17 +25,32 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
   var umbrella1Reference : AnimationReference!
   var umbrella2Reference : AnimationReference!
 
+  var umbrella1LeftPosition : CGPoint!
+  var umbrella2LeftPosition : CGPoint!
+
+  var umbrella1StartScale : CGFloat!
+  var umbrella2StartScale : CGFloat!
+
+  var umbrella1ZeroYPosition : CGFloat!
+  var umbrella2ZeroYPosition : CGFloat!
+
+  var umbrella1ZeroAngle : CGFloat!
+  var umbrella2ZeroAngle : CGFloat!
+
   var selectedButton : TwoPaneButton?
+
+  private var player1ColorIndex = 0
+  private var player2ColorIndex = 1
 
   func setup(sceneSize: CGSize) {
     classicButton = childNode(withName: "button-multi-classic") as! TwoPaneButton!
     classicReference = AnimationReference(zeroPosition: classicButton.position.x,
-                                          offscreenLeft: -sceneSize.width - classicButton.position.x,
+                                          offscreenLeft: -sceneSize.width,
                                           offscreenRight: sceneSize.width + classicButton.position.x)
 
     catPongButton = childNode(withName: "button-multi-cat-pong") as! TwoPaneButton!
     catPongReference = AnimationReference(zeroPosition: catPongButton.position.x,
-                                          offscreenLeft: -sceneSize.width - catPongButton.position.x,
+                                          offscreenLeft: -sceneSize.width,
                                           offscreenRight: sceneSize.width + catPongButton.position.x)
 
     multiplayerText = childNode(withName: "label-multiplayer") as! ShadowLabelNode!
@@ -45,18 +60,39 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
 
     classicHighScoreText = childNode(withName: "label-multi-classic-highscore") as! SKLabelNode!
     classicHighScoreReference = AnimationReference(zeroPosition: classicHighScoreText.position.x,
-                                                   offscreenLeft: -sceneSize.width - classicHighScoreText.position.x,
+                                                   offscreenLeft: -sceneSize.width,
                                                    offscreenRight: sceneSize.width + classicHighScoreText.position.x)
 
     umbrella1 = childNode(withName: "umbrella-1") as! UmbrellaSprite!
     umbrella1Reference = AnimationReference(zeroPosition: umbrella1.position.x,
-                                            offscreenLeft: -sceneSize.width - umbrella1.position.x,
+                                            offscreenLeft: -sceneSize.width,
                                             offscreenRight: sceneSize.width + umbrella1.position.x)
 
     umbrella2 = childNode(withName: "umbrella-2") as! UmbrellaSprite!
     umbrella2Reference = AnimationReference(zeroPosition: umbrella2.position.x,
-                                            offscreenLeft: -sceneSize.width - umbrella2.position.x,
+                                            offscreenLeft: -sceneSize.width,
                                             offscreenRight: sceneSize.width + umbrella2.position.x)
+
+    player1ColorIndex = UserDefaultsManager.sharedInstance.playerOnePalette
+    player2ColorIndex = UserDefaultsManager.sharedInstance.playerTwoPalette
+
+    umbrella1.updatePalette(palette: player1ColorIndex)
+    umbrella2.updatePalette(palette: player2ColorIndex)
+
+    umbrella1ZeroYPosition = umbrella1.position.y
+    umbrella2ZeroYPosition = umbrella2.position.y
+
+    umbrella1StartScale = umbrella1.yScale
+    umbrella2StartScale = umbrella2.yScale
+
+    umbrella1ZeroAngle = umbrella1.zRotation
+    umbrella2ZeroAngle = umbrella2.zRotation
+
+    umbrella1.clickArea!.name = "umbrella1"
+    umbrella2.clickArea!.name = "umbrella2"
+
+    umbrella1.clickArea?.addTarget(self, selector: #selector(umbrellaTapped(_:)), forControlEvents: .TouchUpInside)
+    umbrella2.clickArea?.addTarget(self, selector: #selector(umbrellaTapped(_:)), forControlEvents: .TouchUpInside)
 
     classicButton.addTarget(self, selector: #selector(navigateToClassic), forControlEvents: .TouchUpInside)
     catPongButton.addTarget(self, selector: #selector(navigateToCatPong), forControlEvents: .TouchUpInside)
@@ -66,6 +102,20 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
 
   func getName() -> String {
     return "multiplayer"
+  }
+
+  func umbrellaTapped(_ sender : UmbrellaSprite) {
+    if sender.name == umbrella1.clickArea!.name {
+      player1ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player1ColorIndex)
+      umbrella1.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player1ColorIndex))
+
+      UserDefaultsManager.sharedInstance.updatePlayerOnePalette(palette: player1ColorIndex)
+    } else {
+      player2ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player2ColorIndex)
+      umbrella2.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player2ColorIndex))
+
+      UserDefaultsManager.sharedInstance.updatePlayerTwoPalette(palette: player2ColorIndex)
+    }
   }
 
   func navigateInFromRight(duration: TimeInterval) {
@@ -78,17 +128,18 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration * 1.15))
   }
 
-  func navigateInFromLeft(duration: TimeInterval) {
-    classicButton.moveTo(x: classicReference.zeroPosition, duration: duration)
-    catPongButton.moveTo(x: catPongReference.zeroPosition, duration: duration)
+  public func playerOnePalette() -> ColorPalette {
+    return ColorManager.sharedInstance.getColorPalette(player1ColorIndex)
+  }
 
-    multiplayerText.run(SKActionHelper.moveToEaseInOut(x: multiplayerReference.zeroPosition, duration: duration))
-    classicHighScoreText.run(SKActionHelper.moveToEaseInOut(x: classicHighScoreReference.zeroPosition, duration: duration * 1.05))
-    umbrella1.run(SKActionHelper.moveToEaseInOut(x: umbrella1Reference.zeroPosition, duration: duration * 1.1))
-    umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration * 1.15))
+  public func playerTwoPalette() -> ColorPalette {
+    return ColorManager.sharedInstance.getColorPalette(player2ColorIndex)
   }
 
   func navigateOutToRight(duration: TimeInterval) {
+    umbrella1.clickArea?.isUserInteractionEnabled = false
+    umbrella2.clickArea?.isUserInteractionEnabled = false
+
     selectedButton = nil
 
     classicButton.moveTo(x: classicReference.offscreenRight, duration: duration)
@@ -114,8 +165,37 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKActionHelper.moveToEaseInOut(x: umbrella2Reference.offscreenRight, duration: duration)
       ]))
   }
-  
+
+  func navigateInFromLeft(duration: TimeInterval) {
+    umbrella1.clickArea?.isUserInteractionEnabled = false
+    umbrella2.clickArea?.isUserInteractionEnabled = false
+
+    classicButton.moveTo(x: classicReference.zeroPosition, duration: duration)
+    catPongButton.moveTo(x: catPongReference.zeroPosition, duration: duration)
+
+    multiplayerText.run(SKActionHelper.moveToEaseInOut(x: multiplayerReference.zeroPosition, duration: duration))
+    classicHighScoreText.run(SKActionHelper.moveToEaseInOut(x: classicHighScoreReference.zeroPosition, duration: duration * 1.05))
+
+    umbrella1.run(SKAction.group([
+      SKActionHelper.rotateToEaseInOut(angle: umbrella1ZeroAngle, duration: duration),
+      SKAction.scaleX(to: -umbrella1StartScale, duration: duration),
+      SKAction.scaleY(to: umbrella1StartScale, duration: duration),
+      SKAction.move(to: CGPoint(x: umbrella1Reference.zeroPosition, y: umbrella1ZeroYPosition), duration: duration)
+
+      ]))
+
+    umbrella2.run(SKAction.group([
+      SKActionHelper.rotateToEaseInOut(angle: umbrella2ZeroAngle, duration: duration),
+      SKAction.scale(to: umbrella2StartScale, duration: duration),
+      SKAction.move(to: CGPoint(x: umbrella2Reference.zeroPosition, y: umbrella2ZeroYPosition), duration: duration)
+      ]))
+
+  }
+
   func navigateOutToLeft(duration: TimeInterval) {
+    umbrella1.clickArea?.isUserInteractionEnabled = true
+    umbrella2.clickArea?.isUserInteractionEnabled = true
+
     classicButton.moveTo(x: classicReference.offscreenLeft, duration: duration)
     catPongButton.moveTo(x: catPongReference.offscreenLeft, duration: duration)
 
@@ -129,14 +209,18 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKActionHelper.moveToEaseInOut(x: classicHighScoreReference.offscreenLeft, duration: duration)
       ]))
 
-    umbrella1.run(SKAction.sequence([
-      SKAction.wait(forDuration: 0.1),
-      SKActionHelper.moveToEaseInOut(x: umbrella1Reference.offscreenLeft, duration: duration)
+    umbrella1.run(SKAction.group([
+      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration),
+      SKAction.scaleX(to: -1, duration: duration),
+      SKAction.scaleY(to: 1, duration: duration),
+      SKActionHelper.moveToEasInOut(point: umbrella1LeftPosition, duration: duration)
+
       ]))
 
-    umbrella2.run(SKAction.sequence([
-      SKAction.wait(forDuration: 0.1),
-      SKActionHelper.moveToEaseInOut(x: umbrella2Reference.offscreenLeft, duration: duration)
+    umbrella2.run(SKAction.group([
+      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration),
+      SKAction.scale(to: 1, duration: duration),
+      SKActionHelper.moveToEasInOut(point: umbrella2LeftPosition, duration: duration)
       ]))
   }
 
@@ -145,7 +229,7 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       nav.navigateToMultiplerClassic()
     }
   }
-
+  
   func navigateToCatPong() {
     if let nav = menuNavigation {
       nav.menuToPlayerSelect()

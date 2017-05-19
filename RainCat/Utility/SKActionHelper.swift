@@ -24,4 +24,20 @@ class SKActionHelper {
 
     return action
   }
+
+  static func rotateToEaseInOut(angle: CGFloat, duration : TimeInterval) -> SKAction {
+    let action = SKAction.rotate(toAngle: angle, duration: duration)
+
+    action.timingMode = .easeInEaseOut
+
+    return action
+  }
+
+  static func moveToEasInOut(point: CGPoint, duration: TimeInterval) -> SKAction {
+    let action = SKAction.move(to: point, duration: duration)
+
+    action.timingMode = .easeInEaseOut
+
+    return action
+  }
 }
