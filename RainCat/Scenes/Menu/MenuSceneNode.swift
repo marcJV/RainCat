@@ -410,7 +410,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     if !isNavigating {
       soundForegroundSprite.setReleased(toggleState: false)
       soundMask.setReleased(toggleState: false)
-      
+
       if(SoundManager.sharedInstance.toggleMute()) {
         soundForegroundSprite.setMuted()
         soundMask.setMuted()

@@ -10,7 +10,7 @@ import SpriteKit
 
 public class LogoScene : SceneNode {
 
-  let backgroundSprite = SKSpriteNode(imageNamed: "loony")
+  let backgroundSprite = SKSpriteNode()
   let maskNode = SKCropNode()
   let circleNode = SKShapeNode(circleOfRadius: 20)
 
@@ -43,6 +43,13 @@ public class LogoScene : SceneNode {
     circleNode.position = CGPoint(x: size.width / 2, y: size.height / 2)
     circleNode.fillColor = SKColor(red:0.18, green:0.20, blue:0.22, alpha:1.0)
     circleNode.lineWidth = 0
+
+    let texture = SKTexture(imageNamed: "loony")
+
+    backgroundSprite.size.width = size.height / texture.size().height * texture.size().width
+    backgroundSprite.size.height = size.height
+
+    backgroundSprite.texture = texture
 
     circleNode.zPosition = 1
     addChild(circleNode)
