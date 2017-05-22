@@ -9,6 +9,7 @@
 import SpriteKit
 
 class TwoPaneButton : SKAControlSprite {
+
   private var foregroundPane : SKSpriteNode!
   private var backgroundPane : SKSpriteNode!
   private var label : SKLabelNode!
@@ -19,8 +20,10 @@ class TwoPaneButton : SKAControlSprite {
     super.init(texture: texture, color: color, size: size)
   }
 
-  convenience init(color: SKColor, size : CGSize) {
-    self.init(texture: nil, color: color, size: size)
+  convenience init(text: String, textSize: CGFloat, size : CGSize) {
+    self.init(texture: nil, color: .clear, size: size)
+
+    setup(text: text, fontSize: textSize)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -66,23 +69,32 @@ class TwoPaneButton : SKAControlSprite {
 
     self.color = SKColor.clear
 
-    backgroundPane = SKSpriteNode(color: SKColor(red:0.79, green:0.76, blue:0.37, alpha:1.0), size: size)
-    backgroundPane.position = zeroPosition
+    if backgroundPane == nil {
+      backgroundPane = SKSpriteNode(color: SKColor(red:0.79, green:0.76, blue:0.37, alpha:1.0), size: size)
+      backgroundPane.position = zeroPosition
+      backgroundPane.anchorPoint = anchorPoint
 
-    foregroundPane = SKSpriteNode(color: SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0), size: size)
-    foregroundPane.anchorPoint = anchorPoint
-    backgroundPane.anchorPoint = anchorPoint
+      addChild(backgroundPane)
+    }
 
-    label = SKLabelNode(fontNamed: BASE_FONT_NAME)
+    if foregroundPane == nil {
+      foregroundPane = SKSpriteNode(color: SKColor(red:0.99, green:0.92, blue:0.55, alpha:1.0), size: size)
+      foregroundPane.anchorPoint = anchorPoint
+
+      addChild(foregroundPane)
+    }
+
+    if label == nil {
+      label = SKLabelNode(fontNamed: BASE_FONT_NAME)
+      label.fontSize = fontSize
+      label.fontColor = SKColor(red:0.29, green:0.29, blue:0.29, alpha:1.0)
+      label.horizontalAlignmentMode = .center
+      label.verticalAlignmentMode = .center
+
+      foregroundPane.addChild(label)
+    }
+
     label.text = text
-    label.fontSize = fontSize
-    label.fontColor = SKColor(red:0.29, green:0.29, blue:0.29, alpha:1.0)
-    label.horizontalAlignmentMode = .center
-    label.verticalAlignmentMode = .center
-
-    addChild(backgroundPane)
-    addChild(foregroundPane)
-    foregroundPane.addChild(label)
 
     if let sksElevation = userData?.value(forKey: "elevation") as? Int {
       elevation = CGFloat(sksElevation)

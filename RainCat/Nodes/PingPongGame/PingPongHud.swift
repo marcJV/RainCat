@@ -17,8 +17,12 @@ public class PingPongHud : SKNode {
 
   private var quitButton : TwoPaneButton!
   private var rematchButton : TwoPaneButton!
+  private var quitZeroPosition : CGFloat = 0
+  private var quitHidePosition : CGFloat = 0
 
   private var showingRematchButton = false
+
+  private var showingQuit = true
 
   private(set) var playerOneScore = 0
   private(set) var playerTwoScore = 0
@@ -44,12 +48,13 @@ public class PingPongHud : SKNode {
     playerOneScoreNode.text = "\(playerOneScore)"
     playerTwoScoreNode.text = "\(playerTwoScore)"
 
-    quitButton = TwoPaneButton(color: .clear, size: CGSize(width: 75, height: 35))
-    quitButton.setup(text: "Quit", fontSize: 20)
+    quitButton = TwoPaneButton(text: "Quit", textSize: 20, size: CGSize(width: 95, height: 45))
     quitButton.elevation = 5
 
     let margin : CGFloat = 15
-    quitButton.position = CGPoint(x: size.width / 2 - quitButton.size.width / 2, y: quitButton.size.height + margin)
+    quitZeroPosition = quitButton.size.height + margin
+    quitHidePosition = -20
+    quitButton.position = CGPoint(x: size.width / 2 - quitButton.size.width / 2, y: quitZeroPosition)
     quitButton.addTarget(self, selector: #selector(quitSelected), forControlEvents: .TouchUpInside)
     quitButton.zPosition = 1000
 
@@ -61,8 +66,7 @@ public class PingPongHud : SKNode {
     messageNode.zPosition = 1000
     addChild(messageNode)
 
-    rematchButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 300, height: 70))
-    rematchButton.setup(text: "Rematch?", fontSize: 40)
+    rematchButton = TwoPaneButton(text: "Rematch?", textSize: 40, size: CGSize(width: 300, height: 70))
     rematchButton.alpha = 0
     rematchButton.addTarget(self, selector: #selector(rematchSelected), forControlEvents: .TouchUpInside)
     rematchButton.position = CGPoint(x: size.width / 2 - rematchButton.size.width / 2,
@@ -72,6 +76,8 @@ public class PingPongHud : SKNode {
   }
 
   public func incrementPlayerOne() {
+    showQuitButton()
+    
     playerOneScore += 1
 
     playerOneScoreNode.text = "\(playerOneScore)"
@@ -86,6 +92,8 @@ public class PingPongHud : SKNode {
   }
 
   public func incrementPlayerTwo() {
+    showQuitButton()
+
     playerTwoScore += 1
 
     playerTwoScoreNode.text = "\(playerTwoScore)"
@@ -109,6 +117,23 @@ public class PingPongHud : SKNode {
     if let nav = pingPongNavigation {
       nav.restartPressed()
     }
+  }
+
+  func showQuitButton() {
+    if !showingQuit {
+      quitButton.moveTo(y: quitZeroPosition)
+    }
+
+    showingQuit = true
+
+  }
+
+  func hideQuitButton() {
+    if showingQuit {
+      quitButton.moveTo(y: quitHidePosition)
+    }
+
+    showingQuit = false
   }
 
   func showMessage(message : String) {

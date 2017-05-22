@@ -197,6 +197,8 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
   }
 
   private func resetLocations(_ playerOnePuck : Bool) {
+    hud.showQuitButton()
+
     cat1.physicsBody?.velocity = CGVector()
     cat1.physicsBody?.angularVelocity = 0
 
@@ -419,6 +421,11 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
 
     switch otherBody.categoryBitMask {
     case UmbrellaCategory:
+
+      if !roundStarted {
+        hud.hideQuitButton()
+      }
+
       roundStarted = true
 
       let isPlayer1Hit = otherBody.node?.parent == umbrella1
