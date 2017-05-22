@@ -123,6 +123,8 @@ public class CreditsNode : SKNode, MenuNodeAnimation {
     cathrynButton.run(SKActionHelper.moveToEaseInOut(x: designReference.offscreenRight, duration: duration))
     morganButton.run(SKActionHelper.moveToEaseInOut(x: designReference.offscreenRight, duration: duration * 0.95))
     lauraButton.run(SKActionHelper.moveToEaseInOut(x: designReference.offscreenRight, duration: duration * 0.9))
+
+    tempDisableButton(duration: duration)
   }
   
   func navigateInFromRight(duration: TimeInterval) {
@@ -139,5 +141,27 @@ public class CreditsNode : SKNode, MenuNodeAnimation {
     cathrynButton.run(SKActionHelper.moveToEaseInOut(x: designReference.zeroPosition, duration: duration))
     morganButton.run(SKActionHelper.moveToEaseInOut(x: designReference.zeroPosition, duration: duration * 1.05))
     lauraButton.run(SKActionHelper.moveToEaseInOut(x: designReference.zeroPosition, duration: duration * 1.1))
+
+    tempDisableButton(duration: duration)
+  }
+
+  func tempDisableButton(duration : TimeInterval) {
+    logoButton.isUserInteractionEnabled = false
+    marcButton.isUserInteractionEnabled = false
+    jeffButton.isUserInteractionEnabled = false
+    bensoundButton.isUserInteractionEnabled = false
+    cathrynButton.isUserInteractionEnabled = false
+    morganButton.isUserInteractionEnabled = false
+    lauraButton.isUserInteractionEnabled = false
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.logoButton.isUserInteractionEnabled = true
+      self.marcButton.isUserInteractionEnabled = true
+      self.jeffButton.isUserInteractionEnabled = true
+      self.bensoundButton.isUserInteractionEnabled = true
+      self.cathrynButton.isUserInteractionEnabled = true
+      self.morganButton.isUserInteractionEnabled = true
+      self.lauraButton.isUserInteractionEnabled = true
+    }
   }
 }

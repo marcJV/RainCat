@@ -119,6 +119,14 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     }
   }
 
+  public func playerOnePalette() -> ColorPalette {
+    return ColorManager.sharedInstance.getColorPalette(player1ColorIndex)
+  }
+
+  public func playerTwoPalette() -> ColorPalette {
+    return ColorManager.sharedInstance.getColorPalette(player2ColorIndex)
+  }
+
   func navigateInFromRight(duration: TimeInterval) {
     classicButton.moveTo(x: classicReference.zeroPosition, duration: duration)
     catPongButton.moveTo(x: catPongReference.zeroPosition, duration: duration)
@@ -127,14 +135,8 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     classicHighScoreText.run(SKActionHelper.moveToEaseInOut(x: classicHighScoreReference.zeroPosition, duration: duration * 1.05))
     umbrella1.run(SKActionHelper.moveToEaseInOut(x: umbrella1Reference.zeroPosition, duration: duration * 1.1))
     umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration * 1.15))
-  }
 
-  public func playerOnePalette() -> ColorPalette {
-    return ColorManager.sharedInstance.getColorPalette(player1ColorIndex)
-  }
-
-  public func playerTwoPalette() -> ColorPalette {
-    return ColorManager.sharedInstance.getColorPalette(player2ColorIndex)
+    tempDisableButton(duration: duration)
   }
 
   func navigateOutToRight(duration: TimeInterval) {
@@ -165,6 +167,8 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKAction.wait(forDuration: 0.1),
       SKActionHelper.moveToEaseInOut(x: umbrella2Reference.offscreenRight, duration: duration)
       ]))
+
+    tempDisableButton(duration: duration)
   }
 
   func navigateInFromLeft(duration: TimeInterval) {
@@ -190,6 +194,8 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKAction.scale(to: umbrella2StartScale, duration: duration),
       SKAction.move(to: CGPoint(x: umbrella2Reference.zeroPosition, y: umbrella2ZeroYPosition), duration: duration)
       ]))
+
+    tempDisableButton(duration: duration)
   }
 
   func navigateOutToLeft(duration: TimeInterval) {
@@ -221,17 +227,33 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKAction.scale(to: 1, duration: duration * 0.5),
       SKActionHelper.moveToEasInOut(point: umbrella2LeftPosition, duration: duration * 0.9)
       ]))
+
+    tempDisableButton(duration: duration)
   }
 
   func navigateToClassic() {
     if let nav = menuNavigation {
       nav.navigateToMultiplerClassic()
     }
+
+    tempDisableButton(duration: 1)
   }
   
   func navigateToCatPong() {
     if let nav = menuNavigation {
       nav.menuToPlayerSelect()
+    }
+
+    tempDisableButton(duration: 1)
+  }
+
+  func tempDisableButton(duration : TimeInterval) {
+    classicButton.isUserInteractionEnabled = false
+    catPongButton.isUserInteractionEnabled = false
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.classicButton.isUserInteractionEnabled = true
+      self.catPongButton.isUserInteractionEnabled = true
     }
   }
 }

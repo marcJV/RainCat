@@ -46,6 +46,8 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
 
       menu.menuToSinglePlayer()
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func multiplayerButtonClicked(_ sender : TwoPaneButton) {
@@ -54,6 +56,8 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
 
       menu.menuToMultiplayer()
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func getName() -> String {
@@ -88,6 +92,8 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
       ]))
 
     selectedButton = nil
+
+    tempDisableButton(duration: duration)
   }
 
   func navigateInFromRight(duration: TimeInterval) {
@@ -121,9 +127,22 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
       SKAction.wait(forDuration: wait),
       SKActionHelper.moveToEaseInOut(x: titleReference.offscreenLeft, duration: duration)
       ]))
+
+    tempDisableButton(duration: duration)
   }
 
   func navigateOutToRight(duration: TimeInterval) {
     //Not implimented
+  }
+
+
+  func tempDisableButton(duration : TimeInterval) {
+    singlePlayerButton.isUserInteractionEnabled = false
+    multiPlayerButton.isUserInteractionEnabled = false
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.singlePlayerButton.isUserInteractionEnabled = true
+      self.multiPlayerButton.isUserInteractionEnabled = true
+    }
   }
 }

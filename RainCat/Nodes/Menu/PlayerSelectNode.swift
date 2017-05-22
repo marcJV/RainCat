@@ -86,6 +86,8 @@ public class PlayerSelectNode : SKNode, MenuNodeAnimation {
     umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.offscreenRight, duration: duration))
     catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.offscreenRight, duration: duration))
     startButton.moveTo(x: buttonStartReference.offscreenRight, duration: duration)
+
+    tempDisableButton(duration: 1)
   }
 
   func navigateInFromRight(duration: TimeInterval) {
@@ -93,5 +95,15 @@ public class PlayerSelectNode : SKNode, MenuNodeAnimation {
     //umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration))
     catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.zeroPosition, duration: duration * 0.9))
     startButton.moveTo(x: buttonStartReference.zeroPosition, duration: duration)
+
+    tempDisableButton(duration: 1)
+  }
+
+  func tempDisableButton(duration : TimeInterval) {
+    startButton.isUserInteractionEnabled = false
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.startButton.isUserInteractionEnabled = true
+    }
   }
 }

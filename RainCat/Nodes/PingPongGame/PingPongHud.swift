@@ -125,7 +125,6 @@ public class PingPongHud : SKNode {
     }
 
     showingQuit = true
-
   }
 
   func hideQuitButton() {

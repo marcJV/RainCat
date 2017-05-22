@@ -254,7 +254,6 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     }
   }
 
-
   func getName() -> String {
     return "menu"
   }
@@ -267,6 +266,9 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       navigationItem = .Classic
       rainDropBanner.makeItRain()
     }
+
+    backButton.isUserInteractionEnabled = false
+    tempDisableButton(duration: 1)
   }
 
   func navigateToSinglePlayerLCD() {
@@ -277,6 +279,9 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       navigationItem = .LCD
       rainDropBanner.makeItRain()
     }
+
+    backButton.isUserInteractionEnabled = false
+    tempDisableButton(duration: 1)
   }
 
   func navigateToMultiplerClassic() {
@@ -284,6 +289,10 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       navigationItem = .ClassicMulti
       rainDropBanner.makeItRain()
     }
+
+
+    backButton.isUserInteractionEnabled = false
+    tempDisableButton(duration: 1)
   }
 
   func navigateToMultiplayerCatPong() {
@@ -291,6 +300,9 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       navigationItem = .CatPong
       rainDropBanner.makeItRain()
     }
+
+    backButton.isUserInteractionEnabled = false
+    tempDisableButton(duration: 1)
   }
 
   func menuToSinglePlayer() {
@@ -304,6 +316,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
       currentNode = self
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func menuToMultiplayer() {
@@ -316,6 +330,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
       currentNode = multiplayerNode
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func menuToPlayerSelect() {
@@ -325,6 +341,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
       currentNode = playerSelectNode
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func menuBack() {
@@ -342,6 +360,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
         currentNode = titleNode
       }
     }
+
+    tempDisableButton(duration: 1)
   }
 
   func menuToCredits() {
@@ -354,6 +374,9 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
       currentNode = creditsNode
     }
+
+    backButton.isUserInteractionEnabled = false
+    tempDisableButton(duration: 1)
   }
 
   override func update(dt: TimeInterval) {
@@ -506,6 +529,16 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     classicScoreNode.run(SKActionHelper.moveToEaseInOut(x: classicLEDScoreReference.zeroPosition, duration: duration * 1.1))
     classicHighScoreNode.run(SKActionHelper.moveToEaseInOut(x: classicScoreReference.zeroPosition, duration: duration * 1.1))
+  }
+
+  func tempDisableButton(duration : TimeInterval) {
+    buttonClassic.isUserInteractionEnabled = false
+    buttonLCD.isUserInteractionEnabled = false
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.buttonClassic.isUserInteractionEnabled = true
+      self.buttonLCD.isUserInteractionEnabled = true
+      self.backButton.isUserInteractionEnabled = true
+    }
   }
 
   override func pauseNode() {
