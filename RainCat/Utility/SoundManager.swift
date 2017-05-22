@@ -71,9 +71,7 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   }
 
   func toggleMute() -> Bool {
-    UserDefaultsManager.sharedInstance.toggleMute()
-    let isMuted = UserDefaultsManager.sharedInstance.isMuted
-
+    let isMuted = UserDefaultsManager.sharedInstance.toggleMute()
     if isMuted {
       audioPlayer?.stop()
     } else {

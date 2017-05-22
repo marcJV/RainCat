@@ -201,9 +201,9 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     soundButtonSprite.zPosition = 300
     addChild(soundButtonSprite)
 
-    soundButtonSprite.addTarget(self, selector: #selector(soundButtonTouched(_:)), forControlEvents: [.TouchDown, .DragEnter])
-    soundButtonSprite.addTarget(self, selector: #selector(soundButtonReleased(_:)), forControlEvents: [.DragExit, .TouchCancelled])
-    soundButtonSprite.addTarget(self, selector: #selector(soundButtonPressed(_:)), forControlEvents: [.TouchUpInside])
+    soundButtonSprite.addTarget(self, selector: #selector(soundButtonTouchDown), forControlEvents: [.TouchDown, .DragEnter])
+    soundButtonSprite.addTarget(self, selector: #selector(soundButtonTouchUp), forControlEvents: [.DragExit, .TouchCancelled])
+    soundButtonSprite.addTarget(self, selector: #selector(soundButtonTouchUpInside), forControlEvents: [.TouchUpInside])
 
     soundMask = SoundButtonSprite(size: soundButtonSprite.size)
     soundMask.position = soundButtonSprite.position
@@ -213,6 +213,11 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     maskNode.addChild(soundMask)
     addChild(soundForegroundSprite)
+
+    if UserDefaultsManager.sharedInstance.isMuted {
+      soundForegroundSprite.setMuted()
+      soundMask.setMuted()
+    }
   }
 
   override func attachedToScene() {
@@ -387,24 +392,32 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     rainDropBanner.update(size: size)
   }
 
-  func soundButtonTouched(_ sender : SKAControlSprite) {
+  func soundButtonTouchDown() {
     if !isNavigating {
       soundForegroundSprite.setPressed()
       soundMask.setPressed()
     }
   }
 
-  func soundButtonReleased(_ sender : SKAControlSprite) {
+  func soundButtonTouchUp() {
     if !isNavigating {
       soundForegroundSprite.setReleased(toggleState: false)
       soundMask.setReleased(toggleState: false)
     }
   }
 
-  func soundButtonPressed(_ sender : SKAControlSprite) {
+  func soundButtonTouchUpInside() {
     if !isNavigating {
-      soundForegroundSprite.setReleased(toggleState: true)
-      soundMask.setReleased(toggleState: true)
+      soundForegroundSprite.setReleased(toggleState: false)
+      soundMask.setReleased(toggleState: false)
+      
+      if(SoundManager.sharedInstance.toggleMute()) {
+        soundForegroundSprite.setMuted()
+        soundMask.setMuted()
+      } else {
+        soundForegroundSprite.setPlaying()
+        soundMask.setPlaying()
+      }
     }
   }
 

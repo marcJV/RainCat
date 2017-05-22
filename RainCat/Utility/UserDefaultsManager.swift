@@ -57,12 +57,14 @@ class UserDefaultsManager {
     defaults.synchronize()
   }
 
-  public func toggleMute() {
+  public func toggleMute() -> Bool {
     isMuted = !isMuted
 
     let defaults = UserDefaults.standard
     defaults.set(isMuted, forKey: MuteKey)
     defaults.synchronize()
+
+    return isMuted
   }
 
   public func getClassicHighScore() -> Int {

@@ -19,6 +19,10 @@ public class LogoScene : SceneNode {
   var logoFrames = [SKTexture]()
 
   override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
+    if !UserDefaultsManager.sharedInstance.isMuted {
+      SoundManager.sharedInstance.startPlaying()
+    }
+
     //We can fix pulling a large number of assets if we do the mask animation ourselves
     //TODO: Need to figure out correct speed / easing and clean this up
     for index in 0...89 {
@@ -66,10 +70,6 @@ public class LogoScene : SceneNode {
         if let parent = self.parent as? Router {
           parent.navigate(to: .MainMenu, extras: nil)
         }
-
-//        menuScene.scaleMode = self.scaleMode
-
-//        self.view?.presentScene(menuScene, transition: transition)
       })
       ]))
 
@@ -84,7 +84,7 @@ public class LogoScene : SceneNode {
   override func detachedFromScene() {
 
   }
-
+  
   deinit {
     print("logo scene destroyed")
   }
