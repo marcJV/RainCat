@@ -18,7 +18,7 @@ public class LogoScene : SceneNode {
 
   var logoFrames = [SKTexture]()
 
-  override func layoutScene(size: CGSize) {
+  override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
     //We can fix pulling a large number of assets if we do the mask animation ourselves
     //TODO: Need to figure out correct speed / easing and clean this up
     for index in 0...89 {
@@ -54,14 +54,6 @@ public class LogoScene : SceneNode {
       SKAction.scale(to: 100, duration: 0.8)
       ]))
 
-    //Preload the menu
-//    var menuScene : SKScene
-        
-
-    //     menuScene = MenuScene(size: getDisplaySize())
-
-//    menuScene = SKScene(fileNamed: "MainMenu")!
-
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),
       SKAction.animate(with: logoFrames, timePerFrame: 0.03, resize: true, restore: false),
@@ -72,7 +64,7 @@ public class LogoScene : SceneNode {
         transition.pausesIncomingScene = false
 
         if let parent = self.parent as? Router {
-          parent.navigate(to: .MainMenu)
+          parent.navigate(to: .MainMenu, extras: nil)
         }
 
 //        menuScene.scaleMode = self.scaleMode

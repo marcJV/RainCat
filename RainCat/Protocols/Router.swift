@@ -6,10 +6,15 @@
 //  Copyright © 2017 Thirteen23. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 protocol Router {
-  func navigate(to: Location)
+  func navigate(to: Location, extras menuExtras : MenuExtras?)
+}
+
+protocol WorldManager {
+  func updateGravity(vector : CGVector)
+  func tempPauseScene(duration: TimeInterval)
 }
 
 public enum Location {

@@ -8,15 +8,15 @@
 
 import SpriteKit
 
-class RainCatScene : SKScene, Router {
+class RainCatScene : SKScene, Router, WorldManager {
   private var baseNode : SceneNode?
   private var lastTime : TimeInterval = 0
 
   override func didMove(to view: SKView) {
-    navigate(to: .Logo)
+    navigate(to: .Logo, extras: nil)
   }
 
-  func navigate(to: Location) {
+func navigate(to: Location, extras menuExtras: MenuExtras?) {
     baseNode?.zPosition = 1
     var newNode : SceneNode
 
@@ -35,7 +35,7 @@ class RainCatScene : SKScene, Router {
     }
 
     newNode.zPosition = 2
-    newNode.layoutScene(size: size)
+    newNode.layoutScene(size: size, extras: menuExtras)
 
     physicsWorld.gravity = newNode.getGravity()
 
@@ -58,6 +58,18 @@ class RainCatScene : SKScene, Router {
 
     if let _ = baseNode as? SKPhysicsContactDelegate {
       physicsWorld.contactDelegate = (baseNode as! SKPhysicsContactDelegate)
+    }
+  }
+
+  func updateGravity(vector: CGVector) {
+    physicsWorld.gravity = vector
+  }
+
+  func tempPauseScene(duration: TimeInterval) {
+    physicsWorld.speed = 0.4
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+      self.physicsWorld.speed = 1
     }
   }
 

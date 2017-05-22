@@ -59,6 +59,8 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
     if pingPong {
       top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
       anchorPoint = CGPoint(x: 1, y: 0.5)
+
+      top.physicsBody?.mass = 500
     } else {
       let path = UIBezierPath()
       path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))

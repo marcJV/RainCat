@@ -91,7 +91,7 @@ public class PlayerSelectNode : SKNode, MenuNodeAnimation {
   func navigateInFromRight(duration: TimeInterval) {
     //umbrella1.run(SKActionHelper.moveToEaseInOut(x: umbrella1Reference.zeroPosition, duration: duration))
     //umbrella2.run(SKActionHelper.moveToEaseInOut(x: umbrella2Reference.zeroPosition, duration: duration))
-    catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.zeroPosition, duration: duration))
+    catPongLabel.run(SKActionHelper.moveToEaseInOut(x: catPongLabelReference.zeroPosition, duration: duration * 0.9))
     startButton.moveTo(x: buttonStartReference.zeroPosition, duration: duration)
   }
 }

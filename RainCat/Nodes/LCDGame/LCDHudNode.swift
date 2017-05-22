@@ -40,6 +40,10 @@ class LCDHudNode : SKNode, Resetable, LCDSetupable {
   func addScore() -> Int {
     lcdScoreNode.incrementScore()
 
+    if UserDefaultsManager.sharedInstance.lcdHighScore < lcdScoreNode.score {
+      UserDefaultsManager.sharedInstance.updateLCDHighScore(highScore: lcdScoreNode.score)
+    }
+
     return lcdScoreNode.score
   }
 

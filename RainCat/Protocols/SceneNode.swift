@@ -9,7 +9,7 @@
 import SpriteKit
 
 public class SceneNode : SKSpriteNode {
-  func layoutScene(size : CGSize) {}
+  func layoutScene(size : CGSize, extras : MenuExtras? = nil) {}
   func attachedToScene() {}
   func detachedFromScene() {}
   func update(dt : TimeInterval) {}

@@ -31,6 +31,7 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
   private var lastUpdateTime : TimeInterval = 0
   private let maxNoHitTime : TimeInterval = 5
   private var currentNoHitTime : TimeInterval = 0
+  private var lastPaddleHit : TimeInterval = 0
 
   private var cat1Destination = CGPoint()
   private var cat2Destination = CGPoint()
@@ -68,26 +69,20 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
   private var showingWinCondition = false
   private var giantMode = false
 
-//  public init(size: CGSize, player1ColorPalette : ColorPalette, player2ColorPalette : ColorPalette, catScale : CGFloat, rainScale : CGFloat) {
-//    player1Palette = player1ColorPalette
-//    player2Palette = player2ColorPalette
-//
-//    self.catScale = catScale
-//    self.rainScale = rainScale
-//
-//    destinationOffset = 50 * ((catScale > 1) ? catScale : 1)
-//
-//    if catScale > 2 {
-//      giantMode = true
-//    }
-//
-//    super.init(color: SKColor(red:0.38, green:0.60, blue:0.65, alpha:1.0), size: size)
-//  }
-
   override func attachedToScene() {}
   override func detachedFromScene() {}
 
-  override func layoutScene(size : CGSize) {
+  override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
+
+    if let extras = menuExtras {
+      rainScale = extras.rainScale
+      catScale = extras.catScale
+    }
+
+    if catScale > 2 {
+      giantMode = true
+    }
+
     isUserInteractionEnabled = true
     anchorPoint = CGPoint()
 
@@ -125,10 +120,12 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
 
     puck!.setScale(rainScale)
     puck!.zPosition = 4
-    puck!.physicsBody = SKPhysicsBody(circleOfRadius: puck!.size.height / 3)
+    let center = CGPoint(x: 0, y: -puck!.size.height * 0.1)
+    puck!.physicsBody = SKPhysicsBody(circleOfRadius: puck!.size.height / 4, center: center)
     puck!.physicsBody?.categoryBitMask = RainDropCategory
     puck!.physicsBody?.contactTestBitMask = UmbrellaCategory | WorldFrameCategory | CatCategory
-    puck!.physicsBody?.restitution = 1
+    puck!.physicsBody?.restitution = 0.85
+    puck!.physicsBody?.mass = 0.02
     puck!.physicsBody?.linearDamping = 0.5
 
     addChild(puck!)
@@ -194,6 +191,7 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
     umbrella1.updatePosition(point: umbrella1ZeroPosition)
     umbrella2.updatePosition(point: umbrella2ZeroPosition)
 
+
     addChild(umbrella1)
     addChild(umbrella2)
   }
@@ -244,7 +242,7 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
 
   func quitPressed() {
     if let parent = parent as? Router {
-      parent.navigate(to: .MainMenu)
+      parent.navigate(to: .MainMenu, extras: nil)
     }
   }
 
@@ -364,7 +362,11 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
     return CGVector(dx: 0, dy: 0)
   }
 
+  var lastTouch : TimeInterval = 0
+
   override func update(dt : TimeInterval) { //check if raindrop is outside bounds, then reset
+    lastPaddleHit += dt
+
     if showingWinCondition {
       return
     }
@@ -415,20 +417,30 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
       return
     }
 
-    currentNoHitTime = 0
-
     switch otherBody.categoryBitMask {
     case UmbrellaCategory:
       roundStarted = true
 
-      puck?.physicsBody?.angularVelocity = 0.0
+      let isPlayer1Hit = otherBody.node?.parent == umbrella1
+
+      if lastPaddleHit < 0.3 && (isPlayer1Hit && p1LastHit || !isPlayer1Hit && !p1LastHit) {
+        return
+      }
+
+
+      if otherBody.velocity.dx == 0 || otherBody.velocity.dy == 0 {
+
+      } else {
+        puck?.physicsBody?.angularVelocity = 0.0
+        puck?.physicsBody?.velocity = CGVector()
+      }
 
       var impulse = (otherBody.node?.parent as? UmbrellaSprite)!.getVelocity()
 
-      let max : CGFloat = 25
+      let max : CGFloat = 15
 
       //Check who hit the puck last
-      p1LastHit = otherBody.node?.parent == umbrella1
+      p1LastHit = isPlayer1Hit
 
       if abs(impulse.dx) > max {
         impulse.dx = max * ((impulse.dx > 1) ? 1 : -1)
@@ -439,6 +451,9 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
       }
 
       puck?.physicsBody?.applyImpulse(impulse)
+
+      lastPaddleHit = 0
+      currentNoHitTime = 0
     case CatCategory:
       if !roundStarted {
         return

@@ -85,6 +85,7 @@
 		BBC63AAD1EC38C1000F48F27 /* PlayerSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */; };
 		BBC9F6E81D8D941A00385223 /* PingPongSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9F6E71D8D941A00385223 /* PingPongSceneNode.swift */; };
 		BBCCC2301ECB982600C992AB /* SKActionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCCC22F1ECB982600C992AB /* SKActionHelper.swift */; };
+		BBCCC2351ED32EE200C992AB /* MenuExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCCC2341ED32EE200C992AB /* MenuExtras.swift */; };
 		BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */; };
 		BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */; };
 		BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */; };
@@ -182,6 +183,7 @@
 		BBC63AB61EC5107200F48F27 /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_7.mp3; path = RainCat/Support/SFX/cat_meow_7.mp3; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongSceneNode.swift; path = Scenes/PingPongSceneNode.swift; sourceTree = "<group>"; };
 		BBCCC22F1ECB982600C992AB /* SKActionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKActionHelper.swift; path = Utility/SKActionHelper.swift; sourceTree = "<group>"; };
+		BBCCC2341ED32EE200C992AB /* MenuExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuExtras.swift; path = Model/MenuExtras.swift; sourceTree = "<group>"; };
 		BBCE0A491D8D08EA006C1F44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-clearday.mp3"; path = "Music/bensound-clearday.mp3"; sourceTree = "<group>"; };
 		BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzcomedy.mp3"; path = "Music/bensound-jazzcomedy.mp3"; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 		BBA2E4A41D74A62C00853E63 /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
+				BBCCC2331ED32ECA00C992AB /* Model */,
 				BB459C361E9EAFBE0027CA9B /* Utility */,
 				BB4E54001D918EDD0031DAB9 /* Protocols */,
 				BB36AD271D75D86B00FB54D0 /* Sprites */,
@@ -447,6 +450,14 @@
 				BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		BBCCC2331ED32ECA00C992AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BBCCC2341ED32EE200C992AB /* MenuExtras.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		BBD0A8DB1D78F0F100002F71 /* Music */ = {
@@ -601,6 +612,7 @@
 				BB459C511E9EB17F0027CA9B /* Constants.swift in Sources */,
 				BB869EBA1EB9360A0072A193 /* CurtainSprite.swift in Sources */,
 				BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */,
+				BBCCC2351ED32EE200C992AB /* MenuExtras.swift in Sources */,
 				BB95F4DB1EA57BF50040553D /* TimingFunctions.swift in Sources */,
 				BB459C9C1E9EB3F20027CA9B /* TwoPaneButton.swift in Sources */,
 				BB459C8D1E9EB3F20027CA9B /* LCDNumberNode.swift in Sources */,

@@ -11,33 +11,33 @@ import SpriteKit
 class MultiplayerNode : SKNode, MenuNodeAnimation {
   weak var menuNavigation : MenuNavigation?
 
-  var classicButton : TwoPaneButton!
-  var catPongButton : TwoPaneButton!
-  var classicHighScoreText : SKLabelNode!
-  var multiplayerText : ShadowLabelNode!
-  var umbrella1 : UmbrellaSprite!
-  var umbrella2 : UmbrellaSprite!
+  private var classicButton : TwoPaneButton!
+  private var catPongButton : TwoPaneButton!
+  private var classicHighScoreText : SKLabelNode!
+  private var multiplayerText : ShadowLabelNode!
+  private var umbrella1 : UmbrellaSprite!
+  private var umbrella2 : UmbrellaSprite!
 
-  var classicReference : AnimationReference!
-  var catPongReference : AnimationReference!
-  var classicHighScoreReference : AnimationReference!
-  var multiplayerReference : AnimationReference!
-  var umbrella1Reference : AnimationReference!
-  var umbrella2Reference : AnimationReference!
+  private var classicReference : AnimationReference!
+  private var catPongReference : AnimationReference!
+  private var classicHighScoreReference : AnimationReference!
+  private var multiplayerReference : AnimationReference!
+  private var umbrella1Reference : AnimationReference!
+  private var umbrella2Reference : AnimationReference!
 
   var umbrella1LeftPosition : CGPoint!
   var umbrella2LeftPosition : CGPoint!
 
-  var umbrella1StartScale : CGFloat!
-  var umbrella2StartScale : CGFloat!
+  private var umbrella1StartScale : CGFloat!
+  private var umbrella2StartScale : CGFloat!
 
-  var umbrella1ZeroYPosition : CGFloat!
-  var umbrella2ZeroYPosition : CGFloat!
+  private var umbrella1ZeroYPosition : CGFloat!
+  private var umbrella2ZeroYPosition : CGFloat!
 
-  var umbrella1ZeroAngle : CGFloat!
-  var umbrella2ZeroAngle : CGFloat!
+  private var umbrella1ZeroAngle : CGFloat!
+  private var umbrella2ZeroAngle : CGFloat!
 
-  var selectedButton : TwoPaneButton?
+  private var selectedButton : TwoPaneButton?
 
   private var player1ColorIndex = 0
   private var player2ColorIndex = 1
@@ -62,6 +62,7 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     classicHighScoreReference = AnimationReference(zeroPosition: classicHighScoreText.position.x,
                                                    offscreenLeft: -sceneSize.width,
                                                    offscreenRight: sceneSize.width + classicHighScoreText.position.x)
+    classicHighScoreText.text = "\(UserDefaultsManager.sharedInstance.getClassicMultiplayerHighScore())"
 
     umbrella1 = childNode(withName: "umbrella-1") as! UmbrellaSprite!
     umbrella1Reference = AnimationReference(zeroPosition: umbrella1.position.x,
@@ -189,7 +190,6 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       SKAction.scale(to: umbrella2StartScale, duration: duration),
       SKAction.move(to: CGPoint(x: umbrella2Reference.zeroPosition, y: umbrella2ZeroYPosition), duration: duration)
       ]))
-
   }
 
   func navigateOutToLeft(duration: TimeInterval) {
@@ -210,17 +210,16 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
       ]))
 
     umbrella1.run(SKAction.group([
-      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration),
-      SKAction.scaleX(to: -1, duration: duration),
-      SKAction.scaleY(to: 1, duration: duration),
-      SKActionHelper.moveToEasInOut(point: umbrella1LeftPosition, duration: duration)
-
+      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration * 0.8),
+      SKAction.scaleX(to: -1, duration: duration * 0.5),
+      SKAction.scaleY(to: 1, duration: duration * 0.5),
+      SKActionHelper.moveToEasInOut(point: umbrella1LeftPosition, duration: duration * 0.9)
       ]))
 
     umbrella2.run(SKAction.group([
-      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration),
-      SKAction.scale(to: 1, duration: duration),
-      SKActionHelper.moveToEasInOut(point: umbrella2LeftPosition, duration: duration)
+      SKActionHelper.rotateToEaseInOut(angle: 0, duration: duration * 0.8),
+      SKAction.scale(to: 1, duration: duration * 0.5),
+      SKActionHelper.moveToEasInOut(point: umbrella2LeftPosition, duration: duration * 0.9)
       ]))
   }
 

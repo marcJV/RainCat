@@ -54,7 +54,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
   private var navigationItem : Location?
 
-  override func layoutScene(size: CGSize) {
+  override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
     anchorPoint = CGPoint(x: 0, y: 0)
     color = BACKGROUND_COLOR
     isUserInteractionEnabled = true
@@ -136,8 +136,6 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     currentNode = titleNode
     titleNode.setup(sceneSize: size)
     titleNode.menuNavigation = self
-
-
 
     let creditsReference = childNode(withName: "menu-reference")
     creditsNode = creditsReference?.children[0].childNode(withName: "group-credits") as! CreditsNode
@@ -396,9 +394,27 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       isNavigating = true
       pauseNode()
 
+      var rainScale : CGFloat = 0.33
+      if contact.bodyA.categoryBitMask == RainDropCategory {
+        rainScale = contact.bodyA.node!.xScale
+      } else if contact.bodyB.categoryBitMask == RainDropCategory {
+        rainScale = contact.bodyB.node!.xScale
+      }
+
+      switch rainScale {
+      case 0...0.34:
+        rainScale = 1
+      case 0.34...0.99:
+        rainScale = 2
+      default:
+        rainScale = 3
+      }
+
+      let extras = MenuExtras(rainScale: rainScale, catScale: catSprite.xScale)
+
       if let parent = parent as? Router, navigationItem != nil {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-          parent.navigate(to: self.navigationItem!)
+          parent.navigate(to: self.navigationItem!, extras: extras)
         }
       }
     }

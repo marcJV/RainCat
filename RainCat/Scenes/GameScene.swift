@@ -28,31 +28,27 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
   private var catScale : CGFloat = 1
   private var rainScale : CGFloat = 1
 
-//  public init(size : CGSize, catScale : CGFloat, rainScale : CGFloat) {
-//    switch rainScale {
-//    case 2:
-//      rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
-//    case 3:
-//      rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
-//    default:
-//      rainDropTexture = SKTexture(imageNamed: "rain_drop")
-//    }
-//
-//    super.init(size: size)
-//
-//    self.catScale = catScale
-//    self.rainScale = rainScale
-//  }
-//
-//  required init?(coder aDecoder: NSCoder) {
-//    fatalError("init(coder:) has not been implemented")
-//  }
-
   override func detachedFromScene() {}
 
-  override func layoutScene(size : CGSize) {
+  override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
+
+    if let extras = menuExtras {
+          switch extras.rainScale {
+          case 2:
+            rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
+          case 3:
+            rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
+          default:
+            rainDropTexture = SKTexture(imageNamed: "rain_drop")
+          }
+
+      rainScale = extras.rainScale
+      catScale = extras.catScale
+    } else {
+      rainDropTexture = SKTexture(imageNamed: "rain_drop")
+    }
+
     isUserInteractionEnabled = true
-    rainDropTexture = SKTexture(imageNamed: "rain_drop")
 
     anchorPoint = CGPoint()
 
@@ -106,7 +102,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
   func quitPressed() {
     if let parent = parent as? Router {
-      parent.navigate(to: .MainMenu)
+      parent.navigate(to: .MainMenu, extras: nil)
     }
   }
 
@@ -130,12 +126,6 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     }
   }
 
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
-
-
-  }
-
   override func update(dt: TimeInterval) {
     // Called before each frame is rendered
 
@@ -150,7 +140,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     umbrella.update(deltaTime: dt)
 
-    if let food = food {
+    if let food = childNode(withName: FoodSprite.foodDishName) as? FoodSprite {
       cat.update(deltaTime: dt, foodLocation: (food.position))
     }
 
@@ -166,7 +156,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
       rainDrop.zPosition = 2
 
       let bodyEdge = 20 * rainScale
-      rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: bodyEdge, height: bodyEdge))
+      rainDrop.physicsBody = SKPhysicsBody(texture: rainDropTexture, size: rainDrop.size)
       rainDrop.physicsBody?.categoryBitMask = RainDropCategory
       rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
       rainDrop.physicsBody?.density = 0.5
@@ -247,7 +237,6 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     if contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory {
       handleCatCollision(contact: contact)
-
       return
     }
 
@@ -281,6 +270,11 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     switch otherBody.categoryBitMask {
     case RainDropCategory:
+
+      if let parent = parent as? WorldManager {
+        parent.tempPauseScene(duration: 0.1)
+      }
+
       cat.hitByRain()
       hud.resetPoints()
       resetColorPalette()
@@ -329,8 +323,9 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
         dx = 2.0
       }
 
-      //TODO Fix gravity changer
-     // physicsWorld.gravity = CGVector(dx: dx, dy: dy)
+      if let parent = parent as? WorldManager {
+        parent.updateGravity(vector: CGVector(dx: dx, dy: dy))
+      }
 
       fallthrough
     case WorldFrameCategory:

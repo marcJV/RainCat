@@ -19,7 +19,7 @@ class LCDSceneNode : SceneNode {
   private var currentButton : TwoPaneButton?
   private var isQuitting = false
 
-  override func layoutScene(size: CGSize) {
+  override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
     var scene : SKScene
     anchorPoint = CGPoint(x: 0, y: 0)
     color = BACKGROUND_COLOR
@@ -92,7 +92,7 @@ class LCDSceneNode : SceneNode {
 
   func quitPressed() {
     if let parent = parent as? Router {
-        parent.navigate(to: .MainMenu)
+        parent.navigate(to: .MainMenu, extras: nil)
     }
   }
 

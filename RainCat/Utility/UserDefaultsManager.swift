@@ -16,6 +16,8 @@ class UserDefaultsManager {
   private(set) var playerTwoPalette : Int
   private(set) var initiallySetPalatte : Bool
 
+  private(set) var lcdHighScore : Int
+
   private init() {
     //This is private so you can only have one Sound Manager ever.
 
@@ -23,6 +25,7 @@ class UserDefaultsManager {
 
     isMuted = defaults.bool(forKey: MuteKey)
     initiallySetPalatte = defaults.bool(forKey: FirstLaunchPaletteChooser)
+    lcdHighScore = defaults.integer(forKey: LCDSinglePlayerScoreKey)
 
     if !initiallySetPalatte {
       playerOnePalette = 0
@@ -93,6 +96,8 @@ class UserDefaultsManager {
   }
 
   public func updateLCDHighScore(highScore : Int) {
+    lcdHighScore = highScore
+    
     let defaults = UserDefaults.standard
     defaults.set(highScore, forKey: LCDSinglePlayerScoreKey)
     defaults.synchronize()
