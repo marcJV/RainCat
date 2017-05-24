@@ -63,8 +63,36 @@ class RainTransition : SKNode {
         performScaleInEvenOdd(fromColor: extras.fromColor, toColor: extras.toColor)
       case .ScaleInChecker:
         performScaleInChecker(fromColor: extras.fromColor, toColor: extras.toColor)
-      default:
-        performScaleIn(fromColor: extras.fromColor, toColor: extras.toColor)
+      case .ScaleInLinearTop:
+        performScaleInLinearTop(fromColor: extras.fromColor, toColor: extras.toColor)
+      case .ScaleInUniform:
+        performScaleInUniform(fromColor: extras.fromColor, toColor: extras.toColor)
+      }
+    }
+  }
+
+  func performScaleInUniform(fromColor : SKColor, toColor : SKColor) {
+    for column in sprites {
+      for row in column {
+        let scaleAnim = getScaleAnimation(fromColor: fromColor, toColor: toColor, toScale: 1)
+
+        row.run(scaleAnim)
+      }
+    }
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+      (self.parent as! Router).transitionCoveredScreen()
+
+      self.performScaleOutUniform(fromColor: toColor, toColor: toColor)
+    }
+  }
+
+  private func performScaleOutUniform(fromColor : SKColor, toColor : SKColor) {
+    for column in sprites {
+      for row in column {
+        let scaleAnim = getScaleAnimation(fromColor: fromColor, toColor: toColor, toScale: 0)
+
+        row.run(scaleAnim)
       }
     }
   }
@@ -73,7 +101,6 @@ class RainTransition : SKNode {
     let scaleAnim = getScaleAnimation(fromColor: fromColor, toColor: toColor, toScale: 1)
 
     for col in 0 ..< sprites.count {
-
       for row in 0 ..< sprites[col].count {
         let node = sprites[col][row]
         node.alpha = 1
@@ -153,7 +180,7 @@ class RainTransition : SKNode {
     }
   }
 
-  func performScaleIn(fromColor : SKColor, toColor : SKColor) {
+  func performScaleInLinearTop(fromColor : SKColor, toColor : SKColor) {
     let scaleAnim = getScaleAnimation(fromColor: fromColor, toColor: toColor, toScale: 1)
 
     for column in sprites {
@@ -161,6 +188,7 @@ class RainTransition : SKNode {
         let sprite = column[i]
         sprite.alpha = 1
         sprite.scale(to: CGSize())
+        sprite.color = fromColor
 
         sprite.run(SKAction.sequence([
           SKAction.wait(forDuration: 0.05 * TimeInterval(i)),
@@ -172,11 +200,11 @@ class RainTransition : SKNode {
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
       (self.parent as! Router).transitionCoveredScreen()
 
-      self.performScaleOut(fromColor: toColor, toColor: toColor)
+      self.performScaleOutLinearTop(fromColor: toColor, toColor: toColor)
     }
   }
 
-  private func performScaleOut(fromColor : SKColor, toColor : SKColor) {
+  private func performScaleOutLinearTop(fromColor : SKColor, toColor : SKColor) {
     let scaleAnim = getScaleAnimation(fromColor: fromColor, toColor: toColor, toScale: 0)
 
     for column in sprites {
@@ -354,6 +382,7 @@ class RainTransition : SKNode {
 
 enum TransitionType {
   case ScaleInUniform
+  case ScaleInLinearTop
   case ScaleInCircular(fromPoint : CGPoint)
   case ScaleInEvenOddColumn
   case ScaleInChecker

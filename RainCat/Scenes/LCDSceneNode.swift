@@ -92,7 +92,7 @@ class LCDSceneNode : SceneNode {
 
   func quitPressed() {
     if let parent = parent as? Router {
-      parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0, transition: TransitionExtras(transitionType: .ScaleInUniform, fromColor: .black)))
+      parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0, transition: TransitionExtras(transitionType: .ScaleInLinearTop, fromColor: .black)))
     }
   }
 

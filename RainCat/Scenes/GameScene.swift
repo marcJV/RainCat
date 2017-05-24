@@ -95,7 +95,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     if let parent = parent as? Router {
       parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0,
                                                         catScale: 0,
-                                                        transition: TransitionExtras(transitionType: .ScaleInUniform)))
+                                                        transition: TransitionExtras(transitionType: .ScaleInLinearTop)))
     }
   }
 

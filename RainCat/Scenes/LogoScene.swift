@@ -68,17 +68,18 @@ public class LogoScene : SceneNode {
     t23Logo.run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),
       SKAction.animate(with: logoFrames, timePerFrame: 0.03, resize: true, restore: false),
-      SKAction.wait(forDuration: 1),
-      SKAction.customAction(withDuration: 0.0, actionBlock: { _ in
-        let transition = SKTransition.reveal(with: .left, duration: 0.75)
-        transition.pausesOutgoingScene = false
-        transition.pausesIncomingScene = false
-
-        if let parent = self.parent as? Router {
-          parent.navigate(to: .MainMenu, extras: nil)
-        }
-      })
+      SKAction.wait(forDuration: 1)
       ]))
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.7) {
+      if let parent = self.parent as? Router {
+        parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0,
+                                                          transition:
+          TransitionExtras(transitionType: .ScaleInLinearTop,
+                           fromColor: SKColor(red:0.18, green:0.20, blue:0.22, alpha:1.0),
+                           toColor: BACKGROUND_COLOR)))
+      }
+    }
 
     if !UserDefaultsManager.sharedInstance.isMuted {
       run(SKAction.sequence([
@@ -89,7 +90,7 @@ public class LogoScene : SceneNode {
   }
 
   override func detachedFromScene() {
-
+    
   }
   
   deinit {
