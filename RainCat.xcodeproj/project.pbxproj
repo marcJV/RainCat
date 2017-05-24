@@ -59,6 +59,7 @@
 		BB67AD861EC35F2900CA5205 /* SinglePlayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB67AD851EC35F2900CA5205 /* SinglePlayerScene.sks */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuSceneNode.swift */; };
 		BB73A6681E9FD22200F6AFB2 /* LCDScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */; };
+		BB7A6DF61ED472D30093C21F /* RainTransition.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB7A6DF51ED472D30093C21F /* RainTransition.sks */; };
 		BB869EB41EB8E5F90072A193 /* RainCatScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB869EB31EB8E5F90072A193 /* RainCatScene.swift */; };
 		BB869EB61EB8E82E0072A193 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB869EB51EB8E82E0072A193 /* Router.swift */; };
 		BB869EB81EB8EBAC0072A193 /* SceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB869EB71EB8EBAC0072A193 /* SceneNode.swift */; };
@@ -80,6 +81,8 @@
 		BBAF08251EA0267B00AAF449 /* LogoScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08241EA0267B00AAF449 /* LogoScene.sks */; };
 		BBB318391DC78F6700644DB6 /* LCDSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB318381DC78F6700644DB6 /* LCDSceneNode.swift */; };
 		BBC320301EA29393009CCE39 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC3202F1EA29393009CCE39 /* MainMenu.sks */; };
+		BBC56E3F1ED4AC42006A6351 /* RainTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC56E3E1ED4AC42006A6351 /* RainTransition.swift */; };
+		BBC56E411ED5FFCF006A6351 /* RainDropSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC56E401ED5FFCF006A6351 /* RainDropSprite.swift */; };
 		BBC63AA91EC376CD00F48F27 /* MultiplayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC63AA81EC376CC00F48F27 /* MultiplayerNode.swift */; };
 		BBC63AAB1EC377DC00F48F27 /* MultiplayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC63AAA1EC377DC00F48F27 /* MultiplayerScene.sks */; };
 		BBC63AAD1EC38C1000F48F27 /* PlayerSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */; };
@@ -149,6 +152,7 @@
 		BB67AD851EC35F2900CA5205 /* SinglePlayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SinglePlayerScene.sks; path = Scenes/Menu/SinglePlayerScene.sks; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSceneNode.swift; path = Scenes/Menu/MenuSceneNode.swift; sourceTree = "<group>"; };
 		BB73A6671E9FD22200F6AFB2 /* LCDScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LCDScreen.sks; path = Nodes/LCDGame/LCDScreen.sks; sourceTree = "<group>"; };
+		BB7A6DF51ED472D30093C21F /* RainTransition.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = RainTransition.sks; path = Scenes/Transitions/RainTransition.sks; sourceTree = "<group>"; };
 		BB869EB31EB8E5F90072A193 /* RainCatScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainCatScene.swift; path = Scenes/RainCatScene.swift; sourceTree = "<group>"; };
 		BB869EB51EB8E82E0072A193 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Router.swift; path = Protocols/Router.swift; sourceTree = "<group>"; };
 		BB869EB71EB8EBAC0072A193 /* SceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneNode.swift; path = Protocols/SceneNode.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 		BBAF08241EA0267B00AAF449 /* LogoScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LogoScene.sks; path = Scenes/LogoScene.sks; sourceTree = "<group>"; };
 		BBB318381DC78F6700644DB6 /* LCDSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDSceneNode.swift; path = Scenes/LCDSceneNode.swift; sourceTree = "<group>"; };
 		BBC3202F1EA29393009CCE39 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainMenu.sks; path = Scenes/Menu/MainMenu.sks; sourceTree = "<group>"; };
+		BBC56E3E1ED4AC42006A6351 /* RainTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainTransition.swift; path = Scenes/Transitions/RainTransition.swift; sourceTree = "<group>"; };
+		BBC56E401ED5FFCF006A6351 /* RainDropSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainDropSprite.swift; sourceTree = "<group>"; };
 		BBC63AA81EC376CC00F48F27 /* MultiplayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerNode.swift; sourceTree = "<group>"; };
 		BBC63AAA1EC377DC00F48F27 /* MultiplayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MultiplayerScene.sks; path = Scenes/Menu/MultiplayerScene.sks; sourceTree = "<group>"; };
 		BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PlayerSelectScene.sks; path = Scenes/Menu/PlayerSelectScene.sks; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 		BB36AD241D75D6DE00FB54D0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				BB7A6DF41ED472A30093C21F /* Transitions */,
 				BBC3202E1EA29363009CCE39 /* Menu */,
 				BBC3202D1EA292DE009CCE39 /* Logo */,
 				BBC3202C1EA292D2009CCE39 /* LCD */,
@@ -349,6 +356,7 @@
 				BB459C821E9EB3F20027CA9B /* FoodSprite.swift */,
 				BB459C831E9EB3F20027CA9B /* ShadowLabelNode.swift */,
 				BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */,
+				BBC56E401ED5FFCF006A6351 /* RainDropSprite.swift */,
 			);
 			name = Shared;
 			path = Nodes/Shared;
@@ -378,6 +386,15 @@
 				BBAB78B91EC0FA9F009E254E /* Navigation.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		BB7A6DF41ED472A30093C21F /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				BB7A6DF51ED472D30093C21F /* RainTransition.sks */,
+				BBC56E3E1ED4AC42006A6351 /* RainTransition.swift */,
+			);
+			name = Transitions;
 			sourceTree = "<group>";
 		};
 		BBA2E4991D74A62C00853E63 = {
@@ -566,6 +583,7 @@
 				BB67AD821EC102EA00CA5205 /* CreditsScene.sks in Resources */,
 				BBC63AAB1EC377DC00F48F27 /* MultiplayerScene.sks in Resources */,
 				BB67AD861EC35F2900CA5205 /* SinglePlayerScene.sks in Resources */,
+				BB7A6DF61ED472D30093C21F /* RainTransition.sks in Resources */,
 				BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */,
 				BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */,
 				BBAF081A1EA017C500AAF449 /* blip_0012.wav in Resources */,
@@ -604,11 +622,13 @@
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB459C851E9EB3F20027CA9B /* BackgroundNode.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongSceneNode.swift in Sources */,
+				BBC56E411ED5FFCF006A6351 /* RainDropSprite.swift in Sources */,
 				BB459C8B1E9EB3F20027CA9B /* LCDHudLives.swift in Sources */,
 				BB459C961E9EB3F20027CA9B /* PlayerSelectNode.swift in Sources */,
 				BBAB78B81EC0F8C2009E254E /* LogoButtonSprite.swift in Sources */,
 				BB459C991E9EB3F20027CA9B /* PingPongHud.swift in Sources */,
 				BB459C3E1E9EB1460027CA9B /* SoundManager.swift in Sources */,
+				BBC56E3F1ED4AC42006A6351 /* RainTransition.swift in Sources */,
 				BB459C511E9EB17F0027CA9B /* Constants.swift in Sources */,
 				BB869EBA1EB9360A0072A193 /* CurtainSprite.swift in Sources */,
 				BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */,

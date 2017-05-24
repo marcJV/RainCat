@@ -10,15 +10,24 @@ import SpriteKit
 
 class RainCatScene : SKScene, Router, WorldManager {
   private var baseNode : SceneNode?
+  private var newNode : SceneNode?
+  private var extras : MenuExtras?
   private var lastTime : TimeInterval = 0
+  private var transition : RainTransition!
 
   override func didMove(to view: SKView) {
+    transition = RainTransition()
+    transition.setup()
+    addChild(transition)
+
+
     navigate(to: .Logo, extras: nil)
   }
 
-func navigate(to: Location, extras menuExtras: MenuExtras?) {
+  func navigate(to: Location, extras menuExtras: MenuExtras?) {
+    transition.performTransition(extras : menuExtras?.transition)
+
     baseNode?.zPosition = 1
-    var newNode : SceneNode
 
     switch to {
     case .MainMenu:
@@ -34,18 +43,31 @@ func navigate(to: Location, extras menuExtras: MenuExtras?) {
       newNode = LogoScene(color: .clear, size: size)
     }
 
-    newNode.zPosition = 2
-    newNode.layoutScene(size: size, extras: menuExtras)
+    self.extras = menuExtras
+    newNode!.zPosition = 2
 
-    physicsWorld.gravity = newNode.getGravity()
-
-    if baseNode != nil {
-      updateBaseNode(newNode: newNode)
-    } else {
-      baseNode = newNode
-      addChild(newNode)
-      newNode.attachedToScene()
+    if self.extras?.transition == nil {
+      transitionCoveredScreen()
     }
+  }
+
+  func transitionCoveredScreen() {
+    if newNode != nil  && newNode?.parent == nil {
+      newNode!.layoutScene(size: size, extras: extras)
+
+      physicsWorld.gravity = newNode!.getGravity()
+
+      if baseNode != nil {
+        updateBaseNode(newNode: newNode!)
+      } else {
+        baseNode = newNode
+        addChild(newNode!)
+        newNode!.attachedToScene()
+      }
+    }
+
+    newNode = nil
+    extras = nil
   }
 
   private func updateBaseNode(newNode : SceneNode) {

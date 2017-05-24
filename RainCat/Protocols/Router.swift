@@ -10,6 +10,8 @@ import SpriteKit
 
 protocol Router {
   func navigate(to: Location, extras menuExtras : MenuExtras?)
+
+  func transitionCoveredScreen()
 }
 
 protocol WorldManager {

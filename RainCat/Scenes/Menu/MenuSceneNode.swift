@@ -428,7 +428,6 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       (contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory) &&
       (contact.bodyA.categoryBitMask != FloorCategory && contact.bodyB.categoryBitMask != FloorCategory) {
       isNavigating = true
-      pauseNode()
 
       var rainScale : CGFloat = 0.33
       if contact.bodyA.categoryBitMask == RainDropCategory {
@@ -446,12 +445,13 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
         rainScale = 3
       }
 
-      let extras = MenuExtras(rainScale: rainScale, catScale: catSprite.xScale)
+      let extras = MenuExtras(rainScale: rainScale,
+                              catScale: catSprite.xScale,
+                              transition: TransitionExtras(transitionType: .ScaleInCircular(fromPoint: contact.contactPoint),
+                                                           toColor: self.navigationItem! == .LCD ? .black : RAIN_COLOR))
 
       if let parent = parent as? Router, navigationItem != nil {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-          parent.navigate(to: self.navigationItem!, extras: extras)
-        }
+        parent.navigate(to: self.navigationItem!, extras: extras)
       }
     }
   }

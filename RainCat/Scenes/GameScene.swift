@@ -18,7 +18,6 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
   private var cat : CatSprite!
   private var food : FoodSprite?
   private let hud = HudNode()
-  private var rainDropTexture : SKTexture!
 
   private var backgroundNode : BackgroundNode!
   private var groundNode : GroundNode!
@@ -33,19 +32,8 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
   override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
 
     if let extras = menuExtras {
-          switch extras.rainScale {
-          case 2:
-            rainDropTexture = SKTexture(imageNamed: "medium_rain_drop")
-          case 3:
-            rainDropTexture = SKTexture(imageNamed: "large_rain_drop")
-          default:
-            rainDropTexture = SKTexture(imageNamed: "rain_drop")
-          }
-
       rainScale = extras.rainScale
       catScale = extras.catScale
-    } else {
-      rainDropTexture = SKTexture(imageNamed: "rain_drop")
     }
 
     isUserInteractionEnabled = true
@@ -102,7 +90,8 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
   func quitPressed() {
     if let parent = parent as? Router {
-      parent.navigate(to: .MainMenu, extras: nil)
+      parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0,
+                                                        transition: TransitionExtras(transitionType: .ScaleInUniform)))
     }
   }
 
@@ -111,7 +100,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     if let point = touchPoint {
 
-        umbrella.setDestination(destination: point)
+      umbrella.setDestination(destination: point)
 
     }
   }
@@ -121,7 +110,7 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     if let point = touchPoint {
 
-        umbrella.setDestination(destination: point)
+      umbrella.setDestination(destination: point)
 
     }
   }
@@ -151,15 +140,11 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
   func spawnRaindrop() {
     for _ in 0...Int(hud.score / 10) {
-      let rainDrop = SKSpriteNode(texture: rainDropTexture)
+      let rainDrop = RainDropSprite(scale: rainScale)
       rainDrop.position = CGPoint(x: size.width / 2, y:  size.height / 2)
+      rainDrop.addPhysics()
       rainDrop.zPosition = 2
 
-      let bodyEdge = 20 * rainScale
-      rainDrop.physicsBody = SKPhysicsBody(texture: rainDropTexture, size: rainDrop.size)
-      rainDrop.physicsBody?.categoryBitMask = RainDropCategory
-      rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
-      rainDrop.physicsBody?.density = 0.5
 
       var randomPosition = CGFloat(arc4random())
       randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width)
@@ -176,7 +161,6 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
         rainDrop.physicsBody?.velocity.dx *= arc4random() % 2 == 0 ? -1 : 1
         rainDrop.zPosition = 4
         rainDrop.color = currentPalette.umbrellaBottomColor
-        rainDrop.colorBlendFactor = 0.5
       }
 
       if hud.score > 30 && arc4random() % 10 == 0 {
@@ -331,11 +315,11 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     case WorldFrameCategory:
       foodBody.node?.removeFromParent()
       foodBody.node?.physicsBody = nil
-      
+
       food = nil
-      
+
       spawnFood()
-      
+
     default:
       print("something else touched the food")
     }
@@ -353,14 +337,14 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
   func resetColorPalette() {
     currentPalette = ColorManager.sharedInstance.resetPaletteIndex()
-
+    
     for node in children {
       if let node = node as? Palettable {
         node.updatePalette(palette: currentPalette)
       }
     }
   }
-
+  
   deinit {
     print("game scene destroyed")
   }
