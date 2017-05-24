@@ -9,7 +9,6 @@
 import SpriteKit
 
 class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
-
   private var currentRainDropSpawnTime : TimeInterval = 0
   private var rainDropSpawnRate : TimeInterval = 0.5
   private let foodEdgeMargin : CGFloat = 75.0
@@ -27,10 +26,14 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
   private var catScale : CGFloat = 1
   private var rainScale : CGFloat = 1
 
+  var isMultiplayer = false
+
+  private var umbrellaTouch : UITouch?
+  private var catTouch : UITouch?
+
   override func detachedFromScene() {}
 
   override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
-
     if let extras = menuExtras {
       rainScale = extras.rainScale
       catScale = extras.catScale
@@ -90,28 +93,56 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
   func quitPressed() {
     if let parent = parent as? Router {
-      parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0,
+      parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0,
+                                                        catScale: 0,
                                                         transition: TransitionExtras(transitionType: .ScaleInUniform)))
     }
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
+    for touch in touches {
+      if groundNode.contains(touch.location(in: self)) {
+        //Possible cat touch
+        if isMultiplayer && catTouch == nil {
+          catTouch = touch
+        }
+      } else {
+        //Possible umbrella touch
 
-    if let point = touchPoint {
+        if umbrellaTouch == nil {
+          umbrellaTouch = touch
 
-      umbrella.setDestination(destination: point)
-
+          umbrella.setDestination(destination: (umbrellaTouch?.location(in: self))!)
+        }
+      }
     }
   }
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    let touchPoint = touches.first?.location(in: self)
+    for touch in touches {
+      if let uTouch = umbrellaTouch, touch.isEqual(uTouch) {
+        umbrella.setDestination(destination: uTouch.location(in: self))
+      }
+    }
+  }
 
-    if let point = touchPoint {
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    for touch in touches {
+      if touch.isEqual(umbrellaTouch) {
+        umbrellaTouch = nil
+      } else if touch.isEqual(catTouch) {
+        catTouch = nil
+      }
+    }
+  }
 
-      umbrella.setDestination(destination: point)
-
+  override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    for touch in touches {
+      if touch.isEqual(umbrellaTouch) {
+        umbrellaTouch = nil
+      } else if touch.isEqual(catTouch) {
+        catTouch = nil
+      }
     }
   }
 
@@ -130,7 +161,18 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     umbrella.update(deltaTime: dt)
 
     if let food = childNode(withName: FoodSprite.foodDishName) as? FoodSprite {
-      cat.update(deltaTime: dt, foodLocation: (food.position))
+
+      var position = food.position
+
+      if isMultiplayer {
+        if catTouch != nil {
+          position = catTouch!.location(in: self)
+        } else {
+          position = cat.position
+        }
+      }
+
+      cat.update(deltaTime: dt, foodLocation: position)
     }
 
     cat.movementSpeed = cat.baseMovementSpeed + (cat.baseMovementSpeed * 0.1) * CGFloat(hud.score) / 10.0
@@ -182,6 +224,11 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     }
 
     cat = CatSprite.newInstance()
+
+    if isMultiplayer {
+      cat.addDash()
+    }
+
     cat.setScale(0.5)
     cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y + umbrella.getHeight() / 2)
     cat.run(SKAction.scale(to: catScale, duration: 0.3))

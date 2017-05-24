@@ -20,7 +20,6 @@ class RainCatScene : SKScene, Router, WorldManager {
     transition.setup()
     addChild(transition)
 
-
     navigate(to: .Logo, extras: nil)
   }
 
@@ -36,7 +35,11 @@ class RainCatScene : SKScene, Router, WorldManager {
       newNode = GameScene(color: .clear, size: size)
     case .LCD:
       newNode = LCDSceneNode(color: .clear, size: size)
-    case .ClassicMulti: fallthrough
+    case .ClassicMulti:
+      let game = GameScene(color: .clear, size: size)
+      game.isMultiplayer = true
+
+      newNode = game
     case .CatPong:
       newNode = PingPongSceneNode(color: .clear, size: size)
     default:
