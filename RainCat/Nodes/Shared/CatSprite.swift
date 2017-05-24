@@ -21,6 +21,8 @@ class CatSprite : SKAControlSprite {
   private var currentRainHits = 4
   private let maxRainHits = 4
 
+  private var hasDash = false
+
   let baseMovementSpeed : CGFloat = 100
   var movementSpeed : CGFloat = 100
   var flipScale = false //used only for ping pong for player 1
@@ -70,9 +72,12 @@ class CatSprite : SKAControlSprite {
 
         //Stand still if the food is above us
         if abs(foodLocation.x - position.x) < 2 {
-          //physicsBody?.velocity.dx = 0
           removeAction(forKey: walkingActionKey)
           texture = walkFrames[1]
+
+          if !hasDash {
+            physicsBody?.velocity.dx = 0
+          }
         } else if foodLocation.x < position.x {
           //Food is left
           physicsBody?.velocity.dx = -movementSpeed
@@ -101,6 +106,7 @@ class CatSprite : SKAControlSprite {
   }
 
   func addDash() {
+    hasDash = true
     addTarget(self, selector: #selector(dash), forControlEvents: .TouchUpInside)
   }
 
