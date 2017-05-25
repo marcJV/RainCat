@@ -340,6 +340,12 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
     case CatCategory:
       hud.addPoint()
 
+      if isMultiplayer {
+        UserDefaultsManager.sharedInstance.updateClassicMultiplayerHighScore(highScore: hud.score)
+      } else {
+        UserDefaultsManager.sharedInstance.updateClassicHighScore(highScore: hud.score)
+      }
+
       if hud.score % 5 == 0 {
         updateColorPalette()
         rainDropSpawnRate *= 0.95

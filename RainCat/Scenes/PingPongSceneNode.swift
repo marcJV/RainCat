@@ -127,6 +127,8 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
     puck!.physicsBody?.restitution = 0.85
     puck!.physicsBody?.mass = 0.02
     puck!.physicsBody?.linearDamping = 0.5
+    puck!.colorBlendFactor = 1
+    puck?.color = RAIN_COLOR
 
     addChild(puck!)
   }
@@ -458,6 +460,18 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
       }
 
       puck?.physicsBody?.applyImpulse(impulse)
+
+      var umbrella : UmbrellaSprite
+
+      if umbrella1.isEqual(otherBody.node) {
+        umbrella = umbrella1
+      } else {
+        umbrella = umbrella2
+      }
+
+      puck!.run(ColorAction().colorTransitionAction(fromColor: puck!.color,
+                                                    toColor: umbrella.palette.umbrellaTopColor,
+                                                    duration: 0.25))
 
       lastPaddleHit = 0
       currentNoHitTime = 0

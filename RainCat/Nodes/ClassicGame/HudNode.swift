@@ -56,8 +56,6 @@ class HudNode : SKNode, Palettable {
     if score > highScore {
       highScore = score
 
-      UserDefaultsManager.sharedInstance.updateClassicHighScore(highScore: highScore)
-
       if !showingHighScore {
         showingHighScore = true
 

@@ -311,6 +311,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
   }
 
   func menuToSinglePlayer() {
+    SoundManager.sharedInstance.testTick()
+    
     if !isNavigating {
       backButton.moveTo(y: backButtonReference.zeroPosition)
       creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.offscreenLeft, duration: 0.5))

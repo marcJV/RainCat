@@ -18,8 +18,6 @@ public func SKTTimingFunctionQuarticEaseOut(_ t: CGFloat) -> CGFloat {
     if elapsedTime < 0.8 {
       node.position.x = (endValue - startValue) / 0.8
     }
-
-
   }
 
   let f = t - 1.0

@@ -20,6 +20,8 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
   private var isPingPong = false
   var clickArea : SKAControlSprite?
 
+  private(set) var palette : ColorPalette!
+
   public init() {
     super.init(texture: nil, color: .clear, size: .zero)
   }
@@ -51,6 +53,7 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
   }
 
   private func setup(palette : ColorPalette, pingPong : Bool = false) {
+    self.palette = palette
     isPingPong = pingPong
 
     let top = SKSpriteNode(imageNamed: "umbrellaTop")
@@ -162,11 +165,19 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
   }
 
   public func updatePalette(palette: ColorPalette) {
+    self.palette = palette
+
     umbrellaTop.run(ColorAction().colorTransitionAction(fromColor: umbrellaTop.color, toColor: palette.umbrellaTopColor, duration: colorChangeDuration))
     umbrellaBottom.run(ColorAction().colorTransitionAction(fromColor: umbrellaBottom.color, toColor: palette.umbrellaBottomColor, duration: colorChangeDuration))
   }
 
   public func updatePalette(palette : Int) {
-    updatePalette(palette: ColorManager.sharedInstance.getColorPalette(palette))
+    self.palette = ColorManager.sharedInstance.getColorPalette(palette)
+
+    updatePalette(palette: self.palette)
+  }
+
+  override func isEqual(_ object: Any?) -> Bool {
+    return super.isEqual(object) || umbrellaTop.isEqual(object) || umbrellaBottom.isEqual(object)
   }
 }
