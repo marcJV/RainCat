@@ -84,6 +84,8 @@ class LCDSceneNode : SceneNode {
 
   func moveLeft() {
     lcdScreen.moveUmbrellaLeft()
+
+    
   }
 
   func moveRight() {

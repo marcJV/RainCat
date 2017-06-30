@@ -28,6 +28,8 @@ class RainCatScene : SKScene, Router, WorldManager {
 
     baseNode?.zPosition = 1
 
+    SoundManager.sharedInstance.resumeMusic()
+
     switch to {
     case .MainMenu:
       newNode = MenuSceneNode(color: .clear, size: size)
@@ -35,6 +37,7 @@ class RainCatScene : SKScene, Router, WorldManager {
       newNode = GameScene(color: .clear, size: size)
     case .LCD:
       newNode = LCDSceneNode(color: .clear, size: size)
+      SoundManager.sharedInstance.muteMusic()
     case .ClassicMulti:
       let game = GameScene(color: .clear, size: size)
       game.isMultiplayer = true
@@ -42,6 +45,8 @@ class RainCatScene : SKScene, Router, WorldManager {
       newNode = game
     case .CatPong:
       newNode = PingPongSceneNode(color: .clear, size: size)
+    case .Directions:
+      newNode = DirectionsSceneNode(color: .clear, size: size)
     default:
       newNode = LogoScene(color: .clear, size: size)
     }

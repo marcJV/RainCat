@@ -20,5 +20,5 @@ protocol WorldManager {
 }
 
 public enum Location {
-  case Logo, MainMenu, Classic, LCD, ClassicMulti, CatPong
+  case Logo, MainMenu, Classic, LCD, ClassicMulti, CatPong, Directions
 }

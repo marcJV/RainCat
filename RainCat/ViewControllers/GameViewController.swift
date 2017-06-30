@@ -22,7 +22,6 @@ class GameViewController: UIViewController {
       sceneNode = RainCatScene(size: getDisplaySize())
 //    }
 
-
     if let view = self.view as! SKView? {
       view.presentScene(sceneNode)
       view.ignoresSiblingOrder = true
@@ -31,7 +30,6 @@ class GameViewController: UIViewController {
       //view.showsFPS = true
       //view.showsNodeCount = true
     }
-
 
     SoundManager.sharedInstance.startPlaying()
   }

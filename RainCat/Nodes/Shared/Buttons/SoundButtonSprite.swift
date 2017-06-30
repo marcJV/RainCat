@@ -81,24 +81,4 @@ class SoundButtonSprite : SKSpriteNode {
     addChild(medium)
     addChild(high)
   }
-
-  //override func updateControl() {
-  //  updateToControlState(controlState: controlState)
-  //}
-
-  //  func updateToControlState(controlState : SKAControlState) {
-  //    var action : SKAction
-  //    if controlState.contains(.Disabled) {
-  //      action = SKAction.scale(to: 0.25, duration: 0.15)
-  //    } else if controlState.contains(.Highlighted) {
-  //      action = SKAction.scale(to: 1, duration: 0.15)
-  //    } else {
-  //      action = SKAction.scale(to: 0.75, duration: 0.15)
-  //    }
-  //
-  //    base.run(action)
-  //    low.run(action)
-  //    medium.run(action)
-  //    high.run(action)
-  //  }
 }

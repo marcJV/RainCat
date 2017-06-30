@@ -102,8 +102,13 @@ class TwoPaneButton : SKAControlSprite {
     } else {
       elevation = 10
     }
+
+    addTarget(self, selector: #selector(clickSound), forControlEvents: .TouchUpInside)
   }
 
+  func clickSound() {
+    SoundManager.playButtonClick(node: self)
+  }
 
   let moveKey = "moving_the_button_yay!"
 

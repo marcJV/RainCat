@@ -177,6 +177,21 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
     updatePalette(palette: self.palette)
   }
 
+  func makeDynamic() {
+    umbrellaTop.physicsBody = nil
+    physicsBody = SKPhysicsBody(circleOfRadius: 15)
+    physicsBody?.categoryBitMask = CatCategory
+    physicsBody?.contactTestBitMask = WorldFrameCategory
+    physicsBody?.density = 0.01
+    physicsBody?.linearDamping = 1
+    physicsBody?.isDynamic = true
+    physicsBody?.allowsRotation = true
+
+    zPosition = 0
+    umbrellaTop.zPosition = 1
+    umbrellaBottom.zPosition = 0
+  }
+
   override func isEqual(_ object: Any?) -> Bool {
     return super.isEqual(object) || umbrellaTop.isEqual(object) || umbrellaBottom.isEqual(object)
   }

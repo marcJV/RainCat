@@ -45,18 +45,24 @@ class ColorManager {
     return palette
   }
 
-public func getColorPalette(_ index : Int) -> ColorPalette {
+  public func getColorPalette(_ index : Int) -> ColorPalette {
     let fixedIndex = index % colorList.count
 
     let palette = colorList[fixedIndex]
 
-  print("getting palette number: \(index) \(fixedIndex)")
+    print("getting palette number: \(index) \(fixedIndex)")
 
     return palette
   }
 
   public func getNextColorPaletteIndex(_ index : Int) -> Int {
     return (index + 1) % colorList.count
+  }
+
+  public func getRandomPalette() -> ColorPalette {
+    let index = Int(arc4random_uniform(UInt32(colorList.count)))
+
+    return colorList[index]
   }
 }
 

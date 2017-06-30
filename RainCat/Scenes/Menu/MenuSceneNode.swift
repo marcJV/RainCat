@@ -23,6 +23,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
   private var backButton : TwoPaneButton!
   private var creditsButton : TextButtonSprite!
+  private var directionsButton : TextButtonSprite!
 
   private var titleNode : TitleMenuNode!
   private var creditsNode : CreditsNode!
@@ -51,6 +52,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
   private var lcdLEDScoreReference : AnimationReference!
   private var backButtonReference : AnimationReference!
   private var creditsButtonReference : AnimationReference!
+  private var directionsButtonReference : AnimationReference!
 
   private var navigationItem : Location?
 
@@ -129,6 +131,13 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     creditsButton.position = CGPoint(x: creditsButton.size.width / 2,
                                      y: creditsButton.size.height / 2)
+
+    directionsButton = childNode(withName: "button-directions") as! TextButtonSprite
+    directionsButton.set(text: "HELP", fontSize: 35, autoResize: true)
+    directionsButton.addTarget(self, selector: #selector(navigateToDirections), forControlEvents: .TouchUpInside)
+    directionsButton.position = CGPoint(x: directionsButton.position.x * 0.75,
+                                     y: directionsButton.size.height / 2)
+    directionsButton.zPosition = 49
 
     let titleReference = childNode(withName: "title-reference")
 
@@ -283,6 +292,8 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
       navigationItem = .LCD
       rainDropBanner.makeItRain()
+
+      directionsButton.run(SKAction.fadeOut(withDuration: 0.5))
     }
 
     backButton.isUserInteractionEnabled = false
@@ -310,12 +321,11 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     tempDisableButton(duration: 1)
   }
 
-  func menuToSinglePlayer() {
-    SoundManager.sharedInstance.testTick()
-    
+  func menuToSinglePlayer() {    
     if !isNavigating {
       backButton.moveTo(y: backButtonReference.zeroPosition)
       creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.offscreenLeft, duration: 0.5))
+      directionsButton.run(SKActionHelper.moveToEaseInOut(y: directionsButtonReference.offscreenLeft, duration: 0.5))
 
       currentNode.navigateOutToLeft(duration: 1.0)
 
@@ -331,6 +341,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     if !isNavigating {
       backButton.moveTo(y: backButtonReference.zeroPosition)
       creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.offscreenLeft, duration: 0.5))
+      directionsButton.run(SKActionHelper.moveToEaseInOut(y: directionsButtonReference.offscreenLeft, duration: 0.5))
 
       currentNode.navigateOutToLeft(duration: 1.0)
       multiplayerNode.navigateInFromRight(duration: 1.0)
@@ -362,6 +373,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
       } else {
         backButton.moveTo(y: backButtonReference.offscreenLeft)
         creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.zeroPosition, duration: 0.5))
+        directionsButton.run(SKActionHelper.moveToEaseInOut(y: directionsButtonReference.zeroPosition, duration: 0.5))
 
         titleNode.navigateInFromLeft(duration: 1.0)
         currentNode = titleNode
@@ -375,6 +387,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     if !isNavigating {
       backButton.moveTo(y: backButtonReference.zeroPosition)
       creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.offscreenLeft, duration: 0.5))
+      directionsButton.run(SKActionHelper.moveToEaseInOut(y: directionsButtonReference.zeroPosition, duration: 0.5))
 
       currentNode.navigateOutToLeft(duration: 1.0)
       creditsNode.navigateInFromRight(duration: 1.0)
@@ -384,6 +397,17 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     backButton.isUserInteractionEnabled = false
     tempDisableButton(duration: 1)
+  }
+
+  func navigateToDirections() {
+    if !isNavigating {
+      if let parent = parent as? Router {
+        parent.navigate(to: .Directions,
+                        extras: MenuExtras(rainScale: 1,
+                                           catScale: 1,
+                                           transition: TransitionExtras(transitionType: TransitionType.ScaleInChecker)))
+      }
+    }
   }
 
   override func update(dt: TimeInterval) {
@@ -499,6 +523,12 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     creditsButtonReference = AnimationReference(zeroPosition: creditsButton.position.y,
                                                 offscreenLeft: creditsButton.position.y - 200,
                                                 offscreenRight: creditsButton.position.y - 200)
+
+    directionsButtonReference = AnimationReference(zeroPosition: directionsButton.position.y - 200,
+                                                offscreenLeft: directionsButton.position.y,
+                                                offscreenRight: directionsButton.position.y)
+
+    directionsButton.position.y -= 200
 
     backButton.moveTo(y: backButtonReference.offscreenLeft, duration: 0)
     navigateOutToRight(duration: 0)

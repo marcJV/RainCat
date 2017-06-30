@@ -30,7 +30,8 @@ public class ShadowLabelNode : SKNode {
     shadowTextNode.position = CGPoint(x: -1, y: -6)
 
     textNode.fontColor = SKColor.white
-    shadowTextNode.fontColor = SKColor(red:0.23, green:0.64, blue:0.71, alpha:1.0)
+    shadowTextNode.fontColor = SKColor.black
+    shadowTextNode.alpha = 0.2
 
     addChild(textNode)
     addChild(shadowTextNode)
@@ -41,11 +42,12 @@ public class ShadowLabelNode : SKNode {
 
     setup(fontNamed: BASE_FONT_NAME)
     let labelText = userData?.value(forKey: "text") as? String
+    let textSize = CGFloat(userData?.value(forKey: "textSize") as? Int ?? 100)
     textNode.text = labelText
     shadowTextNode.text = labelText
 
-    textNode.fontSize = 100
-    shadowTextNode.fontSize = 100
+    textNode.fontSize = textSize
+    shadowTextNode.fontSize = textSize
   }
 
   public override var zPosition: CGFloat {

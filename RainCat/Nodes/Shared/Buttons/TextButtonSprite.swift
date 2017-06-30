@@ -9,7 +9,7 @@
 import SpriteKit
 
 class TextButtonSprite : SKAControlSprite {
-  private var label : SKLabelNode!
+  var label : SKLabelNode!
 
   init() {
     super.init(texture: nil, color: .clear, size: .zero)
@@ -28,17 +28,17 @@ class TextButtonSprite : SKAControlSprite {
 
     label = SKLabelNode(fontNamed: BASE_FONT_NAME)
 
-    label.fontColor = .white
     label.zPosition = zPosition
   }
 
-  func set(text: String, fontSize: CGFloat, autoResize: Bool) {
+  func set(text: String, fontSize: CGFloat, autoResize: Bool, fontColor : SKColor = .white) {
     color = .clear
     
     label.horizontalAlignmentMode = .center
     label.verticalAlignmentMode = .center
 
     label.fontSize = fontSize
+    label.fontColor = fontColor
     label.text = text
 
     if autoResize {

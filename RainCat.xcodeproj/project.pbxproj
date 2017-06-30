@@ -55,6 +55,14 @@
 		BB459CA01E9EB3F20027CA9B /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */; };
 		BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA11E9EB4070027CA9B /* Paletteable.swift */; };
 		BB459CA41E9EB4070027CA9B /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA21E9EB4070027CA9B /* Touchable.swift */; };
+		BB476FB11F05636A005EB2AF /* lcd-pickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB01F05636A005EB2AF /* lcd-pickup.wav */; };
+		BB476FB51F056413005EB2AF /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB41F056413005EB2AF /* hit.wav */; };
+		BB476FB71F056431005EB2AF /* move.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB61F056430005EB2AF /* move.wav */; };
+		BB476FB91F056630005EB2AF /* buttonClick.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB81F056630005EB2AF /* buttonClick.wav */; };
+		BB476FBD1F056A45005EB2AF /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FBC1F056A45005EB2AF /* hit.wav */; };
+		BB476FBF1F057513005EB2AF /* DirectionsSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB476FBE1F057513005EB2AF /* DirectionsSceneNode.swift */; };
+		BB476FC11F057586005EB2AF /* DirectionsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB476FC01F057586005EB2AF /* DirectionsScene.sks */; };
+		BB476FC41F06A70A005EB2AF /* InstructionsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB476FC31F06A70A005EB2AF /* InstructionsNode.swift */; };
 		BB67AD821EC102EA00CA5205 /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB67AD811EC102EA00CA5205 /* CreditsScene.sks */; };
 		BB67AD861EC35F2900CA5205 /* SinglePlayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BB67AD851EC35F2900CA5205 /* SinglePlayerScene.sks */; };
 		BB6B0C2D1D7F41FF00BBA0BD /* MenuSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B0C2C1D7F41FF00BBA0BD /* MenuSceneNode.swift */; };
@@ -73,19 +81,12 @@
 		BBAB78B81EC0F8C2009E254E /* LogoButtonSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAB78B71EC0F8C2009E254E /* LogoButtonSprite.swift */; };
 		BBAB78BA1EC0FA9F009E254E /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAB78B91EC0FA9F009E254E /* Navigation.swift */; };
 		BBAF08181EA000E500AAF449 /* LCDScene-iPhone.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08171EA000E500AAF449 /* LCDScene-iPhone.sks */; };
-		BBAF081A1EA017C500AAF449 /* blip_0012.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08191EA017C500AAF449 /* blip_0012.wav */; };
-		BBAF081D1EA01B1600AAF449 /* kick_003.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBAF081B1EA01B1600AAF449 /* kick_003.wav */; };
-		BBAF081E1EA01B1600AAF449 /* kick_004.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBAF081C1EA01B1600AAF449 /* kick_004.wav */; };
-		BBAF08201EA01E2D00AAF449 /* Chip_Hat_10.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBAF081F1EA01E2D00AAF449 /* Chip_Hat_10.wav */; };
 		BBAF08231EA0253200AAF449 /* LogoScene-iPhone.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08221EA0253200AAF449 /* LogoScene-iPhone.sks */; };
 		BBAF08251EA0267B00AAF449 /* LogoScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBAF08241EA0267B00AAF449 /* LogoScene.sks */; };
 		BBB318391DC78F6700644DB6 /* LCDSceneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB318381DC78F6700644DB6 /* LCDSceneNode.swift */; };
 		BBC320301EA29393009CCE39 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC3202F1EA29393009CCE39 /* MainMenu.sks */; };
 		BBC56E3F1ED4AC42006A6351 /* RainTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC56E3E1ED4AC42006A6351 /* RainTransition.swift */; };
 		BBC56E411ED5FFCF006A6351 /* RainDropSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC56E401ED5FFCF006A6351 /* RainDropSprite.swift */; };
-		BBC56E461ED75624006A6351 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC56E451ED75624006A6351 /* AudioKit.framework */; };
-		BBC56E471ED75666006A6351 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC56E451ED75624006A6351 /* AudioKit.framework */; };
-		BBC56E481ED75666006A6351 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BBC56E451ED75624006A6351 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BBC63AA91EC376CD00F48F27 /* MultiplayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC63AA81EC376CC00F48F27 /* MultiplayerNode.swift */; };
 		BBC63AAB1EC377DC00F48F27 /* MultiplayerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC63AAA1EC377DC00F48F27 /* MultiplayerScene.sks */; };
 		BBC63AAD1EC38C1000F48F27 /* PlayerSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */; };
@@ -109,7 +110,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BBC56E481ED75666006A6351 /* AudioKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +165,14 @@
 		BB459C841E9EB3F20027CA9B /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellaSprite.swift; sourceTree = "<group>"; };
 		BB459CA11E9EB4070027CA9B /* Paletteable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paletteable.swift; path = Protocols/Paletteable.swift; sourceTree = "<group>"; };
 		BB459CA21E9EB4070027CA9B /* Touchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Touchable.swift; path = Protocols/Touchable.swift; sourceTree = "<group>"; };
+		BB476FB01F05636A005EB2AF /* lcd-pickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "lcd-pickup.wav"; path = "../lcd-pickup.wav"; sourceTree = "<group>"; };
+		BB476FB41F056413005EB2AF /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hit.wav; path = ../hit.wav; sourceTree = "<group>"; };
+		BB476FB61F056430005EB2AF /* move.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = move.wav; path = ../move.wav; sourceTree = "<group>"; };
+		BB476FB81F056630005EB2AF /* buttonClick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = buttonClick.wav; path = ../buttonClick.wav; sourceTree = "<group>"; };
+		BB476FBC1F056A45005EB2AF /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		BB476FBE1F057513005EB2AF /* DirectionsSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectionsSceneNode.swift; path = Nodes/Menu/DirectionsSceneNode.swift; sourceTree = "<group>"; };
+		BB476FC01F057586005EB2AF /* DirectionsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DirectionsScene.sks; path = Scenes/Menu/DirectionsScene.sks; sourceTree = "<group>"; };
+		BB476FC31F06A70A005EB2AF /* InstructionsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionsNode.swift; path = Scenes/Menu/InstructionsNode.swift; sourceTree = "<group>"; };
 		BB67AD811EC102EA00CA5205 /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		BB67AD851EC35F2900CA5205 /* SinglePlayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SinglePlayerScene.sks; path = Scenes/Menu/SinglePlayerScene.sks; sourceTree = "<group>"; };
 		BB6B0C2C1D7F41FF00BBA0BD /* MenuSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuSceneNode.swift; path = Scenes/Menu/MenuSceneNode.swift; sourceTree = "<group>"; };
@@ -184,27 +192,15 @@
 		BBAB78B71EC0F8C2009E254E /* LogoButtonSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoButtonSprite.swift; sourceTree = "<group>"; };
 		BBAB78B91EC0FA9F009E254E /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		BBAF08171EA000E500AAF449 /* LCDScene-iPhone.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "LCDScene-iPhone.sks"; path = "Scenes/LCDScene-iPhone.sks"; sourceTree = "<group>"; };
-		BBAF08191EA017C500AAF449 /* blip_0012.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blip_0012.wav; sourceTree = "<group>"; };
-		BBAF081B1EA01B1600AAF449 /* kick_003.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_003.wav; sourceTree = "<group>"; };
-		BBAF081C1EA01B1600AAF449 /* kick_004.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = kick_004.wav; sourceTree = "<group>"; };
-		BBAF081F1EA01E2D00AAF449 /* Chip_Hat_10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chip_Hat_10.wav; sourceTree = "<group>"; };
 		BBAF08221EA0253200AAF449 /* LogoScene-iPhone.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "LogoScene-iPhone.sks"; path = "Scenes/LogoScene-iPhone.sks"; sourceTree = "<group>"; };
 		BBAF08241EA0267B00AAF449 /* LogoScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LogoScene.sks; path = Scenes/LogoScene.sks; sourceTree = "<group>"; };
 		BBB318381DC78F6700644DB6 /* LCDSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LCDSceneNode.swift; path = Scenes/LCDSceneNode.swift; sourceTree = "<group>"; };
 		BBC3202F1EA29393009CCE39 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainMenu.sks; path = Scenes/Menu/MainMenu.sks; sourceTree = "<group>"; };
 		BBC56E3E1ED4AC42006A6351 /* RainTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RainTransition.swift; path = Scenes/Transitions/RainTransition.swift; sourceTree = "<group>"; };
 		BBC56E401ED5FFCF006A6351 /* RainDropSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RainDropSprite.swift; sourceTree = "<group>"; };
-		BBC56E451ED75624006A6351 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		BBC63AA81EC376CC00F48F27 /* MultiplayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerNode.swift; sourceTree = "<group>"; };
 		BBC63AAA1EC377DC00F48F27 /* MultiplayerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MultiplayerScene.sks; path = Scenes/Menu/MultiplayerScene.sks; sourceTree = "<group>"; };
 		BBC63AAC1EC38C1000F48F27 /* PlayerSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PlayerSelectScene.sks; path = Scenes/Menu/PlayerSelectScene.sks; sourceTree = "<group>"; };
-		BBC63AB01EC5107200F48F27 /* cat_meow_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_1.mp3; path = RainCat/Support/SFX/cat_meow_1.mp3; sourceTree = "<group>"; };
-		BBC63AB11EC5107200F48F27 /* cat_meow_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_2.mp3; path = RainCat/Support/SFX/cat_meow_2.mp3; sourceTree = "<group>"; };
-		BBC63AB21EC5107200F48F27 /* cat_meow_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_3.mp3; path = RainCat/Support/SFX/cat_meow_3.mp3; sourceTree = "<group>"; };
-		BBC63AB31EC5107200F48F27 /* cat_meow_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_4.mp3; path = RainCat/Support/SFX/cat_meow_4.mp3; sourceTree = "<group>"; };
-		BBC63AB41EC5107200F48F27 /* cat_meow_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_5.wav; path = RainCat/Support/SFX/cat_meow_5.wav; sourceTree = "<group>"; };
-		BBC63AB51EC5107200F48F27 /* cat_meow_6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cat_meow_6.wav; path = RainCat/Support/SFX/cat_meow_6.wav; sourceTree = "<group>"; };
-		BBC63AB61EC5107200F48F27 /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cat_meow_7.mp3; path = RainCat/Support/SFX/cat_meow_7.mp3; sourceTree = "<group>"; };
 		BBC9F6E71D8D941A00385223 /* PingPongSceneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PingPongSceneNode.swift; path = Scenes/PingPongSceneNode.swift; sourceTree = "<group>"; };
 		BBCCC22F1ECB982600C992AB /* SKActionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SKActionHelper.swift; path = Utility/SKActionHelper.swift; sourceTree = "<group>"; };
 		BBCCC2341ED32EE200C992AB /* MenuExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuExtras.swift; path = Model/MenuExtras.swift; sourceTree = "<group>"; };
@@ -223,8 +219,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBC56E471ED75666006A6351 /* AudioKit.framework in Frameworks */,
-				BBC56E461ED75624006A6351 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,10 +228,11 @@
 		BB281B7A1D7899AB00229A97 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
-				BBAF081F1EA01E2D00AAF449 /* Chip_Hat_10.wav */,
-				BBAF08191EA017C500AAF449 /* blip_0012.wav */,
-				BBAF081B1EA01B1600AAF449 /* kick_003.wav */,
-				BBAF081C1EA01B1600AAF449 /* kick_004.wav */,
+				BB476FB01F05636A005EB2AF /* lcd-pickup.wav */,
+				BB476FB41F056413005EB2AF /* hit.wav */,
+				BB476FB61F056430005EB2AF /* move.wav */,
+				BB476FBC1F056A45005EB2AF /* hit.wav */,
+				BB476FB81F056630005EB2AF /* buttonClick.wav */,
 				BB459C3F1E9EB16B0027CA9B /* cat_meow_1.mp3 */,
 				BB459C401E9EB16B0027CA9B /* cat_meow_2.mp3 */,
 				BB459C411E9EB16B0027CA9B /* cat_meow_3.mp3 */,
@@ -256,6 +251,7 @@
 				BBC3202E1EA29363009CCE39 /* Menu */,
 				BBC3202D1EA292DE009CCE39 /* Logo */,
 				BBC3202C1EA292D2009CCE39 /* LCD */,
+				BB476FC21F057724005EB2AF /* Directions */,
 				BBA2E4AB1D74A62C00853E63 /* GameScene.swift */,
 				BBC9F6E71D8D941A00385223 /* PingPongSceneNode.swift */,
 				BB869EB31EB8E5F90072A193 /* RainCatScene.swift */,
@@ -396,6 +392,16 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		BB476FC21F057724005EB2AF /* Directions */ = {
+			isa = PBXGroup;
+			children = (
+				BB476FBE1F057513005EB2AF /* DirectionsSceneNode.swift */,
+				BB476FC31F06A70A005EB2AF /* InstructionsNode.swift */,
+				BB476FC01F057586005EB2AF /* DirectionsScene.sks */,
+			);
+			name = Directions;
+			sourceTree = "<group>";
+		};
 		BB4E54001D918EDD0031DAB9 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,14 +426,6 @@
 		BBA2E4991D74A62C00853E63 = {
 			isa = PBXGroup;
 			children = (
-				BBC63AB01EC5107200F48F27 /* cat_meow_1.mp3 */,
-				BBC56E451ED75624006A6351 /* AudioKit.framework */,
-				BBC63AB11EC5107200F48F27 /* cat_meow_2.mp3 */,
-				BBC63AB21EC5107200F48F27 /* cat_meow_3.mp3 */,
-				BBC63AB31EC5107200F48F27 /* cat_meow_4.mp3 */,
-				BBC63AB41EC5107200F48F27 /* cat_meow_5.wav */,
-				BBC63AB51EC5107200F48F27 /* cat_meow_6.wav */,
-				BBC63AB61EC5107200F48F27 /* cat_meow_7.mp3 */,
 				BBA2E4A41D74A62C00853E63 /* RainCat */,
 				BBA2E4A31D74A62C00853E63 /* Products */,
 			);
@@ -584,33 +582,35 @@
 				BB459C491E9EB16B0027CA9B /* cat_meow_4.mp3 in Resources */,
 				BB459C4A1E9EB16B0027CA9B /* cat_meow_5.wav in Resources */,
 				BB459C4B1E9EB16B0027CA9B /* cat_meow_6.wav in Resources */,
+				BB476FB11F05636A005EB2AF /* lcd-pickup.wav in Resources */,
 				BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */,
 				BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */,
-				BBAF081D1EA01B1600AAF449 /* kick_003.wav in Resources */,
 				BB73A6681E9FD22200F6AFB2 /* LCDScreen.sks in Resources */,
-				BBAF08201EA01E2D00AAF449 /* Chip_Hat_10.wav in Resources */,
 				BB459C541E9EB1E20027CA9B /* Info.plist in Resources */,
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
 				BB046BB71EA157FC001035EB /* LaunchScreen.storyboard in Resources */,
 				BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */,
 				BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */,
+				BB476FB71F056431005EB2AF /* move.wav in Resources */,
 				BBAF08181EA000E500AAF449 /* LCDScene-iPhone.sks in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
 				BB399C8F1EBA344900A750D3 /* TitleMenuScene.sks in Resources */,
 				BBC63AAD1EC38C1000F48F27 /* PlayerSelectScene.sks in Resources */,
 				BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */,
 				BBAF08231EA0253200AAF449 /* LogoScene-iPhone.sks in Resources */,
-				BBAF081E1EA01B1600AAF449 /* kick_004.wav in Resources */,
+				BB476FB91F056630005EB2AF /* buttonClick.wav in Resources */,
+				BB476FB51F056413005EB2AF /* hit.wav in Resources */,
 				BB459C501E9EB17F0027CA9B /* ColorPalette.plist in Resources */,
 				BB67AD821EC102EA00CA5205 /* CreditsScene.sks in Resources */,
 				BBC63AAB1EC377DC00F48F27 /* MultiplayerScene.sks in Resources */,
 				BB67AD861EC35F2900CA5205 /* SinglePlayerScene.sks in Resources */,
+				BB476FBD1F056A45005EB2AF /* hit.wav in Resources */,
 				BB7A6DF61ED472D30093C21F /* RainTransition.sks in Resources */,
 				BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */,
 				BBCE0A4A1D8D08EA006C1F44 /* Assets.xcassets in Resources */,
-				BBAF081A1EA017C500AAF449 /* blip_0012.wav in Resources */,
 				BBC320301EA29393009CCE39 /* MainMenu.sks in Resources */,
 				BBAF08251EA0267B00AAF449 /* LogoScene.sks in Resources */,
+				BB476FC11F057586005EB2AF /* DirectionsScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +628,7 @@
 				BB459C981E9EB3F20027CA9B /* PingPongBackgroundNode.swift in Sources */,
 				BB459C9F1E9EB3F20027CA9B /* ShadowLabelNode.swift in Sources */,
 				BB459C8A1E9EB3F20027CA9B /* LCDFoodRow.swift in Sources */,
+				BB476FBF1F057513005EB2AF /* DirectionsSceneNode.swift in Sources */,
 				BB459CA01E9EB3F20027CA9B /* UmbrellaSprite.swift in Sources */,
 				BB459C971E9EB3F20027CA9B /* RainDropBanner.swift in Sources */,
 				BB459C941E9EB3F20027CA9B /* CreditsNode.swift in Sources */,
@@ -641,6 +642,7 @@
 				BB869EB41EB8E5F90072A193 /* RainCatScene.swift in Sources */,
 				BB869EB61EB8E82E0072A193 /* Router.swift in Sources */,
 				BB459C8C1E9EB3F20027CA9B /* LCDHudNode.swift in Sources */,
+				BB476FC41F06A70A005EB2AF /* InstructionsNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BB459C851E9EB3F20027CA9B /* BackgroundNode.swift in Sources */,
 				BBC9F6E81D8D941A00385223 /* PingPongSceneNode.swift in Sources */,

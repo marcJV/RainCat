@@ -83,16 +83,18 @@ class LCDScreenNode : SKSpriteNode, Resetable {
     lastUpdateTime += deltaTime
 
     if lastUpdateTime >= tick {
-      SoundManager.playTick(node: self)
-
       lastUpdateTime = 0.0
 
       if checkCatHit() {
         hudNode.catHit()
+
+        SoundManager.playLCDHit(node: self)
       }
 
       if hudNode.hasLivesRemaining() {
         if checkUmbrellaLevelRaindrop(atIndex: umbrellaRow.umbrellaLocation) {
+
+          SoundManager.playUmbrellaHit(node: self)
           updateScore()
 
           //Extra raindrop at umbrella location!
@@ -109,6 +111,8 @@ class LCDScreenNode : SKSpriteNode, Resetable {
         }
 
         if catRow.didEatFood {
+          SoundManager.playLCDPickup(node: self)
+
           updateScore()
           updateScore()
 
@@ -169,10 +173,14 @@ class LCDScreenNode : SKSpriteNode, Resetable {
 
   func moveUmbrellaLeft() {
     umbrellaRow.moveLeft()
+
+    SoundManager.playLCDMove(node: self)
   }
 
   func moveUmbrellaRight() {
     umbrellaRow.moveRight()
+
+    SoundManager.playLCDMove(node: self)
   }
 
   func resetPressed() {

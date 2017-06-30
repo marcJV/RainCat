@@ -8,7 +8,6 @@
 
 import AVFoundation
 import SpriteKit
-import AudioKit
 import Foundation
 
 class SoundManager : NSObject, AVAudioPlayerDelegate {
@@ -35,11 +34,14 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     "cat_meow_7.mp3"
   ]
 
-  private let tickSFX = "blip_0012.wav"
-  private let chipSFX = "Chip_Hat_10.wav"
-  private let kick1 = "kick_003.wav"
-  private let kick2 = "kick_004.wav"
-  private var kick = true
+  private var soundTempMuted = false
+
+  private let move = "move.wav"
+  private let lcdHit = "hit.wav"
+  private let lcdPickup = "lcd-pickup.wav"
+
+  private let buttonClick = SKAction.playSoundFileNamed("buttonClick.wav", waitForCompletion: true)
+  private let umbrellaHit = SKAction.playSoundFileNamed("umbrella-hit.wav", waitForCompletion: true)
 
   private override init() {
     //This is private so you can only have one Sound Manager ever.
@@ -67,6 +69,14 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     }
   }
 
+  public func muteMusic() {
+    audioPlayer?.setVolume(0, fadeDuration: 0.5)
+  }
+
+  public func resumeMusic() {
+    audioPlayer?.setVolume(1, fadeDuration: 0.25)
+  }
+
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
     //Just play the next track
     startPlaying()
@@ -75,9 +85,11 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   func toggleMute() -> Bool {
     let isMuted = UserDefaultsManager.sharedInstance.toggleMute()
     if isMuted {
-      audioPlayer?.stop()
-    } else {
+      muteMusic()
+    } else if (audioPlayer == nil || audioPlayer?.isPlaying == false) {
       startPlaying()
+    } else {
+      resumeMusic()
     }
 
     return isMuted
@@ -93,63 +105,40 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     }
   }
 
-  public static func playTick(node :SKNode) {
-
-    var sfx : String
-
-    if SoundManager.sharedInstance.kick {
-      sfx = SoundManager.sharedInstance.kick1
-    } else {
-      sfx = SoundManager.sharedInstance.kick2
-    }
-
-    SoundManager.sharedInstance.kick = !SoundManager.sharedInstance.kick
-
-//    SoundManager.sharedInstance.tickSFX
-
+  public static func playLCDPickup(node : SKNode) {
     if !UserDefaultsManager.sharedInstance.isMuted {
-      node.run(SKAction.playSoundFileNamed(SoundManager.sharedInstance.chipSFX, waitForCompletion: true),
-               withKey: "tick")
+      node.run(SKAction.playSoundFileNamed(SoundManager.sharedInstance.lcdPickup, waitForCompletion: true),
+               withKey: "lcd-pickup")
     }
   }
 
-  var oscillator : AKOscillator!
-  var reverb : AKReverb!
-  var generator : AKOperationGenerator!
+  public static func playLCDMove(node : SKNode) {
+    if !UserDefaultsManager.sharedInstance.isMuted {
+      node.run(SKAction.playSoundFileNamed(SoundManager.sharedInstance.move, waitForCompletion: true),
+               withKey: "lcd-move")
+    }
+  }
 
-  public func testTick() {
-    //This is the most annoying thing ever.
+  public static func playLCDHit(node : SKNode) {
+    if !UserDefaultsManager.sharedInstance.isMuted {
+      node.run(SKAction.playSoundFileNamed(SoundManager.sharedInstance.lcdHit, waitForCompletion: true),
+               withKey: "lcd-hit")
+    }
+  }
 
-//    do {
-//    let pulse = 0.23 // seconds
-//
-//    let sampler = AKSampler()
-//    try sampler.loadWav("cat_meow_6")
-//
-//    var delay = AKDelay(sampler)
-//    delay.time = pulse * 1.5
-//    delay.dryWetMix = 0.3
-//    delay.feedback = 0.2
-//
-//    let reverb = AKReverb(delay)
-//    reverb.loadFactoryPreset(.largeRoom)
-//
-//    var mixer = AKMixer(reverb)
-//    mixer.volume = 5.0
-//    
-//    AudioKit.output = mixer
-//    AudioKit.start()
-//
-//
-//      AKPlaygroundLoop(every: 1) { _ in
-//        let scale = [0, 2, 4, 5, 7, 9, 11, 12]
-//        var note = scale.randomElement()
-//        let octave = [3, 4, 5, 6, 7].randomElement() * 12
-//        if random(0, 10) < 1.0 { note += 1 }
-//        if !scale.contains(note % 12) { print("ACCIDENT!") }
-//        if random(0, 6) > 1.0 { sampler.play(noteNumber: MIDINoteNumber(note + octave)) }
-//      }
-//    } catch {
-//    }
+  public static func playButtonClick(node : SKNode) {
+    if !UserDefaultsManager.sharedInstance.isMuted {
+      node.run(SoundManager.sharedInstance.buttonClick, withKey: "buttonClick")
+    }
+  }
+
+  public static func playUmbrellaHit(node : SKNode) {
+    if !UserDefaultsManager.sharedInstance.isMuted {
+      node.run(SoundManager.sharedInstance.buttonClick, withKey: "umbrellaHit")
+    }
   }
 }
+
+
+
+
