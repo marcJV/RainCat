@@ -78,6 +78,13 @@ class InstructionsNode : SKNode {
     mask.addChild(overlay)
 
     playButton = overlay.childNode(withName: "button-play") as! TwoPaneButton
+    playButton.addTarget(self, selector: #selector(playButtonClicked), forControlEvents: .TouchUpInside)
+  }
+
+  func playButtonClicked() {
+    if let parent = parent as? DirectionsSceneNode {
+      parent.navigateToScene()
+    }
   }
 
   func showNode() {

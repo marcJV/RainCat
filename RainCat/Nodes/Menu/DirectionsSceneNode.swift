@@ -180,6 +180,34 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     }
   }
 
+  func navigateToScene() {
+
+
+    if let parent = parent as? Router {
+      var location : Location? = nil
+
+      if currentNode == classicSingleGroup {
+        location = .Classic
+      } else if currentNode == classicMultiGroup {
+        location = .ClassicMulti
+      } else if currentNode == lcdGroup {
+        location = .LCD
+      } else if currentNode == catPongGroup {
+        location = .CatPong
+      }
+
+      if let location = location {
+        let extras = MenuExtras(rainScale: 1,
+                                catScale: 1,
+                                transition: TransitionExtras(transitionType: .ScaleInCircular(fromPoint: CGPoint()),
+                                                             toColor: location == .LCD ? .black : RAIN_COLOR))
+
+        parent.navigate(to: location, extras: extras)
+      }
+
+    }
+  }
+
   func backClicked() {
     if currentNode == directionsGroup {
       if let parent = (parent as? Router) {
@@ -252,10 +280,10 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     } else {
       contact.bodyA.node?.removeFromParent()
     }
-
+    
     print("node removed")
   }
-
+  
   deinit {
     print("directions scene is gone")
   }
