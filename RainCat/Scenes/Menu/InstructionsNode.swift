@@ -97,14 +97,20 @@ class InstructionsNode : SKNode {
 
   func hideNode() {
     for slide in slides {
-      slide.alpha = 0
-      slide.position.x = offScreenRight
+      slide.run(
+        SKAction.group([
+          SKAction.fadeOut(withDuration: 0.15),
+          SKAction.moveTo(x: offScreenRight, duration: 1)
+          ]))
     }
 
     currentIndex = 0
 
-    overlay.alpha = 0
-    overlay.position.x = offScreenRight
+    overlay.run(
+      SKAction.group([
+        SKAction.fadeOut(withDuration: 0.15),
+        SKAction.moveTo(x: offScreenRight, duration: 1)
+        ]))
   }
 
   func hasNext() -> Bool {

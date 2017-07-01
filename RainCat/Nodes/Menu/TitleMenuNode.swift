@@ -14,6 +14,7 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
   var singlePlayerButton : TwoPaneButton!
   var multiPlayerButton : TwoPaneButton!
   var titleText : ShadowLabelNode!
+  var tutorialButton : TwoPaneButton!
 
   var selectedButton : TwoPaneButton?
 
@@ -22,6 +23,8 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
   var singlePlayerReference : AnimationReference!
   var multiPlayerReference : AnimationReference!
   var titleReference : AnimationReference!
+  var tutorialReference : AnimationReference!
+
 
   func setup(sceneSize: CGSize) {
     self.size = sceneSize
@@ -29,6 +32,8 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
     titleText = childNode(withName: "rain-cat-logo") as! ShadowLabelNode
     singlePlayerButton = childNode(withName: "button-single-player") as! TwoPaneButton
     multiPlayerButton = childNode(withName: "button-multi-player") as! TwoPaneButton
+    tutorialButton = childNode(withName: "button-tutorial") as! TwoPaneButton
+
 
     singlePlayerReference = AnimationReference(zeroPosition: singlePlayerButton.position.x, offscreenLeft: -size.width - singlePlayerButton.position.x, offscreenRight: size.width)
 
@@ -36,8 +41,11 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
 
     titleReference = AnimationReference(zeroPosition: titleText.position.x, offscreenLeft: -size.width - titleText.position.x, offscreenRight: size.width)
 
+    tutorialReference = AnimationReference(zeroPosition: tutorialButton.position.x, offscreenLeft: -size.width - tutorialButton.position.x, offscreenRight: size.width)
+
     singlePlayerButton.addTarget(self, selector: #selector(singlePlayerButtonClicked(_:)), forControlEvents: .TouchUpInside)
     multiPlayerButton.addTarget(self, selector: #selector(multiplayerButtonClicked(_:)), forControlEvents: .TouchUpInside)
+    tutorialButton.addTarget(self, selector: #selector(tutorialButtonClicked), forControlEvents: .TouchUpInside)
   }
 
   func singlePlayerButtonClicked(_ sender : TwoPaneButton) {
@@ -60,6 +68,12 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
     tempDisableButton(duration: 1)
   }
 
+  func tutorialButtonClicked() {
+    if let menu = menuNavigation {
+      menu.navigateToTutorial()
+    }
+  }
+
   func getName() -> String {
     return "title"
   }
@@ -77,13 +91,16 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
       if singlePlayerButton.isEqual(to: button) {
         singlePlayerButton.moveTo(x: singlePlayerReference.zeroPosition, duration: duration)
         multiPlayerButton.moveTo(x: multiPlayerReference.zeroPosition, duration: duration, delay: delay)
+        tutorialButton.moveTo(x: tutorialReference.zeroPosition, duration: duration, delay: delay * 2)
       } else {
         multiPlayerButton.moveTo(x: multiPlayerReference.zeroPosition, duration: duration)
         singlePlayerButton.moveTo(x: singlePlayerReference.zeroPosition, duration: duration, delay: delay)
+        tutorialButton.moveTo(x: tutorialReference.zeroPosition, duration: duration, delay: delay * 2)
       }
     } else {
       multiPlayerButton.moveTo(x: multiPlayerReference.zeroPosition, duration: duration)
       singlePlayerButton.moveTo(x: singlePlayerReference.zeroPosition, duration: duration)
+      tutorialButton.moveTo(x: tutorialReference.zeroPosition, duration: duration)
     }
 
     titleText.run(SKAction.sequence([
@@ -113,13 +130,16 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
       if singlePlayerButton.isEqual(to: button) {
         singlePlayerButton.moveTo(x: singlePlayerReference.offscreenLeft, duration: duration)
         multiPlayerButton.moveTo(x: multiPlayerReference.offscreenLeft, duration: duration, delay: delay)
+        tutorialButton.moveTo(x: tutorialReference.offscreenLeft, duration: duration, delay: delay * 2)
       } else {
         multiPlayerButton.moveTo(x: multiPlayerReference.offscreenLeft, duration: duration)
         singlePlayerButton.moveTo(x: singlePlayerReference.offscreenLeft, duration: duration, delay: delay)
+        tutorialButton.moveTo(x: tutorialReference.offscreenLeft, duration: duration, delay: delay * 2)
       }
     } else {
       multiPlayerButton.moveTo(x: multiPlayerReference.offscreenLeft, duration: duration)
       singlePlayerButton.moveTo(x: singlePlayerReference.offscreenLeft, duration: duration)
+      tutorialButton.moveTo(x: tutorialReference.offscreenLeft, duration: duration)
     }
 
 
@@ -134,7 +154,6 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
   func navigateOutToRight(duration: TimeInterval) {
     //Not implimented
   }
-
 
   func tempDisableButton(duration : TimeInterval) {
     singlePlayerButton.isUserInteractionEnabled = false

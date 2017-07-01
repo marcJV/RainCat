@@ -20,7 +20,9 @@ protocol MenuNavigation : class {
 
   func navigateToMultiplerClassic()
   func navigateToMultiplayerCatPong()
-  
+
+  func navigateToTutorial()
+
   func menuBack()
 }
 
