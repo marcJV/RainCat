@@ -22,7 +22,7 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     "bensound-jazzcomedy",
     "bensound-jazzyfrenchy",
     "bensound-littleidea",
-    "jeffmoon-raincat-1"
+    "jeffmoon-raincat-1" //Except this one, this one is from Mr Moon.
   ]
 
   static private let extensions = [
@@ -50,7 +50,6 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   private let lcdPickup = "lcd-pickup.wav"
 
   private let buttonClick = SKAction.playSoundFileNamed("buttonClick.wav", waitForCompletion: true)
-  private let umbrellaHit = SKAction.playSoundFileNamed("umbrella-hit.wav", waitForCompletion: true)
 
   private override init() {
     //This is private so you can only have one Sound Manager ever.

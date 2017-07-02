@@ -25,7 +25,6 @@
 		BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BB459C451E9EB16B0027CA9B /* cat_meow_7.mp3 */; };
 		BB459C501E9EB17F0027CA9B /* ColorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB459C4D1E9EB17F0027CA9B /* ColorPalette.plist */; };
 		BB459C511E9EB17F0027CA9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C4E1E9EB17F0027CA9B /* Constants.swift */; };
-		BB459C541E9EB1E20027CA9B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB459C531E9EB1E20027CA9B /* Info.plist */; };
 		BB459C851E9EB3F20027CA9B /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C641E9EB3F20027CA9B /* BackgroundNode.swift */; };
 		BB459C861E9EB3F20027CA9B /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C651E9EB3F20027CA9B /* GroundNode.swift */; };
 		BB459C871E9EB3F20027CA9B /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459C661E9EB3F20027CA9B /* HudNode.swift */; };
@@ -56,7 +55,6 @@
 		BB459CA31E9EB4070027CA9B /* Paletteable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA11E9EB4070027CA9B /* Paletteable.swift */; };
 		BB459CA41E9EB4070027CA9B /* Touchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB459CA21E9EB4070027CA9B /* Touchable.swift */; };
 		BB476FB11F05636A005EB2AF /* lcd-pickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB01F05636A005EB2AF /* lcd-pickup.wav */; };
-		BB476FB51F056413005EB2AF /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB41F056413005EB2AF /* hit.wav */; };
 		BB476FB71F056431005EB2AF /* move.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB61F056430005EB2AF /* move.wav */; };
 		BB476FB91F056630005EB2AF /* buttonClick.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FB81F056630005EB2AF /* buttonClick.wav */; };
 		BB476FBD1F056A45005EB2AF /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB476FBC1F056A45005EB2AF /* hit.wav */; };
@@ -589,7 +587,6 @@
 				BB459C4C1E9EB16B0027CA9B /* cat_meow_7.mp3 in Resources */,
 				BBD0A8E01D78F12C00002F71 /* bensound-clearday.mp3 in Resources */,
 				BB73A6681E9FD22200F6AFB2 /* LCDScreen.sks in Resources */,
-				BB459C541E9EB1E20027CA9B /* Info.plist in Resources */,
 				BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */,
 				BB046BB71EA157FC001035EB /* LaunchScreen.storyboard in Resources */,
 				BB98D4811DC3A49C00D17C8D /* LCDScene.sks in Resources */,
@@ -603,7 +600,6 @@
 				BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */,
 				BBAF08231EA0253200AAF449 /* LogoScene-iPhone.sks in Resources */,
 				BB476FB91F056630005EB2AF /* buttonClick.wav in Resources */,
-				BB476FB51F056413005EB2AF /* hit.wav in Resources */,
 				BB459C501E9EB17F0027CA9B /* ColorPalette.plist in Resources */,
 				BB67AD821EC102EA00CA5205 /* CreditsScene.sks in Resources */,
 				BBC63AAB1EC377DC00F48F27 /* MultiplayerScene.sks in Resources */,
