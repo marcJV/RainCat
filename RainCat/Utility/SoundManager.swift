@@ -21,7 +21,16 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     "bensound-clearday",
     "bensound-jazzcomedy",
     "bensound-jazzyfrenchy",
-    "bensound-littleidea"
+    "bensound-littleidea",
+    "jeffmoon-raincat-1"
+  ]
+
+  static private let extensions = [
+    "mp3",
+    "mp3",
+    "mp3",
+    "mp3",
+    "wav"
   ]
 
   private let meowSFX = [
@@ -50,7 +59,8 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
 
   public func startPlaying() {
     if !UserDefaultsManager.sharedInstance.isMuted && (audioPlayer == nil || audioPlayer?.isPlaying == false) {
-      let soundURL = Bundle.main.url(forResource: SoundManager.tracks[trackPosition], withExtension: "mp3")
+      let soundURL = Bundle.main.url(forResource: SoundManager.tracks[trackPosition],
+                                     withExtension: SoundManager.extensions[trackPosition])
 
       do {
         audioPlayer = try AVAudioPlayer(contentsOf: soundURL!)
@@ -75,11 +85,16 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
 
   public func resumeMusic() {
     audioPlayer?.setVolume(1, fadeDuration: 0.25)
+
+    startPlaying()
   }
 
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
     //Just play the next track
-    startPlaying()
+
+    if !soundTempMuted {
+      startPlaying()
+    }
   }
 
   func toggleMute() -> Bool {

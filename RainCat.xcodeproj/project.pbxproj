@@ -99,6 +99,7 @@
 		BBD0A8E21D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */; };
 		BBD0A8E31D78F12C00002F71 /* bensound-littleidea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */; };
 		BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */; };
+		BBDAD95B1F08945100BB111E /* jeffmoon-raincat-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBDAD95A1F08945100BB111E /* jeffmoon-raincat-1.wav */; };
 		BBED71881EBA3B8C002E118E /* TextButtonSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBED71871EBA3B8C002E118E /* TextButtonSprite.swift */; };
 		BBED718A1EBA4F8F002E118E /* SoundButtonSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBED71891EBA4F8F002E118E /* SoundButtonSprite.swift */; };
 /* End PBXBuildFile section */
@@ -210,6 +211,7 @@
 		BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-jazzyfrenchy.mp3"; path = "Music/bensound-jazzyfrenchy.mp3"; sourceTree = "<group>"; };
 		BBD0A8DF1D78F12C00002F71 /* bensound-littleidea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-littleidea.mp3"; path = "Music/bensound-littleidea.mp3"; sourceTree = "<group>"; };
 		BBD0A8E51D79D4F500002F71 /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pixel Digivolve.otf"; path = "Fonts/Pixel Digivolve.otf"; sourceTree = "<group>"; };
+		BBDAD95A1F08945100BB111E /* jeffmoon-raincat-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "jeffmoon-raincat-1.wav"; sourceTree = "<group>"; };
 		BBED71871EBA3B8C002E118E /* TextButtonSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextButtonSprite.swift; sourceTree = "<group>"; };
 		BBED71891EBA4F8F002E118E /* SoundButtonSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundButtonSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -499,6 +501,7 @@
 		BBD0A8DB1D78F0F100002F71 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				BBDAD95A1F08945100BB111E /* jeffmoon-raincat-1.wav */,
 				BBD0A8DC1D78F12C00002F71 /* bensound-clearday.mp3 */,
 				BBD0A8DD1D78F12C00002F71 /* bensound-jazzcomedy.mp3 */,
 				BBD0A8DE1D78F12C00002F71 /* bensound-jazzyfrenchy.mp3 */,
@@ -594,6 +597,7 @@
 				BB476FB71F056431005EB2AF /* move.wav in Resources */,
 				BBAF08181EA000E500AAF449 /* LCDScene-iPhone.sks in Resources */,
 				BBD0A8E11D78F12C00002F71 /* bensound-jazzcomedy.mp3 in Resources */,
+				BBDAD95B1F08945100BB111E /* jeffmoon-raincat-1.wav in Resources */,
 				BB399C8F1EBA344900A750D3 /* TitleMenuScene.sks in Resources */,
 				BBC63AAD1EC38C1000F48F27 /* PlayerSelectScene.sks in Resources */,
 				BBD0A8E61D79D4F500002F71 /* Pixel Digivolve.otf in Resources */,
