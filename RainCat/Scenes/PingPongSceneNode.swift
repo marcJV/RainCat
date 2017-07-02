@@ -410,6 +410,10 @@ class PingPongSceneNode : SceneNode, PingPongNavigation, SKPhysicsContactDelegat
   }
 
   public func didBegin(_ contact: SKPhysicsContact) {
+    if puck == nil {
+      return
+    }
+    
     //So far only the rain drop and something else can come into contact
     var otherBody : SKPhysicsBody
 
