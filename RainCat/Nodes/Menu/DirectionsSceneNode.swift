@@ -280,8 +280,6 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     } else {
       contact.bodyA.node?.removeFromParent()
     }
-    
-    print("node removed")
   }
   
   deinit {

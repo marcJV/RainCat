@@ -32,7 +32,7 @@ class LCDScreenNode : SKSpriteNode, Resetable {
 
   //Every x Points update our variables
   private let tickUpdateInterval = 15
-  private let spawnsUpdateInterval = 40
+  private let spawnsUpdateInterval = 50
   private let ticksPerDropUpdateInterval = 20
 
   //Constructing a logarithmic equation for tick speed from startspeed to end speed
@@ -98,7 +98,9 @@ class LCDScreenNode : SKSpriteNode, Resetable {
           updateScore()
 
           //Extra raindrop at umbrella location!
-          addRaindrop(atIndex: foodRow.foodLocation)
+          if hudNode.getScore() < spawnsUpdateInterval {
+            addRaindrop(atIndex: foodRow.foodLocation)
+          }
         }
 
         //Tell cat row where the food is
@@ -207,11 +209,14 @@ class LCDScreenNode : SKSpriteNode, Resetable {
     updateTicks(score: Double(currentScore))
 
     if currentScore % spawnsUpdateInterval == 0 {
+      print("updating spawn amount")
       spawnsPerDrop += spawnsIncrementAmount
     }
 
     if currentScore % ticksPerDropUpdateInterval == 0 {
       ticksPerDrop -= ticksPerDropDecrementAmount
+      print("updating ticks per update: \(ticksPerDrop)")
+
     }
 
     print("Current Score: \(currentScore)  Tick Interval: \(tick) Spawns Per Drop: \(spawnsPerDrop) Ticks Per Drop: \(ticksPerDrop)")
