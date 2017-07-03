@@ -20,8 +20,8 @@ class HudNode : SKNode, Palettable {
   private var highScoreColor = SKColor.white
 
   //Setup hud here
-  public func setup(size: CGSize, palette : ColorPalette) {
-    highScore = UserDefaultsManager.sharedInstance.getClassicHighScore()
+  public func setup(size: CGSize, palette : ColorPalette, highScore: Int) {
+    self.highScore = highScore
 
     scoreNode.text = "\(score)"
     scoreNode.fontSize = 70

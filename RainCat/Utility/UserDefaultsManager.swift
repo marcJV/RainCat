@@ -74,9 +74,12 @@ class UserDefaultsManager {
   }
 
   public func updateClassicHighScore(highScore : Int) {
-    let defaults = UserDefaults.standard
-    defaults.set(highScore, forKey: ClassicSinglePlayerScoreKey)
-    defaults.synchronize()
+    if highScore > getClassicHighScore() {
+
+      let defaults = UserDefaults.standard
+      defaults.set(highScore, forKey: ClassicSinglePlayerScoreKey)
+      defaults.synchronize()
+    }
   }
 
   public func getClassicMultiplayerHighScore() -> Int {
@@ -86,9 +89,11 @@ class UserDefaultsManager {
   }
 
   public func updateClassicMultiplayerHighScore(highScore : Int) {
-    let defaults = UserDefaults.standard
-    defaults.set(highScore, forKey: ClassicMultiplayerScoreKey)
-    defaults.synchronize()
+    if highScore > getClassicMultiplayerHighScore() {
+      let defaults = UserDefaults.standard
+      defaults.set(highScore, forKey: ClassicMultiplayerScoreKey)
+      defaults.synchronize()
+    }
   }
 
   public func getLCDHighScore() -> Int {
@@ -99,7 +104,7 @@ class UserDefaultsManager {
 
   public func updateLCDHighScore(highScore : Int) {
     lcdHighScore = highScore
-    
+
     let defaults = UserDefaults.standard
     defaults.set(highScore, forKey: LCDSinglePlayerScoreKey)
     defaults.synchronize()

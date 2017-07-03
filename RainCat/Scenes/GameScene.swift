@@ -43,8 +43,15 @@ class GameScene: SceneNode, QuitNavigation, SKPhysicsContactDelegate {
 
     anchorPoint = CGPoint()
 
+    var highScore = 0
+    if isMultiplayer {
+      highScore = UserDefaultsManager.sharedInstance.getClassicMultiplayerHighScore()
+    } else {
+      highScore = UserDefaultsManager.sharedInstance.getClassicHighScore()
+    }
+
     //Hud Setup
-    hud.setup(size: size, palette:  currentPalette)
+    hud.setup(size: size, palette:  currentPalette, highScore: highScore)
     hud.quitNavigation = self
     addChild(hud)
 
