@@ -11,8 +11,12 @@ import SpriteKit
 class HudNode : SKNode, Palettable {
   weak var quitNavigation : QuitNavigation?
   private let scoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
+  private let highRoundScoreNode = SKLabelNode(fontNamed: BASE_FONT_NAME)
   private(set) var score : Int = 0
   private var highScore : Int = 0
+
+  private var highRoundScore : Int = 0
+
   private var showingHighScore = false
 
   private var quitButton : TwoPaneButton!
@@ -29,6 +33,13 @@ class HudNode : SKNode, Palettable {
     scoreNode.zPosition = 1
 
     addChild(scoreNode)
+
+    highRoundScoreNode.text = "\(highRoundScore)"
+    highRoundScoreNode.fontSize = 50
+    highRoundScoreNode.position = CGPoint(x: 40, y: size.height - 60)
+    highRoundScoreNode.horizontalAlignmentMode = .left
+
+    addChild(highRoundScoreNode)
 
     quitButton = TwoPaneButton(color: UIColor.clear, size: CGSize(width: 80, height: 35))
     quitButton.setup(text: "Quit", fontSize: 20)
@@ -62,7 +73,14 @@ class HudNode : SKNode, Palettable {
         scoreNode.run(SKAction.scale(to: 1.5, duration: 0.25))
         scoreNode.run(ColorAction().colorTransitionAction(fromColor: SKColor.white, toColor: highScoreColor, duration: colorChangeDuration))
 
+        highRoundScoreNode.run(ColorAction().colorTransitionAction(fromColor: SKColor.white, toColor: highScoreColor, duration: colorChangeDuration))
       }
+    }
+
+    if score > highRoundScore {
+      highRoundScore = score
+
+      highRoundScoreNode.text = "\(highRoundScore)"
     }
   }
 
