@@ -1,7 +1,12 @@
-![RainCat Header](documentation/header.png)
+![RainCat Header](documentation/header-lcd.png)
+
 #RainCat
 
 A simple exploration of SpriteKit in Swift 3.
+
+New in version 2.0.0, LCD-cat and Multiplayer classic mode.
+
+Also reworked transitions and menus!
 
 Check out the game in the [AppStore](https://itunes.apple.com/us/app/raincat/id1152624676?ls=1&mt=8)!
 
