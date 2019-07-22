@@ -107,13 +107,13 @@ public class PingPongHud : SKNode {
     }
   }
 
-  func quitSelected() {
+  @objc func quitSelected() {
     if let nav = pingPongNavigation {
       nav.quitPressed()
     }
   }
 
-  func rematchSelected() {
+  @objc func rematchSelected() {
     if let nav = pingPongNavigation {
       nav.restartPressed()
     }

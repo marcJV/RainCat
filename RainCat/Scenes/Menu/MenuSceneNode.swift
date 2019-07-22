@@ -105,7 +105,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     curtainForeground.position = CGPoint(x: 0, y: -13)
     curtainSprite.position = CGPoint(x: 0, y: -10)
 
-    rainDropBanner = childNode(withName: "banner") as! RainDropBanner
+    rainDropBanner = (childNode(withName: "banner") as! RainDropBanner)
     rainDropBanner.setup(maskNode: maskNode)
 
     maskNode.addChild(lcdCatSprite)
@@ -123,7 +123,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     catSprite.position = CGPoint(x: size.width / 2, y: size.height / 2)
     addChild(catSprite)
 
-    creditsButton = childNode(withName: "button-credits") as! TextButtonSprite
+    creditsButton = (childNode(withName: "button-credits") as! TextButtonSprite)
     creditsButton.set(text: "credits", fontSize: 35, autoResize: true)
     creditsButton.addTarget(self, selector: #selector(menuToCredits), forControlEvents: .TouchUpInside)
 
@@ -132,23 +132,23 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     let titleReference = childNode(withName: "title-reference")
 
-    titleNode = titleReference?.children[0].childNode(withName: "group-title") as! TitleMenuNode
+    titleNode = (titleReference?.children[0].childNode(withName: "group-title") as! TitleMenuNode)
     currentNode = titleNode
     titleNode.setup(sceneSize: size)
     titleNode.menuNavigation = self
 
     let creditsReference = childNode(withName: "menu-reference")
-    creditsNode = creditsReference?.children[0].childNode(withName: "group-credits") as! CreditsNode
+    creditsNode = (creditsReference?.children[0].childNode(withName: "group-credits") as! CreditsNode)
     creditsNode.setup(sceneSize: size)
     creditsNode.menuNavigation = self
 
     let playerSelectReference = childNode(withName: "catpong-reference")
-    playerSelectNode = playerSelectReference?.children[0].childNode(withName: "group-playerselect") as! PlayerSelectNode
+    playerSelectNode = (playerSelectReference?.children[0].childNode(withName: "group-playerselect") as! PlayerSelectNode)
     playerSelectNode.setup(sceneSize: size)
     playerSelectNode.menuNavigation = self
 
     let multiplayerReference = childNode(withName: "multiplayer-reference")
-    multiplayerNode = multiplayerReference?.children[0].childNode(withName: "group-multiplayer") as! MultiplayerNode
+    multiplayerNode = (multiplayerReference?.children[0].childNode(withName: "group-multiplayer") as! MultiplayerNode)
     multiplayerNode.setup(sceneSize: size)
     multiplayerNode.menuNavigation = self
     multiplayerNode.umbrella1LeftPosition = playerSelectNode.umbrellaLeftPositions.umbrella1Left
@@ -156,29 +156,29 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
 
     setupSoundButton(maskNode: maskNode)
 
-    backButton = childNode(withName: "button-back") as! TwoPaneButton
+    backButton = (childNode(withName: "button-back") as! TwoPaneButton)
     backButton.addTarget(self, selector: #selector(menuBack), forControlEvents: .TouchUpInside)
     backButton.zPosition = 300
 
     //Single player node needs to be managed locally to support the masking effect
-    singlePlayerLabel = childNode(withName: "label-singleplayer") as! ShadowLabelNode!
+    singlePlayerLabel = (childNode(withName: "label-singleplayer") as! ShadowLabelNode)
     singlePlayerMaskLabel = singlePlayerLabel.getLCDVersion()
     maskNode.addChild(singlePlayerMaskLabel)
 
-    buttonClassic = childNode(withName: "button-classic") as! TwoPaneButton!
-    buttonLCD = childNode(withName: "button-lcd") as! TwoPaneButton!
+    buttonClassic = (childNode(withName: "button-classic") as! TwoPaneButton)
+    buttonLCD = (childNode(withName: "button-lcd") as! TwoPaneButton)
 
     let classicScore = UserDefaultsManager.sharedInstance.getClassicHighScore()
     let lcdScore = UserDefaultsManager.sharedInstance.getLCDHighScore()
 
-    classicHighScoreNode = childNode(withName: "label-classic-highscore") as! SKLabelNode
-    lcdHighScoreNode = childNode(withName: "label-lcd-highscore") as! SKLabelNode
+    classicHighScoreNode = (childNode(withName: "label-classic-highscore") as! SKLabelNode)
+    lcdHighScoreNode = (childNode(withName: "label-lcd-highscore") as! SKLabelNode)
 
     classicHighScoreNode.text = "\(classicScore)"
     lcdHighScoreNode.text = "\(lcdScore)"
 
-    lcdScoreNode = childNode(withName: "lcd-score") as! LCDScoreNode!
-    classicScoreNode = childNode(withName: "classic-score") as! LCDScoreNode!
+    lcdScoreNode = (childNode(withName: "lcd-score") as! LCDScoreNode)
+    classicScoreNode = (childNode(withName: "classic-score") as! LCDScoreNode)
 
     lcdScoreNode.setup()
     classicScoreNode.setup()
@@ -263,7 +263,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     return "menu"
   }
 
-  func navigateToSinglePlayerClassic() {
+  @objc func navigateToSinglePlayerClassic() {
     if !isNavigating {
       curtainMask.run(SKActionHelper.moveToEaseInOut(x: curtainReference.offscreenRight, duration: 1.0))
       curtainSprite.run(SKActionHelper.moveToEaseInOut(x: curtainReference.offscreenRight, duration: 1.0))
@@ -276,7 +276,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     tempDisableButton(duration: 1)
   }
 
-  func navigateToSinglePlayerLCD() {
+  @objc func navigateToSinglePlayerLCD() {
     if !isNavigating {
       curtainMask.run(SKActionHelper.moveToEaseInOut(x: curtainReference.offscreenLeft, duration: 1.0))
       curtainSprite.run(SKActionHelper.moveToEaseInOut(x: curtainReference.offscreenLeft, duration: 1.0))
@@ -350,7 +350,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     tempDisableButton(duration: 1)
   }
 
-  func menuBack() {
+  @objc func menuBack() {
     if !isNavigating {
       currentNode.navigateOutToRight(duration: 1.0)
 
@@ -369,7 +369,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     tempDisableButton(duration: 1)
   }
 
-  func menuToCredits() {
+  @objc func menuToCredits() {
     if !isNavigating {
       backButton.moveTo(y: backButtonReference.zeroPosition)
       creditsButton.run(SKActionHelper.moveToEaseInOut(y: creditsButtonReference.offscreenLeft, duration: 0.5))
@@ -403,21 +403,21 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     rainDropBanner.update(size: size)
   }
 
-  func soundButtonTouchDown() {
+  @objc func soundButtonTouchDown() {
     if !isNavigating {
       soundForegroundSprite.setPressed()
       soundMask.setPressed()
     }
   }
 
-  func soundButtonTouchUp() {
+  @objc func soundButtonTouchUp() {
     if !isNavigating {
       soundForegroundSprite.setReleased(toggleState: false)
       soundMask.setReleased(toggleState: false)
     }
   }
 
-  func soundButtonTouchUpInside() {
+  @objc func soundButtonTouchUpInside() {
     if !isNavigating {
       soundForegroundSprite.setReleased(toggleState: false)
       soundMask.setReleased(toggleState: false)

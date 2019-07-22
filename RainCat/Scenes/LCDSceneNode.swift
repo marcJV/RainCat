@@ -48,28 +48,28 @@ class LCDSceneNode : SceneNode {
       optionsTextSize = 25
     }
 
-    lcdScreen = lcdReference?.children[0].childNode(withName: "lcd-screen") as! LCDScreenNode
+    lcdScreen = (lcdReference?.children[0].childNode(withName: "lcd-screen") as! LCDScreenNode)
     lcdScreen.setup()
 
-    let rainCatLabel = childNode(withName: "rain-cat-logo") as! ShadowLabelNode!
+    let rainCatLabel = childNode(withName: "rain-cat-logo") as? ShadowLabelNode
     rainCatLabel?.setup(fontNamed: BASE_FONT_NAME)
     rainCatLabel?.text = "RAINCAT"
     rainCatLabel?.fontSize = 80
 
-    leftButton = childNode(withName: "left-button") as! TwoPaneButton!
+    leftButton = (childNode(withName: "left-button") as! TwoPaneButton)
     leftButton.setup(text: "left", fontSize: controlsTextSize)
     leftButton.addTarget(self, selector: #selector(moveLeft), forControlEvents: .TouchUpInside)
 
-    rightButton = childNode(withName: "right-button") as! TwoPaneButton!
+    rightButton = (childNode(withName: "right-button") as! TwoPaneButton)
     rightButton.setup(text: "right", fontSize: controlsTextSize)
     rightButton.addTarget(self, selector: #selector(moveRight), forControlEvents: .TouchUpInside)
 
-    resetButton = childNode(withName: "reset-button") as! TwoPaneButton!
+    resetButton = (childNode(withName: "reset-button") as! TwoPaneButton)
     resetButton.setup(text: "reset", fontSize: optionsTextSize)
     resetButton.addTarget(self, selector: #selector(resetPressed), forControlEvents: [.TouchDown, .DragEnter])
     resetButton.addTarget(self, selector: #selector(resetReleased), forControlEvents: [.TouchUpInside, .TouchUpOutside])
 
-    quitButton = childNode(withName: "quit-button") as! TwoPaneButton!
+    quitButton = (childNode(withName: "quit-button") as! TwoPaneButton)
     quitButton.setup(text: "quit", fontSize: optionsTextSize)
     quitButton.addTarget(self, selector: #selector(quitPressed), forControlEvents: .TouchUpInside)
   }
@@ -82,27 +82,25 @@ class LCDSceneNode : SceneNode {
     lcdScreen.update(deltaTime: dt)
   }
 
-  func moveLeft() {
-    lcdScreen.moveUmbrellaLeft()
-
-    
+  @objc func moveLeft() {
+    lcdScreen.moveUmbrellaLeft()    
   }
 
-  func moveRight() {
+  @objc func moveRight() {
     lcdScreen.moveUmbrellaRight()
   }
 
-  func quitPressed() {
+  @objc func quitPressed() {
     if let parent = parent as? Router {
       parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0, catScale: 0, transition: TransitionExtras(transitionType: .ScaleInLinearTop, fromColor: .black)))
     }
   }
 
-  func resetPressed() {
+  @objc func resetPressed() {
     lcdScreen.resetPressed()
   }
 
-  func resetReleased() {
+  @objc func resetReleased() {
     lcdScreen.resetReleased()
   }
 

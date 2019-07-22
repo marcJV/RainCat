@@ -14,9 +14,9 @@ class LCDCatNode : SKNode, Resetable, LCDSetupable {
   private var backgroundSprite : SKSpriteNode!
 
   func setup() {
-    backgroundSprite = childNode(withName: "cat-background") as! SKSpriteNode!
-    catLeft = childNode(withName: "cat-left") as! SKSpriteNode!
-    catRight = childNode(withName: "cat-right") as! SKSpriteNode!
+    backgroundSprite = (childNode(withName: "cat-background") as! SKSpriteNode)
+    catLeft = (childNode(withName: "cat-left") as! SKSpriteNode)
+    catRight = (childNode(withName: "cat-right") as! SKSpriteNode)
 
     reset()
   }

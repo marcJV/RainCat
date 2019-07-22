@@ -61,10 +61,10 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     }
 
     directionsGroup = childNode(withName: "group-directions-menu")
-    catPongGroup = childNode(withName: "group-cat-pong") as! InstructionsNode
-    lcdGroup = childNode(withName: "group-lcd") as! InstructionsNode
-    classicMultiGroup = childNode(withName: "group-classic-multi") as! InstructionsNode
-    classicSingleGroup = childNode(withName: "group-classic-single") as! InstructionsNode
+    catPongGroup = (childNode(withName: "group-cat-pong") as! InstructionsNode)
+    lcdGroup = (childNode(withName: "group-lcd") as! InstructionsNode)
+    classicMultiGroup = (childNode(withName: "group-classic-multi") as! InstructionsNode)
+    classicSingleGroup = (childNode(withName: "group-classic-single") as! InstructionsNode)
 
     catPongGroup.position.x = size.width
     lcdGroup.position.x = size.width
@@ -73,26 +73,26 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
 
     currentNode = directionsGroup
 
-    backButton = childNode(withName: "button-back") as! TwoPaneButton
+    backButton = (childNode(withName: "button-back") as! TwoPaneButton)
     backButton.addTarget(self, selector: #selector(backClicked), forControlEvents: .TouchUpInside)
 
-    singleClassicButton = directionsGroup.childNode(withName: "button-single-classic") as! TwoPaneButton
+    singleClassicButton = (directionsGroup.childNode(withName: "button-single-classic") as! TwoPaneButton)
     singleClassicButton.addTarget(self, selector: #selector(directionsButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    lcdButton = directionsGroup.childNode(withName: "button-lcd") as! TwoPaneButton
+    lcdButton = (directionsGroup.childNode(withName: "button-lcd") as! TwoPaneButton)
     lcdButton.addTarget(self, selector: #selector(directionsButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    multiClassicButton = directionsGroup.childNode(withName: "button-multi-classic") as! TwoPaneButton
+    multiClassicButton = (directionsGroup.childNode(withName: "button-multi-classic") as! TwoPaneButton)
     multiClassicButton.addTarget(self, selector: #selector(directionsButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    catPongButton = directionsGroup.childNode(withName: "button-cat-pong") as! TwoPaneButton
+    catPongButton = (directionsGroup.childNode(withName: "button-cat-pong") as! TwoPaneButton)
     catPongButton.addTarget(self, selector: #selector(directionsButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    nextButton = childNode(withName: "button-right") as! TextButtonSprite
+    nextButton = (childNode(withName: "button-right") as! TextButtonSprite)
     nextButton.set(text: ">", fontSize: 150, autoResize: false)
     nextButton.addTarget(self, selector: #selector(nextButtonClicked), forControlEvents: .TouchUpInside)
 
-    previousButton = childNode(withName: "button-left") as! TextButtonSprite
+    previousButton = (childNode(withName: "button-left") as! TextButtonSprite)
     previousButton.set(text: "<", fontSize: 150, autoResize: false)
     previousButton.addTarget(self, selector: #selector(previousButtonClicked), forControlEvents: .TouchUpInside)
 
@@ -164,7 +164,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     return CGPoint(x: randomPosition, y: size.height * 1.5)
   }
 
-  func nextButtonClicked() {
+  @objc func nextButtonClicked() {
     if let instructionNode = currentNode as? InstructionsNode {
       instructionNode.slideForwards()
 
@@ -172,7 +172,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     }
   }
 
-  func previousButtonClicked() {
+  @objc func previousButtonClicked() {
     if let instructionNode = currentNode as? InstructionsNode {
       instructionNode.slideBackwards()
 
@@ -208,7 +208,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     }
   }
 
-  func backClicked() {
+  @objc func backClicked() {
     if currentNode == directionsGroup {
       if let parent = (parent as? Router) {
         parent.navigate(to: .MainMenu, extras: MenuExtras(rainScale: 0,
@@ -238,7 +238,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     }
   }
 
-  func directionsButtonClicked(_ sender: TwoPaneButton) {
+  @objc func directionsButtonClicked(_ sender: TwoPaneButton) {
     if sender == singleClassicButton {
       currentNode = classicSingleGroup
     } else if sender == lcdButton {

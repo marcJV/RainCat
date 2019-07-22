@@ -43,33 +43,33 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
   private var player2ColorIndex = 1
 
   func setup(sceneSize: CGSize) {
-    classicButton = childNode(withName: "button-multi-classic") as! TwoPaneButton!
+    classicButton = (childNode(withName: "button-multi-classic") as! TwoPaneButton)
     classicReference = AnimationReference(zeroPosition: classicButton.position.x,
                                           offscreenLeft: -sceneSize.width,
                                           offscreenRight: sceneSize.width + classicButton.position.x)
 
-    catPongButton = childNode(withName: "button-multi-cat-pong") as! TwoPaneButton!
+    catPongButton = (childNode(withName: "button-multi-cat-pong") as! TwoPaneButton)
     catPongReference = AnimationReference(zeroPosition: catPongButton.position.x,
                                           offscreenLeft: -sceneSize.width,
                                           offscreenRight: sceneSize.width + catPongButton.position.x)
 
-    multiplayerText = childNode(withName: "label-multiplayer") as! ShadowLabelNode!
+    multiplayerText = (childNode(withName: "label-multiplayer") as! ShadowLabelNode)
     multiplayerReference = AnimationReference(zeroPosition: multiplayerText.position.x,
                                               offscreenLeft: -sceneSize.width * 1.2 - multiplayerText.position.x,
                                               offscreenRight: sceneSize.width * 1.2 + multiplayerText.position.x)
 
-    classicHighScoreText = childNode(withName: "label-multi-classic-highscore") as! SKLabelNode!
+    classicHighScoreText = (childNode(withName: "label-multi-classic-highscore") as! SKLabelNode)
     classicHighScoreReference = AnimationReference(zeroPosition: classicHighScoreText.position.x,
                                                    offscreenLeft: -sceneSize.width,
                                                    offscreenRight: sceneSize.width + classicHighScoreText.position.x)
     classicHighScoreText.text = "\(UserDefaultsManager.sharedInstance.getClassicMultiplayerHighScore())"
 
-    umbrella1 = childNode(withName: "umbrella-1") as! UmbrellaSprite!
+    umbrella1 = (childNode(withName: "umbrella-1") as! UmbrellaSprite)
     umbrella1Reference = AnimationReference(zeroPosition: umbrella1.position.x,
                                             offscreenLeft: -sceneSize.width,
                                             offscreenRight: sceneSize.width + umbrella1.position.x)
 
-    umbrella2 = childNode(withName: "umbrella-2") as! UmbrellaSprite!
+    umbrella2 = (childNode(withName: "umbrella-2") as! UmbrellaSprite)
     umbrella2Reference = AnimationReference(zeroPosition: umbrella2.position.x,
                                             offscreenLeft: -sceneSize.width,
                                             offscreenRight: sceneSize.width + umbrella2.position.x)
@@ -105,7 +105,7 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     return "multiplayer"
   }
 
-  func umbrellaTapped(_ sender : UmbrellaSprite) {
+  @objc func umbrellaTapped(_ sender : UmbrellaSprite) {
     if sender.name == umbrella1.clickArea!.name {
       player1ColorIndex = ColorManager.sharedInstance.getNextColorPaletteIndex(player1ColorIndex)
       umbrella1.updatePalette(palette: ColorManager.sharedInstance.getColorPalette(player1ColorIndex))
@@ -231,7 +231,7 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     tempDisableButton(duration: duration)
   }
 
-  func navigateToClassic() {
+  @objc func navigateToClassic() {
     if let nav = menuNavigation {
       nav.navigateToMultiplerClassic()
     }
@@ -239,7 +239,7 @@ class MultiplayerNode : SKNode, MenuNodeAnimation {
     tempDisableButton(duration: 1)
   }
   
-  func navigateToCatPong() {
+  @objc func navigateToCatPong() {
     if let nav = menuNavigation {
       nav.menuToPlayerSelect()
     }

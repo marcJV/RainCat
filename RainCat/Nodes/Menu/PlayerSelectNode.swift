@@ -26,13 +26,13 @@ public class PlayerSelectNode : SKNode, MenuNodeAnimation {
   private(set) var umbrellaLeftPositions : (umbrella1Left : CGPoint, umbrella2Left : CGPoint)!
 
   public func setup(sceneSize: CGSize) {
-    umbrella1 = childNode(withName: "umbrella1") as! UmbrellaSprite
-    umbrella2 = childNode(withName: "umbrella2") as! UmbrellaSprite
+    umbrella1 = (childNode(withName: "umbrella1") as! UmbrellaSprite)
+    umbrella2 = (childNode(withName: "umbrella2") as! UmbrellaSprite)
 
-    startButton = childNode(withName: "button-catpong-start") as! TwoPaneButton
+    startButton = (childNode(withName: "button-catpong-start") as! TwoPaneButton)
     startButton.addTarget(self, selector: #selector(startCatPong), forControlEvents: .TouchUpInside)
 
-    catPongLabel = childNode(withName: "label-catpong") as! ShadowLabelNode
+    catPongLabel = (childNode(withName: "label-catpong") as! ShadowLabelNode)
 
     umbrella1Reference = AnimationReference(zeroPosition: umbrella1.position.x,
                                           offscreenLeft: umbrella1.position.x - sceneSize.width,
@@ -67,7 +67,7 @@ public class PlayerSelectNode : SKNode, MenuNodeAnimation {
     }
   }
 
-  func startCatPong() {
+  @objc func startCatPong() {
     if let menu = menuNavigation {
       menu.navigateToMultiplayerCatPong()
     }

@@ -22,12 +22,12 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
   private var shouldUpdate = true
 
   func setup() {
-    foodPosition1 = childNode(withName: "food-pos-one") as! SKSpriteNode!
-    foodPosition2 = childNode(withName: "food-pos-two") as! SKSpriteNode!
-    foodPosition3 = childNode(withName: "food-pos-three") as! SKSpriteNode!
-    foodPosition4 = childNode(withName: "food-pos-four") as! SKSpriteNode!
-    foodPosition5 = childNode(withName: "food-pos-five") as! SKSpriteNode!
-    foodPosition6 = childNode(withName: "food-pos-six") as! SKSpriteNode!
+    foodPosition1 = (childNode(withName: "food-pos-one") as! SKSpriteNode)
+    foodPosition2 = (childNode(withName: "food-pos-two") as! SKSpriteNode)
+    foodPosition3 = (childNode(withName: "food-pos-three") as! SKSpriteNode)
+    foodPosition4 = (childNode(withName: "food-pos-four") as! SKSpriteNode)
+    foodPosition5 = (childNode(withName: "food-pos-five") as! SKSpriteNode)
+    foodPosition6 = (childNode(withName: "food-pos-six") as! SKSpriteNode)
 
     turnOffLocationAtIndex(index: 0)
     turnOffLocationAtIndex(index: 1)

@@ -53,7 +53,7 @@ class HudNode : SKNode, Palettable {
     addChild(quitButton)
   }
 
-  public func quit() {
+  @objc public func quit() {
     if let quit = quitNavigation {
       quit.quitPressed()
     }

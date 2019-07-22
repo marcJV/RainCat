@@ -106,7 +106,7 @@ class TwoPaneButton : SKAControlSprite {
     addTarget(self, selector: #selector(clickSound), forControlEvents: .TouchUpInside)
   }
 
-  func clickSound() {
+  @objc func clickSound() {
     SoundManager.playButtonClick(node: self)
   }
 

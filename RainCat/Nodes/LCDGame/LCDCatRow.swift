@@ -24,12 +24,12 @@ class LCDCatRow : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   var foodLocation = 0
 
   func setup() {
-    catPosition1 = childNode(withName: "cat-pos-one") as! LCDCatNode!
-    catPosition2 = childNode(withName: "cat-pos-two") as! LCDCatNode!
-    catPosition3 = childNode(withName: "cat-pos-three") as! LCDCatNode!
-    catPosition4 = childNode(withName: "cat-pos-four") as! LCDCatNode!
-    catPosition5 = childNode(withName: "cat-pos-five") as! LCDCatNode!
-    catPosition6 = childNode(withName: "cat-pos-six") as! LCDCatNode!
+    catPosition1 = (childNode(withName: "cat-pos-one") as! LCDCatNode)
+    catPosition2 = (childNode(withName: "cat-pos-two") as! LCDCatNode)
+    catPosition3 = (childNode(withName: "cat-pos-three") as! LCDCatNode)
+    catPosition4 = (childNode(withName: "cat-pos-four") as! LCDCatNode)
+    catPosition5 = (childNode(withName: "cat-pos-five") as! LCDCatNode)
+    catPosition6 = (childNode(withName: "cat-pos-six") as! LCDCatNode)
 
     for child in children {
       if let setupable = child as? LCDSetupable {

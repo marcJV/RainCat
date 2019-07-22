@@ -29,7 +29,7 @@ class RainTransition : SKNode {
 
       currentSprite?.alpha = 0
 
-      spriteNameDict.updateValue(children.index(of: currentSprite!)!, forKey: currentSprite!.name!)
+      spriteNameDict.updateValue(children.firstIndex(of: currentSprite!)!, forKey: currentSprite!.name!)
 
       if row == 0 {
         sprites.append([SKSpriteNode]())
@@ -236,10 +236,12 @@ class RainTransition : SKNode {
       childAtPoint = (children[Int(arc4random()) % children.count] as! SKSpriteNode)
     }
 
-    let coordinates = childAtPoint?.name?.characters.split{$0 == "."}.map(String.init)
-
-    var col = Int(coordinates![0])!
-    var row = Int(coordinates![1])!
+    //TODO double check this
+    let childString = childAtPoint?.name ?? ""
+    let coordinates = childString.split { $0 == "."}
+    
+    var col = Int(coordinates[0])!
+    var row = Int(coordinates[1])!
     var lastDirection = Direction.None
     let animationKey = "scaleKey\(toScale)\(fromColor)\(toColor)"
 

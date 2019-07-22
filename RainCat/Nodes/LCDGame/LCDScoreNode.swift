@@ -16,9 +16,9 @@ class LCDScoreNode : SKSpriteNode, Resetable, LCDSetupable {
   private(set) var score = 0
 
   func setup() {
-    hundredsSpot = childNode(withName: "score-hundreds") as! LCDNumberNode!
-    tensSpot = childNode(withName: "score-tens") as! LCDNumberNode!
-    onesSpot = childNode(withName: "score-ones") as! LCDNumberNode!
+    hundredsSpot = (childNode(withName: "score-hundreds") as! LCDNumberNode)
+    tensSpot = (childNode(withName: "score-tens") as! LCDNumberNode)
+    onesSpot = (childNode(withName: "score-ones") as! LCDNumberNode)
 
     for child in children {
       if let setupable = child as? LCDSetupable {

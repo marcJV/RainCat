@@ -22,12 +22,12 @@ class LCDUmbrellaRow : SKNode, Resetable, LCDSetupable {
   private(set) var umbrellaLocation = 0
 
   func setup() {
-    umbrella1 = childNode(withName: "umbrella-pos-one") as! SKSpriteNode!
-    umbrella2 = childNode(withName: "umbrella-pos-two") as! SKSpriteNode!
-    umbrella3 = childNode(withName: "umbrella-pos-three") as! SKSpriteNode!
-    umbrella4 = childNode(withName: "umbrella-pos-four") as! SKSpriteNode!
-    umbrella5 = childNode(withName: "umbrella-pos-five") as! SKSpriteNode!
-    umbrella6 = childNode(withName: "umbrella-pos-six") as! SKSpriteNode!
+    umbrella1 = (childNode(withName: "umbrella-pos-one") as! SKSpriteNode)
+    umbrella2 = (childNode(withName: "umbrella-pos-two") as! SKSpriteNode)
+    umbrella3 = (childNode(withName: "umbrella-pos-three") as! SKSpriteNode)
+    umbrella4 = (childNode(withName: "umbrella-pos-four") as! SKSpriteNode)
+    umbrella5 = (childNode(withName: "umbrella-pos-five") as! SKSpriteNode)
+    umbrella6 = (childNode(withName: "umbrella-pos-six") as! SKSpriteNode)
 
     umbrella1.alpha = lcdOffAlpha
     umbrella2.alpha = lcdOffAlpha

@@ -14,9 +14,9 @@ class LCDHudNode : SKNode, Resetable, LCDSetupable {
   private var lcdScoreNode : LCDScoreNode!
 
   func setup() {
-    lifeHudNode = childNode(withName: "display-lives") as! LCDHudLives!
-    lcdTimeNode = childNode(withName: "display-time") as! LCDTimeNode!
-    lcdScoreNode = childNode(withName: "display-score") as! LCDScoreNode!
+    lifeHudNode = (childNode(withName: "display-lives") as! LCDHudLives)
+    lcdTimeNode = (childNode(withName: "display-time") as! LCDTimeNode)
+    lcdScoreNode = (childNode(withName: "display-score") as! LCDScoreNode)
 
     for child in children {
       if let setupable = child as? LCDSetupable {

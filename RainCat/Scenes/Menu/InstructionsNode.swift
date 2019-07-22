@@ -70,18 +70,18 @@ class InstructionsNode : SKNode {
       index += 1
     }
 
-    overlay = childNode(withName: "overlay") as! SKSpriteNode
+    overlay = (childNode(withName: "overlay") as! SKSpriteNode)
     overlay.alpha = 0
     overlay.position.x = offScreenRight
 
     overlay.removeFromParent()
     mask.addChild(overlay)
 
-    playButton = overlay.childNode(withName: "button-play") as! TwoPaneButton
+    playButton = (overlay.childNode(withName: "button-play") as! TwoPaneButton)
     playButton.addTarget(self, selector: #selector(playButtonClicked), forControlEvents: .TouchUpInside)
   }
 
-  func playButtonClicked() {
+  @objc func playButtonClicked() {
     if let parent = parent as? DirectionsSceneNode {
       parent.navigateToScene()
     }

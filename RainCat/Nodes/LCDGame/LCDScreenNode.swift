@@ -51,17 +51,17 @@ class LCDScreenNode : SKSpriteNode, Resetable {
     a = (startSpeed - endSpeed) / (log(startScore / endScore))
     b = exp((endSpeed * log(startScore)) - (startSpeed * log(endScore)) / (startSpeed - endSpeed))
 
-    lanes.append(childNode(withName: "raindrop-lane-one") as! LCDRainLane!)
-    lanes.append(childNode(withName: "raindrop-lane-two") as! LCDRainLane!)
-    lanes.append(childNode(withName: "raindrop-lane-three") as! LCDRainLane!)
-    lanes.append(childNode(withName: "raindrop-lane-four") as! LCDRainLane!)
-    lanes.append(childNode(withName: "raindrop-lane-five") as! LCDRainLane!)
-    lanes.append(childNode(withName: "raindrop-lane-six") as! LCDRainLane!)
+    lanes.append(childNode(withName: "raindrop-lane-one") as! LCDRainLane)
+    lanes.append(childNode(withName: "raindrop-lane-two") as! LCDRainLane)
+    lanes.append(childNode(withName: "raindrop-lane-three") as! LCDRainLane)
+    lanes.append(childNode(withName: "raindrop-lane-four") as! LCDRainLane)
+    lanes.append(childNode(withName: "raindrop-lane-five") as! LCDRainLane)
+    lanes.append(childNode(withName: "raindrop-lane-six") as! LCDRainLane)
 
-    umbrellaRow = childNode(withName: "umbrella-row") as! LCDUmbrellaRow!
-    foodRow = childNode(withName: "food-row") as! LCDFoodRow!
-    catRow = childNode(withName: "cat-row") as! LCDCatRow!
-    hudNode = childNode(withName: "hud")   as! LCDHudNode!
+    umbrellaRow = (childNode(withName: "umbrella-row") as! LCDUmbrellaRow)
+    foodRow = (childNode(withName: "food-row") as! LCDFoodRow)
+    catRow = (childNode(withName: "cat-row") as! LCDCatRow)
+    hudNode = (childNode(withName: "hud")   as! LCDHudNode)
 
     for child in children {
       if let setupable = child as? LCDSetupable {

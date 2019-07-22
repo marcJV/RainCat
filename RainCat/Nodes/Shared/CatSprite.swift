@@ -110,7 +110,7 @@ class CatSprite : SKAControlSprite {
     addTarget(self, selector: #selector(dash), forControlEvents: .TouchUpInside)
   }
 
-  func dash() {
+  @objc func dash() {
     if timeSinceLastDash > dashCoolDown &&  timeSinceLastHit >= maxFlailTime {
       isUserInteractionEnabled = false
       timeSinceLastHit = 1.55

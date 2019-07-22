@@ -32,11 +32,11 @@ public class CreditsNode : SKNode, MenuNodeAnimation {
   var musicLabelReference : AnimationReference!
   var designLabelReference : AnimationReference!
 
-  func creditButtonClicked(_ sender : CreditLabelButtonSprite) {
+  @objc func creditButtonClicked(_ sender : CreditLabelButtonSprite) {
     menuNavigation?.navigateToUrl(url: sender.getUrl()!)
   }
 
-  func logoClicked(_ sender : LogoButtonSprite) {
+  @objc func logoClicked(_ sender : LogoButtonSprite) {
     menuNavigation?.navigateToUrl(url: sender.getUrl()!)
   }
 
@@ -45,30 +45,30 @@ public class CreditsNode : SKNode, MenuNodeAnimation {
   }
 
   func setup(sceneSize: CGSize) {
-    marcButton = childNode(withName: "button-marc") as! CreditLabelButtonSprite
+    marcButton = (childNode(withName: "button-marc") as! CreditLabelButtonSprite)
     marcButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    jeffButton = childNode(withName: "button-jeff") as! CreditLabelButtonSprite
+    jeffButton = (childNode(withName: "button-jeff") as! CreditLabelButtonSprite)
     jeffButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    bensoundButton = childNode(withName: "button-bensound") as! CreditLabelButtonSprite
+    bensoundButton = (childNode(withName: "button-bensound") as! CreditLabelButtonSprite)
     bensoundButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    cathrynButton = childNode(withName: "button-cathryn") as! CreditLabelButtonSprite
+    cathrynButton = (childNode(withName: "button-cathryn") as! CreditLabelButtonSprite)
     cathrynButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    morganButton = childNode(withName: "button-morgan") as! CreditLabelButtonSprite
+    morganButton = (childNode(withName: "button-morgan") as! CreditLabelButtonSprite)
     morganButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    lauraButton = childNode(withName: "button-laura") as! CreditLabelButtonSprite
+    lauraButton = (childNode(withName: "button-laura") as! CreditLabelButtonSprite)
     lauraButton.addTarget(self, selector: #selector(creditButtonClicked(_:)), forControlEvents: .TouchUpInside)
 
-    logoButton = childNode(withName: "button-logo") as! LogoButtonSprite
+    logoButton = (childNode(withName: "button-logo") as! LogoButtonSprite)
     logoButton.addTarget(self, selector: #selector(logoClicked(_:)), forControlEvents: .TouchUpInside)
 
-    developmentLabel = childNode(withName: "label-development") as! SKLabelNode
-    designLabel = childNode(withName: "label-design") as! SKLabelNode
-    musicLabel = childNode(withName: "label-music") as! SKLabelNode
+    developmentLabel = (childNode(withName: "label-development") as! SKLabelNode)
+    designLabel = (childNode(withName: "label-design") as! SKLabelNode)
+    musicLabel = (childNode(withName: "label-music") as! SKLabelNode)
 
     developReference = AnimationReference(zeroPosition: marcButton.position.x,
                                           offscreenLeft: marcButton.position.x - sceneSize.width,

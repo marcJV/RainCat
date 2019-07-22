@@ -24,16 +24,16 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   private var shouldUpdate = true
 
   func setup() {
-    raindropNodeOne = childNode(withName: "rain-pos-one") as! SKSpriteNode!
-    raindropNodeTwo = childNode(withName: "rain-pos-two") as! SKSpriteNode!
-    raindropNodeThree = childNode(withName: "rain-pos-three") as! SKSpriteNode!
-    raindropNodeFour = childNode(withName: "rain-pos-four") as! SKSpriteNode!
-    raindropNodeFive = childNode(withName: "rain-pos-five") as! SKSpriteNode!
-    raindropNodeSix = childNode(withName: "rain-pos-six") as! SKSpriteNode!
-    raindropNodeSeven = childNode(withName: "rain-pos-seven") as! SKSpriteNode!
-    raindropNodeEight = childNode(withName: "rain-pos-eight") as! SKSpriteNode!
-    raindropNodeNine = childNode(withName: "rain-pos-nine") as! SKSpriteNode!
-    raindropNodeTen = childNode(withName: "rain-pos-ten") as! SKSpriteNode!
+    raindropNodeOne = (childNode(withName: "rain-pos-one") as! SKSpriteNode)
+    raindropNodeTwo = (childNode(withName: "rain-pos-two") as! SKSpriteNode)
+    raindropNodeThree = (childNode(withName: "rain-pos-three") as! SKSpriteNode)
+    raindropNodeFour = (childNode(withName: "rain-pos-four") as! SKSpriteNode)
+    raindropNodeFive = (childNode(withName: "rain-pos-five") as! SKSpriteNode)
+    raindropNodeSix = (childNode(withName: "rain-pos-six") as! SKSpriteNode)
+    raindropNodeSeven = (childNode(withName: "rain-pos-seven") as! SKSpriteNode)
+    raindropNodeEight = (childNode(withName: "rain-pos-eight") as! SKSpriteNode)
+    raindropNodeNine = (childNode(withName: "rain-pos-nine") as! SKSpriteNode)
+    raindropNodeTen = (childNode(withName: "rain-pos-ten") as! SKSpriteNode)
 
     raindropNodeOne.alpha = lcdOffAlpha
     raindropNodeTwo.alpha = lcdOffAlpha

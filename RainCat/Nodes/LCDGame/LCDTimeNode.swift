@@ -20,10 +20,10 @@ class LCDTimeNode : SKNode, Resetable, LCDSetupable {
 
 
   func setup() {
-    hoursTensSpot = childNode(withName: "hour-tens") as! LCDNumberNode!
-    hoursOnesSpot = childNode(withName: "hour-ones") as! LCDNumberNode!
-    minutesTensSpot = childNode(withName: "minute-tens") as! LCDNumberNode!
-    minutesOnesSpot = childNode(withName: "minute-ones") as! LCDNumberNode!
+    hoursTensSpot = (childNode(withName: "hour-tens") as! LCDNumberNode)
+    hoursOnesSpot = (childNode(withName: "hour-ones") as! LCDNumberNode)
+    minutesTensSpot = (childNode(withName: "minute-tens") as! LCDNumberNode)
+    minutesOnesSpot = (childNode(withName: "minute-ones") as! LCDNumberNode)
 
     for child in children {
       if let setupable = child as? LCDSetupable {

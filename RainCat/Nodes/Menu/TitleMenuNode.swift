@@ -29,10 +29,10 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
   func setup(sceneSize: CGSize) {
     self.size = sceneSize
 
-    titleText = childNode(withName: "rain-cat-logo") as! ShadowLabelNode
-    singlePlayerButton = childNode(withName: "button-single-player") as! TwoPaneButton
-    multiPlayerButton = childNode(withName: "button-multi-player") as! TwoPaneButton
-    tutorialButton = childNode(withName: "button-tutorial") as! TwoPaneButton
+    titleText = (childNode(withName: "rain-cat-logo") as! ShadowLabelNode)
+    singlePlayerButton = (childNode(withName: "button-single-player") as! TwoPaneButton)
+    multiPlayerButton = (childNode(withName: "button-multi-player") as! TwoPaneButton)
+    tutorialButton = (childNode(withName: "button-tutorial") as! TwoPaneButton)
 
 
     singlePlayerReference = AnimationReference(zeroPosition: singlePlayerButton.position.x, offscreenLeft: -size.width - singlePlayerButton.position.x, offscreenRight: size.width)
@@ -48,7 +48,7 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
     tutorialButton.addTarget(self, selector: #selector(tutorialButtonClicked), forControlEvents: .TouchUpInside)
   }
 
-  func singlePlayerButtonClicked(_ sender : TwoPaneButton) {
+  @objc func singlePlayerButtonClicked(_ sender : TwoPaneButton) {
     if let menu = menuNavigation {
       selectedButton = singlePlayerButton
 
@@ -58,7 +58,7 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
     tempDisableButton(duration: 1)
   }
 
-  func multiplayerButtonClicked(_ sender : TwoPaneButton) {
+  @objc func multiplayerButtonClicked(_ sender : TwoPaneButton) {
     if let menu = menuNavigation {
       selectedButton = multiPlayerButton
 
@@ -68,7 +68,7 @@ class TitleMenuNode : SKNode, MenuNodeAnimation {
     tempDisableButton(duration: 1)
   }
 
-  func tutorialButtonClicked() {
+  @objc func tutorialButtonClicked() {
     if let menu = menuNavigation {
       menu.navigateToTutorial()
     }
