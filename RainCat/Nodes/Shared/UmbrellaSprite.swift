@@ -59,13 +59,21 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
     let top = SKSpriteNode(imageNamed: "umbrellaTop")
     let bottom = SKSpriteNode(imageNamed: "umbrellaBottom")
 
+    let path = UIBezierPath()
+
     if pingPong {
-      top.physicsBody = SKPhysicsBody(texture: top.texture!, size: top.size)
+      path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
+      path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
+      path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
+      path.close()
+        //SKPhysicsBody(texture: top.texture!, size: top.size)
       anchorPoint = CGPoint(x: 1, y: 0.5)
 
       top.physicsBody?.mass = 500
+      
+      top.physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
+
     } else {
-      let path = UIBezierPath()
       path.move(to: CGPoint(x: -top.size.width / 2, y: -top.size.height / 2))
       path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
       path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
@@ -73,9 +81,10 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
       path.addLine(to: CGPoint(x: 0, y: top.size.height / 2 - 10))
       path.addLine(to: CGPoint(x: -top.size.width / 2 + 10, y: -top.size.height / 2))
       path.close()
-
+      
       top.physicsBody = SKPhysicsBody(edgeLoopFrom: path.cgPath)
     }
+    
     
     top.physicsBody?.isDynamic = false
     top.physicsBody?.categoryBitMask = UmbrellaCategory

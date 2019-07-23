@@ -59,20 +59,19 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     color = BACKGROUND_COLOR
     isUserInteractionEnabled = true
 
-    var scene : SKScene
+    let scene = SKScene(fileNamed: "MainMenu")!
 
-    if UIDevice.current.userInterfaceIdiom == .phone {
-      scene = SKScene(fileNamed: "MainMenu")!//Todo make iphone variant
-    } else {
-      scene = SKScene(fileNamed: "MainMenu")!
-    }
-
+    let xOffset = (size.width - scene.size.width) / 2
+    
     for child in scene.children {
       child.removeFromParent()
       addChild(child)
 
       //Fix position since SKS file's anchorpoint is (0,1)
       child.position.y += size.height
+  
+      //Centers scene if sized incorrectly
+      child.position.x += xOffset
     }
 
     let cropNode = SKCropNode()

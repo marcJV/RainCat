@@ -41,7 +41,8 @@ class RainDropSprite : SKSpriteNode {
   }
 
   func addPhysics() {
-    physicsBody = SKPhysicsBody(texture: texture!, size: size)
+    physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
+//      SKPhysicsBody(texture: texture!, size: size)
     physicsBody?.categoryBitMask = RainDropCategory
     physicsBody?.contactTestBitMask = WorldFrameCategory
     physicsBody?.density = 0.5
