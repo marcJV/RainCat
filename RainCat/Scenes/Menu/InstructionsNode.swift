@@ -19,6 +19,8 @@ class InstructionsNode : SKNode {
   private var offScreenLeft : CGFloat = 0
   private var offScreenRight : CGFloat = 0
 
+  var xOffset : CGFloat = 0
+  
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
 
@@ -51,9 +53,12 @@ class InstructionsNode : SKNode {
     background.removeFromParent()
     mask.addChild(background)
 
+    
     width = getDisplaySize().width
     offScreenLeft = width / 2 - background.frame.width
     offScreenRight = width / 2 + background.frame.width
+    
+    
 
     var index = 0
 
@@ -91,7 +96,7 @@ class InstructionsNode : SKNode {
     slides[0].run(SKAction.sequence([
       SKAction.wait(forDuration: 0.6),
       SKAction.group([SKAction.fadeIn(withDuration: 0.6),
-                      SKActionHelper.moveToEaseInOut(x: width / 2, duration: 0.8)])
+                      SKActionHelper.moveToEaseInOut(x: width / 2 - xOffset, duration: 0.8)])
       ]))
   }
 
@@ -134,7 +139,7 @@ class InstructionsNode : SKNode {
 
       let nextSlide = currentIndex < slides.count ? slides[currentIndex] : overlay
       nextSlide!.run(
-        SKAction.group([SKActionHelper.moveToEaseInOut(x: width / 2, duration: 0.8),
+        SKAction.group([SKActionHelper.moveToEaseInOut(x: width / 2 - xOffset, duration: 0.8),
                         SKAction.fadeIn(withDuration: 0.6)])
       )
     }
@@ -152,7 +157,7 @@ class InstructionsNode : SKNode {
 
       let nextSlide = currentIndex < slides.count ? slides[currentIndex] : overlay
       nextSlide!.run(
-        SKAction.group([SKActionHelper.moveToEaseInOut(x: width / 2, duration: 0.8),
+        SKAction.group([SKActionHelper.moveToEaseInOut(x: width / 2 - xOffset, duration: 0.8),
                         SKAction.fadeIn(withDuration: 0.6)])
       )
     }

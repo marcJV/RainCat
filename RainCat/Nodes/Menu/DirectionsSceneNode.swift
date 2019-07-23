@@ -24,6 +24,8 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
   private var lcdGroup : InstructionsNode!
   private var classicSingleGroup : InstructionsNode!
   private var classicMultiGroup : InstructionsNode!
+  
+  private var xOffset: CGFloat = 0
 
   private var currentNode : SKNode!
 
@@ -43,21 +45,20 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     anchorPoint = CGPoint(x: 0, y: 0)
     color = BACKGROUND_COLOR
     isUserInteractionEnabled = true
-
-    var scene : SKScene
-
-    if UIDevice.current.userInterfaceIdiom == .phone {
-      scene = SKScene(fileNamed: "DirectionsScene")!//Todo make iphone variant
-    } else {
-      scene = SKScene(fileNamed: "DirectionsScene")!
-    }
-
+    
+    let scene = SKScene(fileNamed: "DirectionsScene")!
+    
+    xOffset = (size.width - scene.size.width) / 2
+    
     for child in scene.children {
       child.removeFromParent()
       addChild(child)
-
+      
       //Fix position since SKS file's anchorpoint is (0,1)
       child.position.y += size.height
+      
+      //Centers scene if sized incorrectly
+      child.position.x += xOffset
     }
 
     directionsGroup = childNode(withName: "group-directions-menu")
@@ -65,6 +66,11 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     lcdGroup = (childNode(withName: "group-lcd") as! InstructionsNode)
     classicMultiGroup = (childNode(withName: "group-classic-multi") as! InstructionsNode)
     classicSingleGroup = (childNode(withName: "group-classic-single") as! InstructionsNode)
+    
+    catPongGroup.xOffset = xOffset
+    lcdGroup.xOffset = xOffset
+    classicMultiGroup.xOffset = xOffset
+    classicSingleGroup.xOffset = xOffset
 
     catPongGroup.position.x = size.width
     lcdGroup.position.x = size.width
@@ -181,8 +187,6 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
   }
 
   func navigateToScene() {
-
-
     if let parent = parent as? Router {
       var location : Location? = nil
 
@@ -225,7 +229,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
 
       directionsGroup.run(SKAction.group([
         SKAction.fadeAlpha(to: 1, duration: 0.5),
-        SKActionHelper.moveToEaseInOut(x: 0, duration: 0.55)
+        SKActionHelper.moveToEaseInOut(x: xOffset, duration: 0.55)
         ]))
 
       if let instructions = currentNode as? InstructionsNode {
@@ -252,7 +256,7 @@ class DirectionsSceneNode : SceneNode, SKPhysicsContactDelegate {
     (currentNode as! InstructionsNode).showNode()
     currentNode.run(SKAction.group([
       SKAction.fadeAlpha(to: 1, duration: 0.5),
-      SKActionHelper.moveToEaseInOut(x: 0, duration: 0.55)
+      SKActionHelper.moveToEaseInOut(x: xOffset, duration: 0.55)
       ]))
 
 
