@@ -83,9 +83,11 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
   }
 
   public func resumeMusic() {
+    if !UserDefaultsManager.sharedInstance.isMuted {
     audioPlayer?.setVolume(1, fadeDuration: 0.25)
 
     startPlaying()
+    }
   }
 
   func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -152,7 +154,3 @@ class SoundManager : NSObject, AVAudioPlayerDelegate {
     }
   }
 }
-
-
-
-
