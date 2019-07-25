@@ -18,8 +18,10 @@ class LCDSceneNode : SceneNode {
 
   private var currentButton : TwoPaneButton?
   private var isQuitting = false
-
+  
   override func layoutScene(size : CGSize, extras menuExtras: MenuExtras?) {
+    self.isPaused = false
+    
     var scene : SKScene
     anchorPoint = CGPoint(x: 0, y: 0)
     color = BACKGROUND_COLOR

@@ -47,6 +47,7 @@ class LCDScreenNode : SKSpriteNode, Resetable {
   var b = 0.0
 
   func setup() {
+    isPaused = false
     //Setup difficulty scale
     a = (startSpeed - endSpeed) / (log(startScore / endScore))
     b = exp((endSpeed * log(startScore)) - (startSpeed * log(endScore)) / (startSpeed - endSpeed))

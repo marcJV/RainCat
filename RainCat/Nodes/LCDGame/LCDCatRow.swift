@@ -24,6 +24,7 @@ class LCDCatRow : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   var foodLocation = 0
 
   func setup() {
+    isPaused = false
     catPosition1 = (childNode(withName: "cat-pos-one") as! LCDCatNode)
     catPosition2 = (childNode(withName: "cat-pos-two") as! LCDCatNode)
     catPosition3 = (childNode(withName: "cat-pos-three") as! LCDCatNode)

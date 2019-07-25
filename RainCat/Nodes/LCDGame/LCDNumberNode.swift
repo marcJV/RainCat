@@ -9,40 +9,49 @@
 import SpriteKit
 
 class LCDNumberNode : SKSpriteNode, LCDSetupable {
-
+  
   private var topHorizontalBar : SKSpriteNode!
   private var middleHorizontalBar : SKSpriteNode!
   private var bottomHorizontalBar : SKSpriteNode!
-
+  
   private var topLeftVerticalBar : SKSpriteNode!
   private var topRightVerticalBar : SKSpriteNode!
   private var bottomLeftVerticalBar : SKSpriteNode!
   private var bottomRightVerticalBar : SKSpriteNode!
-
+  
   func setup() {
+    self.isPaused = false
     //Clear the editor color
     color = SKColor.clear
-
+    
     let horizontalBar = SKTexture(imageNamed: "lcd-horizontal-section")
     let verticalBar = SKTexture(imageNamed: "lcd-vertical-section")
-
+    
     topHorizontalBar = SKSpriteNode(texture: horizontalBar)
     middleHorizontalBar = SKSpriteNode(texture: horizontalBar)
     bottomHorizontalBar = SKSpriteNode(texture: horizontalBar)
-
+    
     topLeftVerticalBar = SKSpriteNode(texture: verticalBar)
     topRightVerticalBar = SKSpriteNode(texture: verticalBar)
     bottomLeftVerticalBar = SKSpriteNode(texture: verticalBar)
     bottomRightVerticalBar = SKSpriteNode(texture: verticalBar)
-
+    
+    topHorizontalBar.isPaused = false
+    middleHorizontalBar.isPaused = false
+    bottomHorizontalBar.isPaused = false
+    topLeftVerticalBar.isPaused = false
+    topRightVerticalBar.isPaused = false
+    bottomLeftVerticalBar.isPaused = false
+    bottomRightVerticalBar.isPaused = false
+    
     let horizontalBarHeight = topHorizontalBar.size.height
     let verticalBarHeight = topLeftVerticalBar.size.height
     let horizontalBarWidth = topHorizontalBar.size.width
-
+    
     let originX = size.width / 2
-
+    
     topHorizontalBar.position = CGPoint(x: originX, y: -horizontalBarHeight * 0.5)
-
+    
     topLeftVerticalBar.position = CGPoint(x: originX - horizontalBarWidth * 0.5,
                                           y: -horizontalBarHeight * 0.75 - verticalBarHeight * 0.5)
     topRightVerticalBar.position = CGPoint(x: originX + horizontalBarWidth * 0.5,
@@ -55,24 +64,24 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
                                               y:bottomLeftVerticalBar.position.y)
     bottomHorizontalBar.position = CGPoint(x: originX,
                                            y: bottomRightVerticalBar.position.y - verticalBarHeight * 0.5)
-
+    
     addChild(topHorizontalBar)
     addChild(middleHorizontalBar)
     addChild(bottomHorizontalBar)
-
+    
     addChild(topLeftVerticalBar)
     addChild(topRightVerticalBar)
     addChild(bottomLeftVerticalBar)
     addChild(bottomRightVerticalBar)
   }
-
+  
   func updateDisplay(number : Int) {
     switch number {
     case 0:
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOffAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOnAlpha
@@ -81,7 +90,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOffAlpha
       middleHorizontalBar.alpha = lcdOffAlpha
       bottomHorizontalBar.alpha = lcdOffAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOffAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -90,7 +99,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOffAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOnAlpha
@@ -99,7 +108,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOffAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -108,7 +117,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOffAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOffAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -117,7 +126,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOffAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -126,7 +135,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOffAlpha
       bottomLeftVerticalBar.alpha = lcdOnAlpha
@@ -135,7 +144,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOffAlpha
       bottomHorizontalBar.alpha = lcdOffAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOffAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -144,7 +153,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOffAlpha
@@ -153,7 +162,7 @@ class LCDNumberNode : SKSpriteNode, LCDSetupable {
       topHorizontalBar.alpha = lcdOnAlpha
       middleHorizontalBar.alpha = lcdOnAlpha
       bottomHorizontalBar.alpha = lcdOnAlpha
-
+      
       topLeftVerticalBar.alpha = lcdOnAlpha
       topRightVerticalBar.alpha = lcdOnAlpha
       bottomLeftVerticalBar.alpha = lcdOnAlpha

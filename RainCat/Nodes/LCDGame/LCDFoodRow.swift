@@ -35,6 +35,14 @@ class LCDFoodRow : SKNode, Resetable, LCDSetupable {
     turnOffLocationAtIndex(index: 3)
     turnOffLocationAtIndex(index: 4)
     turnOffLocationAtIndex(index: 5)
+    
+    isPaused = false
+    foodPosition1.isPaused = false
+    foodPosition2.isPaused = false
+    foodPosition3.isPaused = false
+    foodPosition4.isPaused = false
+    foodPosition5.isPaused = false
+    foodPosition6.isPaused = false
 
     showNextPosition()
   }

@@ -34,6 +34,13 @@ class LCDUmbrellaRow : SKNode, Resetable, LCDSetupable {
     umbrella4.alpha = lcdOffAlpha
     umbrella5.alpha = lcdOffAlpha
     umbrella6.alpha = lcdOffAlpha
+    
+    self.isPaused = false
+    umbrella1.isPaused = false
+    umbrella2.isPaused = false
+    umbrella4.isPaused = false
+    umbrella5.isPaused = false
+    umbrella6.isPaused = false
 
     umbrellaLocation = defaultUmbrellaLocation
   }

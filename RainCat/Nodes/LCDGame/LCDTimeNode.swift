@@ -20,6 +20,7 @@ class LCDTimeNode : SKNode, Resetable, LCDSetupable {
 
 
   func setup() {
+    self.isPaused = false
     hoursTensSpot = (childNode(withName: "hour-tens") as! LCDNumberNode)
     hoursOnesSpot = (childNode(withName: "hour-ones") as! LCDNumberNode)
     minutesTensSpot = (childNode(withName: "minute-tens") as! LCDNumberNode)

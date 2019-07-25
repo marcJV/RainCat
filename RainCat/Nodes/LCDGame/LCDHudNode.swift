@@ -18,6 +18,11 @@ class LCDHudNode : SKNode, Resetable, LCDSetupable {
     lcdTimeNode = (childNode(withName: "display-time") as! LCDTimeNode)
     lcdScoreNode = (childNode(withName: "display-score") as! LCDScoreNode)
 
+    self.isPaused = false
+    lifeHudNode.isPaused = false
+    lcdTimeNode.isPaused = false
+    lcdScoreNode.isPaused = false
+    
     for child in children {
       if let setupable = child as? LCDSetupable {
         setupable.setup()

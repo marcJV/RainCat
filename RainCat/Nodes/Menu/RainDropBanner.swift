@@ -49,9 +49,8 @@ public class RainDropBanner : SKNode, Touchable {
   }
 
   private func addPhysicsBody(rainDrop : SKSpriteNode) {
-    
-    rainDrop.physicsBody = SKPhysicsBody(circleOfRadius: rainDrop.size.width / 2)
-      //SKPhysicsBody(texture: rainDrop.texture!, size: rainDrop.size)
+    rainDrop.isPaused = false
+    rainDrop.physicsBody = SKPhysicsBody(texture: rainDrop.texture!, size: rainDrop.size)
     rainDrop.physicsBody?.categoryBitMask = RainDropCategory
 
     //Makes all of the raindrops fall at different rates

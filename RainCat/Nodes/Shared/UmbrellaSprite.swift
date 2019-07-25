@@ -66,7 +66,7 @@ class UmbrellaSprite : SKSpriteNode, Palettable {
       path.addLine(to: CGPoint(x: 0, y: top.size.height / 2))
       path.addLine(to: CGPoint(x: top.size.width / 2, y: -top.size.height / 2))
       path.close()
-        //SKPhysicsBody(texture: top.texture!, size: top.size)
+
       anchorPoint = CGPoint(x: 1, y: 0.5)
 
       top.physicsBody?.mass = 500

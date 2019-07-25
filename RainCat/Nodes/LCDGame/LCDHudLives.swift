@@ -17,9 +17,14 @@ class LCDHudLives : SKNode, Resetable, LCDSetupable {
   private var lives = 3
 
   func setup() {
+    isPaused = false
     lifeOne = (childNode(withName: "cat-life-one") as! SKSpriteNode)
     lifeTwo = (childNode(withName: "cat-life-two") as! SKSpriteNode)
     lifeThree = (childNode(withName: "cat-life-three") as! SKSpriteNode)
+    
+    lifeOne.isPaused = false
+    lifeTwo.isPaused = false
+    lifeThree.isPaused = false
 
     updateDisplay(lives: lives)
   }

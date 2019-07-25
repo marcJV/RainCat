@@ -22,6 +22,7 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
   private var raindropNodeUmbrella   : SKSpriteNode!
 
   private(set) var needsRaindrop = false
+  private var needsUmbrellaHit = false
   private var shouldUpdate = true
 
   func setup() {
@@ -48,6 +49,19 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
     raindropNodeNine.alpha = lcdOffAlpha
     raindropNodeTen.alpha = lcdOffAlpha
     raindropNodeUmbrella.alpha = lcdOffAlpha
+    
+    self.isPaused = false
+    raindropNodeOne.isPaused = false
+    raindropNodeTwo.isPaused = false
+    raindropNodeThree.isPaused = false
+    raindropNodeFour.isPaused = false
+    raindropNodeFive.isPaused = false
+    raindropNodeSix.isPaused = false
+    raindropNodeSeven.isPaused = false
+    raindropNodeEight.isPaused = false
+    raindropNodeNine.isPaused = false
+    raindropNodeTen.isPaused = false
+    raindropNodeUmbrella.isPaused = false
   }
 
   func resetPressed() {
@@ -87,7 +101,10 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
       raindropNodeThree.alpha = raindropNodeTwo.alpha
       raindropNodeTwo.alpha = raindropNodeOne.alpha
       raindropNodeOne.alpha = needsRaindrop ? lcdOnAlpha : lcdOffAlpha
-
+      
+      raindropNodeUmbrella.alpha = needsUmbrellaHit ? lcdOnAlpha : lcdOffAlpha
+      
+      needsUmbrellaHit = false
       needsRaindrop = false
     }
   }
@@ -101,14 +118,8 @@ class LCDRainLane : SKNode, Resetable, LCDUpdateable, LCDSetupable {
       let hadRaindrop = raindropNodeNine.alpha == lcdOnAlpha
       raindropNodeNine.alpha = lcdOffAlpha
       
-      if hadRaindrop {
-        raindropNodeUmbrella.alpha = lcdOnAlpha
-      } else {
-        raindropNodeUmbrella.alpha = lcdOffAlpha
-      }
-
+      needsUmbrellaHit = hadRaindrop
       //TODO play sound?
-
       return hadRaindrop
     }
 
