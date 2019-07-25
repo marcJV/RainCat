@@ -105,7 +105,7 @@ class MenuSceneNode : SceneNode, MenuNavigation, SKPhysicsContactDelegate, MenuN
     curtainSprite.position = CGPoint(x: 0, y: -10)
 
     rainDropBanner = (childNode(withName: "banner") as! RainDropBanner)
-    rainDropBanner.setup(maskNode: maskNode)
+    rainDropBanner.setup(maskNode: maskNode, offset: xOffset)
 
     maskNode.addChild(lcdCatSprite)
     curtainForeground.zPosition = 50

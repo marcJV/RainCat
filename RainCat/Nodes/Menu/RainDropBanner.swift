@@ -11,6 +11,7 @@ import SpriteKit
 public class RainDropBanner : SKNode, Touchable {
   typealias RainDrops = (raindrop: SKSpriteNode, lcdRaindrop: SKSpriteNode)
 
+  private var xOffset: CGFloat = 0
   var rainDrops = [RainDrops]()
 
   func pause () {
@@ -23,7 +24,9 @@ public class RainDropBanner : SKNode, Touchable {
     }
   }
 
-  public func setup(maskNode : SKNode) {
+  public func setup(maskNode : SKNode, offset: CGFloat) {
+    xOffset = offset
+    
     for i in 0...23 {
       let index = String(format: "%02d", i)
 
@@ -35,6 +38,7 @@ public class RainDropBanner : SKNode, Touchable {
 
       lcdNode.anchorPoint = CGPoint(x: 0, y: 1)
       lcdNode.position = node.position
+      lcdNode.position.x += xOffset
 
       maskNode.addChild(lcdNode)
 
@@ -101,6 +105,7 @@ public class RainDropBanner : SKNode, Touchable {
       node.lcdRaindrop.position = node.raindrop.position
       node.lcdRaindrop.setScale(node.raindrop.xScale)
       node.lcdRaindrop.position.y += size.height //This fixes anchorpoint madness
+      node.lcdRaindrop.position.x += xOffset
       node.lcdRaindrop.zRotation = node.raindrop.zRotation
     }
   }
