@@ -1,6 +1,6 @@
 ![RainCat Header](documentation/header-lcd.png)
 
-#RainCat
+# RainCat
 
 A simple exploration of SpriteKit in Swift 3.
 
